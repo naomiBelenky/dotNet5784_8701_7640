@@ -19,9 +19,6 @@ namespace Stage0
         }
 
         static partial void Welcome7640();
-        {
-
-        }
     }
 }
 
