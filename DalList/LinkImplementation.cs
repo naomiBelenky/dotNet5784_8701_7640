@@ -16,7 +16,10 @@ public class LinkImplementation : ILink
 
     public void Delete(int id)
     {
-        throw new Exception("can't delete this object...!");
+        Link? temp = DataSource.Links.Find(link => link.LinkID == id);
+        if (temp == null)
+            throw new Exception($"Link with ID={id} does Not exist");
+        DataSource.Links.Remove(temp);
     }
 
     public Link? Read(int id)
