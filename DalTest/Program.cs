@@ -87,7 +87,7 @@ delete {choice}");
                 planToStart = Convert.ToDateTime(Console.ReadLine());
                 Console.WriteLine("enter deadline");
                 deadLine = Convert.ToDateTime(Console.ReadLine());
-                Console.WriteLine("write prosuct");
+                Console.WriteLine("write product");
                 product = Console.ReadLine();
                 Console.WriteLine("write notes");
                 notes = Console.ReadLine();
@@ -101,8 +101,6 @@ delete {choice}");
                     planToStart, null, timeForTask, deadLine, null, product, notes, id, difficulty);
 
                 Console.WriteLine(s_dalTask.Create(task));
-
-
             }
 
             if (choice == "engineer")
