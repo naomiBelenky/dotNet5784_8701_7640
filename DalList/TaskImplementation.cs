@@ -1,20 +1,23 @@
-﻿using DalApi;
+﻿namespace Dal;
+
+using DalApi;
 namespace Dal;
 using DO;
+using System.Collections.Generic;
 
 public class TaskImplementation : ITask
 {
     public int Create(Task item)
     {
-        int newId = DataSource.Config.NextTaskID;
-        Task newTask = item with { TaskID = newId };
+        int newID = DataSource.Config.NextTaskID;
+        Task newTask = item with { TaskID = newID };
         DataSource.Tasks.Add(newTask);
-        return newId;
+        return newID;
     }
 
     public void Delete(int id)
     {
-        Task? temp = DataSource.Tasks.Find(task=>task.TaskID == id);
+        Task? temp = DataSource.Tasks.Find(task => task.TaskID == id);
         if (temp == null)
             throw new Exception($"Task with ID={id} does Not exist");
         DataSource.Tasks.Remove(temp);
@@ -33,7 +36,7 @@ public class TaskImplementation : ITask
     public void Update(Task item)
     {
         Task? temp = DataSource.Tasks.Find(task => task.TaskID == item.TaskID);
-        if (temp == null)
+        if (temp == null)   
             throw new Exception($"Task with ID={item.TaskID} does Not exist");
         DataSource.Tasks.Remove(temp);
         DataSource.Tasks.Add(item);

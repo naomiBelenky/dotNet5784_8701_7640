@@ -1,4 +1,5 @@
-﻿namespace DalApi;
+﻿
+namespace DalApi;
 
 using DO;
 public interface ILink
@@ -8,5 +9,4 @@ public interface ILink
     List<Link> ReadAll(); //stage 1 only, Reads all entity objects
     void Update(Link item); //Updates entity object
     void Delete(int id); //Deletes an object by its Id
-
 }

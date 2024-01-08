@@ -16,10 +16,10 @@ public static class Initialization
         DateTime[] dates = new DateTime[20];
         for (int i = 0; i < 20; i++)
         {
-            Random rand = new(DateTime.Now.Microsecond);
+            Random rand = new Random(DateTime.Now.Millisecond);
             int day = rand.Next(30);
-            int month = rand.Next(8, 12);
-            dates[i]=new DateTime(2023, month, day);
+            int month = rand.Next(8, 11);
+            dates[i] = new DateTime(2023, month, day);
         }
         Task[] tasks = new Task[20];
         tasks[0] = new Task(0, "Optimization", "Improve, reduce costs", false, dates[0]);
@@ -48,18 +48,20 @@ public static class Initialization
             s_dalTask.Create(tasks[i]);
         }
     }
+
     private static void createLinks()
     {
-        for (int i = 1; i <= 20 && i!=5; i++)   //all the tasks are dependent on task #5
+        for (int i = 1; i <= 20 && i != 5; i++)  //All the tasks depended in the first task: Prototyping
         {
-            Link temp = new(0, 5, i);
+            Link temp = new Link(0, 5, i);
             s_dalLink.Create(temp);
         }
         for (int i = 1; i <= 20 && i!=5 && i!=19; i++)   //tasks 5-20 are depended on task #19
         {
-            Link temp = new(0, 2, i);
+            Link temp = new Link(0, 19, i);
             s_dalLink.Create(temp);
         }
+
         Link temp1 = new(0, 10, 14);
         s_dalLink.Create(temp1);
         Link temp2 = new(0, 10, 20);
@@ -68,19 +70,23 @@ public static class Initialization
         s_dalLink.Create(temp3);
         Link temp4 = new(0, 17, 20);
         s_dalLink.Create(temp4);
-        //tasks #14 and #20 both depend on task #10 and #17
+        //14th and 20th tasks depended in 10th and 17th tasks
     }
+
     private static void createEngineers()
     {
-        string[] emails = {"aviBuchbut@gmail.com", "shiramarket@gmail.com",
-            "taloriel@gmail.com", "eytanbenisty@gmail.com", "danmaz@gmail.com" };
-        string[] names = { "Avi Buchbut", "Shira Market", "Tal Oriel", "Eytan Benisty", "Dan Maztal" };
+        string[] emails = {"aviBuchbut@gmail.com","shiramarket@gmail.com",
+            "taloriel@gmail.com","eytanbenisty@gmail.com","danmaz@gmail.com"};
+        string[] names = {"Avi Buchbut","Shira Market", "Tal Oriel",
+            "Eytan Benisty", "Dan Maztal"};
         Random random = new Random(DateTime.Now.Millisecond);
-        for (int i = 0; i<5; i++)
+
+
+        for (int i = 0; i < 5; i++)
         {
-            int id = random.Next(200000000, 400000000);
-            EngineerLevel level = (EngineerLevel)random.Next(1, 5);
-            Engineer temp = new(id, names[i], emails[i], level);
+            int tempID = random.Next(200000000, 400000000);
+            EngineerLevel tempLevel = (EngineerLevel)random.Next(1, 5);
+            Engineer temp = new Engineer(tempID, names[i], emails[i], tempLevel);
             s_dalEngineer.Create(temp);
         }
     }
@@ -90,8 +96,15 @@ public static class Initialization
         s_dalTask = dalTask ?? throw new NullReferenceException("DAL can not be null!");
         s_dalLink = dalLink ?? throw new NullReferenceException("DAL can not be null!");
         s_dalEngineer = dalEngineer ?? throw new NullReferenceException("DAL can not be null!");
+
         createTasks();
         createLinks();
         createEngineers();
     }
 }
+
+
+
+
+
+

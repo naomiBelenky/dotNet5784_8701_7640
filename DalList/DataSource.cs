@@ -1,4 +1,6 @@
-﻿namespace Dal;
+﻿
+
+namespace Dal;
 
 internal static class DataSource
 {
@@ -8,13 +10,14 @@ internal static class DataSource
 
     internal static class Config
     {
-        internal const int LinkID = 1;
-        private static int nextLinkID = LinkID;
-        internal static int NextLinkID { get => nextLinkID++; }
-
-        internal const int TaskID = 1;
-        private static int nextTaskID = LinkID;
+        //for TaskID
+        internal const int TaskId = 1;
+        private static int nextTaskID = TaskId;
         internal static int NextTaskID { get => nextTaskID++; }
+        //for LinkID
+        internal const int LinkId = 1;
+        private static int nextLinkID = LinkId;
+        internal static int NextLinkID { get => nextLinkID++; }
     }
 
 }

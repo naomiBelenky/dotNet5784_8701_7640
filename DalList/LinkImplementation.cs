@@ -1,20 +1,22 @@
 ﻿namespace Dal;
+
 using DalApi;
 using DO;
+using System.Collections.Generic;
 
 public class LinkImplementation : ILink
 {
     public int Create(Link item)
     {
-        int newId = DataSource.Config.NextLinkID;
-        Link newLink = item with { LinkID = newId };
+        int newID = DataSource.Config.NextLinkID;
+        Link newLink = item with { LinkID = newID };
         DataSource.Links.Add(newLink);
-        return newId;
+        return newID;
     }
 
     public void Delete(int id)
     {
-        throw new Exception("cannot delete this object");
+        throw new Exception("can't delete this object...!");
     }
 
     public Link? Read(int id)
