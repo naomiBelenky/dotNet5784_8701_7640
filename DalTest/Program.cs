@@ -180,11 +180,6 @@ delete {choice}");
             switch (choice)
             {
                 case "task":
-                    string? name, description, product, notes;
-                    DateTime? planToStart, deadLine;
-                    double? timeForTask;
-                    TaskDifficulty level;
-
                     Console.WriteLine("write task name");
                     string? name = Console.ReadLine();
                     Console.WriteLine("describe the task");
@@ -193,7 +188,7 @@ delete {choice}");
                     Console.WriteLine("on what date do you plan to start?");
                     DateTime? planToStart = Convert.ToDateTime(Console.ReadLine());
                     Console.WriteLine("what is the deadline of the task?");
-                    DateTime? deadline = Convert.ToDateTime(Console.ReadLine());
+                    DateTime? deadLine = Convert.ToDateTime(Console.ReadLine());
                     double? timeForTask = null;
                     Console.WriteLine("describe the product");
                     string? product = Console.ReadLine();
@@ -220,7 +215,7 @@ delete {choice}");
                     EngineerLevel level = (EngineerLevel)int.Parse(Console.ReadLine());
                     Console.WriteLine("enter engineer cost per hour");
                     double? costPerHour = double.Parse(Console.ReadLine());
-                    DO.Engineer newEngineer = new Engineer(taskId, engName, email, level, costPerHour);
+                    DO.Engineer newEngineer = new Engineer(engId, engName, email, level, costPerHour);
                     s_dalEngineer.Update(newEngineer);
                     break;
                 case "link":
