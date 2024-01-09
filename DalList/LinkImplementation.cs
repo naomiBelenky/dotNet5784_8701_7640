@@ -4,7 +4,7 @@ using DalApi;
 using DO;
 using System.Collections.Generic;
 
-public class LinkImplementation : ILink
+internal class LinkImplementation : ILink
 {
     public int Create(Link item)
     {

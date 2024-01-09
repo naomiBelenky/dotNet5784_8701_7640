@@ -5,9 +5,10 @@ using DO;
 
 public static class Initialization
 {
-    private static ITask? s_dalTask;
-    private static ILink? s_dalLink;
-    private static IEngineer? s_dalEngineer;
+    private static IDal? s_dal;
+    //private static ITask? s_dalTask;
+    //private static ILink? s_dalLink;
+    //private static IEngineer? s_dalEngineer;
 
     private static readonly Random s_rand = new();
 
@@ -45,7 +46,7 @@ public static class Initialization
 
         for (int i = 0; i < 20; i++)
         {
-            s_dalTask.Create(tasks[i]);
+            s_dal!.Task.Create(tasks[i]);
         }
     }
 
@@ -54,22 +55,24 @@ public static class Initialization
         for (int i = 1; i <= 20 && i != 5; i++)  //All the tasks depended in the first task: Prototyping
         {
             Link temp = new Link(0, 5, i);
-            s_dalLink.Create(temp);
+            s_dal!.Link.Create(temp);
         }
-        for (int i = 1; i <= 20 && i!=5 && i!=19; i++)   //tasks 5-20 are depended on task #19
+        for (int i = 1; i <= 20 && i != 5 && i != 19; i++)   //tasks 5-20 are depended on task #19
         {
             Link temp = new Link(0, 19, i);
-            s_dalLink.Create(temp);
+            s_dal!.Link.Create(temp);
         }
 
         Link temp1 = new(0, 10, 14);
-        s_dalLink.Create(temp1);
+        //s_dalLink.Create(temp1); //stage 1
+        s_dal!.Link.Create(temp1); //stage 2
         Link temp2 = new(0, 10, 20);
-        s_dalLink.Create(temp2);
+        //s_dalLink.Create(temp2);
+        s_dal.Link.Create(temp2); //stage 2
         Link temp3 = new(0, 17, 14);
-        s_dalLink.Create(temp3);
+        s_dal.Link.Create(temp3);
         Link temp4 = new(0, 17, 20);
-        s_dalLink.Create(temp4);
+        s_dal.Link.Create(temp4);
         //14th and 20th tasks depended in 10th and 17th tasks
     }
 
@@ -87,15 +90,18 @@ public static class Initialization
             int tempID = random.Next(200000000, 400000000);
             EngineerLevel tempLevel = (EngineerLevel)random.Next(1, 5);
             Engineer temp = new Engineer(tempID, names[i], emails[i], tempLevel);
-            s_dalEngineer.Create(temp);
+            //s_dalEngineer.Create(temp); //stage 1
+            s_dal!.Engineer.Create(temp); //stage 2
         }
     }
 
-    public static void Do(ITask? dalTask, ILink? dalLink, IEngineer? dalEngineer)
+    public static void Do(IDal? dal   /*ITask? dalTask, ILink? dalLink, IEngineer? dalEngineer*/)
     {
-        s_dalTask = dalTask ?? throw new NullReferenceException("DAL can not be null!");
-        s_dalLink = dalLink ?? throw new NullReferenceException("DAL can not be null!");
-        s_dalEngineer = dalEngineer ?? throw new NullReferenceException("DAL can not be null!");
+        //s_dalTask = dalTask ?? throw new NullReferenceException("DAL can not be null!");
+        //s_dalLink = dalLink ?? throw new NullReferenceException("DAL can not be null!");
+        //s_dalEngineer = dalEngineer ?? throw new NullReferenceException("DAL can not be null!");
+
+        s_dal = dal ?? throw new NullReferenceException("DAL object can not be null!"); //stage 2
 
         createTasks();
         createLinks();
