@@ -18,7 +18,7 @@ internal class LinkImplementation : ILink
     {
         Link? temp = DataSource.Links.Find(link => link.LinkID == id);
         if (temp == null)
-            throw new Exception($"Link with ID={id} does Not exist");
+            throw new DalDoesNotExistException($"Link with ID={id} does Not exist");
         DataSource.Links.Remove(temp);
     }
 
@@ -33,7 +33,7 @@ internal class LinkImplementation : ILink
         //return (DataSource.Links.Find(link => link.LinkID == id)); //Stage 2
     }
 
-    public IEnumerable<Link> ReadAll(Func<Link, bool>? filter = null)
+    public IEnumerable<Link?> ReadAll(Func<Link, bool>? filter)
     {
         if (filter != null)
         {
@@ -44,6 +44,7 @@ internal class LinkImplementation : ILink
 
         return from item in DataSource.Links
                select item;
+
         //return new List<Link>(DataSource.Links); //Stage 2
     }
 
@@ -51,8 +52,17 @@ internal class LinkImplementation : ILink
     {
         Link? temp = DataSource.Links.Find(link => link.LinkID == item.LinkID);
         if (temp == null)
-            throw new Exception($"Link with ID={item.LinkID} does Not exist");
+            throw new DalDoesNotExistException($"Link with ID={item.LinkID} does Not exist");
         DataSource.Links.Remove(temp);
         DataSource.Links.Add(item);
+    }
+
+    public Link? Read(Func<Link, bool> filter) //Reads entity object by its ID
+    {
+        foreach (Link item in DataSource.Links)
+            if (filter(item))
+                return item;
+
+        return null;
     }
 }

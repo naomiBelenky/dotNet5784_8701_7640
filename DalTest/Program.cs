@@ -1,12 +1,12 @@
-﻿using Dal;
+﻿namespace DalTest;
+
+using Dal;
 using DalApi;
 using DO;
 
-namespace DalTest;
-
 internal class Program
 {
-    private static readonly IDal s_dal = new Dal.DalList(); 
+    private static readonly IDal s_dal = new DalList(); 
 
     static void Main(string[] args)
     {
@@ -165,7 +165,7 @@ delete {choice}");
                     Console.WriteLine(item);
                     break;
             case "link":
-                foreach (var item in s_dal.Task.ReadAll())
+                foreach (var item in s_dal.Link.ReadAll())
                     Console.WriteLine(item);
                 break;
             default: Console.WriteLine("ERROR"); break;
@@ -226,7 +226,7 @@ delete {choice}");
                 int dependedTask = int.Parse(Console.ReadLine());
 
                 DO.Link newLink = new DO.Link(0, prevTask, dependedTask);
-                s_dal.Link.Create(newLink);
+                s_dal.Link.Update(newLink);
                 break;
 
         }

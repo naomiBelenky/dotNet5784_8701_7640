@@ -17,14 +17,14 @@ internal class TaskImplementation : ITask
     {
         Task? temp = DataSource.Tasks.Find(task => task.TaskID == id);
         if (temp == null)
-            throw new Exception($"Task with ID={id} does Not exist");
+            throw new DalDoesNotExistException($"Task with ID={id} does Not exist");
         DataSource.Tasks.Remove(temp);
     }
 
     public Task? Read(int id)
     {
         foreach (Task item in DataSource.Tasks)
-            if (item.TasksID == id)
+            if (item.TaskID == id)
                 return item;
 
         return null;
@@ -33,7 +33,7 @@ internal class TaskImplementation : ITask
 
 
 
-    public IEnumerable<Task?> ReadAll(Func<Task, bool>? filter = null) //stage 2
+    public IEnumerable<Task?> ReadAll(Func<Task, bool>? filter) //stage 2
     {
         if (filter != null)
         {
@@ -45,6 +45,15 @@ internal class TaskImplementation : ITask
                select item;
     }
 
+
+    public Task? Read(Func<Task, bool> filter) //Reads entity object by its ID
+    {
+        foreach (Task item in DataSource.Tasks)
+            if (filter(item))
+                return item;
+
+        return null;
+    }
 
     //public IEnumerable<Task> ReadAll(Func<Task>, bool>? filter = null)
     //{
@@ -66,7 +75,7 @@ internal class TaskImplementation : ITask
     {
         Task? temp = DataSource.Tasks.Find(task => task.TaskID == item.TaskID);
         if (temp == null)
-            throw new Exception($"Task with ID={item.TaskID} does Not exist");
+            throw new DalDoesNotExistException($"Task with ID={item.TaskID} does Not exist");
         DataSource.Tasks.Remove(temp);
         DataSource.Tasks.Add(item);
     }
