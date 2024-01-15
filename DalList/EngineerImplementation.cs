@@ -25,12 +25,28 @@ internal class EngineerImplementation : IEngineer
 
     public Engineer? Read(int id)
     {
-        return (DataSource.Engineers.Find(eng => eng.EngineerID == id));
+
+        foreach (Engineer item in DataSource.Engineers)
+            if (item.EngineerID == id)
+                return item;
+        
+        return null; //didnt found
+        //return (DataSource.Engineers.Find(eng => eng.EngineerID == id)); //Stage 1
     }
 
-    public List<Engineer> ReadAll()
+    public IEnumerable<Engineer> ReadAll(Func<Engineer, bool>? filter = null)
     {
-        return new List<Engineer>(DataSource.Engineers);
+        if (filter != null)
+        {
+            return from item in DataSource.Engineers
+                   where filter(item)
+                   select item;
+        }
+
+        return from item in DataSource.Engineers
+               select item;
+
+        //return new List<Engineer>(DataSource.Engineers); //Stage 1
     }
 
     public void Update(Engineer item)

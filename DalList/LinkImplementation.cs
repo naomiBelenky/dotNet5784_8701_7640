@@ -24,12 +24,27 @@ internal class LinkImplementation : ILink
 
     public Link? Read(int id)
     {
-        return (DataSource.Links.Find(link => link.LinkID == id));
+        foreach (Link item in DataSource.Links)
+            if (item.LinkID == id)
+                return item;
+
+        return null;
+
+        //return (DataSource.Links.Find(link => link.LinkID == id)); //Stage 2
     }
 
-    public List<Link> ReadAll()
+    public IEnumerable<Link> ReadAll(Func<Link, bool>? filter = null)
     {
-        return new List<Link>(DataSource.Links);
+        if (filter != null)
+        {
+            return from item in DataSource.Links
+                   where filter(item)
+                   select item;
+        }
+
+        return from item in DataSource.Links
+               select item;
+        //return new List<Link>(DataSource.Links); //Stage 2
     }
 
     public void Update(Link item)
