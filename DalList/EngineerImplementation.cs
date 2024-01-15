@@ -2,7 +2,6 @@
 
 using DO;
 using DalApi;
-using DO;
 
 internal class EngineerImplementation : IEngineer
 {
@@ -10,7 +9,7 @@ internal class EngineerImplementation : IEngineer
     {
         //if (DataSource.Engineers.Find(eng => eng.EngineerID == item.EngineerID) != null) //Stage 1
 
-        if(Read(item.EngineerID) is not null) //If this id already exist
+        if (Read(item.EngineerID) is not null) //If this id already exist
             throw new DalAlreadyExistsException($"Engineer with ID={item.EngineerID} already exist!!");
 
         DataSource.Engineers.Add(item);
@@ -20,9 +19,9 @@ internal class EngineerImplementation : IEngineer
     public void Delete(int id) //Deletes an object by its Id
     {
         //Engineer? temp = DataSource.Engineers.Find(eng => eng.EngineerID == id); //stage 1
-        //if (temp == null) 
 
-        if (Read(id) == null) //If this id doesnt exist
+        Engineer? temp = Read(id);
+        if (temp == null) //If this id doesnt exist
             throw new DalDoesNotExistException($"Engineer with ID={id} does Not exist");
 
         DataSource.Engineers.Remove(temp);
@@ -34,8 +33,8 @@ internal class EngineerImplementation : IEngineer
         foreach (Engineer item in DataSource.Engineers)
             if (item.EngineerID == id)
                 return item;
-        
-        return null; //didnt found
+
+        return null; //didn't find
         //return (DataSource.Engineers.Find(eng => eng.EngineerID == id)); //Stage 1
     }
 
@@ -48,7 +47,7 @@ internal class EngineerImplementation : IEngineer
                    select item;
         }
 
-        return from item in DataSource.Engineers
+        return from item in DataSource.Engineers    //if there is no filter, returning the whole list
                select item;
 
         //return new List<Engineer>(DataSource.Engineers); //Stage 1
@@ -58,11 +57,12 @@ internal class EngineerImplementation : IEngineer
     {
         //Engineer? temp = DataSource.Engineers.Find(eng => eng.EngineerID == item.EngineerID); //stage 1
         //if (temp == null)
-        
-        if (Read(item.EngineerID) == null) //If this id doesnt exist
+
+        Engineer? temp = Read(item.EngineerID);
+        if (temp == null) //If this id doesn't exist
             throw new DalDoesNotExistException($"Engineer with ID={item.EngineerID} does Not exist");
-        DataSource.Engineers.Remove(temp);
-        DataSource.Engineers.Add(item);
+        DataSource.Engineers.Remove(temp);  //deleting the existing object
+        DataSource.Engineers.Add(item); //adding the updated object
     }
 
     public Engineer? Read(Func<Engineer, bool> filter) //Reads entity object
@@ -71,6 +71,6 @@ internal class EngineerImplementation : IEngineer
             if (filter(item))
                 return item;
 
-        return null;
+        return null;    //didn't find
     }
 }

@@ -6,7 +6,7 @@ using DO;
 
 internal class Program
 {
-    private static readonly IDal s_dal = new DalList(); 
+    private static readonly IDal s_dal = new DalList();
 
     static void Main(string[] args)
     {
@@ -19,7 +19,6 @@ internal class Program
         {
             Console.WriteLine(ex);
         }
-
     }
 
     //private static ITask? s_dalTask = new TaskImplementation(); //stage 1
@@ -27,17 +26,13 @@ internal class Program
     //private static ILink? s_dalLink = new LinkImplementation(); //stage 1
 
 
-    private static void mainMenu()
+    private static void mainMenu()  //the main menu, asking what entity the user wants to do action on
     {
         string? choice;
         do
         {
             Console.WriteLine
-            (@"enter your choice:
-exit
-task
-engineer
-link");
+            ("enter your choice:\nexit\ntask\nengineer\nlink");
             choice = Console.ReadLine();
             if (choice == "exit")
                 return;
@@ -47,17 +42,11 @@ link");
         } while (choice != "exit");
     }
 
-    private static void secondMenu(string? choice)
+    private static void secondMenu(string? choice)  //the second menu, asking what action does the user want to do on the entity he chose
     {
         string? act;
         Console.WriteLine
-            (@$"enter your choice:
-exit
-add {choice}
-read {choice}
-readAll {choice}
-update {choice}
-delete {choice}");
+            ($"enter your choice:\nexit\nadd {choice}\nread {choice}\nreadAll {choice}\nupdate {choice}\ndelete {choice}");
         act = Console.ReadLine();
 
         switch (act)
@@ -71,7 +60,8 @@ delete {choice}");
         }
     }
 
-    private static void add(string? choice)
+    #region methods for second menu
+    private static void add(string? choice) //adding a new entity the the list
     {
         if (choice == "task")
         {
@@ -137,14 +127,14 @@ delete {choice}");
 
         }
     }
-    private static void read(string? choice)
+    private static void read(string? choice)    //printing an object by its id
     {
         Console.WriteLine("enter ID");
         int id = int.Parse(Console.ReadLine());
 
         switch (choice)
         {
-            case "task": Console.WriteLine(s_dal.Task.Read(id));  break;
+            case "task": Console.WriteLine(s_dal.Task.Read(id)); break;
             case "engineer": Console.WriteLine(s_dal.Engineer.Read(id)); break;
             case "link": Console.WriteLine(s_dal.Link.Read(id)); break;
             default: Console.WriteLine("ERROR"); break;
@@ -152,18 +142,18 @@ delete {choice}");
 
 
     }
-    private static void readAll(string? choice)
+    private static void readAll(string? choice) //printing the whole list of the entity the user chose
     {
         switch (choice)
         {
             case "task":
-            foreach(var item in s_dal.Task.ReadAll())
-                Console.WriteLine(item);
+                foreach (var item in s_dal.Task.ReadAll())
+                    Console.WriteLine(item);
                 break;
             case "engineer":
-                foreach(var item in s_dal.Engineer.ReadAll())
+                foreach (var item in s_dal.Engineer.ReadAll())
                     Console.WriteLine(item);
-                    break;
+                break;
             case "link":
                 foreach (var item in s_dal.Link.ReadAll())
                     Console.WriteLine(item);
@@ -171,7 +161,7 @@ delete {choice}");
             default: Console.WriteLine("ERROR"); break;
         }
     }
-    private static void update(string? choice)
+    private static void update(string? choice)  //updating one object by its id
     {
         Console.WriteLine($"enter {choice} ID");
         int id = int.Parse(Console.ReadLine());
@@ -231,7 +221,7 @@ delete {choice}");
 
         }
     }
-    private static void delete(string? choice)
+    private static void delete(string? choice)  //deleting one obgect by its id
     {
         Console.WriteLine("enter id");
         int id = int.Parse(Console.ReadLine());
@@ -242,9 +232,6 @@ delete {choice}");
             case "link": s_dal.Link.Delete(id); break;
             default: Console.WriteLine("ERROR"); break;
         }
-
     }
 }
-
-
-
+#endregion

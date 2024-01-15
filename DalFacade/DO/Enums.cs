@@ -1,12 +1,12 @@
 ﻿namespace DO;
 
 public enum EngineerLevel
-{ 
-  Beginner,
-  AdvancedBeginner,
-  Intermediate,
-  Advanced,
-  Expert
+{
+    Beginner,
+    AdvancedBeginner,
+    Intermediate,
+    Advanced,
+    Expert
 }
 
 public enum TaskDifficulty

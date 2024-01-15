@@ -18,7 +18,8 @@ internal class TaskImplementation : ITask
         //Task? temp = DataSource.Tasks.Find(task => task.TaskID == id);
         //if (temp == null)
 
-        if (Read(id) == null) //If this id doesnt exist
+        Task? temp = Read(id);
+        if (temp == null) //If this id doesnt exist
             throw new DalDoesNotExistException($"Task with ID={id} does Not exist");
 
         DataSource.Tasks.Remove(temp);
@@ -30,11 +31,9 @@ internal class TaskImplementation : ITask
             if (item.TaskID == id)
                 return item;
 
-        return null;
+        return null;    //didn't find
         //return (DataSource.Tasks.Find(task => task.TaskID == id)); //Stage 2
     }
-
-
 
     public IEnumerable<Task?> ReadAll(Func<Task, bool>? filter) //Reads all entity objects
     {
@@ -44,10 +43,21 @@ internal class TaskImplementation : ITask
                    where filter(item)
                    select item;
         }
-        return from item in DataSource.Tasks
+        return from item in DataSource.Tasks    //if there is no filter, returning the whole list
                select item;
     }
 
+    public void Update(Task item) //Updates entity object
+    {
+        //Task? temp = DataSource.Tasks.Find(task => task.TaskID == item.TaskID); //stage 1
+        //if (temp == null)
+
+        Task? temp = Read(item.TaskID);
+        if (temp == null) //If this id doesnt exist
+            throw new DalDoesNotExistException($"Task with ID={item.TaskID} does Not exist");
+        DataSource.Tasks.Remove(temp);  //deleting the existing object
+        DataSource.Tasks.Add(item); //adding the updated object
+    }
 
     public Task? Read(Func<Task, bool> filter) //Reads entity object
     {
@@ -55,18 +65,6 @@ internal class TaskImplementation : ITask
             if (filter(item))
                 return item;
 
-        return null;
-    }
-
-
-    public void Update(Task item) //Updates entity object
-    {
-        //Task? temp = DataSource.Tasks.Find(task => task.TaskID == item.TaskID); //stage 1
-        //if (temp == null)
-
-        if (Read(item.TaskID) == null) //If this id doesnt exist
-            throw new DalDoesNotExistException($"Task with ID={item.TaskID} does Not exist");
-        DataSource.Tasks.Remove(temp);
-        DataSource.Tasks.Add(item);
+        return null;    //didn't find
     }
 }
