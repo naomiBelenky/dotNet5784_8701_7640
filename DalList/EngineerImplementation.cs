@@ -6,25 +6,29 @@ using DO;
 
 internal class EngineerImplementation : IEngineer
 {
-    public int Create(Engineer item)
+    public int Create(Engineer item) //Creates new entity object in DAL
     {
-        //if (DataSource.Engineers.Find(eng => eng.EngineerID == item.EngineerID) != null)
-        if(Read(item.EngineerID) is not null)
+        //if (DataSource.Engineers.Find(eng => eng.EngineerID == item.EngineerID) != null) //Stage 1
+
+        if(Read(item.EngineerID) is not null) //If this id already exist
             throw new DalAlreadyExistsException($"Engineer with ID={item.EngineerID} already exist!!");
 
         DataSource.Engineers.Add(item);
         return item.EngineerID;
     }
 
-    public void Delete(int id)
+    public void Delete(int id) //Deletes an object by its Id
     {
-        Engineer? temp = DataSource.Engineers.Find(eng => eng.EngineerID == id);
-        if (temp == null) 
+        //Engineer? temp = DataSource.Engineers.Find(eng => eng.EngineerID == id); //stage 1
+        //if (temp == null) 
+
+        if (Read(id) == null) //If this id doesnt exist
             throw new DalDoesNotExistException($"Engineer with ID={id} does Not exist");
+
         DataSource.Engineers.Remove(temp);
     }
 
-    public Engineer? Read(int id)
+    public Engineer? Read(int id) //Reads entity object by its ID
     {
 
         foreach (Engineer item in DataSource.Engineers)
@@ -35,7 +39,7 @@ internal class EngineerImplementation : IEngineer
         //return (DataSource.Engineers.Find(eng => eng.EngineerID == id)); //Stage 1
     }
 
-    public IEnumerable<Engineer?> ReadAll(Func<Engineer, bool>? filter)
+    public IEnumerable<Engineer?> ReadAll(Func<Engineer, bool>? filter) //Reads all entity objects
     {
         if (filter != null)
         {
@@ -50,16 +54,18 @@ internal class EngineerImplementation : IEngineer
         //return new List<Engineer>(DataSource.Engineers); //Stage 1
     }
 
-    public void Update(Engineer item)
+    public void Update(Engineer item) //Updates entity object
     {
-        Engineer? temp = DataSource.Engineers.Find(eng => eng.EngineerID == item.EngineerID);
-        if (temp == null)
+        //Engineer? temp = DataSource.Engineers.Find(eng => eng.EngineerID == item.EngineerID); //stage 1
+        //if (temp == null)
+        
+        if (Read(item.EngineerID) == null) //If this id doesnt exist
             throw new DalDoesNotExistException($"Engineer with ID={item.EngineerID} does Not exist");
         DataSource.Engineers.Remove(temp);
         DataSource.Engineers.Add(item);
     }
 
-    public Engineer? Read(Func<Engineer, bool> filter) //Reads entity object by its ID
+    public Engineer? Read(Func<Engineer, bool> filter) //Reads entity object
     {
         foreach (Engineer item in DataSource.Engineers)
             if (filter(item))

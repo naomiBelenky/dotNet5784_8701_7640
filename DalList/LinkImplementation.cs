@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 internal class LinkImplementation : ILink
 {
-    public int Create(Link item)
+    public int Create(Link item) //Creates new entity object in DAL
     {
         int newID = DataSource.Config.NextLinkID;
         Link newLink = item with { LinkID = newID };
@@ -14,15 +14,16 @@ internal class LinkImplementation : ILink
         return newID;
     }
 
-    public void Delete(int id)
+    public void Delete(int id) //Deletes an object by its Id
     {
-        Link? temp = DataSource.Links.Find(link => link.LinkID == id);
-        if (temp == null)
+        //Link? temp = DataSource.Links.Find(link => link.LinkID == id); //Stage 1
+        //if (temp == null)
+        if (Read(id) == null) //If this id doesnt exist
             throw new DalDoesNotExistException($"Link with ID={id} does Not exist");
         DataSource.Links.Remove(temp);
     }
 
-    public Link? Read(int id)
+    public Link? Read(int id) //Reads entity object by its ID
     {
         foreach (Link item in DataSource.Links)
             if (item.LinkID == id)
@@ -33,7 +34,7 @@ internal class LinkImplementation : ILink
         //return (DataSource.Links.Find(link => link.LinkID == id)); //Stage 2
     }
 
-    public IEnumerable<Link?> ReadAll(Func<Link, bool>? filter)
+    public IEnumerable<Link?> ReadAll(Func<Link, bool>? filter) //Reads all entity objects
     {
         if (filter != null)
         {
@@ -48,16 +49,17 @@ internal class LinkImplementation : ILink
         //return new List<Link>(DataSource.Links); //Stage 2
     }
 
-    public void Update(Link item)
+    public void Update(Link item) //Updates entity object
     {
-        Link? temp = DataSource.Links.Find(link => link.LinkID == item.LinkID);
-        if (temp == null)
+        //Link? temp = DataSource.Links.Find(link => link.LinkID == item.LinkID); //stage 1
+        //if (temp == null)
+        if (Read(item.LinkID) == null) //If this id doesnt exist
             throw new DalDoesNotExistException($"Link with ID={item.LinkID} does Not exist");
         DataSource.Links.Remove(temp);
         DataSource.Links.Add(item);
     }
 
-    public Link? Read(Func<Link, bool> filter) //Reads entity object by its ID
+    public Link? Read(Func<Link, bool> filter) //Reads entity object
     {
         foreach (Link item in DataSource.Links)
             if (filter(item))
