@@ -2,7 +2,7 @@
 
 namespace Dal;
 
-public class DalXml : IDal
+sealed public class DalXml : IDal
 {
     public ITask Task => new TaskImplementation();
 

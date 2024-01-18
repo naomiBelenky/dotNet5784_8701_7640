@@ -3,16 +3,20 @@
 using Dal;
 using DalApi;
 using DO;
+using System.Data.SqlTypes;
+
 
 internal class Program
 {
-    private static readonly IDal s_dal = new DalList();
+    //private static readonly IDal s_dal = new DalList(); //stage 2
+    static readonly IDal s_dal = new DalXml(); //stage 3
+
 
     static void Main(string[] args)
     {
         try
         {
-            Initialization.Do(s_dal);
+            //Initialization.Do(s_dal); //stage 2
             mainMenu();
         }
         catch (Exception ex)
@@ -32,7 +36,7 @@ internal class Program
         do
         {
             Console.WriteLine
-            ("enter your choice:\nexit\ntask\nengineer\nlink");
+            ("enter your choice: Data initialization\nexit\ntask\nengineer\nlink");
             choice = Console.ReadLine();
             if (choice == "exit")
                 return;
@@ -52,6 +56,14 @@ internal class Program
         switch (act)
         {
             case "exit": return;
+            case "Data initialization":
+                Console.Write("Would you like to create Initial data? (Y/N)"); //stage 3
+                string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input"); //stage 3
+                if (ans == "Y") //stage 3
+                    Initialization.Do(s_dal); //stage 2
+
+
+                break;
             case "add": add(choice); break;
             case "read": read(choice); break;
             case "readAll": readAll(choice); break;
