@@ -3,6 +3,7 @@ using DalApi;
 using DO;
 using System;
 using System.Collections.Generic;
+using System.Reflection.Emit;
 using System.Xml.Linq;
 
 internal class EngineerImplementation : IEngineer
@@ -52,36 +53,23 @@ internal class EngineerImplementation : IEngineer
 
     public Engineer? Read(Func<Engineer, bool> filter)
     {
-        XElement? eng = XMLTools.LoadListFromXMLElement(s_engineers_xml).Elements().FirstOrDefault(item => filter());
-        //Engineer? newEngineer;
-        return eng is not null ? null : new Engineer()
-        {
-            EngineerID = Convert.ToInt32(eng.Element("EngineerID").Value),
-            FullName =eng. Element("Name").Value,
-            Email = eng.Element("Email").Value,
-            Level = (EngineerLevel)Convert.ToInt32(eng.Element("Level").Value),
-            CostPerHour = Convert.ToDouble(eng.Element("CostPerHour").Value)
-        };
-    
+        //XElement? temp = XMLTools.LoadListFromXMLElement(s_engineers_xml).Elements().FirstOrDefault(filter);
+
+        return XMLTools.LoadListFromXMLElement(s_engineers_xml).Elements().Select(eng => getEngineer(eng)).FirstOrDefault(filter);
     }
 
     public Engineer? Read(int id)
     {
-        XElement? engineer = XMLTools.LoadListFromXMLElement(s_engineers_xml).Elements().FirstOrDefault(item => (int?)item.Element("EngineerID") ==id);
-        return engineer is null ? null : new Engineer()
-        {
-            EngineerID = Convert.ToInt32(engineer.Element("EngineerID").Value),
-            FullName = engineer.Element("Name").Value,
-            Email = engineer.Element("Email").Value,
-            Level = (EngineerLevel)Convert.ToInt32(engineer.Element("Level").Value),
-            CostPerHour = Convert.ToDouble(engineer.Element("CostPerHour").Value)
-        };
-        //return newEngineer is null ? null : newEngineer;
+        XElement? engineer = XMLTools.LoadListFromXMLElement(s_engineers_xml).Elements().FirstOrDefault(item => (int?)item.Element("EngineerID") == id);
+        return engineer is null ? null : getEngineer(engineer);
     }
 
     public IEnumerable<Engineer?> ReadAll(Func<Engineer, bool>? filter = null)
     {
-        throw new NotImplementedException();
+        if (filter != null)
+            return XMLTools.LoadListFromXMLElement(s_engineers_xml).Elements().Select(eng => getEngineer(eng)).Where(filter);
+        else 
+            return XMLTools.LoadListFromXMLElement(s_engineers_xml).Elements().Select(eng => getEngineer(eng));
     }
 
     public void Update(Engineer item)
@@ -92,5 +80,17 @@ internal class EngineerImplementation : IEngineer
         XElement engineerList = XMLTools.LoadListFromXMLElement(s_engineers_xml);
         Delete(item.EngineerID);
         Create(item);
+    }
+
+    public Engineer getEngineer(XElement eng)
+    {
+        return new Engineer()
+        {
+            EngineerID = Convert.ToInt32(eng.Element("EngineerID").Value),
+            FullName = eng.Element("Name").Value,
+            Email = eng.Element("Email").Value,
+            Level = (EngineerLevel)Convert.ToInt32(eng.Element("Level").Value),
+            CostPerHour = Convert.ToDouble(eng.Element("CostPerHour").Value)
+        };
     }
 }
