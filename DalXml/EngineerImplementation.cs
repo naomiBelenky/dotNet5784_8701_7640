@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
 
-internal class EngineerImplementation:IEngineer
+internal class EngineerImplementation : IEngineer
 {
     readonly string s_engineers_xml = "engineers";
 
@@ -29,7 +29,22 @@ internal class EngineerImplementation:IEngineer
 
     public Engineer? Read(int id)
     {
-        throw new NotImplementedException();
+        XElement? engineerList = XMLTools.LoadListFromXMLElement(s_engineers_xml).Elements().FirstOrDefault(item => (int?)item.Element("EngineerID")==id);
+        Engineer? newEngineer;
+        try {
+            newEngineer = (from p in engineerList.Elements()
+                           where Convert.ToInt32(p.Element("EngineerID").Value)==id
+                           select new Engineer()
+                           {
+                               EngineerID = Convert.ToInt32(p.Element("EngineerID").Value),
+                               FullName = p.Element("Name").Value,
+                               Email = p.Element("Email").Value,
+                               Level = (EngineerLevel)Convert.ToInt32(p.Element("Level").Value),
+                               CostPerHour = Convert.ToDouble(p.Element("CostPerHour").Value)
+                           }).FirstOrDefault();
+        }
+        catch { newEngineer = null; }
+        return newEngineer is null ? null : newEngineer;
     }
 
     public IEnumerable<Engineer?> ReadAll(Func<Engineer, bool>? filter = null)
