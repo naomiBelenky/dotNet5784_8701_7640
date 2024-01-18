@@ -52,12 +52,22 @@ internal class EngineerImplementation : IEngineer
 
     public Engineer? Read(Func<Engineer, bool> filter)
     {
-        throw new NotImplementedException();
+        XElement? eng = XMLTools.LoadListFromXMLElement(s_engineers_xml).Elements().FirstOrDefault(item => filter());
+        //Engineer? newEngineer;
+        return eng is not null ? null : new Engineer()
+        {
+            EngineerID = Convert.ToInt32(eng.Element("EngineerID").Value),
+            FullName =eng. Element("Name").Value,
+            Email = eng.Element("Email").Value,
+            Level = (EngineerLevel)Convert.ToInt32(eng.Element("Level").Value),
+            CostPerHour = Convert.ToDouble(eng.Element("CostPerHour").Value)
+        };
+    
     }
 
     public Engineer? Read(int id)
     {
-        XElement? engineerList = XMLTools.LoadListFromXMLElement(s_engineers_xml).Elements().FirstOrDefault(item => (int?)item.Element("EngineerID")==id);
+        XElement? engineerList = XMLTools.LoadListFromXMLElement(s_engineers_xml).Elements().FirstOrDefault(/*item => (int?)item.Element("EngineerID")==id*/);
         Engineer? newEngineer;
         try {
             newEngineer = (from p in engineerList.Elements()
@@ -82,8 +92,7 @@ internal class EngineerImplementation : IEngineer
 
     public void Update(Engineer item)
     {
-        Engineer? temp = Read(item.EngineerID);
-        if (temp == null) //If this id doesnt exist
+        if (Read(item.EngineerID) == null) //If this id doesnt exist
             throw new DalDoesNotExistException($"Engineer with ID={item.EngineerID} does Not exist");
 
         XElement engineerList = XMLTools.LoadListFromXMLElement(s_engineers_xml);
