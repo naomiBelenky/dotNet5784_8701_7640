@@ -24,26 +24,59 @@ internal class TaskImplementation : ITask
 
     public void Delete(int id)
     {
-        throw new NotImplementedException();
+
+        Task? temp = Read(id);
+        if (temp == null)
+            throw new DalDoesNotExistException($"Task with ID={id} does Not exist");
+
+        List<Task> tasks = new List<Task>();
+        tasks = XMLTools.LoadListFromXMLSerializer<Task>(s_tasks_xml);
+        tasks.Remove(temp); //deleting the item from the list
+        XMLTools.SaveListToXMLSerializer(tasks, s_tasks_xml);   //saving the updated list to the xml
     }
 
     public Task? Read(Func<Task, bool> filter)
     {
-        throw new NotImplementedException();
+        List<Task> tasks = XMLTools.LoadListFromXMLSerializer<Task>(s_tasks_xml);
+        foreach (Task item in tasks)
+            if (filter(item))
+                return item;
+
+        return null; //didn't find
     }
 
     public Task? Read(int id)
     {
-        throw new NotImplementedException();
+        List<Task> tasks = XMLTools.LoadListFromXMLSerializer<Task>(s_tasks_xml);
+        foreach (Task item in tasks)
+            if (item.TaskID == id) 
+                return item;
+
+        return null; //didn't find
     }
 
     public IEnumerable<Task?> ReadAll(Func<Task, bool>? filter = null)
     {
-        throw new NotImplementedException();
+        List<Task> tasks = XMLTools.LoadListFromXMLSerializer<Task>(s_tasks_xml);
+        if (filter != null)
+        {
+            return from item in tasks
+                   where filter(item)
+                   select item;
+        }
+
+        return from item in tasks    //if there is no filter, returning the whole list
+               select item;
     }
 
     public void Update(Task item)
     {
-        throw new NotImplementedException();
+        List<Task> tasks = XMLTools.LoadListFromXMLSerializer<Task>(s_tasks_xml);
+        Task? temp = Read(item.TaskID);
+        if (temp == null)
+            throw new DalDoesNotExistException($"Task with ID={item.TaskID} does Not exist");
+        tasks.Remove(item);
+        tasks.Add(temp);
+        XMLTools.SaveListToXMLSerializer(tasks, s_tasks_xml);
     }
 }
