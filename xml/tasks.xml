@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfTask xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Task>
+    <TaskID>44</TaskID>
+    <Name>Optimization</Name>
+    <Description>Improve, reduce costs</Description>
+    <Milestone>false</Milestone>
+    <Creation>2023-09-08T00:00:00</Creation>
+    <PlanToStart xsi:nil="true" />
+    <StartWork xsi:nil="true" />
+    <TimeForTask xsi:nil="true" />
+    <Deadline xsi:nil="true" />
+    <FinishDate xsi:nil="true" />
+    <EngineerID>0</EngineerID>
+    <Difficulty>Novice</Difficulty>
+  </Task>
+  <Task>
+    <TaskID>45</TaskID>
+    <Name>Automation</Name>
+    <Description>Design automated solutions</Description>
+    <Milestone>false</Milestone>
+    <Creation>2023-08-09T00:00:00</Creation>
+    <PlanToStart xsi:nil="true" />
+    <StartWork xsi:nil="true" />
+    <TimeForTask xsi:nil="true" />
+    <Deadline xsi:nil="true" />
+    <FinishDate xsi:nil="true" />
+    <EngineerID>0</EngineerID>
+    <Difficulty>Novice</Difficulty>
+  </Task>
+</ArrayOfTask>

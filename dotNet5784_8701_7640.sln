@@ -16,14 +16,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalList", "DalList\DalList.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalTest", "DalTest\DalTest.csproj", "{15B12CE5-21CE-483A-AC0F-0DAA86078F93}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalXml", "DalXml\DalXml.csproj", "{9FA0733D-6102-4ADD-9614-6BBD0E7DC416}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalXml", "DalXml\DalXml.csproj", "{9FA0733D-6102-4ADD-9614-6BBD0E7DC416}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xml", "xml", "{2FCA857B-BC5E-4B02-AB3B-182337CCDB54}"
 	ProjectSection(SolutionItems) = preProject
-		xml\data-config.xml.txt = xml\data-config.xml.txt
-		xml\engineers.xml.txt = xml\engineers.xml.txt
-		xml\links.xml.txt = xml\links.xml.txt
-		xml\tasks.xml.txt = xml\tasks.xml.txt
+		xml\data-config.xml = xml\data-config.xml
+		xml\engineers.xml = xml\engineers.xml
+		xml\links.xml = xml\links.xml
+		xml\tasks.xml = xml\tasks.xml
 	EndProjectSection
 EndProject
 Global
