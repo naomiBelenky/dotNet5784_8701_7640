@@ -4,6 +4,7 @@ using DO;
 using System;
 using System.Collections.Generic;
 using System.Reflection.Emit;
+using System.Security.Cryptography;
 using System.Xml.Linq;
 
 internal class EngineerImplementation : IEngineer
@@ -92,5 +93,19 @@ internal class EngineerImplementation : IEngineer
             Level = (EngineerLevel)Convert.ToInt32(eng.Element("Level").Value),
             CostPerHour = Convert.ToDouble(eng.Element("CostPerHour").Value)
         };
+    }
+
+    public void DeleteAll()  //delete all the antity objects in case of new initialization
+    {
+
+        XElement engineerList = XMLTools.LoadListFromXMLElement(s_engineers_xml);
+        
+
+        foreach (var item in s_engineers_xml)
+            Delete(item);
+
+        //XMLTools.SaveListToXMLElement(engineerList, s_engineers_xml);
+        //אני חושבת שהפונקצית מחיקה כבר מעדכנת את הקובץ, לא כך?
+        //ולהחזיר.
     }
 }

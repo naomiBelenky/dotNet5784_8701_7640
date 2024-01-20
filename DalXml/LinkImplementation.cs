@@ -4,6 +4,7 @@ using DO;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
+using System.Threading.Tasks;
 
 internal class LinkImplementation : ILink
 {
@@ -73,5 +74,18 @@ internal class LinkImplementation : ILink
         links.Remove(item);
         links.Add(temp);
         XMLTools.SaveListToXMLSerializer(links, s_links_xml);
+        
+    }
+
+    public void DeleteAll() //delete all the antity objects in case of new initialization
+    {
+        List<Link> links = XMLTools.LoadListFromXMLSerializer<Link>(s_links_xml);
+        if (links.Count!=0)
+        {
+            links.Clear();
+            XMLTools.SaveListToXMLSerializer(links, s_links_xml);
+        }
+     
+
     }
 }

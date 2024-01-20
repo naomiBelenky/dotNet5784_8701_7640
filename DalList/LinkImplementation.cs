@@ -71,4 +71,8 @@ internal class LinkImplementation : ILink
 
         return null;    //didn't find
     }
+
+    public void DeleteAll() //for stage 3
+    {
+    }
 }

@@ -12,4 +12,5 @@ public interface ICrud<T> where T : class
     //List<T> ReadAll(); //stage 1 only, Reads all entity objects //Stage 1
     void Update(T item); //Updates entity object
     void Delete(int id); //Deletes an object by its Id
+    void DeleteAll(); //delete all the antity objects in case of new initialization
 }

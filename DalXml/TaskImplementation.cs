@@ -79,4 +79,14 @@ internal class TaskImplementation : ITask
         tasks.Add(temp);
         XMLTools.SaveListToXMLSerializer(tasks, s_tasks_xml);
     }
+
+    public void DeleteAll() //delete all the antity objects in case of new initialization
+    {
+        List<Task> tasks = XMLTools.LoadListFromXMLSerializer<Task>(s_tasks_xml);
+        if (tasks.Count != 0)
+        {
+            tasks.Clear();
+            XMLTools.SaveListToXMLSerializer(tasks, s_tasks_xml);
+        }
+    }
 }

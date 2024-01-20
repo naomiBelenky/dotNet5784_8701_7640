@@ -67,4 +67,8 @@ internal class TaskImplementation : ITask
 
         return null;    //didn't find
     }
+
+    public void DeleteAll() //for stage 3
+    {
+    }
 }

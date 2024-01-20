@@ -103,8 +103,13 @@ public static class Initialization
 
         s_dal = dal ?? throw new NullReferenceException("DAL object can not be null!"); //stage 2
 
+      
+        dal.Task.DeleteAll();
+        //(The check for existing initial data is performed within the function "DeleteAll")
         createTasks();
+        dal.Link.DeleteAll();
         createLinks();
+        dal.Task.DeleteAll();
         createEngineers();
     }
 }
