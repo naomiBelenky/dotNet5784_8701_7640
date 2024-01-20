@@ -46,7 +46,7 @@ internal class Program
                 string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input"); //stage 3
                 if (ans == "Y") //stage 3
                     Initialization.Do(s_dal); //stage 2
-
+                continue;
             }
 
             secondMenu(choice);
@@ -215,8 +215,6 @@ internal class Program
                 s_dal.Task.Update(newTask);
                 break;
             case "engineer":
-                Console.WriteLine("enter ID");
-                int engId = int.Parse(Console.ReadLine());
                 Console.WriteLine("enter full name");
                 string? engName = Console.ReadLine();
                 Console.WriteLine("enter email");

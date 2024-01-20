@@ -109,7 +109,7 @@ public static class Initialization
         createTasks();
         dal.Link.DeleteAll();
         createLinks();
-        dal.Task.DeleteAll();
+        dal.Engineer.DeleteAll();
         createEngineers();
     }
 }

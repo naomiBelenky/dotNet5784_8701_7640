@@ -99,12 +99,13 @@ internal class EngineerImplementation : IEngineer
     {
 
         XElement engineerList = XMLTools.LoadListFromXMLElement(s_engineers_xml);
+        engineerList.RemoveAll();
         
 
-        foreach (var item in s_engineers_xml)
-            Delete(item);
+        //foreach (var item in s_engineers_xml)
+        //    Delete(item);
 
-        //XMLTools.SaveListToXMLElement(engineerList, s_engineers_xml);
+        XMLTools.SaveListToXMLElement(engineerList, s_engineers_xml);
         //אני חושבת שהפונקצית מחיקה כבר מעדכנת את הקובץ, לא כך?
         //ולהחזיר.
     }
