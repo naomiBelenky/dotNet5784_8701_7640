@@ -209,7 +209,7 @@ internal class Program
                 Console.WriteLine("enter task difficulty");
                 TaskDifficulty difficulty = (TaskDifficulty)int.Parse(Console.ReadLine());
 
-                DO.Task newTask = new DO.Task(0, name, description, false, DateTime.Now,
+                DO.Task newTask = new DO.Task(id, name, description, false, DateTime.Now,
                     planToStart, null, timeForTask, deadLine, null, product, notes, id, difficulty);
 
                 s_dal.Task.Update(newTask);
@@ -223,7 +223,7 @@ internal class Program
                 EngineerLevel level = (EngineerLevel)int.Parse(Console.ReadLine());
                 Console.WriteLine("enter engineer cost per hour");
                 double? costPerHour = double.Parse(Console.ReadLine());
-                DO.Engineer newEngineer = new Engineer(engId, engName, email, level, costPerHour);
+                DO.Engineer newEngineer = new Engineer(id, engName, email, level, costPerHour);
                 s_dal.Engineer.Update(newEngineer);
                 break;
             case "link":
@@ -233,7 +233,7 @@ internal class Program
                 Console.WriteLine("enter the depended task ID");
                 int dependedTask = int.Parse(Console.ReadLine());
 
-                DO.Link newLink = new DO.Link(0, prevTask, dependedTask);
+                DO.Link newLink = new DO.Link(id, prevTask, dependedTask);
                 s_dal.Link.Update(newLink);
                 break;
 

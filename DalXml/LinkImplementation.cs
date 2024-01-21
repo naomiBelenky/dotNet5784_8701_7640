@@ -71,8 +71,8 @@ internal class LinkImplementation : ILink
         Link? temp = Read(item.LinkID);
         if (temp == null)
             throw new DalDoesNotExistException($"Link with ID={item.LinkID} does Not exist");
-        links.Remove(item);
-        links.Add(temp);
+        links.Remove(temp);
+        links.Add(item);
         XMLTools.SaveListToXMLSerializer(links, s_links_xml);
         
     }

@@ -88,7 +88,7 @@ internal class EngineerImplementation : IEngineer
         return new Engineer()
         {
             EngineerID = Convert.ToInt32(eng.Element("EngineerID").Value),
-            FullName = eng.Element("Name").Value,
+            FullName = eng.Element("FullName").Value,
             Email = eng.Element("Email").Value,
             Level = (EngineerLevel)Convert.ToInt32(eng.Element("Level").Value),
             CostPerHour = Convert.ToDouble(eng.Element("CostPerHour").Value)

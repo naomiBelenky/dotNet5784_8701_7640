@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfLink xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Link>
-    <LinkID>80</LinkID>
-    <PrevTask>5</PrevTask>
-    <NextTask>1</NextTask>
-  </Link>
-  <Link>
     <LinkID>81</LinkID>
     <PrevTask>5</PrevTask>
     <NextTask>2</NextTask>

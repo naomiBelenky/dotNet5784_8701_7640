@@ -30,4 +30,11 @@
     <Email>danmaz@gmail.com</Email>
     <Level>Expert</Level>
   </Engineer>
+  <Engineer>
+    <EngineerID>21</EngineerID>
+    <FullName>yifat</FullName>
+    <Email>hvas</Email>
+    <Level>Advanced</Level>
+    <CostPerHour>100</CostPerHour>
+  </Engineer>
 </ArrayOfEngineer>
