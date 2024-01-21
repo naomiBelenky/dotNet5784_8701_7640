@@ -2,6 +2,9 @@
 
 using DalApi;
 using DO;
+using System.Xml.Linq;
+using System.Xml;
+using Dal;
 
 public static class Initialization
 {
@@ -88,8 +91,8 @@ public static class Initialization
         for (int i = 0; i < 5; i++)
         {
             int tempID = random.Next(200000000, 400000000);
-            double costPerHour = random.Next(30, 300);
             EngineerLevel tempLevel = (EngineerLevel)random.Next(1, 5);
+            double costPerHour = Math.Round((random.NextDouble() * (500 - 30) + 30), 2); //random double number between 30 to 500 with two numbers after the decimal point
             Engineer temp = new Engineer(tempID, names[i], emails[i], tempLevel, costPerHour);
             //s_dalEngineer.Create(temp); //stage 1
             s_dal!.Engineer.Create(temp); //stage 2
@@ -104,7 +107,12 @@ public static class Initialization
 
         s_dal = dal ?? throw new NullReferenceException("DAL object can not be null!"); //stage 2
 
-      
+        string filePath = "C:\\Users\\Naomi\\source\\repos\\dotNet5784_8701_7640\\xml\\data-config.xml";
+        XElement root = XElement.Load(filePath);
+        root.Element("NextTaskId").Value= "1";
+        root.Element("NextLinkId").Value = "1";
+        root.Save(filePath);
+
         dal.Task.DeleteAll();
         //(The check for existing initial data is performed within the function "DeleteAll")
         createTasks();

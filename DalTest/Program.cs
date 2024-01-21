@@ -42,7 +42,7 @@ internal class Program
                 return;
             if (choice == "Data initialization")
             {
-                Console.Write("Would you like to create Initial data? (Y/N)"); //stage 3
+                Console.Write("Would you like to create Initial data? (Y/N)\n"); //stage 3
                 string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input"); //stage 3
                 if (ans == "Y") //stage 3
                     Initialization.Do(s_dal); //stage 2
@@ -58,23 +58,15 @@ internal class Program
     {
         string? act;
         Console.WriteLine
-            ($"enter your choice:\nexit\nadd {choice}\nread {choice}\nreadAll {choice}\nupdate {choice}\ndelete {choice}");
+            ($"enter your choice:\nexit\nadd {choice}\nread {choice}\nread all {choice}\nupdate {choice}\ndelete {choice}");
         act = Console.ReadLine();
 
         switch (act)
         {
             case "exit": return;
-            //case "Data initialization":
-            //    Console.Write("Would you like to create Initial data? (Y/N)"); //stage 3
-            //    string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input"); //stage 3
-            //    if (ans == "Y") //stage 3
-            //        Initialization.Do(s_dal); //stage 2
-
-
-            //    break;
             case "add": add(choice); break;
             case "read": read(choice); break;
-            case "readAll": readAll(choice); break;
+            case "read all": readAll(choice); break;
             case "update": update(choice); break;
             case "delete": delete(choice); break;
         }
