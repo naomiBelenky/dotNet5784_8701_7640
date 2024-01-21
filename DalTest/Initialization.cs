@@ -88,8 +88,9 @@ public static class Initialization
         for (int i = 0; i < 5; i++)
         {
             int tempID = random.Next(200000000, 400000000);
+            double costPerHour = random.Next(30, 300);
             EngineerLevel tempLevel = (EngineerLevel)random.Next(1, 5);
-            Engineer temp = new Engineer(tempID, names[i], emails[i], tempLevel);
+            Engineer temp = new Engineer(tempID, names[i], emails[i], tempLevel, costPerHour);
             //s_dalEngineer.Create(temp); //stage 1
             s_dal!.Engineer.Create(temp); //stage 2
         }

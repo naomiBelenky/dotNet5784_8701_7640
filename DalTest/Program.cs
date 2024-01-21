@@ -222,7 +222,7 @@ internal class Program
                 Console.WriteLine("enter engineer level");
                 EngineerLevel level = (EngineerLevel)int.Parse(Console.ReadLine());
                 Console.WriteLine("enter engineer cost per hour");
-                double? costPerHour = double.Parse(Console.ReadLine());
+                double costPerHour = double.Parse(Console.ReadLine());
                 DO.Engineer newEngineer = new Engineer(id, engName, email, level, costPerHour);
                 s_dal.Engineer.Update(newEngineer);
                 break;

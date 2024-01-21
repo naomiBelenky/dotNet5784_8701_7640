@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfTask xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Task>
-    <TaskID>185</TaskID>
+    <TaskID>245</TaskID>
     <Name>Optimization</Name>
     <Description>Improve, reduce costs</Description>
     <Milestone>false</Milestone>
-    <Creation>2023-09-12T00:00:00</Creation>
+    <Creation>2023-10-02T00:00:00</Creation>
     <PlanToStart xsi:nil="true" />
     <StartWork xsi:nil="true" />
     <TimeForTask xsi:nil="true" />
@@ -15,11 +15,11 @@
     <Difficulty>Novice</Difficulty>
   </Task>
   <Task>
-    <TaskID>186</TaskID>
+    <TaskID>246</TaskID>
     <Name>Automation</Name>
     <Description>Design automated solutions</Description>
     <Milestone>false</Milestone>
-    <Creation>2023-08-14T00:00:00</Creation>
+    <Creation>2023-09-19T00:00:00</Creation>
     <PlanToStart xsi:nil="true" />
     <StartWork xsi:nil="true" />
     <TimeForTask xsi:nil="true" />
@@ -29,11 +29,11 @@
     <Difficulty>Novice</Difficulty>
   </Task>
   <Task>
-    <TaskID>187</TaskID>
+    <TaskID>247</TaskID>
     <Name>Simulation</Name>
     <Description>Virtual models for testing</Description>
     <Milestone>false</Milestone>
-    <Creation>2023-08-14T00:00:00</Creation>
+    <Creation>2023-09-19T00:00:00</Creation>
     <PlanToStart xsi:nil="true" />
     <StartWork xsi:nil="true" />
     <TimeForTask xsi:nil="true" />
@@ -43,11 +43,11 @@
     <Difficulty>Novice</Difficulty>
   </Task>
   <Task>
-    <TaskID>188</TaskID>
+    <TaskID>248</TaskID>
     <Name>Algorithm Development</Name>
     <Description>Craft complex algorithms</Description>
     <Milestone>false</Milestone>
-    <Creation>2023-08-14T00:00:00</Creation>
+    <Creation>2023-09-19T00:00:00</Creation>
     <PlanToStart xsi:nil="true" />
     <StartWork xsi:nil="true" />
     <TimeForTask xsi:nil="true" />
@@ -57,7 +57,7 @@
     <Difficulty>Novice</Difficulty>
   </Task>
   <Task>
-    <TaskID>189</TaskID>
+    <TaskID>249</TaskID>
     <Name>Prototyping</Name>
     <Description>Build early-stage models</Description>
     <Milestone>false</Milestone>
@@ -71,11 +71,11 @@
     <Difficulty>Novice</Difficulty>
   </Task>
   <Task>
-    <TaskID>190</TaskID>
+    <TaskID>250</TaskID>
     <Name>Network Infrastructure</Name>
     <Description>Manage data communication networks</Description>
     <Milestone>false</Milestone>
-    <Creation>2023-08-14T00:00:00</Creation>
+    <Creation>2023-09-19T00:00:00</Creation>
     <PlanToStart xsi:nil="true" />
     <StartWork xsi:nil="true" />
     <TimeForTask xsi:nil="true" />
@@ -85,11 +85,11 @@
     <Difficulty>Novice</Difficulty>
   </Task>
   <Task>
-    <TaskID>191</TaskID>
+    <TaskID>251</TaskID>
     <Name>Data Analysis</Name>
     <Description>Extract insights from datasets</Description>
     <Milestone>false</Milestone>
-    <Creation>2023-08-14T00:00:00</Creation>
+    <Creation>2023-09-19T00:00:00</Creation>
     <PlanToStart xsi:nil="true" />
     <StartWork xsi:nil="true" />
     <TimeForTask xsi:nil="true" />
@@ -99,11 +99,11 @@
     <Difficulty>Novice</Difficulty>
   </Task>
   <Task>
-    <TaskID>192</TaskID>
+    <TaskID>252</TaskID>
     <Name>System Integration</Name>
     <Description>Integrate for improved functionality</Description>
     <Milestone>false</Milestone>
-    <Creation>2023-08-14T00:00:00</Creation>
+    <Creation>2023-09-19T00:00:00</Creation>
     <PlanToStart xsi:nil="true" />
     <StartWork xsi:nil="true" />
     <TimeForTask xsi:nil="true" />
@@ -113,11 +113,11 @@
     <Difficulty>Novice</Difficulty>
   </Task>
   <Task>
-    <TaskID>193</TaskID>
+    <TaskID>253</TaskID>
     <Name>Robotics</Name>
     <Description>Program robotic systems</Description>
     <Milestone>false</Milestone>
-    <Creation>2023-08-14T00:00:00</Creation>
+    <Creation>2023-09-19T00:00:00</Creation>
     <PlanToStart xsi:nil="true" />
     <StartWork xsi:nil="true" />
     <TimeForTask xsi:nil="true" />
@@ -127,11 +127,11 @@
     <Difficulty>Novice</Difficulty>
   </Task>
   <Task>
-    <TaskID>194</TaskID>
+    <TaskID>254</TaskID>
     <Name>Quality Assurance</Name>
     <Description>Ensure product reliability</Description>
     <Milestone>false</Milestone>
-    <Creation>2023-08-14T00:00:00</Creation>
+    <Creation>2023-09-19T00:00:00</Creation>
     <PlanToStart xsi:nil="true" />
     <StartWork xsi:nil="true" />
     <TimeForTask xsi:nil="true" />
@@ -141,11 +141,11 @@
     <Difficulty>Novice</Difficulty>
   </Task>
   <Task>
-    <TaskID>195</TaskID>
+    <TaskID>255</TaskID>
     <Name>Security Engineering</Name>
     <Description>Protect systems, data</Description>
     <Milestone>false</Milestone>
-    <Creation>2023-08-14T00:00:00</Creation>
+    <Creation>2023-09-19T00:00:00</Creation>
     <PlanToStart xsi:nil="true" />
     <StartWork xsi:nil="true" />
     <TimeForTask xsi:nil="true" />
@@ -155,11 +155,11 @@
     <Difficulty>Novice</Difficulty>
   </Task>
   <Task>
-    <TaskID>196</TaskID>
+    <TaskID>256</TaskID>
     <Name>Energy Management</Name>
     <Description>Design efficient energy solutions</Description>
     <Milestone>false</Milestone>
-    <Creation>2023-08-14T00:00:00</Creation>
+    <Creation>2023-09-19T00:00:00</Creation>
     <PlanToStart xsi:nil="true" />
     <StartWork xsi:nil="true" />
     <TimeForTask xsi:nil="true" />
@@ -169,11 +169,11 @@
     <Difficulty>Novice</Difficulty>
   </Task>
   <Task>
-    <TaskID>197</TaskID>
+    <TaskID>257</TaskID>
     <Name>Embedded Systems</Name>
     <Description>Develop dedicated systems</Description>
     <Milestone>false</Milestone>
-    <Creation>2023-08-14T00:00:00</Creation>
+    <Creation>2023-09-19T00:00:00</Creation>
     <PlanToStart xsi:nil="true" />
     <StartWork xsi:nil="true" />
     <TimeForTask xsi:nil="true" />
@@ -183,7 +183,7 @@
     <Difficulty>Novice</Difficulty>
   </Task>
   <Task>
-    <TaskID>198</TaskID>
+    <TaskID>258</TaskID>
     <Name>AR Development</Name>
     <Description>Create AR applications</Description>
     <Milestone>false</Milestone>
@@ -197,11 +197,11 @@
     <Difficulty>Novice</Difficulty>
   </Task>
   <Task>
-    <TaskID>199</TaskID>
+    <TaskID>259</TaskID>
     <Name>UI Design</Name>
     <Description>Design visual elements</Description>
     <Milestone>false</Milestone>
-    <Creation>2023-08-14T00:00:00</Creation>
+    <Creation>2023-09-19T00:00:00</Creation>
     <PlanToStart xsi:nil="true" />
     <StartWork xsi:nil="true" />
     <TimeForTask xsi:nil="true" />
@@ -211,11 +211,11 @@
     <Difficulty>Novice</Difficulty>
   </Task>
   <Task>
-    <TaskID>200</TaskID>
+    <TaskID>260</TaskID>
     <Name>Machine Learning Integration</Name>
     <Description>Integrate machine learning</Description>
     <Milestone>false</Milestone>
-    <Creation>2023-08-14T00:00:00</Creation>
+    <Creation>2023-09-19T00:00:00</Creation>
     <PlanToStart xsi:nil="true" />
     <StartWork xsi:nil="true" />
     <TimeForTask xsi:nil="true" />
@@ -225,11 +225,11 @@
     <Difficulty>Novice</Difficulty>
   </Task>
   <Task>
-    <TaskID>201</TaskID>
+    <TaskID>261</TaskID>
     <Name>Structural Analysis</Name>
     <Description>Analyze structural integrity</Description>
     <Milestone>false</Milestone>
-    <Creation>2023-08-14T00:00:00</Creation>
+    <Creation>2023-09-19T00:00:00</Creation>
     <PlanToStart xsi:nil="true" />
     <StartWork xsi:nil="true" />
     <TimeForTask xsi:nil="true" />
@@ -239,11 +239,11 @@
     <Difficulty>Novice</Difficulty>
   </Task>
   <Task>
-    <TaskID>202</TaskID>
+    <TaskID>262</TaskID>
     <Name>Control Systems Engineering</Name>
     <Description>Design dynamic control</Description>
     <Milestone>false</Milestone>
-    <Creation>2023-08-14T00:00:00</Creation>
+    <Creation>2023-09-19T00:00:00</Creation>
     <PlanToStart xsi:nil="true" />
     <StartWork xsi:nil="true" />
     <TimeForTask xsi:nil="true" />
@@ -253,7 +253,7 @@
     <Difficulty>Novice</Difficulty>
   </Task>
   <Task>
-    <TaskID>203</TaskID>
+    <TaskID>263</TaskID>
     <Name>CAD Modeling</Name>
     <Description>Create 3D models</Description>
     <Milestone>false</Milestone>
@@ -267,7 +267,7 @@
     <Difficulty>Novice</Difficulty>
   </Task>
   <Task>
-    <TaskID>204</TaskID>
+    <TaskID>264</TaskID>
     <Name>Sustainable Design</Name>
     <Description>Eco-friendly project design</Description>
     <Milestone>false</Milestone>

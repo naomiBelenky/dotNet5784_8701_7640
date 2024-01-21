@@ -15,7 +15,7 @@ public record Engineer
     string FullName,
     string Email,
     EngineerLevel Level,
-    double? CostPerHour = null
+    double CostPerHour
 )
 {
     public Engineer() : this(0, "", "", 0, 0.0) { }
