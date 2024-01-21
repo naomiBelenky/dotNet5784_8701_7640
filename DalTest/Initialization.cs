@@ -3,7 +3,6 @@
 using DalApi;
 using DO;
 using System.Xml.Linq;
-using System.Xml;
 using Dal;
 
 public static class Initialization
@@ -55,13 +54,17 @@ public static class Initialization
 
     private static void createLinks()
     {
-        for (int i = 1; i <= 20 && i != 5; i++)  //All the tasks depended in the first task: Prototyping
+        for (int i = 1; i <= 20; i++)  //All the tasks depended in the first task: Prototyping
         {
+            if (i == 5)
+                continue;
             Link temp = new Link(0, 5, i);
             s_dal!.Link.Create(temp);
         }
-        for (int i = 1; i <= 20 && i != 5 && i != 19; i++)   //tasks 5-20 are depended on task #19
+        for (int i = 1; i <= 20; i++)   //tasks 5-20 are depended on task #19
         {
+            if (i == 5 || i == 19)
+                continue;
             Link temp = new Link(0, 19, i);
             s_dal!.Link.Create(temp);
         }
@@ -107,11 +110,11 @@ public static class Initialization
 
         s_dal = dal ?? throw new NullReferenceException("DAL object can not be null!"); //stage 2
 
-        string filePath = "C:\\Users\\Naomi\\source\\repos\\dotNet5784_8701_7640\\xml\\data-config.xml";
-        XElement root = XElement.Load(filePath);
-        root.Element("NextTaskId").Value= "1";
-        root.Element("NextLinkId").Value = "1";
-        root.Save(filePath);
+        //resetting the serial numbers to 1
+        XElement config = XMLTools.LoadListFromXMLElement("data-config");
+        config.Element("NextTaskId").Value= "1";
+        config.Element("NextLinkId").Value = "1";
+        XMLTools.SaveListToXMLElement(config, "data-config");
 
         dal.Task.DeleteAll();
         //(The check for existing initial data is performed within the function "DeleteAll")
