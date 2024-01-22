@@ -114,11 +114,11 @@ public static class Initialization
 
         //resetting the serial numbers to 1
         XElement config = XMLTools.LoadListFromXMLElement("data-config");
-        config.Element("NextTaskId").Value= "1";
-        config.Element("NextLinkId").Value = "1";
+        config.Element("NextTaskId")!.Value= "1";
+        config.Element("NextLinkId")!.Value = "1";
         XMLTools.SaveListToXMLElement(config, "data-config");
 
-        dal.Task.DeleteAll();
+        DalApi.Factory.Get.Task.DeleteAll();
         //(The check for existing initial data is performed within the function "DeleteAll")
         createTasks();
         DalApi.Factory.Get.Link.DeleteAll();
@@ -127,9 +127,3 @@ public static class Initialization
         createEngineers();
     }
 }
-
-
-
-
-
-

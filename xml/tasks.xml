@@ -5,7 +5,7 @@
     <Name>Optimization</Name>
     <Description>Improve, reduce costs</Description>
     <Milestone>false</Milestone>
-    <Creation>2023-08-25T00:00:00</Creation>
+    <Creation>2023-09-27T00:00:00</Creation>
     <PlanToStart xsi:nil="true" />
     <StartWork xsi:nil="true" />
     <TimeForTask xsi:nil="true" />
@@ -19,7 +19,7 @@
     <Name>Automation</Name>
     <Description>Design automated solutions</Description>
     <Milestone>false</Milestone>
-    <Creation>2023-10-27T00:00:00</Creation>
+    <Creation>2023-08-28T00:00:00</Creation>
     <PlanToStart xsi:nil="true" />
     <StartWork xsi:nil="true" />
     <TimeForTask xsi:nil="true" />
@@ -33,7 +33,7 @@
     <Name>Simulation</Name>
     <Description>Virtual models for testing</Description>
     <Milestone>false</Milestone>
-    <Creation>2023-10-27T00:00:00</Creation>
+    <Creation>2023-08-28T00:00:00</Creation>
     <PlanToStart xsi:nil="true" />
     <StartWork xsi:nil="true" />
     <TimeForTask xsi:nil="true" />
@@ -47,7 +47,7 @@
     <Name>Algorithm Development</Name>
     <Description>Craft complex algorithms</Description>
     <Milestone>false</Milestone>
-    <Creation>2023-10-27T00:00:00</Creation>
+    <Creation>2023-08-28T00:00:00</Creation>
     <PlanToStart xsi:nil="true" />
     <StartWork xsi:nil="true" />
     <TimeForTask xsi:nil="true" />
@@ -75,7 +75,7 @@
     <Name>Network Infrastructure</Name>
     <Description>Manage data communication networks</Description>
     <Milestone>false</Milestone>
-    <Creation>2023-10-27T00:00:00</Creation>
+    <Creation>2023-08-28T00:00:00</Creation>
     <PlanToStart xsi:nil="true" />
     <StartWork xsi:nil="true" />
     <TimeForTask xsi:nil="true" />
@@ -89,7 +89,7 @@
     <Name>Data Analysis</Name>
     <Description>Extract insights from datasets</Description>
     <Milestone>false</Milestone>
-    <Creation>2023-10-27T00:00:00</Creation>
+    <Creation>2023-08-28T00:00:00</Creation>
     <PlanToStart xsi:nil="true" />
     <StartWork xsi:nil="true" />
     <TimeForTask xsi:nil="true" />
@@ -103,7 +103,7 @@
     <Name>System Integration</Name>
     <Description>Integrate for improved functionality</Description>
     <Milestone>false</Milestone>
-    <Creation>2023-10-27T00:00:00</Creation>
+    <Creation>2023-08-28T00:00:00</Creation>
     <PlanToStart xsi:nil="true" />
     <StartWork xsi:nil="true" />
     <TimeForTask xsi:nil="true" />
@@ -117,7 +117,7 @@
     <Name>Robotics</Name>
     <Description>Program robotic systems</Description>
     <Milestone>false</Milestone>
-    <Creation>2023-10-27T00:00:00</Creation>
+    <Creation>2023-08-28T00:00:00</Creation>
     <PlanToStart xsi:nil="true" />
     <StartWork xsi:nil="true" />
     <TimeForTask xsi:nil="true" />
@@ -131,7 +131,7 @@
     <Name>Quality Assurance</Name>
     <Description>Ensure product reliability</Description>
     <Milestone>false</Milestone>
-    <Creation>2023-10-27T00:00:00</Creation>
+    <Creation>2023-08-28T00:00:00</Creation>
     <PlanToStart xsi:nil="true" />
     <StartWork xsi:nil="true" />
     <TimeForTask xsi:nil="true" />
@@ -145,7 +145,7 @@
     <Name>Security Engineering</Name>
     <Description>Protect systems, data</Description>
     <Milestone>false</Milestone>
-    <Creation>2023-10-27T00:00:00</Creation>
+    <Creation>2023-08-28T00:00:00</Creation>
     <PlanToStart xsi:nil="true" />
     <StartWork xsi:nil="true" />
     <TimeForTask xsi:nil="true" />
@@ -159,7 +159,7 @@
     <Name>Energy Management</Name>
     <Description>Design efficient energy solutions</Description>
     <Milestone>false</Milestone>
-    <Creation>2023-10-27T00:00:00</Creation>
+    <Creation>2023-08-28T00:00:00</Creation>
     <PlanToStart xsi:nil="true" />
     <StartWork xsi:nil="true" />
     <TimeForTask xsi:nil="true" />
@@ -173,7 +173,7 @@
     <Name>Embedded Systems</Name>
     <Description>Develop dedicated systems</Description>
     <Milestone>false</Milestone>
-    <Creation>2023-10-27T00:00:00</Creation>
+    <Creation>2023-08-28T00:00:00</Creation>
     <PlanToStart xsi:nil="true" />
     <StartWork xsi:nil="true" />
     <TimeForTask xsi:nil="true" />
@@ -201,7 +201,7 @@
     <Name>UI Design</Name>
     <Description>Design visual elements</Description>
     <Milestone>false</Milestone>
-    <Creation>2023-10-27T00:00:00</Creation>
+    <Creation>2023-08-28T00:00:00</Creation>
     <PlanToStart xsi:nil="true" />
     <StartWork xsi:nil="true" />
     <TimeForTask xsi:nil="true" />
@@ -215,7 +215,7 @@
     <Name>Machine Learning Integration</Name>
     <Description>Integrate machine learning</Description>
     <Milestone>false</Milestone>
-    <Creation>2023-10-27T00:00:00</Creation>
+    <Creation>2023-08-28T00:00:00</Creation>
     <PlanToStart xsi:nil="true" />
     <StartWork xsi:nil="true" />
     <TimeForTask xsi:nil="true" />
@@ -229,7 +229,7 @@
     <Name>Structural Analysis</Name>
     <Description>Analyze structural integrity</Description>
     <Milestone>false</Milestone>
-    <Creation>2023-10-27T00:00:00</Creation>
+    <Creation>2023-08-28T00:00:00</Creation>
     <PlanToStart xsi:nil="true" />
     <StartWork xsi:nil="true" />
     <TimeForTask xsi:nil="true" />
@@ -243,7 +243,7 @@
     <Name>Control Systems Engineering</Name>
     <Description>Design dynamic control</Description>
     <Milestone>false</Milestone>
-    <Creation>2023-10-27T00:00:00</Creation>
+    <Creation>2023-08-28T00:00:00</Creation>
     <PlanToStart xsi:nil="true" />
     <StartWork xsi:nil="true" />
     <TimeForTask xsi:nil="true" />
