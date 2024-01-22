@@ -1,40 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfEngineer>
   <Engineer>
-    <EngineerID>361868116</EngineerID>
+    <EngineerID>280299749</EngineerID>
     <FullName>Avi Buchbut</FullName>
     <Email>aviBuchbut@gmail.com</Email>
-    <Level>AdvancedBeginner</Level>
+    <Level>Intermediate</Level>
+    <CostPerHour>297.83</CostPerHour>
   </Engineer>
   <Engineer>
-    <EngineerID>346496141</EngineerID>
+    <EngineerID>252425091</EngineerID>
     <FullName>Shira Market</FullName>
     <Email>shiramarket@gmail.com</Email>
-    <Level>Advanced</Level>
+    <Level>AdvancedBeginner</Level>
+    <CostPerHour>183.68</CostPerHour>
   </Engineer>
   <Engineer>
-    <EngineerID>347815545</EngineerID>
+    <EngineerID>273505346</EngineerID>
     <FullName>Tal Oriel</FullName>
     <Email>taloriel@gmail.com</Email>
-    <Level>Intermediate</Level>
+    <Level>AdvancedBeginner</Level>
+    <CostPerHour>489.69</CostPerHour>
   </Engineer>
   <Engineer>
-    <EngineerID>257126630</EngineerID>
+    <EngineerID>208512185</EngineerID>
     <FullName>Eytan Benisty</FullName>
     <Email>eytanbenisty@gmail.com</Email>
-    <Level>Intermediate</Level>
+    <Level>Expert</Level>
+    <CostPerHour>122.41</CostPerHour>
   </Engineer>
   <Engineer>
-    <EngineerID>334327522</EngineerID>
+    <EngineerID>263082356</EngineerID>
     <FullName>Dan Maztal</FullName>
     <Email>danmaz@gmail.com</Email>
     <Level>Expert</Level>
-  </Engineer>
-  <Engineer>
-    <EngineerID>21</EngineerID>
-    <FullName>yifat</FullName>
-    <Email>hvas</Email>
-    <Level>Advanced</Level>
-    <CostPerHour>100</CostPerHour>
+    <CostPerHour>443.33</CostPerHour>
   </Engineer>
 </ArrayOfEngineer>

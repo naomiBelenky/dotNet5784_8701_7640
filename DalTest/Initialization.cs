@@ -2,6 +2,8 @@
 
 using DalApi;
 using DO;
+using System.Xml.Linq;
+using Dal;
 
 public static class Initialization
 {
@@ -52,13 +54,17 @@ public static class Initialization
 
     private static void createLinks()
     {
-        for (int i = 1; i <= 20 && i != 5; i++)  //All the tasks depended in the first task: Prototyping
+        for (int i = 1; i <= 20; i++)  //All the tasks depended in the first task: Prototyping
         {
+            if (i == 5)
+                continue;
             Link temp = new Link(0, 5, i);
             s_dal!.Link.Create(temp);
         }
-        for (int i = 1; i <= 20 && i != 5 && i != 19; i++)   //tasks 5-20 are depended on task #19
+        for (int i = 1; i <= 20; i++)   //tasks 5-20 are depended on task #19
         {
+            if (i == 5 || i == 19)
+                continue;
             Link temp = new Link(0, 19, i);
             s_dal!.Link.Create(temp);
         }
@@ -89,7 +95,8 @@ public static class Initialization
         {
             int tempID = random.Next(200000000, 400000000);
             EngineerLevel tempLevel = (EngineerLevel)random.Next(1, 5);
-            Engineer temp = new Engineer(tempID, names[i], emails[i], tempLevel);
+            double costPerHour = Math.Round((random.NextDouble() * (500 - 30) + 30), 2); //random double number between 30 to 500 with two numbers after the decimal point
+            Engineer temp = new Engineer(tempID, names[i], emails[i], tempLevel, costPerHour);
             //s_dalEngineer.Create(temp); //stage 1
             s_dal!.Engineer.Create(temp); //stage 2
         }
@@ -105,7 +112,13 @@ public static class Initialization
         //s_dal = dal ?? throw new NullReferenceException("DAL object can not be null!"); //stage 2
         s_dal = DalApi.Factory.Get; //stage 4
 
-        DalApi.Factory.Get.Task.DeleteAll();
+        //resetting the serial numbers to 1
+        XElement config = XMLTools.LoadListFromXMLElement("data-config");
+        config.Element("NextTaskId").Value= "1";
+        config.Element("NextLinkId").Value = "1";
+        XMLTools.SaveListToXMLElement(config, "data-config");
+
+        dal.Task.DeleteAll();
         //(The check for existing initial data is performed within the function "DeleteAll")
         createTasks();
         DalApi.Factory.Get.Link.DeleteAll();
