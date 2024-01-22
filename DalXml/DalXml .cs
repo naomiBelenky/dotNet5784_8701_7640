@@ -2,8 +2,9 @@
 
 namespace Dal;
 
-sealed public class DalXml : IDal
+sealed internal class DalXml : IDal
 {
+    public static IDal Instance { get; } = new DalXml();
     public ITask Task => new TaskImplementation();
 
     public IEngineer Engineer => new EngineerImplementation();

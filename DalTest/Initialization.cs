@@ -95,21 +95,22 @@ public static class Initialization
         }
     }
 
-    public static void Do(IDal? dal   /*ITask? dalTask, ILink? dalLink, IEngineer? dalEngineer*/)
+    //public static void Do(IDal? dal   /*ITask? dalTask, ILink? dalLink, IEngineer? dalEngineer*/) //stage 3
+    public static void Do() //stage 4
     {
         //s_dalTask = dalTask ?? throw new NullReferenceException("DAL can not be null!");
         //s_dalLink = dalLink ?? throw new NullReferenceException("DAL can not be null!");
         //s_dalEngineer = dalEngineer ?? throw new NullReferenceException("DAL can not be null!");
 
-        s_dal = dal ?? throw new NullReferenceException("DAL object can not be null!"); //stage 2
+        //s_dal = dal ?? throw new NullReferenceException("DAL object can not be null!"); //stage 2
+        s_dal = DalApi.Factory.Get; //stage 4
 
-      
-        dal.Task.DeleteAll();
+        DalApi.Factory.Get.Task.DeleteAll();
         //(The check for existing initial data is performed within the function "DeleteAll")
         createTasks();
-        dal.Link.DeleteAll();
+        DalApi.Factory.Get.Link.DeleteAll();
         createLinks();
-        dal.Engineer.DeleteAll();
+        DalApi.Factory.Get.Engineer.DeleteAll();
         createEngineers();
     }
 }
