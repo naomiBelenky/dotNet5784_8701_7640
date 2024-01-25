@@ -1,5 +1,9 @@
 ﻿namespace BO;
 
+/// <summary>
+/// for the tasks list screen
+/// </summary>
+
 public class TaskInList
 {
     public int Id { get; init; }

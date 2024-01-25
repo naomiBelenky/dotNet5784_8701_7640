@@ -1,6 +1,4 @@
-﻿using System.Net.Security;
-
-namespace BO;
+﻿namespace BO;
 
 /// <summary>
 /// Engineer Entity represents an engineer with all its props
