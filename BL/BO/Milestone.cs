@@ -1,7 +1,7 @@
 ﻿namespace BO;
 
 /// <summary>
-/// Milestone entity 
+/// Milestone entity for info about a specific task
 /// </summary>
 
 public class Milestone
@@ -17,5 +17,5 @@ public class Milestone
     public DateTime? FinishDate { get; set; }
     public double CompletionPrecentage { get; set; }
     public string? Notes { get; set; }
-    public List<BO.MilestoneInList>? Links { get; set; }
+    public List<BO.TaskInList>? Links { get; set; }
 }

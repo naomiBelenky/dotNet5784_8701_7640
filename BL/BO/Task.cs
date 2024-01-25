@@ -18,6 +18,7 @@ public class Task
     public DateTime? PlanToFinish {  get; set; }
     public DateTime? Deadline {  get; set; }
     public DateTime? FinishDate { get; set;}
+    public TimeSpan? Duration { get; set; }
     public string? Product {  get; set; }
     public string? Notes { get; set; }
     public BO.EngineerInTask? Engineer { get; set; }

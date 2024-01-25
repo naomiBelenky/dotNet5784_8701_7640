@@ -1,5 +1,9 @@
 ﻿namespace BO;
 
+/// <summary>
+/// for the milestone list screen
+/// </summary>
+
 public class MilestoneInList
 {
     public string Description { get; set; }
