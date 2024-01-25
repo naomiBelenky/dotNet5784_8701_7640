@@ -36,7 +36,7 @@ public record Task
     DateTime? FinishDate = null,
     string? Product = null,
     string? Notes = null,
-    int EngineerID = 0,
+    int? EngineerID = 0,
     TaskDifficulty Difficulty = TaskDifficulty.Novice//null?
 )
 {
