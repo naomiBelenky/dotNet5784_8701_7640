@@ -3,21 +3,36 @@
 using BlApi;
 using BO;
 
+
+
 namespace BlImplementation;
 
 internal class EngineerImplementation : IEngineer
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
 
-    public void Add(Engineer item)
+    public void Add(BO.Engineer item)
     {
-        DO.Engineer doEng = new DO.Engineer(item.Id, item.Name, item.Email, item.Level, item.Cost);
-        //we need to create new enum? or what?
-        if (item.Id > 0 && item.Name != "" && item.Cost > 0/*&&item.Email*/)
-            //how check valid email?
+        DO.Engineer doEng = new DO.Engineer(item.Id, item.Name, item.Email, (DO.EngineerLevel)item.Level, item.Cost);
+
+        try
         {
-            _dal.Engineer.Create(doEng);
+            if (item.Id > 0 && item.Name != "" && item.Cost > 0 && item.Email.EndsWith("@gmail.com"))
+            {
+                _dal.Engineer.Create(doEng);
+            }
+            else throw new BlDoesNotExistException("id or name or cost or email doesnt valid");
         }
+        catch(DO.DalAlreadyExistsException messege)
+        {
+            throw new BlDoesNotExistException($"Engineer with ID={item.Id} already exists", messege);
+        }
+        //catch (BO.BlDoesNotExistException messege)
+        //{ ???????????????
+        
+        //}
+
+
     }
 
     public void Delete(int id)
