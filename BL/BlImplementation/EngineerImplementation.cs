@@ -1,7 +1,9 @@
 ﻿
 
 using BlApi;
-using BO;
+using DO;
+using System.Collections;
+using System.Collections.Generic;
 
 
 
@@ -29,16 +31,32 @@ internal class EngineerImplementation : IEngineer
         }
         //catch (BO.BlDoesNotExistException messege)
         //{ ???????????????
-        
+        //I think we dont need it?
         //}
-
-
     }
 
     public void Delete(int id)
     {
-        throw new NotImplementedException();
-    }
+        DO.Engineer? doEng = _dal.Engineer.Read(id);
+        if (doEng == null)
+            throw new BO.BlDoesNotExistException($"Engineer with ID={id} does Not exist");
+
+        return new BO.Engineer()
+        {
+            Id = id,
+            Name = doEng.FullName,
+            Email = doEng.Email,
+            Level = (BO.EngineerLevel)doEng.Level,
+            Cost = doEng.CostPerHour,
+            //IEnumerable<DO.Task?> temp = from item in _dal.Task.ReadAll()
+            //                             where id == item.EngineerID
+            //                             select item;
+            IEnumerable<DO.Task> temp = _dal.Task.ReadAll(item => item.EngineerID == id);
+
+    
+        };
+
+    
 
     public Engineer? Read(int id)
     {
