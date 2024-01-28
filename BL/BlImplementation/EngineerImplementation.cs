@@ -1,7 +1,6 @@
 ﻿
 
 using BlApi;
-using BO;
 using System.Collections.Generic;
 
 
@@ -23,33 +22,45 @@ internal class EngineerImplementation : IEngineer
             {
                 _dal.Engineer.Create(doEng);
             }
-            else throw new BlDoesNotExistException("id or name or cost or email doesnt valid");
+            else throw new BO.BlDoesNotExistException("id or name or cost or email doesnt valid");
         }
         catch (DO.DalAlreadyExistsException messege)
         {
-            throw new BlDoesNotExistException($"Engineer with ID={item.Id} already exists", messege);
+            throw new BO.BlDoesNotExistException($"Engineer with ID={item.Id} already exists", messege);
         }
-        //catch (BO.BlDoesNotExistException messege)
-        //{ ???????????????
-        //I think we dont need it?
-        //}
     }
 
     public void Delete(int id)
     {
+        
+        var task = _dal.Task.Read(item => item.EngineerID == id && 
+           item.StartWork < DateTime.Now);
+        if (task != null)
+        {
+            throw new BO.BlDeletionImpossible("Deletion is impossible because the engineer is/was warking on a task");
+        }
 
+        try
+        {
+            _dal.Engineer.Delete(id);
+        }
+        catch(DO.DalDoesNotExistException messege)
+        {
+            throw new BO.BlDoesNotExistException($"Engineer with ID={id} does Not exist", messege);
+        }
+       
     }
 
 
 
 
-    public Engineer? Read(int id)
+    public BO.Engineer? Read(int id)
     {
         DO.Engineer? doEng = _dal.Engineer.Read(id); //קוראים את הנתונים
         if (doEng == null)
             throw new BO.BlDoesNotExistException($"Engineer with ID={id} does Not exist");
 
-        BO.Engineer eng = new Engineer() //יוצרים ישות לוגית בעזרתם
+        BO.Engineer eng = new BO.Engineer() //יוצרים ישות לוגית בעזרתם
         { Id = id, Name = doEng.FullName, Email = doEng.Email,
             Level = (BO.EngineerLevel)doEng.Level, Cost = doEng.CostPerHour };
 
@@ -65,12 +76,12 @@ internal class EngineerImplementation : IEngineer
         return eng;
     }
 
-    public IEnumerable<Engineer> ReadAll(Func<bool> filter)
+    public IEnumerable<BO.Engineer> ReadAll(Func<bool> filter)
 {
     throw new NotImplementedException();
 }
 
-    public void Update(Engineer engineer)
+    public void Update(BO.Engineer engineer)
 {
     throw new NotImplementedException();
 }

@@ -29,5 +29,11 @@ public class BlXMLFileLoadCreateException : Exception
                 : base(message, innerException) { }
 }
 
+//public class BlNullPropertyException : Exception
+//{
+//    public BlNullPropertyException(string? message) : base(message) { }
+//}
+
+
 
 
