@@ -24,8 +24,7 @@ internal class EngineerImplementation : IEngineer
         newItem.Add(new XElement("FullName", item.FullName));
         newItem.Add(new XElement("Email", item.Email));
         newItem.Add(new XElement("Level", item.Level));
-        if (item.CostPerHour!=null)
-            newItem.Add(new XElement("CostPerHour", item.CostPerHour));
+        newItem.Add(new XElement("CostPerHour", item.CostPerHour));
 
         engineerList.Add(newItem);
         XMLTools.SaveListToXMLElement(engineerList, s_engineers_xml);
@@ -69,7 +68,7 @@ internal class EngineerImplementation : IEngineer
     {
         if (filter != null)
             return XMLTools.LoadListFromXMLElement(s_engineers_xml).Elements().Select(eng => getEngineer(eng)).Where(filter);
-        else 
+        else
             return XMLTools.LoadListFromXMLElement(s_engineers_xml).Elements().Select(eng => getEngineer(eng));
     }
 
@@ -87,11 +86,11 @@ internal class EngineerImplementation : IEngineer
     {
         return new Engineer()
         {
-            EngineerID = Convert.ToInt32(eng.Element("EngineerID").Value),
-            FullName = eng.Element("FullName").Value,
-            Email = eng.Element("Email").Value,
-            Level = Enum.Parse<EngineerLevel>(eng.Element("Level").Value),
-            CostPerHour = Convert.ToDouble(eng.Element("CostPerHour").Value)
+            EngineerID = Convert.ToInt32(eng.Element("EngineerID")!.Value),
+            FullName = eng.Element("FullName")!.Value,
+            Email = eng.Element("Email")!.Value,
+            Level = Enum.Parse<EngineerLevel>(eng.Element("Level")!.Value),
+            CostPerHour = Convert.ToDouble(eng.Element("CostPerHour")!.Value)
         };
     }
 
@@ -100,7 +99,7 @@ internal class EngineerImplementation : IEngineer
 
         XElement engineerList = XMLTools.LoadListFromXMLElement(s_engineers_xml);
         engineerList.RemoveAll();
-        
+
 
         //foreach (var item in s_engineers_xml)
         //    Delete(item);
