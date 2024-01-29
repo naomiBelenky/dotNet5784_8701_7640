@@ -29,10 +29,16 @@ public class BlXMLFileLoadCreateException : Exception
                 : base(message, innerException) { }
 }
 
-//public class BlNullPropertyException : Exception
-//{
-//    public BlNullPropertyException(string? message) : base(message) { }
-//}
+public class BlInformationIsntValid : Exception
+{
+    public BlInformationIsntValid(string? message) : base(message) { }
+}
+
+public class BlDeletingIsForbidden : Exception
+{
+    public BlDeletingIsForbidden(string? message) : base(message) { }
+}
+
 
 
 

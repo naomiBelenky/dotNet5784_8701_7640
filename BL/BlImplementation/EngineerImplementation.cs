@@ -12,6 +12,7 @@ internal class EngineerImplementation : IEngineer
     {
         DO.Engineer doEng = new DO.Engineer(item.Id, item.Name, item.Email, (DO.EngineerLevel)item.Level, item.Cost);
 
+
         try
         {
             if (item.Id > 0 && item.Name != "" && item.Cost > 0 && item.Email.EndsWith("@gmail.com"))
