@@ -101,8 +101,8 @@ internal class Program
             timeForTask = int.Parse(Console.ReadLine());
             Level difficulty = (Level)int.Parse(Console.ReadLine());
 
-            DO.Task task = new DO.Task(0, name, description, false, DateTime.Now,
-                planToStart, null, timeForTask, deadLine, null, product, notes, id, difficulty);
+            DO.Task task = new DO.Task(0, name, description, difficulty, false, DateTime.Now,
+                planToStart, null, timeForTask, deadLine, null, product, notes, id);
 
             Console.WriteLine(s_dal.Task.Create(task));
         }
@@ -201,8 +201,8 @@ internal class Program
                 Console.WriteLine("enter task difficulty");
                 Level difficulty = (Level)int.Parse(Console.ReadLine());
 
-                DO.Task newTask = new DO.Task(id, name, description, false, DateTime.Now,
-                    planToStart, null, timeForTask, deadLine, null, product, notes, id, difficulty);
+                DO.Task newTask = new DO.Task(id, name, description, difficulty, false, DateTime.Now,
+                    planToStart, null, timeForTask, deadLine, null, product, notes, id);
 
                 s_dal.Task.Update(newTask);
                 break;

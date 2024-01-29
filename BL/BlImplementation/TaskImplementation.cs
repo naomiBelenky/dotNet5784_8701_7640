@@ -5,20 +5,15 @@ namespace BlImplementation;
 internal class TaskImplementation : ITask
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="task"></param>
-    /// <exception cref="BlInformationIsntValid"></exception>
-    /// <exception cref="BO.BlAlreadyExistsException"></exception>
+
     public void Add(BO.Task task)
     {
-        DO.Task doTask = new DO.Task(task.Id, task.Name, task.Description);
+        DO.Task doTask = new DO.Task(task.Id, task.Name, task.Description, (DO.Level)task.Difficulty);
         try
         {
             if (int.IsNegative(task.Id)) throw new BO.BlInformationIsntValid("id is not valid");
             if (task.Name == "") throw new BO.BlInformationIsntValid("name is not valid");
-            if (task.Links != null) //if there are dependent tasks, adding them to the list of link
+            if (task.Links != null) //if there are dependent tasks, adding them to the list of links
             {
                 foreach (BO.TaskInList item in task.Links)
                 {
@@ -27,16 +22,15 @@ internal class TaskImplementation : ITask
                 }
             }
 
-            int id = _dal.Task.Create(doTask);
+            int id = _dal.Task.Create(doTask);  //if the data is valid, creating the task in the data layer
         }
         catch (DO.DalAlreadyExistsException message)
         {
             throw new BO.BlAlreadyExistsException($"Task with ID={task.Id} already exists", message);
         }
-        
     }
 
-   
+
     public void Delete(int id)
     {
 
@@ -49,20 +43,32 @@ internal class TaskImplementation : ITask
         {
             //check if 
             DO.Task? tempTask = _dal.Task.Read(id);
-            if (tempTask.PlanToStart != null)
+            if (tempTask?.PlanToStart != null)
                 throw new BO.BlDeletingIsForbidden("Deleting is forbiden now");
 
-                _dal.Task.Delete(id);
+            _dal.Task.Delete(id);
         }
         catch (DO.DalDoesNotExistException messege)
         {
             throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist", messege);
-        }  
+        }
     }
 
-    public System.Threading.Tasks.Task? Read(int id)
+    public Task? Read(int id)
     {
-        throw new NotImplementedException();
+        DO.Task? doTask = _dal.Task.Read(id) ?? throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist");
+        BO.Task task = new BO.Task()
+        {
+            //Id = id,
+            //Name = doTask.Name,
+            //Description = doTask.Description,
+            //Difficulty = (BO.Level)doTask.Difficulty,
+            //Creation = doTask.Creation,
+            //PlanToStart = doTask.PlanToStart,
+            //StartWork = doTask.StartWork,
+            
+        };
+        return null;
     }
 
     public IEnumerable<BO.Task> ReadAll(Func<bool>? filter = null)
