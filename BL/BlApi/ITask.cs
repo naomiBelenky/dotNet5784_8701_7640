@@ -9,7 +9,7 @@ public interface ITask
     /// </summary>
     /// <param name="filter"></param>
     /// <returns></returns>
-    public IEnumerable<BO.Task> ReadAll(Func<bool> filter); //Funk needs to get paramater?
+    public IEnumerable<BO.Task> ReadAll(Func<bool>? filter = null); //Funk needs to get paramater?
     /// <summary>
     /// gets id and returns its task (throws exeption if doesnt find)
     /// </summary>

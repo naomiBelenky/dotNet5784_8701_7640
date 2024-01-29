@@ -14,6 +14,6 @@ public enum Status
     Unscheduled,
     Scheduled,
     OnTrack,
-    InJeopardy,
+    //InJeopardy, (if we are doing milestone)
     Done
 }

@@ -1,7 +1,4 @@
-﻿
-
-using BlApi;
-using DO;
+﻿using BlApi;
 
 namespace BlImplementation;
 
@@ -19,13 +16,22 @@ internal class TaskImplementation : ITask
         DO.Task doTask = new DO.Task(task.Id, task.Name, task.Description);
         try
         {
-            if (int.IsNegative(task.Id)) throw new BlInformationIsntValid("id is not valid");
-            if (task.Name == "") throw new BlInformationIsntValid("name is not valid");
+            if (int.IsNegative(task.Id)) throw new BO.BlInformationIsntValid("id is not valid");
+            if (task.Name == "") throw new BO.BlInformationIsntValid("name is not valid");
+            if (task.Links != null) //if there are dependent tasks, adding them to the list of link
+            {
+                foreach (BO.TaskInList item in task.Links)
+                {
+                    DO.Link link = new DO.Link(0, item.Id, task.Id);
+                    _dal.Link.Create(link);
+                }
+            }
+
             int id = _dal.Task.Create(doTask);
-            
         }
-        catch (DO.DalAlreadyExistsException ex) {
-            throw new BO.BlAlreadyExistsException($"Task with ID={task.Id} already exists\", messege");
+        catch (DO.DalAlreadyExistsException message)
+        {
+            throw new BO.BlAlreadyExistsException($"Task with ID={task.Id} already exists", message);
         }
         
     }
@@ -51,13 +57,7 @@ internal class TaskImplementation : ITask
         catch (DO.DalDoesNotExistException messege)
         {
             throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist", messege);
-        }
-        
-
-        
-            
-        
-        
+        }  
     }
 
     public System.Threading.Tasks.Task? Read(int id)
@@ -65,7 +65,7 @@ internal class TaskImplementation : ITask
         throw new NotImplementedException();
     }
 
-    public IEnumerable<BO.Task> ReadAll(Func<bool> filter)
+    public IEnumerable<BO.Task> ReadAll(Func<bool>? filter = null)
     {
         throw new NotImplementedException();
     }

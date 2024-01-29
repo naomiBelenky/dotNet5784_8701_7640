@@ -82,7 +82,6 @@ internal class Program
             DateTime? planToStart, deadLine;
             double? timeForTask;
             int id;
-            Level level;
 
             Console.WriteLine("write task name");
             name = Console.ReadLine();

@@ -38,8 +38,3 @@ public class BlDeletingIsForbidden : Exception
 {
     public BlDeletingIsForbidden(string? message) : base(message) { }
 }
-
-
-
-
-
