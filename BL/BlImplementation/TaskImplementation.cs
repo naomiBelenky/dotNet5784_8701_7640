@@ -30,9 +30,34 @@ internal class TaskImplementation : ITask
         
     }
 
+   
     public void Delete(int id)
     {
-        throw new NotImplementedException();
+
+        //checking if there is another task that depended in this task
+        DO.Link? tempLink = _dal.Link.Read(item => item.PrevTask == id);
+        if (tempLink != null)
+            throw new BO.BlDeletingIsForbidden("Deleting this task is forbiden");
+
+        try
+        {
+            //check if 
+            DO.Task? tempTask = _dal.Task.Read(id);
+            if (tempTask.PlanToStart != null)
+                throw new BO.BlDeletingIsForbidden("Deleting is forbiden now");
+
+                _dal.Task.Delete(id);
+        }
+        catch (DO.DalDoesNotExistException messege)
+        {
+            throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist", messege);
+        }
+        
+
+        
+            
+        
+        
     }
 
     public System.Threading.Tasks.Task? Read(int id)
