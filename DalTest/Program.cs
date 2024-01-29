@@ -82,7 +82,7 @@ internal class Program
             DateTime? planToStart, deadLine;
             double? timeForTask;
             int id;
-            TaskDifficulty level;
+            Level level;
 
             Console.WriteLine("write task name");
             name = Console.ReadLine();
@@ -100,7 +100,7 @@ internal class Program
             id = int.Parse(Console.ReadLine());
             Console.WriteLine("enter time for task");
             timeForTask = int.Parse(Console.ReadLine());
-            TaskDifficulty difficulty = (TaskDifficulty)int.Parse(Console.ReadLine());
+            Level difficulty = (Level)int.Parse(Console.ReadLine());
 
             DO.Task task = new DO.Task(0, name, description, false, DateTime.Now,
                 planToStart, null, timeForTask, deadLine, null, product, notes, id, difficulty);
@@ -117,7 +117,7 @@ internal class Program
             Console.WriteLine("enter email");
             string email = Console.ReadLine();
             Console.WriteLine("enter engineer level");
-            EngineerLevel level = (EngineerLevel)int.Parse(Console.ReadLine());
+            Level level = (Level)int.Parse(Console.ReadLine());
             Console.WriteLine("please enter cost per hour");
             double costPerHour = double.Parse(Console.ReadLine());
 
@@ -200,7 +200,7 @@ internal class Program
                 Console.WriteLine("enter the engineer id");
                 int engineerId = int.Parse(Console.ReadLine());
                 Console.WriteLine("enter task difficulty");
-                TaskDifficulty difficulty = (TaskDifficulty)int.Parse(Console.ReadLine());
+                Level difficulty = (Level)int.Parse(Console.ReadLine());
 
                 DO.Task newTask = new DO.Task(id, name, description, false, DateTime.Now,
                     planToStart, null, timeForTask, deadLine, null, product, notes, id, difficulty);
@@ -213,7 +213,7 @@ internal class Program
                 Console.WriteLine("enter email");
                 string? email = Console.ReadLine();
                 Console.WriteLine("enter engineer level");
-                EngineerLevel level = (EngineerLevel)int.Parse(Console.ReadLine());
+                Level level = (Level)int.Parse(Console.ReadLine());
                 Console.WriteLine("enter engineer cost per hour");
                 double costPerHour = double.Parse(Console.ReadLine());
                 DO.Engineer newEngineer = new Engineer(id, engName, email, level, costPerHour);

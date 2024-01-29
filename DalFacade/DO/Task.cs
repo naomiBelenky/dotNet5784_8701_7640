@@ -37,7 +37,7 @@ public record Task
     string? Product = null,
     string? Notes = null,
     int? EngineerID = 0,
-    TaskDifficulty Difficulty = TaskDifficulty.Novice//null?
+    Level? Difficulty = null
 )
 {
     public Task() : this(0, "", "") { }

@@ -89,7 +89,7 @@ internal class EngineerImplementation : IEngineer
             EngineerID = Convert.ToInt32(eng.Element("EngineerID")!.Value),
             FullName = eng.Element("FullName")!.Value,
             Email = eng.Element("Email")!.Value,
-            Level = Enum.Parse<EngineerLevel>(eng.Element("Level")!.Value),
+            Level = Enum.Parse<Level>(eng.Element("Level")!.Value),
             CostPerHour = Convert.ToDouble(eng.Element("CostPerHour")!.Value)
         };
     }

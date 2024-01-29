@@ -22,5 +22,5 @@ public class Task
     public string? Product {  get; set; }
     public string? Notes { get; set; }
     public BO.EngineerInTask? Engineer { get; set; }
-    public BO.TaskDifficulty Difficulty { get; set; }
+    public BO.Level Difficulty { get; set; }
 }

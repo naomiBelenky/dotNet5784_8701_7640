@@ -14,9 +14,9 @@ public record Engineer
     int EngineerID,
     string FullName,
     string Email,
-    EngineerLevel Level,
+    Level Level,
     double CostPerHour
 )
 {
-    public Engineer(int id) : this(0, "", "", 0, 0.0) { }
+    public Engineer() : this(0, "", "", 0, 0.0) { }
 }
