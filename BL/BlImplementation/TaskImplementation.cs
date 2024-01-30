@@ -1,4 +1,5 @@
 ﻿using BlApi;
+using System.Security.Cryptography;
 
 namespace BlImplementation;
 
@@ -69,10 +70,10 @@ internal class TaskImplementation : ITask
             //Milestone (idk)
             PlanToStart = doTask.PlanToStart,
             StartWork = doTask.StartWork,
-            //PlanToFinish (need to calculate)
+            //PlanToFinish calculated later
             Deadline = doTask.Deadline,
             FinishDate = doTask.FinishDate,
-            //Duration = doTask.TimeForTask, (need to fix TimeToStart to be TimeSpan and not double)
+            Duration = doTask.TimeForTask,
             Product = doTask.Product,
             Notes = doTask.Notes,
             Engineer = new BO.EngineerInTask    //filling the info about the engineer working on the task
@@ -85,6 +86,7 @@ internal class TaskImplementation : ITask
         };
 
         task.Status = getStatus(task);
+        task.PlanToFinish = getPlanToFinish(task);
 
         return task;
     }
@@ -106,6 +108,7 @@ internal class TaskImplementation : ITask
     }
 
     #region private methods for help
+
     /// <summary>
     /// determines the status of the task
     /// </summary>
@@ -120,9 +123,20 @@ internal class TaskImplementation : ITask
         else if (task.FinishDate <= DateTime.Now) status = BO.Status.Done;
         return status;
     }
+    /// <summary>
+    /// calculates the date that is planned to finish the task
+    /// </summary>
+    /// <param name="task"> the task we are calculating the date for </param>
+    /// <returns></returns>
+    private DateTime? getPlanToFinish(BO.Task task)
+    {
+        return (DateTime?)(task.StartWork + task.Duration);
+    }
 
-    private DateTime planToFinish(BO.Task task)
-    { }
+    private List<BO.TaskInList> getLinks(BO.Task task)
+    {
+        List<DO.Link?> links = new List<DO.Link?>(_dal.Link.ReadAll());
 
+    }
     #endregion
 }

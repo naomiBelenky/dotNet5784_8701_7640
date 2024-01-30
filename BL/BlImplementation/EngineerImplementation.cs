@@ -88,13 +88,10 @@ internal class EngineerImplementation : IEngineer
                                              });
             foreach (BO.Engineer engineer in temp)
             {
-                var task = _dal.Task.Read(item => item.EngineerID == engineer.Id);
+                var task = _dal.Task.Read(item => item.EngineerID == engineer.Id)   //searching for the task that the engineer is responsible for
+                    ??throw new BO.BlDoesNotExistException($"Task with ID={engineer.Id} does Not exist");
+                engineer.Task = new BO.TaskInEngineer { Id = task.TaskID, Name = task.Name };
             }
-            //IEnumerable<BO.Engineer> temp = _dal.Engineer.ReadAll().Select(doEngineer => new BO.Engineer
-            //{
-            //    ...
-            //});
-
             return temp;
         }
         else
@@ -111,7 +108,9 @@ internal class EngineerImplementation : IEngineer
                                              });
             foreach (BO.Engineer engineer in temp)
             {
-                var task = _dal.Task.Read(item => item.EngineerID == engineer.Id);
+                var task = _dal.Task.Read(item => item.EngineerID == engineer.Id)   //searching for the task that the engineer is responsible for
+                    ??throw new BO.BlDoesNotExistException($"Task with ID={engineer.Id} does Not exist");
+                engineer.Task = new BO.TaskInEngineer { Id = task.TaskID, Name = task.Name };
             }
             return temp;
         }
@@ -138,9 +137,9 @@ internal class EngineerImplementation : IEngineer
             }
 
         }
-        catch (DO.DalDoesNotExistException ex)
+        catch (DO.DalDoesNotExistException message)
         {
-            throw new BO.BlDoesNotExistException($"Engineer with ID={engineer.Id} does Not exist");
+            throw new BO.BlDoesNotExistException($"Engineer with ID={engineer.Id} does Not exist", message);
         }
     }
 }
