@@ -25,26 +25,35 @@ internal class TaskImplementation : ITask
         {
             //check if 
             DO.Task? tempTask = _dal.Task.Read(id);
-            if (tempTask.PlanToStart != null)
-                throw new BO.BlDeletingIsForbidden("Deleting is forbiden now");
+            if (tempTask != null)
+                if (tempTask.PlanToStart != null)
+                    throw new BO.BlDeletingIsForbidden("Deleting is forbiden now");
+                else;
+            else
+                throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist");
 
-                _dal.Task.Delete(id);
+
+            _dal.Task.Delete(id);
         }
         catch (DO.DalDoesNotExistException messege)
         {
             throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist", messege);
         }
-        
-
-        
-            
-        
-        
     }
 
-    public System.Threading.Tasks.Task? Read(int id)
+    public BO.Task? Read(int id)
     {
-        throw new NotImplementedException();
+        DO.Task? temp= _dal.Task.Read(id);
+        return new BO.Task()
+            {
+            Id = temp.TaskID,
+            Name = temp.Name,
+            Description = temp.Description,
+            Creation=temp.Creation,
+
+
+
+        };
     }
 
     public IEnumerable<BO.Task> ReadAll(Func<bool> filter)
