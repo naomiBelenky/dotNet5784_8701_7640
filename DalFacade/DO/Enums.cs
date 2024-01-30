@@ -1,17 +1,10 @@
 ﻿namespace DO;
 
-public enum EngineerLevel
+public enum Level
 {
     Beginner,
     AdvancedBeginner,
     Intermediate,
     Advanced,
-    Expert
-}
-
-public enum TaskDifficulty
-{
-    Novice,
-    Competent,
     Expert
 }

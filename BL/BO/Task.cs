@@ -6,21 +6,75 @@
 
 public class Task
 {
-    public int Id { get; set; }
+    /// <summary>
+    /// Personal unique ID of the task
+    /// </summary>
+    public int Id { get; init; }
+    /// <summary>
+    /// The task's name
+    /// </summary>
     public string Name { get; set; }
+    /// <summary>
+    /// The task's description
+    /// </summary>
     public string Description { get; set; }
+    /// <summary>
+    /// The date that the task was created by the manager
+    /// </summary>
     public DateTime Creation {  get; init; }
+    /// <summary>
+    /// The status of the task (unscheduled, done...)
+    /// </summary>
     public BO.Status? Status { get; set; }
+    /// <summary>
+    /// A list of the tasks that this task depends on
+    /// </summary>
     public List<BO.TaskInList>? Links { get; set; }
+    /// <summary>
+    /// Describes wether the task is complete
+    /// </summary>
     public BO.MilestoneInTask? Milestone { get; set; }
+    /// <summary>
+    /// The planned date to start working on the task
+    /// </summary>
     public DateTime? PlanToStart { get; set; }
+    /// <summary>
+    /// The actual date of starting working on the task
+    /// </summary>
     public DateTime? StartWork { get; set; }
+    /// <summary>
+    /// The date that is planned to finish the task
+    /// </summary>
     public DateTime? PlanToFinish {  get; set; }
+    /// <summary>
+    /// Deadline of the task
+    /// </summary>
     public DateTime? Deadline {  get; set; }
+    /// <summary>
+    /// Actual date of finishing the task
+    /// </summary>
     public DateTime? FinishDate { get; set;}
+    /// <summary>
+    /// Amount of days that are needed to work on the task
+    /// </summary>
     public TimeSpan? Duration { get; set; }
+    /// <summary>
+    /// Describes the results or provided items of the finished task
+    /// </summary>
     public string? Product {  get; set; }
+    /// <summary>
+    /// Remarks and notes about the task or products
+    /// </summary>
     public string? Notes { get; set; }
+    /// <summary>
+    /// The assigned engineer for the task
+    /// </summary>
     public BO.EngineerInTask? Engineer { get; set; }
-    public BO.TaskDifficulty Difficulty { get; set; }
+    /// <summary>
+    /// The level of difficulty of the task, defines the level of expertise needed to work on it
+    /// </summary>
+    public BO.Level Difficulty { get; set; }
+
+    private BO.Status getStatus(BO.Task task);
+    private DateTime planToFinish(BO.Task task);
 }

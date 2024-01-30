@@ -1,6 +1,4 @@
 ﻿using BlApi;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace BlImplementation;
 
@@ -10,7 +8,7 @@ internal class EngineerImplementation : IEngineer
 
     public void Add(BO.Engineer item)
     {
-        DO.Engineer doEng = new DO.Engineer(item.Id, item.Name, item.Email, (DO.EngineerLevel)item.Level, item.Cost);
+        DO.Engineer doEng = new DO.Engineer(item.Id, item.Name, item.Email, (DO.Level)item.Level, item.Cost);
 
 
         try
@@ -59,7 +57,7 @@ internal class EngineerImplementation : IEngineer
             Id = id,
             Name = doEng.FullName,
             Email = doEng.Email,
-            Level = (BO.EngineerLevel)doEng.Level,
+            Level = (BO.Level)doEng.Level,
             Cost = doEng.CostPerHour
         };
 
@@ -75,51 +73,70 @@ internal class EngineerImplementation : IEngineer
         return eng;
     }
 
-    public IEnumerable<BO.Engineer> ReadAll(Func<bool> filter)
+    public IEnumerable<BO.Engineer> ReadAll(Func<bool>? filter = null)
     {
         if (filter == null)
         {
-            //return (from DO.Engineer doEngineer in _dal.Engineer.ReadAll()
-            //        select new BO.Engineer()
-            //        {
-            //            Id = doEngineer.EngineerID,
-            //            Name = doEngineer.FullName,
-            //            Email = doEngineer.Email,
-            //            Level = (BO.EngineerLevel)doEngineer.Level,
-            //            Cost = doEngineer.CostPerHour,
-            //        });
-            return _dal.Engineer.ReadAll().Select(doEngineer => new BO.Engineer
+            IEnumerable<BO.Engineer> temp = (from DO.Engineer doEngineer in _dal.Engineer.ReadAll()
+                                             select new BO.Engineer()
+                                             {
+                                                 Id = doEngineer.EngineerID,
+                                                 Name = doEngineer.FullName,
+                                                 Email = doEngineer.Email,
+                                                 Level = (BO.Level)doEngineer.Level,
+                                                 Cost = doEngineer.CostPerHour,
+                                             });
+            foreach (BO.Engineer engineer in temp)
             {
-                Id = doEngineer.EngineerID,
-                Name = doEngineer.FullName,
-                Email = doEngineer.Email,
-                Level = (BO.EngineerLevel)doEngineer.Level,
-                Cost = doEngineer.CostPerHour,
-            });
+                var task = _dal.Task.Read(item => item.EngineerID == engineer.Id);
+            }
+            //IEnumerable<BO.Engineer> temp = _dal.Engineer.ReadAll().Select(doEngineer => new BO.Engineer
+            //{
+            //    ...
+            //});
+
+            return temp;
         }
         else
         {
-            return _dal.Engineer.ReadAll()
-                    .Where(doEngineer => filter())
-                    .Select(doEngineer => new BO.Engineer
-                    {
-                        Id = doEngineer.EngineerID,
-                        Name = doEngineer.FullName,
-                        Email = doEngineer.Email,
-                        Level = (BO.EngineerLevel)doEngineer.Level,
-                        Cost = doEngineer.CostPerHour
-                    });
+            IEnumerable<BO.Engineer> temp = (from DO.Engineer doEngineer in _dal.Engineer.ReadAll()
+                                             where filter()
+                                             select new BO.Engineer()
+                                             {
+                                                 Id = doEngineer.EngineerID,
+                                                 Name = doEngineer.FullName,
+                                                 Email = doEngineer.Email,
+                                                 Level = (BO.Level)doEngineer.Level,
+                                                 Cost = doEngineer.CostPerHour,
+                                             });
+            foreach (BO.Engineer engineer in temp)
+            {
+                var task = _dal.Task.Read(item => item.EngineerID == engineer.Id);
+            }
+            return temp;
         }
     }
 
     public void Update(BO.Engineer engineer)
     {
-        DO.Engineer doEng = new DO.Engineer(engineer.Id, engineer.Name, engineer.Email, (DO.EngineerLevel)engineer.Level, engineer.Cost);
+        DO.Engineer doEng = new DO.Engineer(engineer.Id, engineer.Name, engineer.Email, (DO.Level)engineer.Level, engineer.Cost);
         try
         {
-            if (engineer.Id > 0 && engineer.Name != "" && engineer.Email.EndsWith("@gmail.com") && engineer.Cost > 0)
-                _dal.Engineer.Update(doEng);
-            else throw new BO.BlDoesNotExistException("id or name or cost or email are not valid");
+            if (int.IsNegative(engineer.Id)) throw new BO.BlDoesNotExistException("id is not valid");
+            if (string.IsNullOrEmpty(engineer.Name)) throw new BO.BlDoesNotExistException("name is not valid");
+            if (!engineer.Email.EndsWith("@gmail.com")) throw new BO.BlDoesNotExistException("email adress is not valid");
+            if (double.IsNegative(engineer.Cost)) throw new BO.BlDoesNotExistException("cost is not valid");
+
+            _dal.Engineer.Update(doEng);    //if the information is valid, update the engineer in the data layer
+
+            if (engineer.Task is not null)
+            {
+                var task = _dal.Task.Read(task => task.TaskID == engineer.Task!.Id) //reading the task that the engineer is responsible for
+                    ?? throw new BO.BlDoesNotExistException($"task with id={engineer.Task.Id} does not exist");
+
+                _dal.Task.Update(task with { EngineerID = engineer.Id });   //if there is a task, update the task that this engineer is working on it
+            }
+
         }
         catch (DO.DalDoesNotExistException ex)
         {

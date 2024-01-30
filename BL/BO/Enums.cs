@@ -1,6 +1,6 @@
 ﻿namespace BO;
 
-public enum EngineerLevel
+public enum Level
 {
     Beginner,
     AdvancedBeginner,
@@ -9,18 +9,11 @@ public enum EngineerLevel
     Expert
 }
 
-public enum TaskDifficulty
-{
-    Novice,
-    Competent,
-    Expert
-}
-
 public enum Status
 {
     Unscheduled,
     Scheduled,
     OnTrack,
-    InJeopardy,
+    //InJeopardy, (if we are doing milestone)
     Done
 }
