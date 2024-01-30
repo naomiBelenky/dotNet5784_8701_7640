@@ -18,5 +18,5 @@ public record Engineer
     double CostPerHour
 )
 {
-    public Engineer() : this(0, "", "", 0, 0.0) { }
+    public Engineer() : this(0, "", "", Level.Beginner, 0.0) { }
 }

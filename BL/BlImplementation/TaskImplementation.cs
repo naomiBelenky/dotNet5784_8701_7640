@@ -54,22 +54,41 @@ internal class TaskImplementation : ITask
         }
     }
 
-    public Task? Read(int id)
+    public BO.Task? Read(int id)
     {
         DO.Task? doTask = _dal.Task.Read(id) ?? throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist");
         BO.Task task = new BO.Task()
         {
-            //Id = id,
-            //Name = doTask.Name,
-            //Description = doTask.Description,
-            //Difficulty = (BO.Level)doTask.Difficulty,
-            //Creation = doTask.Creation,
-            //PlanToStart = doTask.PlanToStart,
-            //StartWork = doTask.StartWork,
-            
+            Id = id,
+            Name = doTask.Name,
+            Description = doTask.Description,
+            Difficulty = (BO.Level)doTask.Difficulty,
+            Creation = (DateTime)doTask.Creation!,
+            //Status calculated later
+            //Links (need to calculate)
+            //Milestone (idk)
+            PlanToStart = doTask.PlanToStart,
+            StartWork = doTask.StartWork,
+            //PlanToFinish (need to calculate)
+            Deadline = doTask.Deadline,
+            FinishDate = doTask.FinishDate,
+            //Duration = doTask.TimeForTask, (need to fix TimeToStart to be TimeSpan and not double)
+            Product = doTask.Product,
+            Notes = doTask.Notes,
+            Engineer = new BO.EngineerInTask    //filling the info about the engineer working on the task
+            {
+                Id = (int)doTask.EngineerID!,
+                Name = (_dal.Engineer.Read(id)??
+                throw new BO.BlDoesNotExistException($"Engineer with ID={id} does Not exist")).FullName
+                //if the Read returns an engineer, assigning his name to the EngineerInTask
+            }
         };
-        return null;
+
+        task.Status = getStatus(task);
+
+        return task;
     }
+
 
     public IEnumerable<BO.Task> ReadAll(Func<bool>? filter = null)
     {
@@ -85,4 +104,25 @@ internal class TaskImplementation : ITask
     {
         throw new NotImplementedException();
     }
+
+    #region private methods for help
+    /// <summary>
+    /// determines the status of the task
+    /// </summary>
+    /// <param name="task"> The task we are trying to get the status of </param>
+    /// <returns></returns>
+    private BO.Status getStatus(BO.Task task)
+    {
+        BO.Status status = BO.Status.Unscheduled;
+        if (task.PlanToStart == null) status = BO.Status.Unscheduled;
+        else if (task.StartWork == null) status = BO.Status.Scheduled;
+        else if (task.FinishDate == null) status = BO.Status.OnTrack;
+        else if (task.FinishDate <= DateTime.Now) status = BO.Status.Done;
+        return status;
+    }
+
+    private DateTime planToFinish(BO.Task task)
+    { }
+
+    #endregion
 }

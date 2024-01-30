@@ -40,7 +40,7 @@ public record Task
     int? EngineerID = 0
 )
 {
-    public Task() : this(0, "", "", 0) { }
+    public Task() : this(0, "", "", Level.Beginner) { }
 }
 
 

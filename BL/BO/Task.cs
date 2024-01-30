@@ -74,4 +74,7 @@ public class Task
     /// The level of difficulty of the task, defines the level of expertise needed to work on it
     /// </summary>
     public BO.Level Difficulty { get; set; }
+
+    private BO.Status getStatus(BO.Task task);
+    private DateTime planToFinish(BO.Task task);
 }
