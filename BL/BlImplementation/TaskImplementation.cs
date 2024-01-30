@@ -44,8 +44,13 @@ internal class TaskImplementation : ITask
         {
             //check if 
             DO.Task? tempTask = _dal.Task.Read(id);
-            if (tempTask?.PlanToStart != null)
-                throw new BO.BlDeletingIsForbidden("Deleting is forbiden now");
+            if (tempTask != null)
+                if (tempTask.PlanToStart != null)
+                    throw new BO.BlDeletingIsForbidden("Deleting is forbiden now");
+                else;
+            else
+                throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist");
+            
 
             _dal.Task.Delete(id);
         }
@@ -55,6 +60,7 @@ internal class TaskImplementation : ITask
         }
     }
 
+   
     public BO.Task? Read(int id)
     {
         DO.Task? doTask = _dal.Task.Read(id) ?? throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist");
@@ -91,6 +97,7 @@ internal class TaskImplementation : ITask
         return task;
     }
 
+        };
 
     public IEnumerable<BO.Task> ReadAll(Func<bool>? filter = null)
     {
