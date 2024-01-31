@@ -80,7 +80,7 @@ internal class Program
         {
             string? name, description, product, notes;
             DateTime? planToStart, deadLine;
-            double? timeForTask;
+            TimeSpan? timeForTask;
             int id;
 
             Console.WriteLine("write task name");
@@ -98,7 +98,7 @@ internal class Program
             Console.WriteLine("enter engineer ID");
             id = int.Parse(Console.ReadLine());
             Console.WriteLine("enter time for task");
-            timeForTask = int.Parse(Console.ReadLine());
+            timeForTask = TimeSpan.Parse(Console.ReadLine());
             Level difficulty = (Level)int.Parse(Console.ReadLine());
 
             DO.Task task = new DO.Task(0, name, description, difficulty, false, DateTime.Now,
@@ -191,7 +191,7 @@ internal class Program
                 DateTime? planToStart = Convert.ToDateTime(Console.ReadLine());
                 Console.WriteLine("what is the deadline of the task?");
                 DateTime? deadLine = Convert.ToDateTime(Console.ReadLine());
-                double? timeForTask = null;
+                TimeSpan? timeForTask = null;
                 Console.WriteLine("describe the product");
                 string? product = Console.ReadLine();
                 Console.WriteLine("if you have any notes about the task, write them here");

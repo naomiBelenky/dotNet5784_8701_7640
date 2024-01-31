@@ -32,7 +32,7 @@ public record Task
     DateTime? Creation = null,
     DateTime? PlanToStart = null,
     DateTime? StartWork = null,
-    double? TimeForTask = null,
+    TimeSpan? TimeForTask = null,
     DateTime? Deadline = null,
     DateTime? FinishDate = null,
     string? Product = null,
