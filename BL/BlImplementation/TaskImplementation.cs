@@ -1,5 +1,4 @@
 ﻿using BlApi;
-using System.Security.Cryptography;
 
 namespace BlImplementation;
 
@@ -50,7 +49,7 @@ internal class TaskImplementation : ITask
                 else;
             else
                 throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist");
-            
+
 
             _dal.Task.Delete(id);
         }
@@ -60,7 +59,7 @@ internal class TaskImplementation : ITask
         }
     }
 
-   
+
     public BO.Task? Read(int id)
     {
         DO.Task? doTask = _dal.Task.Read(id) ?? throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist");
@@ -73,7 +72,6 @@ internal class TaskImplementation : ITask
             Creation = (DateTime)doTask.Creation!,
             //Status calculated later
             //Links (need to calculate)
-            //Milestone (idk)
             PlanToStart = doTask.PlanToStart,
             StartWork = doTask.StartWork,
             //PlanToFinish calculated later
@@ -91,13 +89,11 @@ internal class TaskImplementation : ITask
             }
         };
 
-        task.Status = getStatus(task);
+        task.Status = getStatus(doTask);
         task.PlanToFinish = getPlanToFinish(task);
 
         return task;
     }
-
-        };
 
     public IEnumerable<BO.Task> ReadAll(Func<bool>? filter = null)
     {
@@ -121,7 +117,7 @@ internal class TaskImplementation : ITask
     /// </summary>
     /// <param name="task"> The task we are trying to get the status of </param>
     /// <returns></returns>
-    private BO.Status getStatus(BO.Task task)
+    private BO.Status getStatus(DO.Task task)
     {
         BO.Status status = BO.Status.Unscheduled;
         if (task.PlanToStart == null) status = BO.Status.Unscheduled;
@@ -139,11 +135,31 @@ internal class TaskImplementation : ITask
     {
         return (DateTime?)(task.StartWork + task.Duration);
     }
-
+    /// <summary>
+    /// returns the list of tasks which thus task depends on
+    /// </summary>
+    /// <param name="task"> the task that depends on the list of links </param>
+    /// <returns></returns>
+    /// <exception cref="BO.BlDoesNotExistException"></exception>
     private List<BO.TaskInList> getLinks(BO.Task task)
     {
-        List<DO.Link?> links = new List<DO.Link?>(_dal.Link.ReadAll());
+        List<DO.Link?> links = new List<DO.Link?>(_dal.Link.ReadAll(link => link.NextTask == task.Id));
+        if (links.Count == 0) return new List<BO.TaskInList>(); //if the ReadAll didn't return any link, returning an empty list
 
+        List<BO.TaskInList> tasks = new List<BO.TaskInList>();
+        foreach (DO.Link link in links)
+        {
+            DO.Task doTask = _dal.Task.Read(link!.PrevTask) ?? throw new BO.BlDoesNotExistException($"Task with Id={link.PrevTask} does not exist");
+            BO.TaskInList newTask = new BO.TaskInList
+            {
+                Id = doTask.TaskID,
+                Name = doTask.Name,
+                Description = doTask.Description,
+                Status = getStatus(doTask),
+            };
+            tasks.Add(newTask); //adding each task to the list of TaskInList
+        }
+        return tasks;
     }
     #endregion
 }

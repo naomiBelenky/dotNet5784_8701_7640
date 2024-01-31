@@ -31,10 +31,6 @@ public class Task
     /// </summary>
     public List<BO.TaskInList>? Links { get; set; }
     /// <summary>
-    /// Describes wether the task is complete
-    /// </summary>
-    public BO.MilestoneInTask? Milestone { get; set; }
-    /// <summary>
     /// The planned date to start working on the task
     /// </summary>
     public DateTime? PlanToStart { get; set; }
