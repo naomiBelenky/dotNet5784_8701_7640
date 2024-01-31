@@ -133,43 +133,6 @@ internal class TaskImplementation : ITask
                         || task.StartWork != tempTask.StartWork || task.Deadline != tempTask.Deadline
                         || task.FinishDate != tempTask.FinishDate || task.Links != null && task.Links.Count != counterDoLinks) 
                     { throw new BO.BlForbiddenAfterCreatingSchedule("Updating this parameters is prohibited after the project schedule is created"); }
-
-                    //צריך לראות אם רוצים לעדכן משהו בתלויות
-                    //שזה אומר: או להוסיף תלות
-                    //או למחוק תלות 
-                    //אם הוסיפו תלויות אז מספר האיברים ברשימה של המשימה יהיה גדול יותר ממספר התלויות שהמשימה הבאה שלהן היא המשימה שלי
-                    //במקרה הזה אני אבין שצריך להוסיף
-                    //ואז אצטרך לבדוק מה המשימה שצריך להוסיף 
-                    //ואז להוסיף אותה לתלויות,אם מותר
-                    //במקרה שצריך למחוק אז מספר האיברים ברשימה יהיה קטן ממספר התלויות עם הת.ז המתאים
-                    //ואז אצטרך לחפש מה צריך למחוק 
-                    //ואז אמחק אם מותר.
-                    //עוד דרך לבדוק אם צריך להוסיף או למחוק: 
-                    
-                    
-                   
-
-
-                    //if(task.Links != null)
-                    //{
-                    //    //(from BO.TaskInList link in task.Links
-                    //    // select  )
-                    //    foreach (var link in task.Links)
-                    //    {
-                    //        from DO.Link item in _dal.Link.ReadAll(link => link.NextTask == task.Id)
-                    //        where item.PrevTask != link.Id
-                    //        select item
-                    //    }
-                    //IEnumerable<DO.Link> temp = (from DO.Link item in _dal.Link.ReadAll(link => link.NextTask == task.Id)
-                    //                             where item.PrevTask != task)
-                    //}
-                     
-                    //נבדוק שאין שינוי ברשימת תלויות
-                    //לעבור על הליסט
-                    //עבור כל אחד מהמשימות שיש שם לחפש אותה בלינקס
-                    //אם אין אותה סימן שרצינו לשנות 
-
-
                 }
 
             //אם אנחנו פה סימן שכל הבדיקות עברו בהצלחה:)
@@ -199,12 +162,29 @@ internal class TaskImplementation : ITask
                     foreach(int linkID in oldLinksID)
                     {
                         _dal.Link.Delete(linkID);
-                        //try??? 
+                    //try??? 
                     }
                 }
             }
+            else
+            {
+                if(counterDoLinks > 0) //אם צריך למחוק תלויות
+                {
+                    IEnumerable<DO.Link> links = _dal.Link.ReadAll(item => item.NextTask == task.Id);
+                    foreach (DO.Link link in links) { _dal.Link.Delete(link.LinkID); }
+                }
+            }
 
-            DO.Task doTask = new DO.Task(task.Id, task.Name, task.Description, (DO.Level)task.Difficulty);
+            
+            int? tempID;
+            if (task.Engineer == null)
+                tempID = null;
+            else
+                tempID = task.Engineer.Id;
+
+            DO.Task doTask = new DO.Task(task.Id, task.Name, task.Description, (DO.Level)task.Difficulty,
+                false, task.Creation, task.PlanToStart, task.StartWork, task.Duration, task.Deadline,
+                task.FinishDate, task.Product, task.Notes, tempID);
             _dal.Task.Update(doTask);
         }
 
