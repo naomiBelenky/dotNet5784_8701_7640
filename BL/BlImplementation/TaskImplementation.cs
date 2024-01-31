@@ -49,7 +49,7 @@ internal class TaskImplementation : ITask
                 else;
             else
                 throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist");
-            
+
 
             _dal.Task.Delete(id);
         }
@@ -59,7 +59,7 @@ internal class TaskImplementation : ITask
         }
     }
 
-   
+
     public BO.Task? Read(int id)
     {
         DO.Task? doTask = _dal.Task.Read(id) ?? throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist");
@@ -84,7 +84,7 @@ internal class TaskImplementation : ITask
             Engineer = new BO.EngineerInTask    //filling the info about the engineer working on the task
             {
                 Id = (int)doTask.EngineerID!,
-                Name = (_dal.Engineer.Read(id)??
+                Name = (_dal.Engineer.Read(id) ??
                 throw new BO.BlDoesNotExistException($"Engineer with ID={id} does Not exist")).FullName
                 //if the Read returns an engineer, assigning his name to the EngineerInTask
             }
@@ -95,12 +95,18 @@ internal class TaskImplementation : ITask
         return task;
     }
 
-        };
+
 
     public IEnumerable<BO.Task> ReadAll(Func<bool>? filter = null)
     {
-        throw new NotImplementedException();
-    }
+        if (filter == null)
+            IEnumerable<BO.Task> tasks = (from DO.Task doTask in _dal.Task.DeleteAll()
+                                          select new BO.Task()
+                                          {
+                                          });
+                                          
+
+    } 
 
     public void Update(BO.Task task)
     {
