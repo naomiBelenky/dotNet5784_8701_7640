@@ -105,7 +105,5 @@ internal class EngineerImplementation : IEngineer
         //    Delete(item);
 
         XMLTools.SaveListToXMLElement(engineerList, s_engineers_xml);
-        //אני חושבת שהפונקצית מחיקה כבר מעדכנת את הקובץ, לא כך?
-        //ולהחזיר.
     }
 }
