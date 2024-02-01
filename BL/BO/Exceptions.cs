@@ -38,3 +38,8 @@ public class BlForbiddenAfterCreatingSchedule : Exception
 {
     public BlForbiddenAfterCreatingSchedule(string? message) : base(message) { }
 }
+
+public class BlForbiddenToUpdate : Exception
+{
+    public BlForbiddenToUpdate(string? message) : base(message) { }
+}
