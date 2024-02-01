@@ -37,19 +37,13 @@ internal class TaskImplementation : ITask
         //checking if there is another task that depended in this task
         DO.Link? tempLink = _dal.Link.Read(item => item.PrevTask == id);
         if (tempLink != null)
-            throw new BO.BlDeletionImpossible("Deleting this task is forbidden beacuse there is another task that depended on it");
+            throw new BO.BlForbiddenInThisStage("Deleting this task is forbidden beacuse there is another task that depended on it");
 
         try
-        {
-            //check if 
+        {           
             DO.Task? tempTask = _dal.Task.Read(id);
-            if (tempTask != null)
-                if (tempTask.PlanToStart != null)
-                    throw new BO.BlForbiddenInThisStage("Deleting is prohibited after the project schedule is created");
-                else;
-            else
-                throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist");
-
+            if(tempTask==null) throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist");
+            else if (tempTask.PlanToStart != null) throw new BO.BlForbiddenInThisStage("Deleting is prohibited after the project schedule is created");
 
             _dal.Task.Delete(id);
         }
@@ -101,7 +95,6 @@ internal class TaskImplementation : ITask
 
     public IEnumerable<BO.TaskInList> ReadAll(Func<bool>? filter = null)
     {
-        throw new NotImplementedException();
         if (filter == null)
         {
             IEnumerable<BO.TaskInList> tasks = (from DO.Task item in _dal.Task.ReadAll()
@@ -127,12 +120,13 @@ internal class TaskImplementation : ITask
                                                 });
             return tasks;
         }
+        
     }
 
     public void Update(BO.Task task)
     {
-        //נבדוק שהנתונים תקינים
-        if (int.IsNegative(task.Id)) throw new BO.BlInformationIsntValid("id is not valid");
+        //check if data is valid
+        if (task.Id <= 0) throw new BO.BlInformationIsntValid("id is not valid");
         if (task.Name == "") throw new BO.BlInformationIsntValid("name is not valid");
 
         try
@@ -175,20 +169,19 @@ internal class TaskImplementation : ITask
                 {
                     //נחפש את כל התלויות בנתונים שכבר לא קיימות ברשימה
                     IEnumerable<int> oldLinksID = (from DO.Link item in _dal.Link.ReadAll(link => link.NextTask == task.Id)
-                                                   where task.Links.Any(link => link.Id == item.PrevTask) == false
+                                                   where task.Links.Any(temp => temp.Id == item.PrevTask) == false
                                                    select item.LinkID);
                     foreach (int linkID in oldLinksID)
                     {
                         _dal.Link.Delete(linkID);
-                        //try??? 
                     }
                 }
             }
-            else
+            else 
             {
                 if (counterDoLinks > 0) //אם צריך למחוק תלויות
                 {
-                    IEnumerable<DO.Link> links = _dal.Link.ReadAll(item => item.NextTask == task.Id);
+                    IEnumerable<DO.Link> links = _dal.Link.ReadAll(item => item.NextTask == task.Id)!;
                     foreach (DO.Link link in links) { _dal.Link.Delete(link.LinkID); }
                 }
             }
