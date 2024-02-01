@@ -95,15 +95,37 @@ internal class TaskImplementation : ITask
         return task;
     }
 
-    public IEnumerable<BO.Task> ReadAll(Func<bool>? filter = null)
+    public IEnumerable<BO.TaskInList> ReadAll(Func<bool>? filter = null)
     {
         throw new NotImplementedException();
-        //if (filter == null)
-        //    IEnumerable<BO.Task> tasks = (from DO.Task doTask in _dal.Task.DeleteAll()
-        //                                  select new BO.Task()
-        //                                  {
-        //                                  });
-                                          
+        if (filter == null)
+        {
+            IEnumerable<BO.TaskInList> tasks = (from DO.Task item in _dal.Task.ReadAll()
+                                                select new BO.TaskInList()
+                                                {
+                                                    Id=item.TaskID!,
+                                                    Name = item.Name,
+                                                    Description = item.Description,
+                                                    Status=getStatus(item)
+                                                });
+          return tasks;
+        }
+        else
+        {
+            IEnumerable<BO.TaskInList> tasks = (from DO.Task item in _dal.Task.ReadAll()
+                                                where filter()
+                                                select new BO.TaskInList()
+                                                {
+                                                    Id = item.TaskID!,
+                                                    Name = item.Name,
+                                                    Description = item.Description,
+                                                    Status = getStatus(item)
+                                                }) ;
+        }
+        
+
+    
+
 
     } 
 
