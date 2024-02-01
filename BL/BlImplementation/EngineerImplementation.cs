@@ -88,9 +88,9 @@ internal class EngineerImplementation : IEngineer
                                              });
             foreach (BO.Engineer engineer in temp)
             {
-                var task = _dal.Task.Read(item => item.EngineerID == engineer.Id)   //searching for the task that the engineer is responsible for
-                    ??throw new BO.BlDoesNotExistException($"Task with ID={engineer.Id} does Not exist");
-                engineer.Task = new BO.TaskInEngineer { Id = task.TaskID, Name = task.Name };
+                DO.Task? task = _dal.Task.Read(item => item.EngineerID == engineer.Id);   //searching for the task that the engineer is responsible for
+                if (task != null)
+                    engineer.Task = new BO.TaskInEngineer { Id = task.TaskID, Name = task.Name };
             }
             return temp;
         }
@@ -108,9 +108,9 @@ internal class EngineerImplementation : IEngineer
                                              });
             foreach (BO.Engineer engineer in temp)
             {
-                var task = _dal.Task.Read(item => item.EngineerID == engineer.Id)   //searching for the task that the engineer is responsible for
-                    ??throw new BO.BlDoesNotExistException($"Task with ID={engineer.Id} does Not exist");
-                engineer.Task = new BO.TaskInEngineer { Id = task.TaskID, Name = task.Name };
+                DO.Task? task = _dal.Task.Read(item => item.EngineerID == engineer.Id);   //searching for the task that the engineer is responsible for
+                if (task != null)
+                    engineer.Task = new BO.TaskInEngineer { Id = task.TaskID, Name = task.Name };
             }
             return temp;
         }

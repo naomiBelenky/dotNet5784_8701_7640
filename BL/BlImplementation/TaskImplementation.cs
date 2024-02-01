@@ -11,7 +11,7 @@ internal class TaskImplementation : ITask
         DO.Task doTask = new DO.Task(task.Id, task.Name, task.Description, (DO.Level)task.Difficulty);
         try
         {
-            if (int.IsNegative(task.Id)) throw new BO.BlInformationIsntValid("id is not valid");
+            if (task.Id <= 0) throw new BO.BlInformationIsntValid("id is not valid");
             if (task.Name == "") throw new BO.BlInformationIsntValid("name is not valid");
             if (task.Links != null) //if there are dependent tasks, adding them to the list of links
             {
@@ -45,7 +45,7 @@ internal class TaskImplementation : ITask
             DO.Task? tempTask = _dal.Task.Read(id);
             if (tempTask != null)
                 if (tempTask.PlanToStart != null)
-                    throw new BO.BlForbiddenAfterCreatingSchedule("Deleting is prohibited after the project schedule is created");
+                    throw new BO.BlForbiddenInThisStage("Deleting is prohibited after the project schedule is created");
                 else;
             else
                 throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist");
@@ -71,7 +71,7 @@ internal class TaskImplementation : ITask
             Difficulty = (BO.Level)doTask.Difficulty,
             Creation = (DateTime)doTask.Creation!,
             //Status calculated later
-            //Links (need to calculate)
+            //Links calculateed later
             PlanToStart = doTask.PlanToStart,
             StartWork = doTask.StartWork,
             //PlanToFinish calculated later
@@ -80,17 +80,21 @@ internal class TaskImplementation : ITask
             Duration = doTask.TimeForTask,
             Product = doTask.Product,
             Notes = doTask.Notes,
-            Engineer = new BO.EngineerInTask    //filling the info about the engineer working on the task
+            
+        };
+        if (doTask.EngineerID != null)
+        {
+            task.Engineer = new BO.EngineerInTask    //filling the info about the engineer working on the task
             {
                 Id = (int)doTask.EngineerID!,
                 Name = (_dal.Engineer.Read(id) ??
-                throw new BO.BlDoesNotExistException($"Engineer with ID={id} does Not exist")).FullName
+                    throw new BO.BlDoesNotExistException($"Engineer with ID={id} does Not exist")).FullName
                 //if the Read returns an engineer, assigning his name to the EngineerInTask
-            }
-        };
-
+            };
+        }
         task.Status = getStatus(doTask);
         task.PlanToFinish = getPlanToFinish(doTask);
+        task.Links = getLinks(task);
 
         return task;
     }
@@ -146,7 +150,7 @@ internal class TaskImplementation : ITask
                         task.Creation != tempTask.Creation || task.PlanToStart != tempTask.PlanToStart
                         || task.StartWork != tempTask.StartWork || task.Deadline != tempTask.Deadline
                         || task.FinishDate != tempTask.FinishDate || task.Links != null && task.Links.Count != counterDoLinks)
-                    { throw new BO.BlForbiddenAfterCreatingSchedule("Updating this parameters is prohibited after the project schedule is created"); }
+                    { throw new BO.BlForbiddenInThisStage("Updating this parameters is prohibited after the project schedule is created"); }
                 }
 
             //אם אנחנו פה סימן שכל הבדיקות עברו בהצלחה:)
@@ -210,8 +214,8 @@ internal class TaskImplementation : ITask
 
     public void UpdateDate(int id, DateTime date)
     {
-        BO.Task task = Read(id) ?? throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist");   //reading the BO task
-        DO.Task doTask = _dal.Task.Read(id)!;
+        DO.Task doTask = _dal.Task.Read(id) ?? throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist");   //reading the DO task
+        BO.Task task = Read(id)!;
         List<BO.TaskInList>? links = task.Links;
         if (links == null)
         {
@@ -223,8 +227,8 @@ internal class TaskImplementation : ITask
         foreach (BO.TaskInList dependOnTask in links)
         {
             DO.Task fullTask = _dal.Task.Read(dependOnTask.Id) ?? throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist");
-            if (fullTask.PlanToStart == null) throw new BO.BlForbiddenToUpdate($"Task with ID={dependOnTask} hasn't been schedualed yet");
-            if (date < getPlanToFinish(fullTask)) throw new BO.BlForbiddenToUpdate($"Task with ID={dependOnTask.Id} isn't planned to be finished in time");
+            if (fullTask.PlanToStart == null) throw new BO.BlForbiddenInThisStage($"Task with ID={dependOnTask} hasn't been schedualed yet");
+            if (date < getPlanToFinish(fullTask)) throw new BO.BlForbiddenInThisStage($"Task with ID={dependOnTask.Id} isn't planned to be finished in time");
         }
 
         //if the tasks are schedualed and planned to be finished before the date:
@@ -254,7 +258,7 @@ internal class TaskImplementation : ITask
     /// <returns></returns>
     private DateTime? getPlanToFinish(DO.Task task)
     {
-        return (DateTime?)(task.StartWork + task.TimeForTask);
+        return (DateTime?)(task.PlanToStart + task.TimeForTask);
     }
     /// <summary>
     /// returns the list of tasks which thus task depends on

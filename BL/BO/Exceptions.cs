@@ -34,12 +34,7 @@ public class BlInformationIsntValid : Exception
     public BlInformationIsntValid(string? message) : base(message) { }
 }
 
-public class BlForbiddenAfterCreatingSchedule : Exception
+public class BlForbiddenInThisStage : Exception
 {
-    public BlForbiddenAfterCreatingSchedule(string? message) : base(message) { }
-}
-
-public class BlForbiddenToUpdate : Exception
-{
-    public BlForbiddenToUpdate(string? message) : base(message) { }
+    public BlForbiddenInThisStage(string? message) : base(message) { }
 }
