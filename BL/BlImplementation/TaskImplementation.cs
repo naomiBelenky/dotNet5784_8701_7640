@@ -131,15 +131,15 @@ internal class TaskImplementation : ITask
 
         try
         {
-            //בשביל ההמשך, נבדוק כמה תלויות יש לי
+            //checking how many links there are in the data
             int counterDoLinks = (_dal.Link.ReadAll(link => link.NextTask == task.Id).ToList().Count);
 
-            //נבדוק האם הלו"ז כבר הוחלט
+            //Check whether the schedule has already been set
             DO.Task? tempTask = _dal.Task.Read(task.Id);
             if (tempTask != null)
                 if (tempTask.PlanToStart != null)
                 {
-                    //אם הלוז כבר נקבע נבדוק שעודכנו רק השדות המותרים לעדכון
+                    //If the schedule has already been set, check that only the fields allowed for update have been updated
                     if (task.Id != tempTask.TaskID || (int)task.Difficulty != (int)tempTask.Difficulty ||/*task.Milestone!=tempTask.Milestone||*/
                         task.Creation != tempTask.Creation || task.PlanToStart != tempTask.PlanToStart
                         || task.StartWork != tempTask.StartWork || task.Deadline != tempTask.Deadline
@@ -147,27 +147,27 @@ internal class TaskImplementation : ITask
                     { throw new BO.BlForbiddenInThisStage("Updating this parameters is prohibited after the project schedule is created"); }
                 }
 
-            //אם אנחנו פה סימן שכל הבדיקות עברו בהצלחה:)
-            //לכן נעדכן 
-            //נבדוק האם רוצים להוסיף תלויות
-            if (task.Links != null) //צריך לטפל במקרה שבו זה כן שווה לנל זתומרת שאין לי שום תלויות
+            //If we are here, it means that all the tests passed successfully:)
+            
+            //Check whether links need to be added or be deleted
+            if (task.Links != null) 
             {
-                if (task.Links.Count > counterDoLinks) //אם אנחנו רוצים להוסיף תלויות 
+                if (task.Links.Count > counterDoLinks) //if links need to be added
                 {
                     IEnumerable<int> newTasksID = (from BO.TaskInList item in task.Links
                                                    where (_dal.Link.Read(link => link.PrevTask == item.Id && link.NextTask == task.Id) == null)
-                                                   select item.Id); //רשימת תלויות חדשות
+                                                   select item.Id); //list of new links
 
-                    foreach (int taskID in newTasksID) //נוסיף את כולן 
+                    foreach (int taskID in newTasksID) //add all the new links
                     {
                         DO.Link newLink = new DO.Link(0, taskID, task.Id);
                         _dal.Link.Create(newLink);
                     }
                 }
 
-                if (task.Links.Count < counterDoLinks)  //אם צריך למחוק תלויות
+                if (task.Links.Count < counterDoLinks)  //if links need to be deleted
                 {
-                    //נחפש את כל התלויות בנתונים שכבר לא קיימות ברשימה
+                    //Search for all links in data that no longer exists in the list
                     IEnumerable<int> oldLinksID = (from DO.Link item in _dal.Link.ReadAll(link => link.NextTask == task.Id)
                                                    where task.Links.Any(temp => temp.Id == item.PrevTask) == false
                                                    select item.LinkID);
@@ -177,15 +177,14 @@ internal class TaskImplementation : ITask
                     }
                 }
             }
-            else 
+            else  //if the list is empty
             {
-                if (counterDoLinks > 0) //אם צריך למחוק תלויות
+                if (counterDoLinks > 0) //if links need to be deleted
                 {
                     IEnumerable<DO.Link> links = _dal.Link.ReadAll(item => item.NextTask == task.Id)!;
                     foreach (DO.Link link in links) { _dal.Link.Delete(link.LinkID); }
                 }
             }
-
 
             int? tempID;
             if (task.Engineer == null)
