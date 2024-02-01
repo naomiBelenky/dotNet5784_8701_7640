@@ -15,12 +15,12 @@ public class BlAlreadyExistsException : Exception
                 : base(message, innerException) { }
 }
 
-public class BlDeletionImpossible : Exception
-{
-    public BlDeletionImpossible(string? message) : base(message) { }
-    public BlDeletionImpossible(string message, Exception innerException)
-                : base(message, innerException) { }
-}
+//public class BlDeletionImpossible : Exception
+//{
+//    public BlDeletionImpossible(string? message) : base(message) { }
+//    public BlDeletionImpossible(string message, Exception innerException)
+//                : base(message, innerException) { }
+//}
 
 public class BlXMLFileLoadCreateException : Exception
 {
