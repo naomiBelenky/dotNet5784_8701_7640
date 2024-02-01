@@ -90,7 +90,7 @@ internal class TaskImplementation : ITask
         };
 
         task.Status = getStatus(doTask);
-        task.PlanToFinish = getPlanToFinish(task);
+        task.PlanToFinish = getPlanToFinish(doTask);
 
         return task;
     }
@@ -108,7 +108,7 @@ internal class TaskImplementation : ITask
                                                     Description = item.Description,
                                                     Status=getStatus(item)
                                                 });
-          return tasks;
+            return tasks;
         }
         else
         {
@@ -120,36 +120,31 @@ internal class TaskImplementation : ITask
                                                     Name = item.Name,
                                                     Description = item.Description,
                                                     Status = getStatus(item)
-                                                }) ;
+                                                });
         }
-        
-
-    
-
-
-    } 
+    }
 
     public void Update(BO.Task task)
     {
         //נבדוק שהנתונים תקינים
         if (int.IsNegative(task.Id)) throw new BO.BlInformationIsntValid("id is not valid");
         if (task.Name == "") throw new BO.BlInformationIsntValid("name is not valid");
-        
+
         try
         {
             //בשביל ההמשך, נבדוק כמה תלויות יש לי
             int counterDoLinks = (_dal.Link.ReadAll(link => link.NextTask == task.Id).ToList().Count);
-            
+
             //נבדוק האם הלו"ז כבר הוחלט
             DO.Task? tempTask = _dal.Task.Read(task.Id);
-            if (tempTask != null) 
-                if (tempTask.PlanToStart != null) 
+            if (tempTask != null)
+                if (tempTask.PlanToStart != null)
                 {
                     //אם הלוז כבר נקבע נבדוק שעודכנו רק השדות המותרים לעדכון
                     if (task.Id != tempTask.TaskID || (int)task.Difficulty != (int)tempTask.Difficulty ||/*task.Milestone!=tempTask.Milestone||*/
                         task.Creation != tempTask.Creation || task.PlanToStart != tempTask.PlanToStart
                         || task.StartWork != tempTask.StartWork || task.Deadline != tempTask.Deadline
-                        || task.FinishDate != tempTask.FinishDate || task.Links != null && task.Links.Count != counterDoLinks) 
+                        || task.FinishDate != tempTask.FinishDate || task.Links != null && task.Links.Count != counterDoLinks)
                     { throw new BO.BlForbiddenAfterCreatingSchedule("Updating this parameters is prohibited after the project schedule is created"); }
                 }
 
@@ -162,7 +157,7 @@ internal class TaskImplementation : ITask
                 {
                     IEnumerable<int> newTasksID = (from BO.TaskInList item in task.Links
                                                    where (_dal.Link.Read(link => link.PrevTask == item.Id && link.NextTask == task.Id) == null)
-                                                   select item.Id) ; //רשימת תלויות חדשות
+                                                   select item.Id); //רשימת תלויות חדשות
 
                     foreach (int taskID in newTasksID) //נוסיף את כולן 
                     {
@@ -177,23 +172,23 @@ internal class TaskImplementation : ITask
                     IEnumerable<int> oldLinksID = (from DO.Link item in _dal.Link.ReadAll(link => link.NextTask == task.Id)
                                                    where task.Links.Any(link => link.Id == item.PrevTask) == false
                                                    select item.LinkID);
-                    foreach(int linkID in oldLinksID)
+                    foreach (int linkID in oldLinksID)
                     {
                         _dal.Link.Delete(linkID);
-                    //try??? 
+                        //try??? 
                     }
                 }
             }
             else
             {
-                if(counterDoLinks > 0) //אם צריך למחוק תלויות
+                if (counterDoLinks > 0) //אם צריך למחוק תלויות
                 {
                     IEnumerable<DO.Link> links = _dal.Link.ReadAll(item => item.NextTask == task.Id);
                     foreach (DO.Link link in links) { _dal.Link.Delete(link.LinkID); }
                 }
             }
 
-            
+
             int? tempID;
             if (task.Engineer == null)
                 tempID = null;
@@ -206,7 +201,7 @@ internal class TaskImplementation : ITask
             _dal.Task.Update(doTask);
         }
 
-        catch(DO.DalDoesNotExistException messege)
+        catch (DO.DalDoesNotExistException messege)
         {
             throw new BO.BlDoesNotExistException($"Task with ID={task.Id} does Not exist", messege);
         }
@@ -214,7 +209,25 @@ internal class TaskImplementation : ITask
 
     public void UpdateDate(int id, DateTime date)
     {
-        throw new NotImplementedException();
+        BO.Task task = Read(id) ?? throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist");   //reading the BO task
+        DO.Task doTask = _dal.Task.Read(id)!;
+        List<BO.TaskInList>? links = task.Links;
+        if (links == null)
+        {
+            _dal.Task.Update(doTask with { PlanToStart = date });
+            return;   //if there are no tasks that this task depends on, simply updating the PlanToStart date
+        }
+
+        //if there are tasks that this task depends on:
+        foreach (BO.TaskInList dependOnTask in links)
+        {
+            DO.Task fullTask = _dal.Task.Read(dependOnTask.Id) ?? throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist");
+            if (fullTask.PlanToStart == null) throw new BO.BlForbiddenToUpdate($"Task with ID={dependOnTask} hasn't been schedualed yet");
+            if (date < getPlanToFinish(fullTask)) throw new BO.BlForbiddenToUpdate($"Task with ID={dependOnTask.Id} isn't planned to be finished in time");
+        }
+
+        //if the tasks are schedualed and planned to be finished before the date:
+        _dal.Task.Update(doTask with { PlanToStart = date });
     }
 
     #region private methods for help
@@ -238,9 +251,9 @@ internal class TaskImplementation : ITask
     /// </summary>
     /// <param name="task"> the task we are calculating the date for </param>
     /// <returns></returns>
-    private DateTime? getPlanToFinish(BO.Task task)
+    private DateTime? getPlanToFinish(DO.Task task)
     {
-        return (DateTime?)(task.StartWork + task.Duration);
+        return (DateTime?)(task.StartWork + task.TimeForTask);
     }
     /// <summary>
     /// returns the list of tasks which thus task depends on
