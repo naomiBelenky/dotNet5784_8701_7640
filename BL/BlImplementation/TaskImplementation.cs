@@ -121,12 +121,8 @@ internal class TaskImplementation : ITask
                                                     Description = item.Description,
                                                     Status = getStatus(item)
                                                 }) ;
+            return tasks;
         }
-        
-
-    
-
-
     } 
 
     public void Update(BO.Task task)
@@ -214,7 +210,7 @@ internal class TaskImplementation : ITask
 
     public void UpdateDate(int id, DateTime date)
     {
-        throw new NotImplementedException();
+        
     }
 
     #region private methods for help
