@@ -1,6 +1,6 @@
 ﻿namespace BlApi;
 
-public interface IB1
+public interface IBL
 {
     public IEngineer Engineer { get; }
     public ITask Task { get; }
