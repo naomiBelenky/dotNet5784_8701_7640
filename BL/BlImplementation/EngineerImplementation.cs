@@ -1,4 +1,5 @@
 ﻿using BlApi;
+using System.ComponentModel.DataAnnotations;
 
 namespace BlImplementation;
 
@@ -14,7 +15,7 @@ internal class EngineerImplementation : IEngineer
         {
             if (item.Id <= 0) throw new BO.BlInformationIsntValid("id is not valid");
             if (string.IsNullOrEmpty(item.Name)) throw new BO.BlInformationIsntValid("name is not valid");
-            if (!item.Email.EndsWith("@gmail.com")) throw new BO.BlInformationIsntValid("email adress is not valid");
+            if (!new EmailAddressAttribute().IsValid(item.Email)) throw new BO.BlInformationIsntValid("email adress is not valid");
             if (double.IsNegative(item.Cost)) throw new BO.BlInformationIsntValid("cost is not valid");
 
             _dal.Engineer.Create(doEng);          
@@ -125,7 +126,7 @@ internal class EngineerImplementation : IEngineer
         {
             if (int.IsNegative(engineer.Id)) throw new BO.BlInformationIsntValid("id is not valid");
             if (string.IsNullOrEmpty(engineer.Name)) throw new BO.BlInformationIsntValid("name is not valid");
-            if (!engineer.Email.EndsWith("@gmail.com")) throw new BO.BlInformationIsntValid("email adress is not valid");
+            if (!new EmailAddressAttribute().IsValid(engineer.Email)) throw new BO.BlInformationIsntValid("email adress is not valid");
             if (double.IsNegative(engineer.Cost)) throw new BO.BlInformationIsntValid("cost is not valid");
 
             _dal.Engineer.Update(doEng);    //if the information is valid, update the engineer in the data layer

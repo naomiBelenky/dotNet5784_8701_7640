@@ -35,7 +35,7 @@ internal class TaskImplementation : ITask
         //return (DataSource.Tasks.Find(task => task.TaskID == id)); //Stage 2
     }
 
-    public IEnumerable<Task?> ReadAll(Func<Task, bool>? filter) //Reads all entity objects
+    public IEnumerable<Task> ReadAll(Func<Task, bool>? filter) //Reads all entity objects
     {
         if (filter != null)
         {

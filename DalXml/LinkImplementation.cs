@@ -51,7 +51,7 @@ internal class LinkImplementation : ILink
         return null;
     }
 
-    public IEnumerable<Link?> ReadAll(Func<Link, bool>? filter = null)
+    public IEnumerable<Link> ReadAll(Func<Link, bool>? filter = null)
     {
         List<Link> links = XMLTools.LoadListFromXMLSerializer<Link>(s_links_xml);
         if (filter != null)

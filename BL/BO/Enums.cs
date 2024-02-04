@@ -17,3 +17,10 @@ public enum Status
     //InJeopardy, (if we are doing milestone)
     Done
 }
+
+public enum Stage
+{
+    Planning,
+    MidScheduling,
+    Execution
+}

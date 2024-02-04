@@ -36,7 +36,7 @@ internal class LinkImplementation : ILink
         //return (DataSource.Links.Find(link => link.LinkID == id)); //Stage 2
     }
 
-    public IEnumerable<Link?> ReadAll(Func<Link, bool>? filter) //Reads all entity objects
+    public IEnumerable<Link> ReadAll(Func<Link, bool>? filter) //Reads all entity objects
     {
         if (filter != null)
         {

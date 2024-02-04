@@ -38,7 +38,7 @@ internal class EngineerImplementation : IEngineer
         //return (DataSource.Engineers.Find(eng => eng.EngineerID == id)); //Stage 1
     }
 
-    public IEnumerable<Engineer?> ReadAll(Func<Engineer, bool>? filter) //Reads all entity objects
+    public IEnumerable<Engineer> ReadAll(Func<Engineer, bool>? filter) //Reads all entity objects
     {
         if (filter != null)
         {

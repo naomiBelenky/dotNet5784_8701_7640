@@ -64,7 +64,7 @@ internal class EngineerImplementation : IEngineer
         return engineer is null ? null : getEngineer(engineer);
     }
 
-    public IEnumerable<Engineer?> ReadAll(Func<Engineer, bool>? filter = null)
+    public IEnumerable<Engineer> ReadAll(Func<Engineer, bool>? filter = null)
     {
         if (filter != null)
             return XMLTools.LoadListFromXMLElement(s_engineers_xml).Elements().Select(eng => getEngineer(eng)).Where(filter);
