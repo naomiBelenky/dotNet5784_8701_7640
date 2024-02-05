@@ -1,4 +1,5 @@
 ﻿using BlApi;
+using DalApi;
 using DO;
 
 namespace BlImplementation;
@@ -291,10 +292,11 @@ internal class TaskImplementation : ITask
             {
                 DO.Task prevTask = _dal.Task.Read(link.PrevTask) ?? throw new BO.BlDoesNotExistException($"Task with ID={link.PrevTask} does not exist");
                 if (prevTask.PlanToStart == null)
-                    throw new BO.BlForbiddenInThisStage($"can't schedule task with ID={task.TaskID} before task {prevTask.TaskID}");
+                    throw new BO.BlForbiddenInThisStage($"Can't schedule task with ID={task.TaskID} before task {prevTask.TaskID}");
                 if (date < getPlanToFinish(prevTask))
-                    throw new BO.BlForbiddenInThisStage($"can't schedual task with ID={task.TaskID} to a date before task {prevTask.TaskID} is planned to be finnished");
-                
+                    throw new BO.BlForbiddenInThisStage($"Can't schedule task with ID={task.TaskID} to a date earlier than {getPlanToFinish(prevTask)}");
+                if (date < _dal.StartDate)
+                    throw new BO.BlForbiddenInThisStage($"Can't schedule task with ID={task.TaskID} to a date earlier than the start of the project: {_dal.StartDate}");
             }
         }
     }
