@@ -284,6 +284,7 @@ internal class TaskImplementation : ITask
 
     public void ScheduleTask(int id, DateTime date)
     {
+        //?צריך לשמור את תאריך תחילת הםרויקט במשתנה זמני
         DO.Task task = _dal.Task.Read(id) ?? throw new BO.BlDoesNotExistException($"Task with ID={id} does not exist");
         IEnumerable<DO.Link> links = _dal.Link.ReadAll(item => item.NextTask == task.TaskID);
         if (links != null )
@@ -295,9 +296,9 @@ internal class TaskImplementation : ITask
                     throw new BO.BlForbiddenInThisStage($"Can't schedule task with ID={task.TaskID} before task {prevTask.TaskID}");
                 if (date < getPlanToFinish(prevTask))
                     throw new BO.BlForbiddenInThisStage($"Can't schedule task with ID={task.TaskID} to a date earlier than {getPlanToFinish(prevTask)}");
-                if (date < _dal.StartDate)
-                    throw new BO.BlForbiddenInThisStage($"Can't schedule task with ID={task.TaskID} to a date earlier than the start of the project: {_dal.StartDate}");
             }
         }
+        if (date < _dal.StartDate)
+            throw new BO.BlForbiddenInThisStage($"Can't schedule task with ID={task.TaskID} to a date earlier than the start of the project: {_dal.StartDate}");
     }
 }

@@ -16,8 +16,6 @@ internal static class DataSource
         internal const int LinkId = 1;
         private static int nextLinkID = LinkId;
         internal static int NextLinkID { get => nextLinkID++; }
-
-        //public static DateTime StartProgect { get; set; }
     }
 
 }
