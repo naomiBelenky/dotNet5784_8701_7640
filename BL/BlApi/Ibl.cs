@@ -1,4 +1,6 @@
-﻿namespace BlApi;
+﻿using BO;
+
+namespace BlApi;
 
 <<<<<<<< HEAD:BL/BlApi/IBL.cs
 public interface IBL
@@ -9,4 +11,5 @@ public interface IBl
     public IEngineer Engineer { get; }
     public ITask Task { get; }
     public IMilestone MileStone { get; }
+    static Stage Stage { get;  }
 }

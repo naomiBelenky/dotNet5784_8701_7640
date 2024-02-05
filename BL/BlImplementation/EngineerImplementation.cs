@@ -1,4 +1,5 @@
 ﻿using BlApi;
+using System.ComponentModel.DataAnnotations;
 
 namespace BlImplementation;
 
@@ -14,7 +15,7 @@ internal class EngineerImplementation : IEngineer
         {
             if (item.Id <= 0) throw new BO.BlInformationIsntValid("id is not valid");
             if (string.IsNullOrEmpty(item.Name)) throw new BO.BlInformationIsntValid("name is not valid");
-            if (!item.Email.EndsWith("@gmail.com")) throw new BO.BlInformationIsntValid("email adress is not valid");
+            if (!new EmailAddressAttribute().IsValid(item.Email)) throw new BO.BlInformationIsntValid("email adress is not valid");
             if (double.IsNegative(item.Cost)) throw new BO.BlInformationIsntValid("cost is not valid");
 
             _dal.Engineer.Create(doEng);          
@@ -125,7 +126,7 @@ internal class EngineerImplementation : IEngineer
         {
             if (int.IsNegative(engineer.Id)) throw new BO.BlInformationIsntValid("id is not valid");
             if (string.IsNullOrEmpty(engineer.Name)) throw new BO.BlInformationIsntValid("name is not valid");
-            if (!engineer.Email.EndsWith("@gmail.com")) throw new BO.BlInformationIsntValid("email adress is not valid");
+            if (!new EmailAddressAttribute().IsValid(engineer.Email)) throw new BO.BlInformationIsntValid("email adress is not valid");
             if (double.IsNegative(engineer.Cost)) throw new BO.BlInformationIsntValid("cost is not valid");
 
             _dal.Engineer.Update(doEng);    //if the information is valid, update the engineer in the data layer
@@ -134,6 +135,8 @@ internal class EngineerImplementation : IEngineer
             {
                 var task = _dal.Task.Read(task => task.TaskID == engineer.Task!.Id) //reading the task that the engineer is responsible for
                     ?? throw new BO.BlDoesNotExistException($"task with id={engineer.Task.Id} does not exist");
+                if ((int)task.Difficulty > (int)engineer.Level) throw new BO.BlForbiddenInThisStage($"task with ID={task.TaskID} doesn't fit the engineer level");
+                if (task.EngineerID != null) throw new BO.BlForbiddenInThisStage($"Task with ID={task.TaskID} is already assigned to an engineer");
 
                 _dal.Task.Update(task with { EngineerID = engineer.Id });   //if there is a task, update the task that this engineer is working on it
             }

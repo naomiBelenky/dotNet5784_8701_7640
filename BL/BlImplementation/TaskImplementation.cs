@@ -1,4 +1,5 @@
 ﻿using BlApi;
+using DO;
 
 namespace BlImplementation;
 
@@ -260,7 +261,7 @@ internal class TaskImplementation : ITask
     /// <exception cref="BO.BlDoesNotExistException"></exception>
     private List<BO.TaskInList> getLinks(BO.Task task)
     {
-        List<DO.Link?> links = new List<DO.Link?>(_dal.Link.ReadAll(link => link.NextTask == task.Id));
+        List<DO.Link> links = new List<DO.Link>(_dal.Link.ReadAll(link => link.NextTask == task.Id));
         if (links.Count == 0) return new List<BO.TaskInList>(); //if the ReadAll didn't return any link, returning an empty list
 
         List<BO.TaskInList> tasks = new List<BO.TaskInList>();
@@ -279,4 +280,22 @@ internal class TaskImplementation : ITask
         return tasks;
     }
     #endregion
+
+    public void ScheduleTask(int id, DateTime date)
+    {
+        DO.Task task = _dal.Task.Read(id) ?? throw new BO.BlDoesNotExistException($"Task with ID={id} does not exist");
+        IEnumerable<DO.Link> links = _dal.Link.ReadAll(item => item.NextTask == task.TaskID);
+        if (links != null )
+        {
+            foreach (DO.Link link in links)
+            {
+                DO.Task prevTask = _dal.Task.Read(link.PrevTask) ?? throw new BO.BlDoesNotExistException($"Task with ID={link.PrevTask} does not exist");
+                if (prevTask.PlanToStart == null)
+                    throw new BO.BlForbiddenInThisStage($"can't schedule task with ID={task.TaskID} before task {prevTask.TaskID}");
+                if (date < getPlanToFinish(prevTask))
+                    throw new BO.BlForbiddenInThisStage($"can't schedual task with ID={task.TaskID} to a date before task {prevTask.TaskID} is planned to be finnished");
+                
+            }
+        }
+    }
 }
