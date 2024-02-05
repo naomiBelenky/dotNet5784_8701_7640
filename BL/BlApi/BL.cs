@@ -2,7 +2,7 @@
 
 namespace BlApi;
 
-internal class BL : IBL
+internal class BL : IBl
 {
     public IEngineer Engineer =>  new EngineerImplementation();
 

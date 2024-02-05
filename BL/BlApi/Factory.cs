@@ -1,6 +1,6 @@
 ﻿namespace BlApi;
 
-internal class Factory
+public static class Factory
 {
-    public static IBL BL => new BL();
+    public static IBl Get() => new BlImplementation.Bl();
 }
