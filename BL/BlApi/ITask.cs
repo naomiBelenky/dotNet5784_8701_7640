@@ -18,7 +18,7 @@ public interface ITask
     /// gets a task and adds it to the data.
     /// </summary>
     /// <param name="task"> BO Task to be added </param>
-    public void Add(BO.Task task);
+    public int Add(BO.Task task);
     /// <summary>
     /// gets a task and update the current task (throws exeption if doesnt find)
     /// </summary>

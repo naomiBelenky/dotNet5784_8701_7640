@@ -20,7 +20,7 @@ public interface IEngineer
     /// gets a engineer and add it to the data.
     /// </summary>
     /// <param name="engineer"></param>
-    public void Add( BO.Engineer engineer);
+    public int Add( BO.Engineer engineer);
     /// <summary>
     /// gets a engineer and updates the current engineer (throws exeption if doesnt find)
     /// </summary>

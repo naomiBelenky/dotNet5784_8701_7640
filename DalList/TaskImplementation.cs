@@ -15,8 +15,6 @@ internal class TaskImplementation : ITask
 
     public void Delete(int id) //Deletes an object by its Id
     {
-        //Task? temp = DataSource.Tasks.Find(task => task.TaskID == id);
-        //if (temp == null)
 
         Task? temp = Read(id);
         if (temp == null) //If this id doesnt exist
