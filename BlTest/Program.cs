@@ -1,4 +1,5 @@
 ﻿using BO;
+using DalApi;
 
 namespace BlTest
 {
@@ -31,6 +32,11 @@ namespace BlTest
 
 
                 } while (choice != "exit");
+
+                DateTime startOfProject = DateTime.Parse(getString("enter date of start of the project"));
+                DalApi.Factory.Get.saveStartandFinishDatestoFile("data-config.xml", "startDate", startOfProject);
+                s_bl.schedule();
+
             }
             catch (BO.BlAlreadyExistsException messege)
             {

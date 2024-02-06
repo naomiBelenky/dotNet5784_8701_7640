@@ -1,5 +1,6 @@
 ﻿namespace BlImplementation;
 using BlApi;
+
 using System.Collections.Generic;
 using System.Security.Cryptography;
 
@@ -9,6 +10,7 @@ internal class TaskImplementation : ITask
 
     public int Add(BO.Task task)
     {
+        
        //לבדוק אם זה שלב שמותר להוסיף משימה
         DO.Task doTask = new DO.Task(task.Id, task.Name, task.Description, (DO.Level)task.Difficulty);
         try
@@ -288,7 +290,7 @@ internal class TaskImplementation : ITask
     }
     #endregion
 
-    private DateTime scheduleTask(int id)
+    public DateTime SuggestStartDate(int id)
     {
         DO.Task task = _dal.Task.Read(id) ?? throw new BO.BlDoesNotExistException($"Task with ID={id} does not exist");
         IEnumerable<DO.Link> links = _dal.Link.ReadAll(link => link.NextTask == id);    //getting all the tasks that our task depends on
