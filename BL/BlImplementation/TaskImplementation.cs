@@ -1,6 +1,6 @@
-﻿using BlApi;
-
-namespace BlImplementation;
+﻿namespace BlImplementation;
+using BlApi;
+using System.Collections.Generic;
 
 internal class TaskImplementation : ITask
 {
@@ -253,7 +253,7 @@ internal class TaskImplementation : ITask
     /// <returns></returns>
     private DateTime? getPlanToFinish(DO.Task task)
     {
-        return (DateTime?)(task.PlanToStart + task.TimeForTask);
+        return (task.PlanToStart + task.TimeForTask);
     }
     /// <summary>
     /// returns the list of tasks which thus task depends on
@@ -283,23 +283,48 @@ internal class TaskImplementation : ITask
     }
     #endregion
 
-    public void ScheduleTask(int id, DateTime date)
+    //public void ScheduleTask(int id, DateTime date)
+    //{
+    //    //?צריך לשמור את תאריך תחילת הםרויקט במשתנה זמני
+    //    DO.Task task = _dal.Task.Read(id) ?? throw new BO.BlDoesNotExistException($"Task with ID={id} does not exist");
+    //    IEnumerable<DO.Link> links = _dal.Link.ReadAll(item => item.NextTask == task.TaskID);
+    //    if (links != null )
+    //    {
+    //        foreach (DO.Link link in links)
+    //        {
+    //            DO.Task links = _dal.Task.Read(link.PrevTask) ?? throw new BO.BlDoesNotExistException($"Task with ID={link.PrevTask} does not exist");
+    //            if (links.PlanToStart == null)
+    //                throw new BO.BlForbiddenInThisStage($"Can't schedule task with ID={task.TaskID} before task {links.TaskID}");
+    //            if (date < getPlanToFinish(links))
+    //                throw new BO.BlForbiddenInThisStage($"Can't schedule task with ID={task.TaskID} to a date earlier than {getPlanToFinish(links)}");
+    //        }
+    //    }
+    //    if (date < _dal.StartDate)
+    //        throw new BO.BlForbiddenInThisStage($"Can't schedule task with ID={task.TaskID} to a date earlier than the start of the project: {_dal.StartDate}");
+    //}
+
+
+    //private DateTime ScheduleTask(BO.Task task)
+    //{
+    //    if (task.Links == null) return (DateTime)_dal.StartDate!;
+    //    List<BO.TaskInList> links = task.Links;
+    //    //DateTime suggestDate = DateTime.MinValue;
+    //    DateTime suggestDate = links.Select(prevTask => _dal.Link.Read(doPrevTask => doPrevTask.NextTask == prevTask.Id)).Max() ??DateTime.MinValue;
+
+    //    return suggestDate;
+    //}
+
+    private DateTime ScheduleTask(int id)
     {
-        //?צריך לשמור את תאריך תחילת הםרויקט במשתנה זמני
         DO.Task task = _dal.Task.Read(id) ?? throw new BO.BlDoesNotExistException($"Task with ID={id} does not exist");
-        IEnumerable<DO.Link> links = _dal.Link.ReadAll(item => item.NextTask == task.TaskID);
-        if (links != null )
-        {
-            foreach (DO.Link link in links)
-            {
-                DO.Task prevTask = _dal.Task.Read(link.PrevTask) ?? throw new BO.BlDoesNotExistException($"Task with ID={link.PrevTask} does not exist");
-                if (prevTask.PlanToStart == null)
-                    throw new BO.BlForbiddenInThisStage($"Can't schedule task with ID={task.TaskID} before task {prevTask.TaskID}");
-                if (date < getPlanToFinish(prevTask))
-                    throw new BO.BlForbiddenInThisStage($"Can't schedule task with ID={task.TaskID} to a date earlier than {getPlanToFinish(prevTask)}");
-            }
-        }
-        if (date < _dal.StartDate)
-            throw new BO.BlForbiddenInThisStage($"Can't schedule task with ID={task.TaskID} to a date earlier than the start of the project: {_dal.StartDate}");
+        IEnumerable<DO.Link> links = _dal.Link.ReadAll(link => link.NextTask == id);    //getting all the tasks that our task depends on
+        if (links == null) return (DateTime)_dal.StartDate!;    //if the task does not depend on any task, it can start when the project starts
+
+        DateTime suggestedDate = links.Select
+            (link => getPlanToFinish(_dal.Task.Read(link.PrevTask)  //making a collection of the PlanToFinish dates of the tasks
+            ?? throw new BO.BlDoesNotExistException($"Task with ID={id} does not exist")))  //if one of the tasks doesn't have a 
+            .Max() ?? (DateTime)_dal.StartDate!; //selecting the latest date in the collection and assigning it to the suggestedDate
+
+        return suggestedDate;
     }
 }
