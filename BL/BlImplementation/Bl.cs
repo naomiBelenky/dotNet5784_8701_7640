@@ -9,11 +9,12 @@ internal class Bl : IBl
 
     public ITask Task => new TaskImplementation();
 
-    public IMilestone MileStone => throw new NotImplementedException(); 
+    public IMilestone MileStone => throw new NotImplementedException();
+
     /// <summary>
     /// the stage of the progect (Planning, MidScheduling, Execution)
     /// </summary>
-    public BO.Stage Stage { get; set; }
+    public BO.Stage StageOfProject { get => StageOfProject; set => StageOfProject = value; }
 
    
     public void schedule()

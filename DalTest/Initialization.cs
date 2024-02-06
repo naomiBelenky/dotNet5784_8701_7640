@@ -20,7 +20,7 @@ public static class Initialization
         Random rand = new Random(DateTime.Now.Millisecond);
         for (int i = 0; i < 20; i++)
         {
-            int day = rand.Next(30);
+            int day = rand.Next(1, 30);
             int month = rand.Next(8, 11);
             dates[i] = new DateTime(2023, month, day);
         }
@@ -30,7 +30,7 @@ public static class Initialization
         tasks[2] = new Task(0, "Simulation", "Virtual models for testing", (Level)rand.Next(0, 5), false, dates[2]);
         tasks[3] = new Task(0, "Algorithm Development", "Craft complex algorithms", (Level)rand.Next(0, 5), false, dates[3]);
         tasks[4] = new Task(0, "Prototyping", "Build early-stage models", (Level)rand.Next(0, 5), false, new DateTime(2023, 07, 01));
-        tasks[5] = new Task(0, "Network Infrastructure", "Manage data communication networks", (Level)rand.Next(0,54), false, dates[5]);
+        tasks[5] = new Task(0, "Network Infrastructure", "Manage data communication networks", (Level)rand.Next(0,5), false, dates[5]);
         tasks[6] = new Task(0, "Data Analysis", "Extract insights from datasets", (Level)rand.Next(0, 5), false, dates[6]);
         tasks[7] = new Task(0, "System Integration", "Integrate for improved functionality", (Level)rand.Next(0, 5), false, dates[7]);
         tasks[8] = new Task(0, "Robotics", "Program robotic systems", (Level)rand.Next(0, 5), false, dates[8]);
