@@ -1,4 +1,5 @@
 ﻿using DalApi;
+using System.Xml.Linq;
 
 namespace Dal;
 
@@ -13,4 +14,16 @@ sealed internal class DalXml : IDal
 
     public DateTime? StartDate { get => Instance.StartDate; set => Instance.StartDate=value; }
     public DateTime? FinishDate { get => Instance.FinishDate; set => Instance.FinishDate=value; }
+
+    public void saveStartandFinishDatestoFile(string data_config_xml, string elemName, DateTime toSave)
+    {
+        //ליצור XELEMENT עם שם התגית להיות תאריך התחלה, והתוכן האריך עצמו ואז SAVE
+
+        XElement root = XMLTools.LoadListFromXMLElement(data_config_xml);
+        DateTime? date = root.ToDateTimeNullable(elemName);
+        //checking if the date is already set
+        if (date != null) throw new DO.DalAlreadyExistsException($"The date is already set to {date}");
+        root.Element(elemName)?.SetValue(toSave);
+        XMLTools.SaveListToXMLElement(root, data_config_xml);
+    }
 }

@@ -288,11 +288,11 @@ internal class TaskImplementation : ITask
     }
     #endregion
 
-    private DateTime scheduleTask(int id, DateTime startProject)
+    private DateTime scheduleTask(int id)
     {
         DO.Task task = _dal.Task.Read(id) ?? throw new BO.BlDoesNotExistException($"Task with ID={id} does not exist");
         IEnumerable<DO.Link> links = _dal.Link.ReadAll(link => link.NextTask == id);    //getting all the tasks that our task depends on
-        if (links == null) return (DateTime)_dal.StartDate!;    //if the task does not depend on any task, it can start when the project starts
+        if (links == null) return (DateTime)_dal.StartDate;    //if the task does not depend on any task, it can start when the project starts
 
         DateTime suggestedDate = links.Select
             (link => getPlanToFinish(_dal.Task.Read(link.PrevTask)  //making a collection of the PlanToFinish dates of the tasks
