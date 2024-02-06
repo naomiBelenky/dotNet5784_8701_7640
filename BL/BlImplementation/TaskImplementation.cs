@@ -1,6 +1,7 @@
 ﻿namespace BlImplementation;
 using BlApi;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 
 internal class TaskImplementation : ITask
 {
@@ -100,6 +101,7 @@ internal class TaskImplementation : ITask
     {
         if (filter == null)
         {
+            //IEnumerable<BO.TaskInList> tasks1=(_dal.Task.ReadAll()).Select new BO.TaskInList()
             IEnumerable<BO.TaskInList> tasks = (from DO.Task item in _dal.Task.ReadAll()
                                                 select new BO.TaskInList()
                                                 {
@@ -112,6 +114,7 @@ internal class TaskImplementation : ITask
         }
         else
         {
+           // IEnumerable<BO.TaskInList> tasks1=(_dal.Task.ReadAll()).Where(filter()).select new 
             IEnumerable<BO.TaskInList> tasks = (from DO.Task item in _dal.Task.ReadAll()
                                                 where filter()
                                                 select new BO.TaskInList()
@@ -158,10 +161,12 @@ internal class TaskImplementation : ITask
                 if (task.Links.Count > counterDoLinks) //if links need to be added
                 {
                     IEnumerable<int> newTasksID = (from BO.TaskInList item in task.Links
-                                                   where (_dal.Link.Read(link => link.PrevTask == item.Id && link.NextTask == task.Id) == null)
-                                                   select item.Id); //list of new links
+                                                   let doLink = _dal.Link.Read(link => link.PrevTask == item.Id && link.NextTask == task.Id)
+                                                   //group item by doLink == null ? "newTask" : "dontNew");
+                                                   where (doLink == null)
+                                                   select item.Id); //list of new links 
 
-                    foreach (int taskID in newTasksID) //add all the new links
+                    foreach (var taskID in newTasksID) //add all the new links
                     {
                         DO.Link newLink = new DO.Link(0, taskID, task.Id);
                         _dal.Link.Create(newLink);
