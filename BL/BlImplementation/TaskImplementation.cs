@@ -7,6 +7,7 @@ internal class TaskImplementation : ITask
 
     public int Add(BO.Task task)
     {
+        
        //לבדוק אם זה שלב שמותר להוסיף משימה
         DO.Task doTask = new DO.Task(task.Id, task.Name, task.Description, (DO.Level)task.Difficulty);
         try
@@ -286,7 +287,7 @@ internal class TaskImplementation : ITask
     }
     #endregion
 
-    internal DateTime SuggestStartDate(int id)
+    public DateTime SuggestStartDate(int id)
     {
         if (_dal.StartDate == null) throw new BO.BlDoesNotExistException("Start date of the project is not set yet");
         DO.Task task = _dal.Task.Read(id) ?? throw new BO.BlDoesNotExistException($"Task with ID={id} does not exist");

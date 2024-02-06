@@ -1,5 +1,6 @@
 ﻿namespace BlImplementation;
 using BlApi;
+using BO;
 using System.Xml.Linq;
 
 internal class Bl : IBl
@@ -14,13 +15,21 @@ internal class Bl : IBl
     /// </summary>
     public BO.Stage Stage { get; set; }
 
+   
     public void schedule()
     {
         List<BO.TaskInList> tasks = (Task.ReadAll()).ToList();
         foreach (var task in tasks)
         {
-            BO.Task fullTask = Task.Read(task.Id) ?? throw new BO.BlDoesNotExistException($"Task with ID={task.Id} does not exist");
-            DateTime what = Task.SuggestStartDate(fullTask.Id);
+            //BO.Task fullTask = Task.Read(task.Id) ?? throw new BO.BlDoesNotExistException($"Task with ID={task.Id} does not exist");
+            
+            Console.WriteLine("enter date");
+            DateTime date = Convert.ToDateTime(Console.ReadLine());
+
+            if (date < Task.SuggestStartDate(task.Id)) 
+                throw new BO.BlForbiddenInThisStage("not valid date, there are later task that this task depend on them");
+
+            Task.UpdateDate(task.Id, date);
         }
     }
 }
