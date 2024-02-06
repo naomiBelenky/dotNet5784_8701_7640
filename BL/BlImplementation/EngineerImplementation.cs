@@ -7,7 +7,7 @@ internal class EngineerImplementation : IEngineer
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
     
-    public void Add(BO.Engineer item)
+    public int Add(BO.Engineer item)
     {
         DO.Engineer doEng = new DO.Engineer(item.Id, item.Name, item.Email, (DO.Level)item.Level, item.Cost);
 
@@ -18,7 +18,9 @@ internal class EngineerImplementation : IEngineer
             if (!new EmailAddressAttribute().IsValid(item.Email)) throw new BO.BlInformationIsntValid("email adress is not valid");
             if (double.IsNegative(item.Cost)) throw new BO.BlInformationIsntValid("cost is not valid");
 
-            _dal.Engineer.Create(doEng);          
+            int newID = _dal.Engineer.Create(doEng);
+            return newID;
+
         }
         catch (DO.DalAlreadyExistsException messege)
         {

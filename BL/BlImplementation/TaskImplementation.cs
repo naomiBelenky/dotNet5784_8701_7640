@@ -1,6 +1,4 @@
 ﻿using BlApi;
-using DalApi;
-using DO;
 
 namespace BlImplementation;
 
@@ -8,8 +6,9 @@ internal class TaskImplementation : ITask
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
 
-    public void Add(BO.Task task)
+    public int Add(BO.Task task)
     {
+       //לבדוק אם זה שלב שמותר להוסיף משימה
         DO.Task doTask = new DO.Task(task.Id, task.Name, task.Description, (DO.Level)task.Difficulty);
         try
         {
@@ -25,11 +24,13 @@ internal class TaskImplementation : ITask
             }
 
             int id = _dal.Task.Create(doTask);  //if the data is valid, creating the task in the data layer
+            return id;
         }
         catch (DO.DalAlreadyExistsException message)
         {
             throw new BO.BlAlreadyExistsException($"Task with ID={task.Id} already exists", message);
         }
+        
     }
 
 

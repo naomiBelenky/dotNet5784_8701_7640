@@ -1,4 +1,6 @@
-﻿namespace BlTest
+﻿using BO;
+
+namespace BlTest
 {
     internal class Program
     {
@@ -6,7 +8,272 @@
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            Console.Write("Would you like to create Initial data? (Y/N)");
+            string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input");
+            if (ans == "Y")
+                DalTest.Initialization.Do();
+
+            string? choice;
+            do
+            {
+                Console.WriteLine("enter your choice: \nexit\ntask\nengineer");
+                choice = Console.ReadLine();
+                if (choice == "exit")
+                    return;
+
+                switch (choice)
+                {
+                    case "task": taskMenu(); break;
+                    case "engineer": engineerMenu(); break;
+                }
+
+
+            } while (choice != "exit");
+            
         }
+        private static void taskMenu()
+        {
+
+            string? choice;
+
+            do
+            {
+                Console.WriteLine("enter your choice: \nadd\ndelete\nread\nread all\nupdate\nupdate date\nmain menu");
+                choice = Console.ReadLine();
+                try
+                {
+                    switch (choice)
+                    {
+                        //?
+                        case "add":
+
+                            int id = int.Parse(getString("enter id"));
+                            string? name = (getString("enter Name")), descreption = getString("enter descreption"),
+                                product = getString("enter ptodict"), notes = getString("enter notes");
+                            TimeSpan? duration = TimeSpan.Parse(getString("enter duration"));
+                            //duratuin
+                            Level difficulty = (Level)int.Parse(getString("enter level"));
+
+                            List<BO.TaskInList> prevTasks = new List<BO.TaskInList>();
+
+                            int tempID = int.Parse(getString("enter id of previous task or endl"));
+                            while (tempID != null)
+                            {
+                                BO.TaskInList temp = new BO.TaskInList()
+                                {
+                                    Id = tempID,
+                                    Description = s_bl.Task.Read(tempID).Description,
+                                    Name = s_bl.Task.Read(tempID).Name,
+                                    Status = (BO.Status)s_bl.Task.Read(tempID).Status
+                                };
+                                prevTasks.Add(temp);
+                                tempID = int.Parse(getString("enter id of previous task or endl"));
+                            }
+
+                            BO.Task task = new BO.Task()
+                            {
+                                Id = id,
+                                Name = name,
+                                Description = descreption,
+                                Creation = DateTime.Now,
+                                Status = BO.Status.Unscheduled,
+                                Links = prevTasks,
+
+                                Duration = duration,
+                                Product = product,
+                                Notes = notes,
+                                Difficulty = difficulty
+                            };
+
+
+                            int newID = s_bl.Task.Add(task);
+                            Console.WriteLine(newID);
+                            break;
+                        case "delete":
+                            int idToDelete = int.Parse(getString("enter the id of the task to delete"));
+                            s_bl.Task.Delete(idToDelete);
+                            //s_bl.Task.Read(idToDelete); //התוצאה צריכה להיות שגיאה שנתפסת
+                            break;
+                        case "read":
+                            int idToRead = int.Parse(getString("enter the id of the task to read"));
+                            Console.WriteLine(s_bl.Task.Read(idToRead));
+                            break;
+                        ///??
+                        case "read all":
+                            foreach (var item in s_bl.Task.ReadAll())
+                                Console.WriteLine(item);
+
+                            break;
+                        case "update":
+                            id = int.Parse(getString("enter id"));
+                            name = (getString("enter Name")), descreption = getString("enter descreption"),
+                            product = getString("enter ptodict"), notes = getString("enter notes");
+                            duration = TimeSpan.TryParse(getString("enter duration"));
+                            //duratuin
+                            difficulty = (Level)int.Parse(getString("enter level"));
+
+                            prevTasks = new List<BO.TaskInList>();
+
+                            tempID = int.Parse(getString("enter id of previous task or endl"));
+                            while (tempID != null)
+                            {
+                                BO.TaskInList temp = new BO.TaskInList()
+                                {
+                                    Id = tempID,
+                                    Description = s_bl.Task.Read(tempID).Description,
+                                    Name = s_bl.Task.Read(tempID).Name,
+                                    Status = (BO.Status)s_bl.Task.Read(tempID).Status
+                                };
+                                prevTasks.Add(temp);
+                                tempID = int.Parse(getString("enter id of previous task or endl"));
+                            }
+
+                            BO.Task taskToUpdate = new BO.Task()
+                            {
+                                Id = id,
+                                Name = name,
+                                Description = descreption,
+                                Creation = DateTime.Now,
+                                Status = BO.Status.Unscheduled,
+                                Links = prevTasks,
+
+                                Duration = duration,
+                                Product = product,
+                                Notes = notes,
+                                Difficulty = difficulty
+                            };
+
+                            s_bl.Task.Update(taskToUpdate);
+                            //check:
+                            Console.WriteLine(s_bl.Task.Read(taskToUpdate.Id));
+                            break;
+                        case "update date":
+                            id = int.Parse(getString("enter id of task to update date"));
+                            DateTime date = DateTime.Parse(getString("enter the new date"));
+                            s_bl.Task.UpdateDate(id, date);
+                            //check:
+                            Console.WriteLine(s_bl.Task.Read(id));
+                            break;
+                        case "main menu": return;
+                        default:
+                            {
+                                Console.WriteLine("doesnt valid input, please enter again");
+                                choice = Console.ReadLine();
+                                break;
+                            }
+                    }
+
+                }
+                catch(BO.BlAlreadyExistsException messege)
+                {
+                    Console.WriteLine("BlAlreadyExistsException\n");
+                    Console.WriteLine(messege + "\n");
+                    //inner exeption?
+                }
+                catch(BO.BlDoesNotExistException messege)
+                {
+                    Console.WriteLine("BlDoesNotExistException\n");
+                    Console.WriteLine(messege + "\n");
+                    //inner exeption?
+                }
+                catch(BO.BlForbiddenInThisStage messege)
+                {
+                    Console.WriteLine("BlForbiddenInThisStage\n");
+                    Console.WriteLine(messege + "\n");
+                    //inner exeption?
+                }
+                catch(BO.BlInformationIsntValid messege)
+                {
+                    Console.WriteLine("BlInformationIsntValid\n");
+                    Console.WriteLine(messege + "\n");
+                    //inner exeption?
+                }
+                //צריך את הזריקה הזו?
+                catch(BO.BlXMLFileLoadCreateException messege)
+                {
+                    Console.WriteLine("BlXMLFileLoadCreateException\n");
+                    Console.WriteLine(messege + "\n");
+                    //inner exeption?
+                }
+            } while (choice != "main menu");
+
+            return;
+            
+        }
+        private static void engineerMenu()
+        {
+            string? choice;
+
+            do
+            {
+                Console.WriteLine("enter your choice: \nadd\ndelete\nread\nread all\nupdate\nmain menu");
+                choice = Console.ReadLine();
+
+
+                switch (choice)
+                {
+                    case "add":
+                        BO.Engineer engineer = new BO.Engineer()
+                        {
+                            Id = int.Parse(getString("enter id\n")),
+                            Name = getString("enter name"),
+                            Email = getString("enter email"),
+                            Level= (Level)int.Parse(getString("enter level")),
+                            Cost = double.Parse(getString("enter cost"))
+                            //TaskInEngineer?
+                        };
+                        Console.WriteLine(s_bl.Engineer.Add(engineer));
+                        break;
+                    case "delete":
+                        int id = int.Parse(getString("enter id to delete"));
+                        s_bl.Engineer.Delete(id);
+                        //check
+                        s_bl.Engineer.Read(id);
+                        break;
+                    case "read":
+                        id = int.Parse(getString("enter id to read"));
+                        Console.WriteLine(s_bl.Engineer.Read(id));
+                        break;
+                    case "read all":
+                        foreach (var item in s_bl.Engineer.ReadAll())
+                            Console.WriteLine(item);
+                        break;
+                    case "update":
+                        BO.Engineer eng = new BO.Engineer()
+                        {
+                            Id = int.Parse(getString("enter id\n")),
+                            Name = getString("enter name"),
+                            Email = getString("enter email"),
+                            Level = (Level)int.Parse(getString("enter level")),
+                            Cost = double.Parse(getString("enter cost"))
+                            //TaskInEngineer?
+                        };
+                        s_bl.Engineer.Update(eng);
+                        //check:
+                        s_bl.Engineer.Read(eng.Id);
+                        break;
+                    case "main menu": return;
+                    default:
+                        {
+                            Console.WriteLine("doesnt valid input, please enter again");
+                            choice = Console.ReadLine();
+                            return;
+                        }
+                }
+            } while (choice != "main menu");
+
+            return;
+        }
+
+
+        public static string getString(string s)
+        {
+            Console.WriteLine(s);
+            return Console.ReadLine();
+        }
+
+
     }
+
+
 }
