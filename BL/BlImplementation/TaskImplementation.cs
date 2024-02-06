@@ -1,7 +1,5 @@
 ﻿namespace BlImplementation;
 using BlApi;
-using System.Collections.Generic;
-using System.Security.Cryptography;
 
 internal class TaskImplementation : ITask
 {
@@ -232,7 +230,7 @@ internal class TaskImplementation : ITask
         }
 
         //if the tasks are schedualed and planned to be finished before the date:
-        _dal.Task.Update(doTask with { PlanToStart = date });
+        _dal.Task.Update(doTask with { PlanToStart = date });       
     }
 
     #region private methods for help
@@ -288,8 +286,9 @@ internal class TaskImplementation : ITask
     }
     #endregion
 
-    private DateTime scheduleTask(int id)
+    internal DateTime SuggestStartDate(int id)
     {
+        if (_dal.StartDate == null) throw new BO.BlDoesNotExistException("Start date of the project is not set yet");
         DO.Task task = _dal.Task.Read(id) ?? throw new BO.BlDoesNotExistException($"Task with ID={id} does not exist");
         IEnumerable<DO.Link> links = _dal.Link.ReadAll(link => link.NextTask == id);    //getting all the tasks that our task depends on
         if (links == null) return (DateTime)_dal.StartDate;    //if the task does not depend on any task, it can start when the project starts

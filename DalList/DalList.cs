@@ -16,4 +16,6 @@ sealed internal class DalList : IDal
     public DateTime? FinishDate { get => Instance.FinishDate; set => Instance.FinishDate=value; }
 
     private DalList() { }
+
+    public void saveStartandFinishDatestoFile(string data_config_xml, string elemName, DateTime toSave) { }
 }

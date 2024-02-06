@@ -15,7 +15,7 @@ sealed internal class DalXml : IDal
     public DateTime? StartDate { get => Instance.StartDate; set => Instance.StartDate=value; }
     public DateTime? FinishDate { get => Instance.FinishDate; set => Instance.FinishDate=value; }
 
-    public void saveStartandFinishDatestoFile(string data_config_xml, string elemName, DateTime toSave)
+    public void saveStartandFinishDatestoFile(string data_config_xml, string elemName, DateTime elemValue)
     {
         //ליצור XELEMENT עם שם התגית להיות תאריך התחלה, והתוכן האריך עצמו ואז SAVE
 
@@ -23,7 +23,7 @@ sealed internal class DalXml : IDal
         DateTime? date = root.ToDateTimeNullable(elemName);
         //checking if the date is already set
         if (date != null) throw new DO.DalAlreadyExistsException($"The date is already set to {date}");
-        root.Element(elemName)?.SetValue(toSave);
+        root.Element(elemName)?.SetValue(elemValue);
         XMLTools.SaveListToXMLElement(root, data_config_xml);
     }
 }
