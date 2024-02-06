@@ -92,7 +92,7 @@ namespace BlTest
                         case "delete":
                             int idToDelete = int.Parse(getString("enter the id of the task to delete"));
                             s_bl.Task.Delete(idToDelete);
-                            //s_bl.Task.Read(idToDelete); //התוצאה צריכה להיות שגיאה שנתפסת
+                            s_bl.Task.Read(idToDelete); //התוצאה צריכה להיות שגיאה שנתפסת
                             break;
                         case "read":
                             int idToRead = int.Parse(getString("enter the id of the task to read"));
@@ -106,9 +106,9 @@ namespace BlTest
                             break;
                         case "update":
                             id = int.Parse(getString("enter id"));
-                            name = (getString("enter Name")), descreption = getString("enter descreption"),
-                            product = getString("enter ptodict"), notes = getString("enter notes");
-                            duration = TimeSpan.TryParse(getString("enter duration"));
+                            name = (getString("enter Name")); descreption = getString("enter descreption");
+                            product = getString("enter ptodict"); notes = getString("enter notes");
+                            duration = TimeSpan.Parse(getString("enter duration"));
                             //duratuin
                             difficulty = (Level)int.Parse(getString("enter level"));
 
@@ -166,34 +166,24 @@ namespace BlTest
                 }
                 catch(BO.BlAlreadyExistsException messege)
                 {
-                    Console.WriteLine("BlAlreadyExistsException\n");
-                    Console.WriteLine(messege + "\n");
-                    //inner exeption?
+                   printEx(messege);
                 }
                 catch(BO.BlDoesNotExistException messege)
                 {
-                    Console.WriteLine("BlDoesNotExistException\n");
-                    Console.WriteLine(messege + "\n");
-                    //inner exeption?
+                    printEx(messege);
                 }
                 catch(BO.BlForbiddenInThisStage messege)
                 {
-                    Console.WriteLine("BlForbiddenInThisStage\n");
-                    Console.WriteLine(messege + "\n");
-                    //inner exeption?
+                    printEx(messege);
                 }
-                catch(BO.BlInformationIsntValid messege)
+                catch (BO.BlInformationIsntValid messege)
                 {
-                    Console.WriteLine("BlInformationIsntValid\n");
-                    Console.WriteLine(messege + "\n");
-                    //inner exeption?
+                    printEx(messege);
                 }
                 //צריך את הזריקה הזו?
-                catch(BO.BlXMLFileLoadCreateException messege)
+                catch (BO.BlXMLFileLoadCreateException messege)
                 {
-                    Console.WriteLine("BlXMLFileLoadCreateException\n");
-                    Console.WriteLine(messege + "\n");
-                    //inner exeption?
+                    printEx(messege);
                 }
             } while (choice != "main menu");
 
@@ -209,67 +199,99 @@ namespace BlTest
                 Console.WriteLine("enter your choice: \nadd\ndelete\nread\nread all\nupdate\nmain menu");
                 choice = Console.ReadLine();
 
-
-                switch (choice)
+                try
                 {
-                    case "add":
-                        BO.Engineer engineer = new BO.Engineer()
-                        {
-                            Id = int.Parse(getString("enter id\n")),
-                            Name = getString("enter name"),
-                            Email = getString("enter email"),
-                            Level= (Level)int.Parse(getString("enter level")),
-                            Cost = double.Parse(getString("enter cost"))
-                            //TaskInEngineer?
-                        };
-                        Console.WriteLine(s_bl.Engineer.Add(engineer));
-                        break;
-                    case "delete":
-                        int id = int.Parse(getString("enter id to delete"));
-                        s_bl.Engineer.Delete(id);
-                        //check
-                        s_bl.Engineer.Read(id);
-                        break;
-                    case "read":
-                        id = int.Parse(getString("enter id to read"));
-                        Console.WriteLine(s_bl.Engineer.Read(id));
-                        break;
-                    case "read all":
-                        foreach (var item in s_bl.Engineer.ReadAll())
-                            Console.WriteLine(item);
-                        break;
-                    case "update":
-                        BO.Engineer eng = new BO.Engineer()
-                        {
-                            Id = int.Parse(getString("enter id\n")),
-                            Name = getString("enter name"),
-                            Email = getString("enter email"),
-                            Level = (Level)int.Parse(getString("enter level")),
-                            Cost = double.Parse(getString("enter cost"))
-                            //TaskInEngineer?
-                        };
-                        s_bl.Engineer.Update(eng);
-                        //check:
-                        s_bl.Engineer.Read(eng.Id);
-                        break;
-                    case "main menu": return;
-                    default:
-                        {
-                            Console.WriteLine("doesnt valid input, please enter again");
-                            choice = Console.ReadLine();
-                            return;
-                        }
+                    switch (choice)
+                    {
+                        case "add":
+                            BO.Engineer engineer = new BO.Engineer()
+                            {
+                                Id = int.Parse(getString("enter id\n")),
+                                Name = getString("enter name"),
+                                Email = getString("enter email"),
+                                Level = (Level)int.Parse(getString("enter level")),
+                                Cost = double.Parse(getString("enter cost"))
+                                //TaskInEngineer?
+                            };
+                            Console.WriteLine(s_bl.Engineer.Add(engineer));
+                            break;
+                        case "delete":
+                            int id = int.Parse(getString("enter id to delete"));
+                            s_bl.Engineer.Delete(id);
+                            //check
+                            s_bl.Engineer.Read(id);
+                            break;
+                        case "read":
+                            id = int.Parse(getString("enter id to read"));
+                            Console.WriteLine(s_bl.Engineer.Read(id));
+                            break;
+                        case "read all":
+                            foreach (var item in s_bl.Engineer.ReadAll())
+                                Console.WriteLine(item);
+                            break;
+                        case "update":
+                            BO.Engineer eng = new BO.Engineer()
+                            {
+                                Id = int.Parse(getString("enter id\n")),
+                                Name = getString("enter name"),
+                                Email = getString("enter email"),
+                                Level = (Level)int.Parse(getString("enter level")),
+                                Cost = double.Parse(getString("enter cost"))
+                                //TaskInEngineer?
+                            };
+                            s_bl.Engineer.Update(eng);
+                            //check:
+                            s_bl.Engineer.Read(eng.Id);
+                            break;
+                        case "main menu": return;
+                        default:
+                            {
+                                Console.WriteLine("doesnt valid input, please enter again");
+                                choice = Console.ReadLine();
+                                return;
+                            }
+                    }
                 }
+                catch (BO.BlAlreadyExistsException messege)
+                {
+                    printEx(messege);
+                }
+                catch (BO.BlDoesNotExistException messege)
+                {
+                    printEx(messege);
+                }
+                catch (BO.BlForbiddenInThisStage messege)
+                {
+                    printEx(messege);
+                }
+                catch (BO.BlInformationIsntValid messege)
+                {
+                    printEx(messege);
+                }
+                //צריך את הזריקה הזו?
+                catch (BO.BlXMLFileLoadCreateException messege)
+                {
+                    printEx(messege);
+                }
+
             } while (choice != "main menu");
 
             return;
         }
 
 
-        public static string getString(string s)
+        private static string getString(string s)
         {
             Console.WriteLine(s);
             return Console.ReadLine();
+        }
+
+        public static void printEx(Exception messege)
+        {
+            if (messege.InnerException != null)
+                Console.WriteLine("Dal Exeption:\n");
+            Console.WriteLine(messege.GetType() + "\n");
+            Console.WriteLine(messege + "\n");
         }
 
 
