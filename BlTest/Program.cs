@@ -29,6 +29,10 @@ namespace BlTest
 
 
             } while (choice != "exit");
+
+            DateTime startingProject = DateTime.Parse(getString("enter date of start to the project"));
+            
+
             
         }
         private static void taskMenu()
