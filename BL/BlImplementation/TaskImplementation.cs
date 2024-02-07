@@ -7,7 +7,7 @@ internal class TaskImplementation : ITask
 
     public int Add(BO.Task task)
     {
-       
+
         if (Factory.Get().getStage() != (BO.Stage.Planning)) throw new BO.BlForbiddenInThisStage("Can not add tasks after scheduling the project");
 
         DO.Task doTask = new DO.Task(task.Id, task.Name, task.Description, (DO.Level)task.Difficulty);
@@ -260,6 +260,8 @@ internal class TaskImplementation : ITask
     /// <returns></returns>
     private DateTime? getPlanToFinish(DO.Task task)
     {
+        if (task.PlanToStart == null) return null;
+        if (task.TimeForTask == null) return null;
         return (task.PlanToStart + task.TimeForTask);
     }
     /// <summary>
@@ -290,17 +292,19 @@ internal class TaskImplementation : ITask
     }
     #endregion
 
-    public DateTime SuggestStartDate(int id)
+    public DateTime? SuggestStartDate(int id)
     {
-        if (_dal.StartDate == null) throw new BO.BlDoesNotExistException("Start date of the project is not set yet");
+        if (Factory.Get().getStage() == BO.Stage.Planning) throw new BO.BlDoesNotExistException("Start date of the project is not set yet");
         DO.Task task = _dal.Task.Read(id) ?? throw new BO.BlDoesNotExistException($"Task with ID={id} does not exist");
         IEnumerable<DO.Link> links = _dal.Link.ReadAll(link => link.NextTask == id);    //getting all the tasks that our task depends on
-        if (links == null) return (DateTime)_dal.StartDate;    //if the task does not depend on any task, it can start when the project starts
+        if (links == null) return _dal.getStartOrFinishDateFromXml("startDate");    //if the task does not depend on any task, it can start when the project starts
 
-        DateTime suggestedDate = links.Select
+        IEnumerable<DateTime?> dates = links.Select
             (link => getPlanToFinish(_dal.Task.Read(link.PrevTask)  //making a collection of the PlanToFinish dates of the tasks
-            ?? throw new BO.BlDoesNotExistException($"Task with ID={id} does not exist")))  //if one of the tasks doesn't have a 
-            .Max() ?? (DateTime)_dal.StartDate!; //selecting the latest date in the collection and assigning it to the suggestedDate
+            ?? throw new BO.BlDoesNotExistException($"Task with ID={id} does not exist")));  //if one of the tasks doesn't have a startDate yet
+
+        if (dates.Any(date => date == null)) return null;   //if one of the tasks doesn't have a startDate yet
+        DateTime? suggestedDate = dates.Max();
 
         return suggestedDate;
     }
