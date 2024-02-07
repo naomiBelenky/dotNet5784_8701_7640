@@ -8,8 +8,10 @@ public interface IBl
     public IMilestone MileStone { get; }
 
     /// <summary>
-    /// the stage of the progect (Planning, MidScheduling, Execution)
+    /// return the stage of the progect (Planning or Execution)
     /// </summary>
-    public BO.Stage StageOfProject { get; set; }
-    public void schedule();
+    /// 
+
+    public BO.Stage getStage();
+    public void automaticSchedule();
 }

@@ -7,8 +7,9 @@ internal class TaskImplementation : ITask
 
     public int Add(BO.Task task)
     {
-        if (Factory.Get().StageOfProject != (BO.Stage.Planning)) throw new BO.BlForbiddenInThisStage("Can not add tasks after scheduling the project");
-        //לבדוק אם זה שלב שמותר להוסיף משימה
+       
+        if (Factory.Get().getStage() != (BO.Stage.Planning)) throw new BO.BlForbiddenInThisStage("Can not add tasks after scheduling the project");
+
         DO.Task doTask = new DO.Task(task.Id, task.Name, task.Description, (DO.Level)task.Difficulty);
         try
         {
@@ -36,7 +37,7 @@ internal class TaskImplementation : ITask
 
     public void Delete(int id)
     {
-        if (Factory.Get().StageOfProject != (BO.Stage.Planning)) throw new BO.BlForbiddenInThisStage("Can not delete tasks after scheduling the project");
+        if (Factory.Get().getStage() != (BO.Stage.Planning)) throw new BO.BlForbiddenInThisStage("Can not delete tasks after scheduling the project");
         //checking if there is another task that depended in this task
         DO.Link? tempLink = _dal.Link.Read(item => item.PrevTask == id);
         if (tempLink != null)
@@ -232,6 +233,8 @@ internal class TaskImplementation : ITask
 
         //if the tasks are schedualed and planned to be finished before the date:
         _dal.Task.Update(doTask with { PlanToStart = date });
+
+
     }
 
     #region private methods for help

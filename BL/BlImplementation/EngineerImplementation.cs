@@ -136,7 +136,7 @@ internal class EngineerImplementation : IEngineer
 
             if (engineer.Task is not null)
             {
-                if (Factory.Get().StageOfProject == (BO.Stage.Planning)) throw new BO.BlForbiddenInThisStage("Can not assign a task to an engineer in the planning stage");
+                if (Factory.Get().getStage() == (BO.Stage.Planning)) throw new BO.BlForbiddenInThisStage("Can not assign a task to an engineer in the planning stage");
                 
                 var task = _dal.Task.Read(task => task.TaskID == engineer.Task!.Id) //reading the task that the engineer is responsible for
                     ?? throw new BO.BlDoesNotExistException($"task with id={engineer.Task.Id} does not exist");
