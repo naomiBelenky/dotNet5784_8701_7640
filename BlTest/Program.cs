@@ -28,7 +28,11 @@ namespace BlTest
                     {
                         case "task": taskMenu(); break;
                         case "engineer": engineerMenu(); break;
-                        case "automaticSchedule": s_bl.automaticSchedule(); break;
+                        case "automaticSchedule":
+                            DateTime startOfProject = DateTime.Parse(getString("enter date of start of the project"));
+                            DalApi.Factory.Get.saveStartandFinishDatestoFile("data-config.xml", "startDate", startOfProject);
+                            s_bl.automaticSchedule();
+                            break;
                     }
                 }
                 catch (BO.BlAlreadyExistsException messege)
@@ -51,13 +55,15 @@ namespace BlTest
                 {
                     printEx(messege);
                 }
+                catch(Exception)
+                { 
+
+                }
                
 
             } while (choice != "exit");
 
-            DateTime startOfProject = DateTime.Parse(getString("enter date of start of the project"));
-            DalApi.Factory.Get.saveStartandFinishDatestoFile("data-config.xml", "startDate", startOfProject);
-            s_bl.automaticSchedule();
+           
         }
 
         private static void taskMenu()
@@ -82,15 +88,21 @@ namespace BlTest
 
                     List<BO.TaskInList> prevTasks = new List<BO.TaskInList>();
 
-                    int tempID = int.Parse(getString("enter id of previous task or endl"));
-                    while (tempID != null)
+                    int tempID = Convert.ToInt16(getString("enter id of previous task or endl"));
+                    while (tempID != 0) 
                     {
+                        BO.Task? fullTask = s_bl.Task.Read(tempID);
+                        if (fullTask == null) 
+                        {
+                            throw new BO.BlDoesNotExistException($"Task with ID={tempID} does Not exist");
+                        }
+
                         BO.TaskInList temp = new BO.TaskInList()
                         {
                             Id = tempID,
-                            Description = s_bl.Task.Read(tempID).Description,
-                            Name = s_bl.Task.Read(tempID).Name,
-                            Status = (BO.Status)s_bl.Task.Read(tempID).Status
+                            Description = fullTask.Description,
+                            Name = fullTask.Name,
+                            Status = (BO.Status)fullTask.Status
                         };
                         prevTasks.Add(temp);
                         tempID = int.Parse(getString("enter id of previous task or endl"));
@@ -118,7 +130,7 @@ namespace BlTest
                 case "delete":
                     int idToDelete = int.Parse(getString("enter the id of the task to delete"));
                     s_bl.Task.Delete(idToDelete);
-                    s_bl.Task.Read(idToDelete); //התוצאה צריכה להיות שגיאה שנתפסת
+                    //s_bl.Task.Read(idToDelete); //התוצאה צריכה להיות שגיאה שנתפסת
                     break;
                 case "read":
                     int idToRead = int.Parse(getString("enter the id of the task to read"));
@@ -262,9 +274,10 @@ namespace BlTest
         public static void printEx(Exception messege)
         {
             if (messege.InnerException != null)
-                Console.WriteLine("Dal Exeption:\n");
-            Console.WriteLine(messege.GetType() + "\n");
-            Console.WriteLine(messege + "\n");
+                Console.WriteLine("Dal Exception:\n");
+            //Console.WriteLine(messege.GetType() + "\n");
+            //Console.WriteLine(messege + "\n");
+            Console.WriteLine(messege.Message);
         }
 
 
