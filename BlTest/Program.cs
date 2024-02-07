@@ -10,7 +10,7 @@ namespace BlTest
 
         static void Main(string[] args)
         {
-            Console.Write("Would you like to create Initial data? (Y/N)");
+            Console.Write("Would you like to create Initial data? (Y/N) ");
             string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input");
             if (ans == "Y")
                 DalTest.Initialization.Do();
@@ -73,17 +73,16 @@ namespace BlTest
                 //?
                 case "add":
 
-                    int id = int.Parse(getString("enter id"));
-                    string? name = (getString("enter Name")), descreption = getString("enter descreption"),
-                        product = getString("enter ptodict"), notes = getString("enter notes");
+                    string? name = (getString("enter Name")), descreption = getString("enter description"),
+                        product = getString("enter product"), notes = getString("enter notes");
                     TimeSpan? duration = TimeSpan.Parse(getString("enter duration"));
                     //duratuin
                     Level difficulty = (Level)int.Parse(getString("enter level"));
 
                     List<BO.TaskInList> prevTasks = new List<BO.TaskInList>();
 
-                    int tempID = int.Parse(getString("enter id of previous task or endl"));
-                    while (tempID != null)
+                    int tempID = int.Parse(getString("enter id of previous task or 0 to finish"));
+                    while (tempID != 0)
                     {
                         BO.TaskInList temp = new BO.TaskInList()
                         {
@@ -93,12 +92,11 @@ namespace BlTest
                             Status = (BO.Status)s_bl.Task.Read(tempID).Status
                         };
                         prevTasks.Add(temp);
-                        tempID = int.Parse(getString("enter id of previous task or endl"));
+                        tempID = Convert.ToInt16(getString("enter id of previous task or 0 to finish"));
                     }
 
                     BO.Task task = new BO.Task()
                     {
-                        Id = id,
                         Name = name,
                         Description = descreption,
                         Creation = DateTime.Now,
@@ -131,7 +129,7 @@ namespace BlTest
 
                     break;
                 case "update":
-                    id = int.Parse(getString("enter id"));
+                    int id = int.Parse(getString("enter id"));
                     name = (getString("enter Name")); descreption = getString("enter descreption");
                     product = getString("enter ptodict"); notes = getString("enter notes");
                     duration = TimeSpan.Parse(getString("enter duration"));
@@ -140,8 +138,8 @@ namespace BlTest
 
                     prevTasks = new List<BO.TaskInList>();
 
-                    tempID = int.Parse(getString("enter id of previous task or endl"));
-                    while (tempID != null)
+                    tempID = int.Parse(getString("enter id of previous task or 0 to finish"));
+                    while (tempID != 0)
                     {
                         BO.TaskInList temp = new BO.TaskInList()
                         {
@@ -151,7 +149,7 @@ namespace BlTest
                             Status = (BO.Status)s_bl.Task.Read(tempID).Status
                         };
                         prevTasks.Add(temp);
-                        tempID = int.Parse(getString("enter id of previous task or endl"));
+                        tempID = int.Parse(getString("enter id of previous task or 0 to finish"));
                     }
 
                     BO.Task taskToUpdate = new BO.Task()

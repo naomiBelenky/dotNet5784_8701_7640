@@ -16,35 +16,39 @@ public static class Initialization
 
     private static void createTasks()
     {
-        DateTime[] dates = new DateTime[20];
+        DateTime[] dates = new DateTime[20];    //an array with random dates
+        TimeSpan[] duration = new TimeSpan[20];    //an array with random numbers of days
         Random rand = new Random(DateTime.Now.Millisecond);
         for (int i = 0; i < 20; i++)
         {
             int day = rand.Next(1, 30);
             int month = rand.Next(8, 11);
             dates[i] = new DateTime(2023, month, day);
+
+            int days = rand.Next(1, 7);
+            duration[i] = new TimeSpan(days, 0, 0, 0);
         }
         Task[] tasks = new Task[20];
-        tasks[0] = new Task(0, "Optimization", "Improve, reduce costs", (Level)rand.Next(0, 5), false, dates[0]);
-        tasks[1] = new Task(0, "Automation", "Design automated solutions", (Level)rand.Next(0, 5), false, dates[1]);
-        tasks[2] = new Task(0, "Simulation", "Virtual models for testing", (Level)rand.Next(0, 5), false, dates[2]);
-        tasks[3] = new Task(0, "Algorithm Development", "Craft complex algorithms", (Level)rand.Next(0, 5), false, dates[3]);
-        tasks[4] = new Task(0, "Prototyping", "Build early-stage models", (Level)rand.Next(0, 5), false, new DateTime(2023, 07, 01));
-        tasks[5] = new Task(0, "Network Infrastructure", "Manage data communication networks", (Level)rand.Next(0,5), false, dates[5]);
-        tasks[6] = new Task(0, "Data Analysis", "Extract insights from datasets", (Level)rand.Next(0, 5), false, dates[6]);
-        tasks[7] = new Task(0, "System Integration", "Integrate for improved functionality", (Level)rand.Next(0, 5), false, dates[7]);
-        tasks[8] = new Task(0, "Robotics", "Program robotic systems", (Level)rand.Next(0, 5), false, dates[8]);
-        tasks[9] = new Task(0, "Quality Assurance", "Ensure product reliability", (Level)rand.Next(0, 5), false, dates[9]);
-        tasks[10] = new Task(0, "Security Engineering", "Protect systems, data", (Level)rand.Next(0, 5), false, dates[10]);
-        tasks[11] = new Task(0, "Energy Management", "Design efficient energy solutions", (Level)rand.Next(0, 5), false, dates[11]);
-        tasks[12] = new Task(0, "Embedded Systems", "Develop dedicated systems", (Level)rand.Next(0, 5), false, dates[12]);
-        tasks[13] = new Task(0, "AR Development", "Create AR applications", (Level)rand.Next(0, 5), false, new DateTime(2023, 12, 04));
-        tasks[14] = new Task(0, "UI Design", "Design visual elements", (Level)rand.Next(0, 5), false, dates[14]);
-        tasks[15] = new Task(0, "Machine Learning Integration", "Integrate machine learning", (Level)rand.Next(0, 5), false, dates[15]);
-        tasks[16] = new Task(0, "Structural Analysis", "Analyze structural integrity", (Level)rand.Next(0, 5), false, dates[16]);
-        tasks[17] = new Task(0, "Control Systems Engineering", "Design dynamic control", (Level)rand.Next(0, 5), false, dates[17]);
-        tasks[18] = new Task(0, "CAD Modeling", "Create 3D models", (Level)rand.Next(0, 5), false, new DateTime(2023, 07, 25));
-        tasks[19] = new Task(0, "Sustainable Design", "Eco-friendly project design", (Level)rand.Next(0, 5), false, new DateTime(2023, 12, 18));
+        tasks[0] = new Task(0, "Optimization", "Improve, reduce costs", (Level)rand.Next(0, 5), false, dates[0]) with { TimeForTask = duration[0] };
+        tasks[1] = new Task(0, "Automation", "Design automated solutions", (Level)rand.Next(0, 5), false, dates[1]) with { TimeForTask = duration[1] };
+        tasks[2] = new Task(0, "Simulation", "Virtual models for testing", (Level)rand.Next(0, 5), false, dates[2]) with { TimeForTask = duration[2] };
+        tasks[3] = new Task(0, "Algorithm Development", "Craft complex algorithms", (Level)rand.Next(0, 5), false, dates[3]) with { TimeForTask = duration[3] };
+        tasks[4] = new Task(0, "Prototyping", "Build early-stage models", (Level)rand.Next(0, 5), false, new DateTime(2023, 07, 01)) with { TimeForTask = duration[4] };
+        tasks[5] = new Task(0, "Network Infrastructure", "Manage data communication networks", (Level)rand.Next(0,5), false, dates[5]) with { TimeForTask = duration[5] };
+        tasks[6] = new Task(0, "Data Analysis", "Extract insights from datasets", (Level)rand.Next(0, 5), false, dates[6]) with { TimeForTask = duration[6] };
+        tasks[7] = new Task(0, "System Integration", "Integrate for improved functionality", (Level)rand.Next(0, 5), false, dates[7]) with { TimeForTask = duration[7] };
+        tasks[8] = new Task(0, "Robotics", "Program robotic systems", (Level)rand.Next(0, 5), false, dates[8]) with { TimeForTask = duration[8] };
+        tasks[9] = new Task(0, "Quality Assurance", "Ensure product reliability", (Level)rand.Next(0, 5), false, dates[9]) with { TimeForTask = duration[9] };
+        tasks[10] = new Task(0, "Security Engineering", "Protect systems, data", (Level)rand.Next(0, 5), false, dates[10]) with { TimeForTask = duration[10] };
+        tasks[11] = new Task(0, "Energy Management", "Design efficient energy solutions", (Level)rand.Next(0, 5), false, dates[11]) with { TimeForTask = duration[11] };
+        tasks[12] = new Task(0, "Embedded Systems", "Develop dedicated systems", (Level)rand.Next(0, 5), false, dates[12]) with { TimeForTask = duration[12] };
+        tasks[13] = new Task(0, "AR Development", "Create AR applications", (Level)rand.Next(0, 5), false, new DateTime(2023, 12, 04)) with { TimeForTask = duration[13] };
+        tasks[14] = new Task(0, "UI Design", "Design visual elements", (Level)rand.Next(0, 5), false, dates[14]) with { TimeForTask = duration[14] };
+        tasks[15] = new Task(0, "Machine Learning Integration", "Integrate machine learning", (Level)rand.Next(0, 5), false, dates[15]) with { TimeForTask = duration[15] };
+        tasks[16] = new Task(0, "Structural Analysis", "Analyze structural integrity", (Level)rand.Next(0, 5), false, dates[16]) with { TimeForTask = duration[16] };
+        tasks[17] = new Task(0, "Control Systems Engineering", "Design dynamic control", (Level)rand.Next(0, 5), false, dates[17]) with { TimeForTask = duration[17] };
+        tasks[18] = new Task(0, "CAD Modeling", "Create 3D models", (Level)rand.Next(0, 5), false, new DateTime(2023, 07, 25)) with { TimeForTask = duration[18] };
+        tasks[19] = new Task(0, "Sustainable Design", "Eco-friendly project design", (Level)rand.Next(0, 5), false, new DateTime(2023, 12, 18)) with { TimeForTask = duration[19] };
 
         for (int i = 0; i < 20; i++)
         {

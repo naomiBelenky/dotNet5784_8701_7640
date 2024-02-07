@@ -10,21 +10,22 @@ internal class TaskImplementation : ITask
 
         if (Factory.Get().getStage() != (BO.Stage.Planning)) throw new BO.BlForbiddenInThisStage("Can not add tasks after scheduling the project");
 
-        DO.Task doTask = new DO.Task(task.Id, task.Name, task.Description, (DO.Level)task.Difficulty);
+        DO.Task doTask = new DO.Task(task.Id, task.Name, task.Description, (DO.Level)task.Difficulty) with { TimeForTask = task.Duration };
         try
         {
-            if (task.Id <= 0) throw new BO.BlInformationIsntValid("id is not valid");
+            if (task.Id < 0) throw new BO.BlInformationIsntValid("id is not valid");
             if (task.Name == "") throw new BO.BlInformationIsntValid("name is not valid");
+            
+
+            int id = _dal.Task.Create(doTask);  //if the data is valid, creating the task in the data layer
             if (task.Links != null) //if there are dependent tasks, adding them to the list of links
             {
                 foreach (BO.TaskInList item in task.Links)
                 {
-                    DO.Link link = new DO.Link(0, item.Id, task.Id);
+                    DO.Link link = new DO.Link(0, item.Id, id);
                     _dal.Link.Create(link);
                 }
             }
-
-            int id = _dal.Task.Create(doTask);  //if the data is valid, creating the task in the data layer
             return id;
         }
         catch (DO.DalAlreadyExistsException message)
@@ -80,7 +81,7 @@ internal class TaskImplementation : ITask
             Notes = doTask.Notes,
 
         };
-        if (doTask.EngineerID != 0)
+        if (doTask.EngineerID != null)
         {
             task.Engineer = new BO.EngineerInTask    //filling the info about the engineer working on the task
             {
