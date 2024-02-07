@@ -16,7 +16,7 @@ internal class Bl : IBl
 
     public Stage getStage()
     {
-        XElement root = XMLTools.LoadListFromXMLElement("data_config.xml");
+        XElement root = XMLTools.LoadListFromXMLElement("data-config.xml");
         DateTime? date = root.ToDateTimeNullable("startDate");
 
         if (date == null)

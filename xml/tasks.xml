@@ -200,7 +200,7 @@
     <TaskID>15</TaskID>
     <Name>UI Design</Name>
     <Description>Design visual elements</Description>
-    <Difficulty>Intermediate</Difficulty>
+    <Difficulty>AdvancedBeginner</Difficulty>
     <Milestone>false</Milestone>
     <Creation>2023-08-02T00:00:00</Creation>
     <PlanToStart xsi:nil="true" />

@@ -142,9 +142,10 @@ internal class TaskImplementation : ITask
             int counterDoLinks = (_dal.Link.ReadAll(link => link.NextTask == task.Id).ToList().Count);
 
             //Check whether the schedule has already been set
+            //Check which stage of the project are we in
             DO.Task? tempTask = _dal.Task.Read(task.Id);
             if (tempTask != null)
-                if (tempTask.PlanToStart != null)
+                if (Factory.Get().getStage() == BO.Stage.Execution) 
                 {
                     //If the schedule has already been set, check that only the fields allowed for update have been updated
                     if (task.Id != tempTask.TaskID || (int)task.Difficulty != (int)tempTask.Difficulty ||/*task.Milestone!=tempTask.Milestone||*/
