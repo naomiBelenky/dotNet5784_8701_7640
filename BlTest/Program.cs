@@ -1,4 +1,5 @@
-﻿using BO;
+﻿using BlApi;
+using BO;
 using DalApi;
 
 namespace BlTest
@@ -18,7 +19,7 @@ namespace BlTest
             do
             {
 
-                Console.WriteLine("enter your choice: \nexit\ntask\nengineer");
+                Console.WriteLine("enter your choice: \nexit\ntask\nengineer\nautomaticSchedule\n");
                 choice = Console.ReadLine();
                 if (choice == "exit")
                     return;
@@ -28,6 +29,7 @@ namespace BlTest
                     {
                         case "task": taskMenu(); break;
                         case "engineer": engineerMenu(); break;
+                        case "automaticSchedule": s_bl.automaticSchedule(); break;
                     }
                 }
                 catch (BO.BlAlreadyExistsException messege)
@@ -46,17 +48,17 @@ namespace BlTest
                 {
                     printEx(messege);
                 }
-                //צריך את הזריקה הזו?
                 catch (BO.BlXMLFileLoadCreateException messege)
                 {
                     printEx(messege);
                 }
+               
 
             } while (choice != "exit");
 
             DateTime startOfProject = DateTime.Parse(getString("enter date of start of the project"));
             DalApi.Factory.Get.saveStartandFinishDatestoFile("data-config.xml", "startDate", startOfProject);
-            s_bl.schedule();
+            s_bl.automaticSchedule();
         }
 
         private static void taskMenu()
@@ -272,3 +274,51 @@ namespace BlTest
 
 
 }
+
+
+
+
+
+/*Would you like to create Initial data? (Y/N)Y
+enter your choice:
+exit
+task
+engineer
+task
+enter your choice:
+add
+delete
+read
+read all
+update
+update date
+main menu
+read
+enter the id of the task to read
+1
+BO.Task
+enter your choice:
+exit
+task
+engineer
+task
+enter your choice:
+add
+delete
+read
+read all
+update
+update date
+main menu
+delete
+enter the id of the task to delete
+1
+Stack overflow.
+Repeat 19250 times:
+--------------------------------
+   at BlImplementation.Bl.get_StageOfProject()
+--------------------------------
+   at BlImplementation.TaskImplementation.Delete(Int32)
+   at BlTest.Program.taskMenu()
+   at BlTest.Program.Main(System.String[])
+*/

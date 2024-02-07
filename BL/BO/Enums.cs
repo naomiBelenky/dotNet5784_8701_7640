@@ -21,6 +21,6 @@ public enum Status
 public enum Stage
 {
     Planning,
-    MidScheduling,
+    //MidScheduling,
     Execution
 }
