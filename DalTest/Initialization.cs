@@ -49,7 +49,7 @@ public static class Initialization
         tasks[17] = new Task(0, "Control Systems Engineering", "Design dynamic control", (Level)rand.Next(0, 5), false, dates[17]) with { TimeForTask = duration[17] };
         tasks[18] = new Task(0, "CAD Modeling", "Create 3D models", (Level)rand.Next(0, 5), false, new DateTime(2023, 07, 25)) with { TimeForTask = duration[18] };
         tasks[19] = new Task(0, "Sustainable Design", "Eco-friendly project design", (Level)rand.Next(0, 5), false, new DateTime(2023, 12, 18)) with { TimeForTask = duration[19] };
-
+ 
         for (int i = 0; i < 20; i++)
         {
             s_dal!.Task.Create(tasks[i]);

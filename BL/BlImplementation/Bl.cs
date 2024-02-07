@@ -16,7 +16,7 @@ internal class Bl : IBl
 
     public Stage getStage()
     {
-        XElement root = XMLTools.LoadListFromXMLElement("data-config.xml");
+        XElement root = XMLTools.LoadListFromXMLElement("data-config");
         DateTime? date = root.ToDateTimeNullable("startDate");
 
         if (date == null)
@@ -29,6 +29,7 @@ internal class Bl : IBl
         //StageOfProject = BO.Stage.Execution;
 
         List<BO.TaskInList> tasks = (Task.ReadAll()).ToList();
+
         foreach (var task in tasks)
         {
 
@@ -40,11 +41,7 @@ internal class Bl : IBl
                 tasks.Add(task); //enter the task to the end of the list
             }
             else Task.UpdateDate(task.Id, (DateTime)date);
-
-
-
         }
-
 
     }
 }

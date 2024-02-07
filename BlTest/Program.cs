@@ -30,8 +30,9 @@ namespace BlTest
                         case "engineer": engineerMenu(); break;
                         case "automaticSchedule":
                             DateTime startOfProject = DateTime.Parse(getString("enter date of start of the project"));
-                            DalApi.Factory.Get.saveStartandFinishDatestoFile("data-config.xml", "startDate", startOfProject);
-                            s_bl.automaticSchedule();
+                            if(DalApi.Factory.Get.saveStartandFinishDatestoFile("data-config", "startDate", startOfProject))
+                                s_bl.automaticSchedule();
+                            else throw new BO.BlAlreadyExistsException($"The date is already set");
                             break;
                     }
                 }
@@ -56,8 +57,8 @@ namespace BlTest
                     printEx(messege);
                 }
                 catch(Exception)
-                { 
-
+                {
+                    Console.WriteLine("unhandled exception");
                 }
                
 
@@ -90,12 +91,18 @@ namespace BlTest
                     int tempID = int.Parse(getString("enter id of previous task or 0 to finish"));
                     while (tempID != 0)
                     {
+                        BO.Task? fullTask = s_bl.Task.Read(tempID);
+                        if (fullTask == null) 
+                        {
+                            throw new BO.BlDoesNotExistException($"Task with ID={tempID} does Not exist");
+                        }
+
                         BO.TaskInList temp = new BO.TaskInList()
                         {
                             Id = tempID,
                             Description = fullTask.Description,
                             Name = fullTask.Name,
-                            Status = (BO.Status)fullTask.Status
+                            Status = (BO.Status?)fullTask.Status
                         };
                         prevTasks.Add(temp);
                         tempID = Convert.ToInt16(getString("enter id of previous task or 0 to finish"));
@@ -136,8 +143,8 @@ namespace BlTest
                     break;
                 case "update":
                     int id = int.Parse(getString("enter id"));
-                    name = (getString("enter Name")); descreption = getString("enter descreption");
-                    product = getString("enter ptodict"); notes = getString("enter notes");
+                    name = (getString("enter Name")); descreption = getString("enter description");
+                    product = getString("enter product"); notes = getString("enter notes");
                     duration = TimeSpan.Parse(getString("enter duration"));
                     //duratuin
                     difficulty = (Level)int.Parse(getString("enter level"));
@@ -147,12 +154,13 @@ namespace BlTest
                     tempID = int.Parse(getString("enter id of previous task or 0 to finish"));
                     while (tempID != 0)
                     {
+                        BO.Task tempTask = s_bl.Task.Read(tempID) ?? throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist");
                         BO.TaskInList temp = new BO.TaskInList()
                         {
                             Id = tempID,
-                            Description = s_bl.Task.Read(tempID).Description,
-                            Name = s_bl.Task.Read(tempID).Name,
-                            Status = (BO.Status)s_bl.Task.Read(tempID).Status
+                            Description = tempTask.Description,
+                            Name = tempTask.Name,
+                            Status = (BO.Status?)tempTask.Status
                         };
                         prevTasks.Add(temp);
                         tempID = int.Parse(getString("enter id of previous task or 0 to finish"));
@@ -187,7 +195,7 @@ namespace BlTest
                 case "main menu": return;
                 default:
                     {
-                        Console.WriteLine("doesnt valid input, please enter again");
+                        Console.WriteLine("invalid input, please enter again");
                         choice = Console.ReadLine();
                         break;
                     }
@@ -220,7 +228,7 @@ namespace BlTest
                     int id = int.Parse(getString("enter id to delete"));
                     s_bl.Engineer.Delete(id);
                     //check
-                    s_bl.Engineer.Read(id);
+                    //s_bl.Engineer.Read(id);
                     break;
                 case "read":
                     id = int.Parse(getString("enter id to read"));
@@ -271,16 +279,8 @@ namespace BlTest
             //Console.WriteLine(messege + "\n");
             Console.WriteLine(messege.Message);
         }
-
-
     }
-
-
 }
-
-
-
-
 
 /*Would you like to create Initial data? (Y/N)Y
 enter your choice:

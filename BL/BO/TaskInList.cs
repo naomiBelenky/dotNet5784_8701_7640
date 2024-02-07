@@ -21,5 +21,5 @@ public class TaskInList
     /// <summary>
     /// The status of the task (unscheduled, done...)
     /// </summary>
-    public BO.Status Status { get; set; }
+    public BO.Status? Status { get; set; }
 }
