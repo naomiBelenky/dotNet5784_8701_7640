@@ -12,8 +12,8 @@ sealed internal class DalXml : IDal
 
     public ILink Link => new LinkImplementation();
 
-    public DateTime? StartDate { get => Instance.StartDate; set => Instance.StartDate=value; }
-    public DateTime? FinishDate { get => Instance.FinishDate; set => Instance.FinishDate=value; }
+    //public DateTime? StartDate { get => Instance.StartDate; set => Instance.StartDate=value; }
+    //public DateTime? FinishDate { get => Instance.FinishDate; set => Instance.FinishDate=value; }
 
     public void saveStartandFinishDatestoFile(string data_config_xml, string elemName, DateTime elemValue)
     {
@@ -25,5 +25,11 @@ sealed internal class DalXml : IDal
         if (date != null) throw new DO.DalAlreadyExistsException($"The date is already set to {date}");
         root.Element(elemName)?.SetValue(elemValue);
         XMLTools.SaveListToXMLElement(root, data_config_xml);
+    }
+
+    public DateTime? getStartOrFinshDatesFromXml(string elemName)
+    {
+        XElement root = XMLTools.LoadListFromXMLElement("data_config.xml");
+        return( root.ToDateTimeNullable(elemName));
     }
 }

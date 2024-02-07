@@ -18,6 +18,7 @@ internal class Bl : IBl
     {
         XElement root = XMLTools.LoadListFromXMLElement("data_config.xml");
         DateTime? date = root.ToDateTimeNullable("startDate");
+
         if (date == null)
             return Stage.Planning;
         else return Stage.Execution;
@@ -31,21 +32,17 @@ internal class Bl : IBl
         foreach (var task in tasks)
         {
 
-            DateTime date = Task.SuggestStartDate(task.Id);
+            DateTime? date = Task.SuggestStartDate(task.Id);
 
-            if (date < Task.SuggestStartDate(task.Id))
+            if (date == null) //if the task is depended in other task thats dont have dates
             {
-                Console.WriteLine("not valid date, there are later task that this task depend on them");
-                //throw new BO.BlForbiddenInThisStage("not valid date, there are later task that this task depend on them");
-                tasks.Remove(task); 
+                tasks.Remove(task);
                 tasks.Add(task); //enter the task to the end of the list
-                
-
             }
+            else Task.UpdateDate(task.Id, (DateTime)date);
 
-            // Task.UpdateDate(task.Id, Task.SuggestStartDate(task.Id));
 
-            Task.UpdateDate(task.Id, Task.SuggestStartDate(task.Id));
+
         }
 
 

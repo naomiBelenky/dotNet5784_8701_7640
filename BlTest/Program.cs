@@ -18,7 +18,6 @@ namespace BlTest
             string? choice;
             do
             {
-
                 Console.WriteLine("enter your choice: \nexit\ntask\nengineer\nautomaticSchedule\n");
                 choice = Console.ReadLine();
                 if (choice == "exit")
@@ -189,7 +188,6 @@ namespace BlTest
                         break;
                     }
             }
-
 
             return;
 
