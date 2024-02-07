@@ -7,8 +7,8 @@ internal class TaskImplementation : ITask
 
     public int Add(BO.Task task)
     {
-        
-       //לבדוק אם זה שלב שמותר להוסיף משימה
+        if (Factory.Get().StageOfProject != (BO.Stage.Planning)) throw new BO.BlForbiddenInThisStage("Can not add tasks after scheduling the project");
+        //לבדוק אם זה שלב שמותר להוסיף משימה
         DO.Task doTask = new DO.Task(task.Id, task.Name, task.Description, (DO.Level)task.Difficulty);
         try
         {
@@ -30,22 +30,22 @@ internal class TaskImplementation : ITask
         {
             throw new BO.BlAlreadyExistsException($"Task with ID={task.Id} already exists", message);
         }
-        
+
     }
 
 
     public void Delete(int id)
     {
-
+        if (Factory.Get().StageOfProject != (BO.Stage.Planning)) throw new BO.BlForbiddenInThisStage("Can not delete tasks after scheduling the project");
         //checking if there is another task that depended in this task
         DO.Link? tempLink = _dal.Link.Read(item => item.PrevTask == id);
         if (tempLink != null)
             throw new BO.BlForbiddenInThisStage("Deleting this task is forbidden beacuse there is another task that depended on it");
 
         try
-        {           
+        {
             DO.Task? tempTask = _dal.Task.Read(id);
-            if(tempTask==null) throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist");
+            if (tempTask==null) throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist");
             else if (tempTask.PlanToStart != null) throw new BO.BlForbiddenInThisStage("Deleting is prohibited after the project schedule is created");
 
             _dal.Task.Delete(id);
@@ -77,9 +77,9 @@ internal class TaskImplementation : ITask
             Duration = doTask.TimeForTask,
             Product = doTask.Product,
             Notes = doTask.Notes,
-            
+
         };
-        if (doTask.EngineerID != null)
+        if (doTask.EngineerID != 0)
         {
             task.Engineer = new BO.EngineerInTask    //filling the info about the engineer working on the task
             {
@@ -113,7 +113,7 @@ internal class TaskImplementation : ITask
         }
         else
         {
-           // IEnumerable<BO.TaskInList> tasks1=(_dal.Task.ReadAll()).Where(filter()).select new 
+            // IEnumerable<BO.TaskInList> tasks1=(_dal.Task.ReadAll()).Where(filter()).select new 
             IEnumerable<BO.TaskInList> tasks = (from DO.Task item in _dal.Task.ReadAll()
                                                 where filter()
                                                 select new BO.TaskInList()
@@ -125,7 +125,7 @@ internal class TaskImplementation : ITask
                                                 });
             return tasks;
         }
-        
+
     }
 
     public void Update(BO.Task task)
@@ -153,9 +153,9 @@ internal class TaskImplementation : ITask
                 }
 
             //If we are here, it means that all the tests passed successfully:)
-            
+
             //Check whether links need to be added or be deleted
-            if (task.Links != null) 
+            if (task.Links != null)
             {
                 if (task.Links.Count > counterDoLinks) //if links need to be added
                 {
@@ -231,7 +231,7 @@ internal class TaskImplementation : ITask
         }
 
         //if the tasks are schedualed and planned to be finished before the date:
-        _dal.Task.Update(doTask with { PlanToStart = date });       
+        _dal.Task.Update(doTask with { PlanToStart = date });
     }
 
     #region private methods for help

@@ -9,6 +9,7 @@ internal class EngineerImplementation : IEngineer
     
     public int Add(BO.Engineer item)
     {
+        
         DO.Engineer doEng = new DO.Engineer(item.Id, item.Name, item.Email, (DO.Level)item.Level, item.Cost);
 
         try
@@ -135,6 +136,8 @@ internal class EngineerImplementation : IEngineer
 
             if (engineer.Task is not null)
             {
+                if (Factory.Get().StageOfProject == (BO.Stage.Planning)) throw new BO.BlForbiddenInThisStage("Can not assign a task to an engineer in the planning stage");
+                
                 var task = _dal.Task.Read(task => task.TaskID == engineer.Task!.Id) //reading the task that the engineer is responsible for
                     ?? throw new BO.BlDoesNotExistException($"task with id={engineer.Task.Id} does not exist");
                 if ((int)task.Difficulty > (int)engineer.Level) throw new BO.BlForbiddenInThisStage($"task with ID={task.TaskID} doesn't fit the engineer level");

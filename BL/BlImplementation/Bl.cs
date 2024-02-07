@@ -1,6 +1,5 @@
 ﻿namespace BlImplementation;
 using BlApi;
-using BO;
 using System.Xml.Linq;
 
 internal class Bl : IBl
@@ -11,9 +10,6 @@ internal class Bl : IBl
 
     public IMilestone MileStone => throw new NotImplementedException();
 
-    /// <summary>
-    /// the stage of the progect (Planning, MidScheduling, Execution)
-    /// </summary>
     public BO.Stage StageOfProject { get => StageOfProject; set => StageOfProject = value; }
 
    

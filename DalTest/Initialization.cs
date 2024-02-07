@@ -116,6 +116,8 @@ public static class Initialization
         XElement config = XMLTools.LoadListFromXMLElement("data-config");
         config.Element("NextTaskId")!.Value= "1";
         config.Element("NextLinkId")!.Value = "1";
+        config.Element("startDate")?.SetValue("");
+        config.Element("finishDate")?.SetValue("");
         XMLTools.SaveListToXMLElement(config, "data-config");
 
         DalApi.Factory.Get.Task.DeleteAll();
