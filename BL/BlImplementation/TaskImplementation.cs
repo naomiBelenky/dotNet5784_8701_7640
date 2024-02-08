@@ -130,71 +130,127 @@ internal class TaskImplementation : ITask
 
     }
 
+    //public void Update(BO.Task task)
+    //{
+    //    //check if data is valid
+    //    if (task.Id <= 0) throw new BO.BlInformationIsntValid("id is not valid");
+    //    if (task.Name == "") throw new BO.BlInformationIsntValid("name is not valid");
+
+    //    try
+    //    {
+    //        //checking how many links there are in the data
+    //        int counterDoLinks = (_dal.Link.ReadAll(link => link.NextTask == task.Id).ToList().Count);
+
+    //        
+    //        //Check which stage of the project are we in
+    //        DO.Task? tempTask = _dal.Task.Read(task.Id);
+    //        if (tempTask != null)
+    //            if (Factory.Get().getStage() == BO.Stage.Execution) 
+    //            {
+    //                //If the schedule has already been set, check that only the fields allowed for update have been updated
+    //                if (task.Id != tempTask.TaskID || (int)task.Difficulty != (int)tempTask.Difficulty ||/*task.Milestone!=tempTask.Milestone||*/
+    //                    task.Creation != tempTask.Creation || task.PlanToStart != tempTask.PlanToStart
+    //                    || task.StartWork != tempTask.StartWork || task.Deadline != tempTask.Deadline
+    //                    || task.FinishDate != tempTask.FinishDate || task.Links != null && task.Links.Count != counterDoLinks)
+    //                { throw new BO.BlForbiddenInThisStage("Updating this parameters is prohibited after the project schedule is created"); }
+    //            }
+
+    //        //If we are here, it means that all the tests passed successfully:)
+
+    //        //Check whether links need to be added or be deleted
+    //        if (task.Links != null)
+    //        {
+    //            if (task.Links.Count > counterDoLinks) //if links need to be added
+    //            {
+    //                IEnumerable<int> newTasksID = (from BO.TaskInList item in task.Links
+    //                                               let doLink = _dal.Link.Read(link => link.PrevTask == item.Id && link.NextTask == task.Id)
+    //                                               //group item by doLink == null ? "newTask" : "dontNew");
+    //                                               where (doLink == null)
+    //                                               select item.Id); //list of new links 
+
+    //                foreach (var taskID in newTasksID) //add all the new links
+    //                {
+    //                    DO.Link newLink = new DO.Link(0, taskID, task.Id);
+    //                    _dal.Link.Create(newLink);
+    //                }
+    //            }
+
+    //            if (task.Links.Count < counterDoLinks)  //if links need to be deleted
+    //            {
+    //                //Search for all links in data that no longer exists in the list
+    //                IEnumerable<int> oldLinksID = (from DO.Link item in _dal.Link.ReadAll(link => link.NextTask == task.Id)
+    //                                               where task.Links.Any(temp => temp.Id == item.PrevTask) == false
+    //                                               select item.LinkID);
+    //                foreach (int linkID in oldLinksID)
+    //                {
+    //                    _dal.Link.Delete(linkID);
+    //                }
+    //            }
+
+    //            if (task.Links.Count == counterDoLinks) 
+    //            {
+                    
+    //            }
+    //        }
+    //        else  //if the list is empty
+    //        {
+    //            if (counterDoLinks > 0) //if links need to be deleted
+    //            {
+    //                IEnumerable<DO.Link>  = _dal.Link.ReadAll(item => item.NextTask == task.Id)!;
+    //                foreach (DO.Link lilinksnk in links) { _dal.Link.Delete(link.LinkID); }
+    //            }
+    //        }
+
+    //        int? tempID;
+    //        if (task.Engineer == null)
+    //            tempID = null;
+    //        else
+    //            tempID = task.Engineer.Id;
+
+    //        DO.Task doTask = new DO.Task(task.Id, task.Name, task.Description, (DO.Level)task.Difficulty,
+    //            false, task.Creation, task.PlanToStart, task.StartWork, task.Duration, task.Deadline,
+    //            task.FinishDate, task.Product, task.Notes, tempID);
+    //        _dal.Task.Update(doTask);
+    //    }
+
+    //    catch (DO.DalDoesNotExistException messege)
+    //    {
+    //        throw new BO.BlDoesNotExistException($"Task with ID={task.Id} does Not exist", messege);
+    //    }
+    //}
     public void Update(BO.Task task)
     {
         //check if data is valid
         if (task.Id <= 0) throw new BO.BlInformationIsntValid("id is not valid");
         if (task.Name == "") throw new BO.BlInformationIsntValid("name is not valid");
 
+        DO.Task? tempTask = _dal.Task.Read(task.Id);
+        if (tempTask == null)  { throw new BO.BlAlreadyExistsException($"Task with ID={task.Id} already exists"); }
+
+        //If the schedule has already been set, check that only the fields allowed for update have been updated
+        if (Factory.Get().getStage() == BO.Stage.Execution)
+            if (task.Id != tempTask.TaskID || (int)task.Difficulty != (int)tempTask.Difficulty ||/*task.Milestone!=tempTask.Milestone||*/
+                              task.Creation != tempTask.Creation || task.PlanToStart != tempTask.PlanToStart
+                              || task.StartWork != tempTask.StartWork || task.Deadline != tempTask.Deadline
+                              || task.FinishDate != tempTask.FinishDate || task.Links != null && task.Links.Count != )
+            { throw new BO.BlForbiddenInThisStage("Updating this parameters is prohibited after the project schedule is created"); }
+
+        //If we are here, it means that all the tests passed successfully:)
+
         try
         {
-            //checking how many links there are in the data
-            int counterDoLinks = (_dal.Link.ReadAll(link => link.NextTask == task.Id).ToList().Count);
-
-            //Check whether the schedule has already been set
-            //Check which stage of the project are we in
-            DO.Task? tempTask = _dal.Task.Read(task.Id);
-            if (tempTask != null)
-                if (Factory.Get().getStage() == BO.Stage.Execution) 
-                {
-                    //If the schedule has already been set, check that only the fields allowed for update have been updated
-                    if (task.Id != tempTask.TaskID || (int)task.Difficulty != (int)tempTask.Difficulty ||/*task.Milestone!=tempTask.Milestone||*/
-                        task.Creation != tempTask.Creation || task.PlanToStart != tempTask.PlanToStart
-                        || task.StartWork != tempTask.StartWork || task.Deadline != tempTask.Deadline
-                        || task.FinishDate != tempTask.FinishDate || task.Links != null && task.Links.Count != counterDoLinks)
-                    { throw new BO.BlForbiddenInThisStage("Updating this parameters is prohibited after the project schedule is created"); }
-                }
-
-            //If we are here, it means that all the tests passed successfully:)
-
-            //Check whether links need to be added or be deleted
-            if (task.Links != null)
+            //updete the links
+            foreach (var item in (_dal.Link.ReadAll(link => link.NextTask == task.Id)))
             {
-                if (task.Links.Count > counterDoLinks) //if links need to be added
-                {
-                    IEnumerable<int> newTasksID = (from BO.TaskInList item in task.Links
-                                                   let doLink = _dal.Link.Read(link => link.PrevTask == item.Id && link.NextTask == task.Id)
-                                                   //group item by doLink == null ? "newTask" : "dontNew");
-                                                   where (doLink == null)
-                                                   select item.Id); //list of new links 
-
-                    foreach (var taskID in newTasksID) //add all the new links
-                    {
-                        DO.Link newLink = new DO.Link(0, taskID, task.Id);
-                        _dal.Link.Create(newLink);
-                    }
-                }
-
-                if (task.Links.Count < counterDoLinks)  //if links need to be deleted
-                {
-                    //Search for all links in data that no longer exists in the list
-                    IEnumerable<int> oldLinksID = (from DO.Link item in _dal.Link.ReadAll(link => link.NextTask == task.Id)
-                                                   where task.Links.Any(temp => temp.Id == item.PrevTask) == false
-                                                   select item.LinkID);
-                    foreach (int linkID in oldLinksID)
-                    {
-                        _dal.Link.Delete(linkID);
-                    }
-                }
-              }
-            else  //if the list is empty
-            {
-                if (counterDoLinks > 0) //if links need to be deleted
-                {
-                    IEnumerable<DO.Link> links = _dal.Link.ReadAll(item => item.NextTask == task.Id)!;
-                    foreach (DO.Link link in links) { _dal.Link.Delete(link.LinkID); }
-                }
+                _dal.Link.Delete(item.LinkID);
             }
+            if (task.Links != null)
+                foreach (var item in task.Links)
+                {
+                    DO.Link temp = new DO.Link() { PrevTask = item.Id, NextTask = task.Id };
+                    _dal.Link.Create(temp);
+                }
+
 
             int? tempID;
             if (task.Engineer == null)
@@ -205,13 +261,21 @@ internal class TaskImplementation : ITask
             DO.Task doTask = new DO.Task(task.Id, task.Name, task.Description, (DO.Level)task.Difficulty,
                 false, task.Creation, task.PlanToStart, task.StartWork, task.Duration, task.Deadline,
                 task.FinishDate, task.Product, task.Notes, tempID);
+
             _dal.Task.Update(doTask);
         }
-
         catch (DO.DalDoesNotExistException messege)
         {
             throw new BO.BlDoesNotExistException($"Task with ID={task.Id} does Not exist", messege);
         }
+        
+
+        
+            
+
+
+
+
     }
 
     public void UpdateDate(int id, DateTime date)
