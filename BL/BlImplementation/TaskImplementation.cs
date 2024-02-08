@@ -186,7 +186,7 @@ internal class TaskImplementation : ITask
                         _dal.Link.Delete(linkID);
                     }
                 }
-            }
+              }
             else  //if the list is empty
             {
                 if (counterDoLinks > 0) //if links need to be deleted
