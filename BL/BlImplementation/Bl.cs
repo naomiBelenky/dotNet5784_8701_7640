@@ -16,7 +16,7 @@ internal class Bl : IBl
 
     public Stage getStage()
     {
-        XElement root = XMLTools.LoadListFromXMLElement("data-config.xml");
+        XElement root = XMLTools.LoadListFromXMLElement("data-config");
         DateTime? date = root.ToDateTimeNullable("startDate");
 
         if (date == null)
@@ -24,27 +24,30 @@ internal class Bl : IBl
         else return Stage.Execution;
     }
 
+    public void recursiveSchedule(int id)
+    {
+        BO.Task fullTask = Task.Read(id) ?? throw new BO.BlDoesNotExistException($"Task with ID={id} does not exist");
+        if (fullTask.PlanToStart != null) return;   //if the starting date is already set
+        fullTask.PlanToStart = DalApi.Factory.Get.getStartOrFinshDatesFromXml("startDate"); //setting the satrt date temporarily to be the start of project
+
+        List<TaskInList>? prevTasks = fullTask.Links?.ToList() ?? new List<TaskInList>();   //if there are no links, creating an empty list
+        foreach (var task in prevTasks)
+        {
+            recursiveSchedule(task.Id);
+        }
+        DateTime planToStart = (DateTime)Task.SuggestStartDate(id);
+        Task.UpdateDate(id, planToStart);
+    }
+
     public void automaticSchedule()
     {
         //StageOfProject = BO.Stage.Execution;
 
         List<BO.TaskInList> tasks = (Task.ReadAll()).ToList();
+
         foreach (var task in tasks)
         {
-
-            DateTime? date = Task.SuggestStartDate(task.Id);
-
-            if (date == null) //if the task is depended in other task thats dont have dates
-            {
-                tasks.Remove(task);
-                tasks.Add(task); //enter the task to the end of the list
-            }
-            else Task.UpdateDate(task.Id, (DateTime)date);
-
-
-
+            recursiveSchedule(task.Id);
         }
-
-
     }
 }

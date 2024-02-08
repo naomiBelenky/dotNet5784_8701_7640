@@ -15,20 +15,21 @@ sealed internal class DalXml : IDal
     //public DateTime? StartDate { get => Instance.StartDate; set => Instance.StartDate=value; }
     //public DateTime? FinishDate { get => Instance.FinishDate; set => Instance.FinishDate=value; }
 
-    public void saveStartandFinishDatestoFile(string data_config_xml, string elemName, DateTime elemValue)
+    public bool saveStartandFinishDatestoFile(string data_config_xml, string elemName, DateTime elemValue)
     {
         XElement root = XMLTools.LoadListFromXMLElement(data_config_xml);
         DateTime? date = root.ToDateTimeNullable(elemName);
         //checking if the date is already set
-        if (date != null) throw new DO.DalAlreadyExistsException($"The date is already set to {date}");
-        //root.Element(elemName)?.SetValue(elemValue);
-        root.Add(new XElement(elemName, elemValue));
+        if (date != null) return false;
+        root.Element(elemName)?.SetValue(elemValue);
+        //root.Add(new XElement(elemName, elemValue));
         XMLTools.SaveListToXMLElement(root, data_config_xml);
+        return true;
     }
 
     public DateTime? getStartOrFinshDatesFromXml(string elemName)
     {
-        XElement root = XMLTools.LoadListFromXMLElement("data-config.xml");
+        XElement root = XMLTools.LoadListFromXMLElement("data-config");
         return( root.ToDateTimeNullable(elemName));
     }
 }

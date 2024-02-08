@@ -17,7 +17,7 @@ sealed internal class DalList : IDal
 
     private DalList() { }
 
-    public void saveStartandFinishDatestoFile(string data_config_xml, string elemName, DateTime toSave) { }
+    public bool saveStartandFinishDatestoFile(string data_config_xml, string elemName, DateTime toSave) { return false;  }
 
     public DateTime? getStartOrFinshDatesFromXml(string elemName) { return null; }
 
