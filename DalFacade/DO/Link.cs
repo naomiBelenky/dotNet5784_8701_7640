@@ -11,8 +11,8 @@ namespace DO;
 public record Link
 (
     int LinkID,
-    int PrevTask, //nullable??
-    int NextTask //nullable??
+    int PrevTask,
+    int NextTask
 )
 {
     public Link() : this(0, 0, 0) { } //empty ctor for stage 3

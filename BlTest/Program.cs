@@ -29,21 +29,20 @@ namespace BlTest
                         case "engineer": engineerMenu(); break;
                         case "automaticSchedule":
                             DateTime startOfProject = DateTime.Parse(getString("enter date of start of the project"));
-                            
-                            if(DalApi.Factory.Get.saveStartandFinishDatestoFile("data-config", "startDate", startOfProject))
+                            if (DalApi.Factory.Get.saveStartandFinishDatestoFile("data-config", "startDate", startOfProject))
                                 s_bl.automaticSchedule();
                             else throw new BO.BlAlreadyExistsException($"The date is already set");
                             break;
                     }
                 }
-                //catch (BO.BlAlreadyExistsException messege)
-                //{
-                //    printEx(messege);
-                //}
-                //catch (BO.BlDoesNotExistException messege)
-                //{
-                //    printEx(messege);
-                //}
+                catch (Exception messege)
+                {
+                    if (messege.InnerException != null)
+                        Console.WriteLine("Dal Exception:\n");
+                    //Console.WriteLine(messege.GetType() + "\n");
+                    //Console.WriteLine(messege + "\n");
+                    Console.WriteLine(messege.Message);
+                }
                 //catch (BO.BlForbiddenInThisStage messege)
                 //{
                 //    printEx(messege);
@@ -56,6 +55,12 @@ namespace BlTest
                 //{
                 //    printEx(messege);
                 //}
+                //catch (Exception)
+                //{
+                //    Console.WriteLine("unhandled exception");
+                //}
+
+
                 catch(Exception messege)
                 {
                     if (messege.InnerException != null)
@@ -66,7 +71,7 @@ namespace BlTest
                 
             } while (choice != "exit");
 
-           
+
         }
 
         private static void taskMenu()
@@ -94,7 +99,7 @@ namespace BlTest
                     while (tempID != 0)
                     {
                         BO.Task? fullTask = s_bl.Task.Read(tempID);
-                        if (fullTask == null) 
+                        if (fullTask == null)
                         {
                             throw new BO.BlDoesNotExistException($"Task with ID={tempID} does Not exist");
                         }
