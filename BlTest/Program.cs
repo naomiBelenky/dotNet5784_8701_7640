@@ -33,39 +33,16 @@ namespace BlTest
                                 s_bl.automaticSchedule();
                             else throw new BO.BlAlreadyExistsException($"The date is already set");
                             break;
+                        default:
+                            Console.WriteLine("not valid input, try again"); break;
                     }
                 }
                 catch (Exception messege)
                 {
                     if (messege.InnerException != null)
-                        Console.WriteLine("Dal Exception:\n");
-                    //Console.WriteLine(messege.GetType() + "\n");
-                    //Console.WriteLine(messege + "\n");
-                    Console.WriteLine(messege.Message);
-                }
-                //catch (BO.BlForbiddenInThisStage messege)
-                //{
-                //    printEx(messege);
-                //}
-                //catch (BO.BlInformationIsntValid messege)
-                //{
-                //    printEx(messege);
-                //}
-                //catch (BO.BlXMLFileLoadCreateException messege)
-                //{
-                //    printEx(messege);
-                //}
-                //catch (Exception)
-                //{
-                //    Console.WriteLine("unhandled exception");
-                //}
+                        Console.WriteLine("Dal Exception:");
 
-
-                catch(Exception messege)
-                {
-                    if (messege.InnerException != null)
-                        Console.WriteLine("Dal Exception:\n");
-
+                    Console.WriteLine(messege.GetType());
                     Console.WriteLine(messege.Message);
                 }
                 
@@ -84,13 +61,12 @@ namespace BlTest
             choice = Console.ReadLine();
             switch (choice)
             {
-                //?
+                
                 case "add":
 
                     string? name = (getString("enter Name")), descreption = getString("enter description"),
                         product = getString("enter product"), notes = getString("enter notes");
                     TimeSpan? duration = TimeSpan.Parse(getString("enter duration"));
-                    //duratuin
                     Level difficulty = (Level)int.Parse(getString("enter level"));
 
                     List<BO.TaskInList> prevTasks = new List<BO.TaskInList>();
@@ -110,6 +86,7 @@ namespace BlTest
                             Description = fullTask.Description,
                             Name = fullTask.Name,
                             Status = (BO.Status?)fullTask.Status
+
                         };
                         prevTasks.Add(temp);
                         tempID = Convert.ToInt16(getString("enter id of previous task or 0 to finish"));
@@ -142,7 +119,6 @@ namespace BlTest
                     int idToRead = int.Parse(getString("enter the id of the task to read"));
                     Console.WriteLine(s_bl.Task.Read(idToRead));
                     break;
-                ///??
                 case "read all":
                     foreach (var item in s_bl.Task.ReadAll())
                         Console.WriteLine(item);
@@ -153,7 +129,6 @@ namespace BlTest
                     name = (getString("enter Name")); descreption = getString("enter description");
                     product = getString("enter product"); notes = getString("enter notes");
                     duration = TimeSpan.Parse(getString("enter duration"));
-                    //duratuin
                     difficulty = (Level)int.Parse(getString("enter level"));
 
                     prevTasks = new List<BO.TaskInList>();
@@ -227,15 +202,13 @@ namespace BlTest
                         Email = getString("enter email"),
                         Level = (Level)int.Parse(getString("enter level")),
                         Cost = double.Parse(getString("enter cost"))
-                        //TaskInEngineer?
                     };
                     Console.WriteLine(s_bl.Engineer.Add(engineer));
                     break;
                 case "delete":
                     int id = int.Parse(getString("enter id to delete"));
                     s_bl.Engineer.Delete(id);
-                    //check
-                    //s_bl.Engineer.Read(id);
+       
                     break;
                 case "read":
                     id = int.Parse(getString("enter id to read"));
@@ -253,11 +226,17 @@ namespace BlTest
                         Email = getString("enter email"),
                         Level = (Level)int.Parse(getString("enter level")),
                         Cost = double.Parse(getString("enter cost"))
-                        //TaskInEngineer?
                     };
+
+                    if (getString("do you want add task to the engineer? enter Y/N") == "Y") 
+                    {
+                        id = Convert.ToInt16(getString("enter id of task"));
+                        string name =getString("enter name of the task");
+                        BO.TaskInEngineer temp = new BO.TaskInEngineer() { Id = id, Name = name };
+                        eng.Task= temp;
+                    }
+
                     s_bl.Engineer.Update(eng);
-                    //check:
-                    s_bl.Engineer.Read(eng.Id);
                     break;
                 case "main menu": return;
                 default:
@@ -278,14 +257,7 @@ namespace BlTest
             return Console.ReadLine();
         }
 
-        //public static void printEx(Exception messege)
-        //{
-        //    if (messege.InnerException != null)
-        //        Console.WriteLine("Dal Exception:\n");
-        //    //Console.WriteLine(messege.GetType() + "\n");
-        //    //Console.WriteLine(messege + "\n");
-        //    Console.WriteLine(messege.Message);
-        //}
+
     }
 }
 

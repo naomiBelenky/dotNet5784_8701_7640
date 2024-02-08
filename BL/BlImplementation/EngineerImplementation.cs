@@ -18,10 +18,10 @@ internal class EngineerImplementation : IEngineer
             if (string.IsNullOrEmpty(item.Name)) throw new BO.BlInformationIsntValid("name is not valid");
             if (!new EmailAddressAttribute().IsValid(item.Email)) throw new BO.BlInformationIsntValid("email adress is not valid");
             if (double.IsNegative(item.Cost)) throw new BO.BlInformationIsntValid("cost is not valid");
+            if((int)item.Level<=0||(int)item.Level>4) throw new BO.BlInformationIsntValid("Level is not valid");
 
             int newID = _dal.Engineer.Create(doEng);
             return newID;
-
         }
         catch (DO.DalAlreadyExistsException messege)
         {
