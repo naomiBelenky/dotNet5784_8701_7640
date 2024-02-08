@@ -61,6 +61,14 @@ namespace BlTest
                 //}
 
 
+                catch(Exception messege)
+                {
+                    if (messege.InnerException != null)
+                        Console.WriteLine("Dal Exception:\n");
+
+                    Console.WriteLine(messege.Message);
+                }
+                
             } while (choice != "exit");
 
 
@@ -270,57 +278,14 @@ namespace BlTest
             return Console.ReadLine();
         }
 
-        public static void printEx(Exception messege)
-        {
-            if (messege.InnerException != null)
-                Console.WriteLine("Dal Exception:\n");
-            //Console.WriteLine(messege.GetType() + "\n");
-            //Console.WriteLine(messege + "\n");
-            Console.WriteLine(messege.Message);
-        }
+        //public static void printEx(Exception messege)
+        //{
+        //    if (messege.InnerException != null)
+        //        Console.WriteLine("Dal Exception:\n");
+        //    //Console.WriteLine(messege.GetType() + "\n");
+        //    //Console.WriteLine(messege + "\n");
+        //    Console.WriteLine(messege.Message);
+        //}
     }
 }
 
-/*Would you like to create Initial data? (Y/N)Y
-enter your choice:
-exit
-task
-engineer
-task
-enter your choice:
-add
-delete
-read
-read all
-update
-update date
-main menu
-read
-enter the id of the task to read
-1
-BO.Task
-enter your choice:
-exit
-task
-engineer
-task
-enter your choice:
-add
-delete
-read
-read all
-update
-update date
-main menu
-delete
-enter the id of the task to delete
-1
-Stack overflow.
-Repeat 19250 times:
---------------------------------
-   at BlImplementation.Bl.get_StageOfProject()
---------------------------------
-   at BlImplementation.TaskImplementation.Delete(Int32)
-   at BlTest.Program.taskMenu()
-   at BlTest.Program.Main(System.String[])
-*/
