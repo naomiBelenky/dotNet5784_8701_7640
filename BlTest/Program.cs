@@ -29,6 +29,7 @@ namespace BlTest
                         case "engineer": engineerMenu(); break;
                         case "automaticSchedule":
                             DateTime startOfProject = DateTime.Parse(getString("enter date of start of the project"));
+                            
                             if(DalApi.Factory.Get.saveStartandFinishDatestoFile("data-config", "startDate", startOfProject))
                                 s_bl.automaticSchedule();
                             else throw new BO.BlAlreadyExistsException($"The date is already set");
@@ -59,28 +60,10 @@ namespace BlTest
                 {
                     if (messege.InnerException != null)
                         Console.WriteLine("Dal Exception:\n");
-                    //Console.WriteLine(messege.GetType() + "\n");
-                    //Console.WriteLine(messege + "\n");
+
                     Console.WriteLine(messege.Message);
                 }
-                catch (BO.BlForbiddenInThisStage messege)
-                {
-                    printEx(messege);
-                }
-                catch (BO.BlInformationIsntValid messege)
-                {
-                    printEx(messege);
-                }
-                catch (BO.BlXMLFileLoadCreateException messege)
-                {
-                    printEx(messege);
-                }
-                catch(Exception)
-                {
-                    Console.WriteLine("unhandled exception");
-                }
-               
-
+                
             } while (choice != "exit");
 
            
@@ -290,57 +273,14 @@ namespace BlTest
             return Console.ReadLine();
         }
 
-        public static void printEx(Exception messege)
-        {
-            if (messege.InnerException != null)
-                Console.WriteLine("Dal Exception:\n");
-            //Console.WriteLine(messege.GetType() + "\n");
-            //Console.WriteLine(messege + "\n");
-            Console.WriteLine(messege.Message);
-        }
+        //public static void printEx(Exception messege)
+        //{
+        //    if (messege.InnerException != null)
+        //        Console.WriteLine("Dal Exception:\n");
+        //    //Console.WriteLine(messege.GetType() + "\n");
+        //    //Console.WriteLine(messege + "\n");
+        //    Console.WriteLine(messege.Message);
+        //}
     }
 }
 
-/*Would you like to create Initial data? (Y/N)Y
-enter your choice:
-exit
-task
-engineer
-task
-enter your choice:
-add
-delete
-read
-read all
-update
-update date
-main menu
-read
-enter the id of the task to read
-1
-BO.Task
-enter your choice:
-exit
-task
-engineer
-task
-enter your choice:
-add
-delete
-read
-read all
-update
-update date
-main menu
-delete
-enter the id of the task to delete
-1
-Stack overflow.
-Repeat 19250 times:
---------------------------------
-   at BlImplementation.Bl.get_StageOfProject()
---------------------------------
-   at BlImplementation.TaskImplementation.Delete(Int32)
-   at BlTest.Program.taskMenu()
-   at BlTest.Program.Main(System.String[])
-*/
