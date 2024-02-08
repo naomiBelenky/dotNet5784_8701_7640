@@ -35,29 +35,33 @@ namespace BlTest
                             break;
                     }
                 }
-                catch (BO.BlAlreadyExistsException messege)
+                //catch (BO.BlAlreadyExistsException messege)
+                //{
+                //    printEx(messege);
+                //}
+                //catch (BO.BlDoesNotExistException messege)
+                //{
+                //    printEx(messege);
+                //}
+                //catch (BO.BlForbiddenInThisStage messege)
+                //{
+                //    printEx(messege);
+                //}
+                //catch (BO.BlInformationIsntValid messege)
+                //{
+                //    printEx(messege);
+                //}
+                //catch (BO.BlXMLFileLoadCreateException messege)
+                //{
+                //    printEx(messege);
+                //}
+                catch(Exception messege)
                 {
-                    printEx(messege);
-                }
-                catch (BO.BlDoesNotExistException messege)
-                {
-                    printEx(messege);
-                }
-                catch (BO.BlForbiddenInThisStage messege)
-                {
-                    printEx(messege);
-                }
-                catch (BO.BlInformationIsntValid messege)
-                {
-                    printEx(messege);
-                }
-                catch (BO.BlXMLFileLoadCreateException messege)
-                {
-                    printEx(messege);
-                }
-                catch(Exception)
-                { 
-
+                    if (messege.InnerException != null)
+                        Console.WriteLine("Dal Exception:\n");
+                    //Console.WriteLine(messege.GetType() + "\n");
+                    //Console.WriteLine(messege + "\n");
+                    Console.WriteLine(messege.Message);
                 }
                
 
@@ -263,14 +267,14 @@ namespace BlTest
             return Console.ReadLine();
         }
 
-        public static void printEx(Exception messege)
-        {
-            if (messege.InnerException != null)
-                Console.WriteLine("Dal Exception:\n");
-            //Console.WriteLine(messege.GetType() + "\n");
-            //Console.WriteLine(messege + "\n");
-            Console.WriteLine(messege.Message);
-        }
+        //public static void printEx(Exception messege)
+        //{
+        //    if (messege.InnerException != null)
+        //        Console.WriteLine("Dal Exception:\n");
+        //    //Console.WriteLine(messege.GetType() + "\n");
+        //    //Console.WriteLine(messege + "\n");
+        //    Console.WriteLine(messege.Message);
+        //}
 
 
     }
