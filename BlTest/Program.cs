@@ -94,6 +94,7 @@ namespace BlTest
                     int tempID = int.Parse(getString("enter id of previous task or 0 to finish"));
                     while (tempID != 0)
                     {
+
                         BO.TaskInList temp = new BO.TaskInList()
                         {
                             Id = tempID,
