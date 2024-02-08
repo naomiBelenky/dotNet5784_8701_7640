@@ -7,7 +7,7 @@ internal class EngineerImplementation : IEngineer
 {
     public int Create(Engineer item) //Creates new entity object in DAL
     {
-        //if (DataSource.Engineers.Find(eng => eng.EngineerID == item.EngineerID) != null) //Stage 1
+        //if (DataSource.Engineers.Find(eng => eng.EngineerID == item.EngineerID) != 0) //Stage 1
 
         if (Read(item.EngineerID) is not null) //If this id already exist
             throw new DalAlreadyExistsException($"Engineer with ID={item.EngineerID} already exist!!");

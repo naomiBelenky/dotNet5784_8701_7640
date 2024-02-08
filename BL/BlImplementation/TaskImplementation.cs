@@ -1,5 +1,6 @@
 ﻿namespace BlImplementation;
 using BlApi;
+using System.Reflection.Metadata.Ecma335;
 
 internal class TaskImplementation : ITask
 {
@@ -15,7 +16,7 @@ internal class TaskImplementation : ITask
         {
             if (task.Id < 0) throw new BO.BlInformationIsntValid("id is not valid");
             if (task.Name == "") throw new BO.BlInformationIsntValid("name is not valid");
-            
+
 
             int id = _dal.Task.Create(doTask);  //if the data is valid, creating the task in the data layer
             if (task.Links != null) //if there are dependent tasks, adding them to the list of links
@@ -85,7 +86,7 @@ internal class TaskImplementation : ITask
         {
             task.Engineer = new BO.EngineerInTask    //filling the info about the engineer working on the task
             {
-                Id = (int)doTask.EngineerID!,
+                Id = (int)doTask.EngineerID,
                 Name = (_dal.Engineer.Read(id) ??
                     throw new BO.BlDoesNotExistException($"Engineer with ID={id} does Not exist")).FullName
                 //if the Read returns an engineer, assigning his name to the EngineerInTask
@@ -189,7 +190,7 @@ internal class TaskImplementation : ITask
 
     //            if (task.Links.Count == counterDoLinks) 
     //            {
-                    
+
     //            }
     //        }
     //        else  //if the list is empty
@@ -225,20 +226,35 @@ internal class TaskImplementation : ITask
         if (task.Name == "") throw new BO.BlInformationIsntValid("name is not valid");
 
         DO.Task? tempTask = _dal.Task.Read(task.Id);
-        if (tempTask == null)  { throw new BO.BlAlreadyExistsException($"Task with ID={task.Id} already exists"); }
+        if (tempTask == null) throw new BO.BlAlreadyExistsException($"Task with ID={task.Id} already exists");
 
         //If the schedule has already been set, check that only the fields allowed for update have been updated
         if (Factory.Get().getStage() == BO.Stage.Execution)
+        {
+            List<DO.Link> tempTaskLinks = _dal.Link.ReadAll(link => link.NextTask == task.Id).ToList(); //a list of all the tasks that 'task' depends on
+            List<DO.Link> taskLinks = new List<DO.Link>();  //the list of tasks that the user wants 'task' to depend on
+            if (task.Links != null)
+            {
+                foreach (var taskIn in task.Links)
+                {
+                    DO.Link? link = _dal.Link.Read(link => link.PrevTask == taskIn.Id);
+                    if (link != null)
+                        taskLinks.Add(link);
+                }
+            }
+
             if (task.Id != tempTask.TaskID || (int)task.Difficulty != (int)tempTask.Difficulty ||/*task.Milestone!=tempTask.Milestone||*/
                               task.Creation != tempTask.Creation || task.PlanToStart != tempTask.PlanToStart
                               || task.StartWork != tempTask.StartWork || task.Deadline != tempTask.Deadline
-                              || task.FinishDate != tempTask.FinishDate || task.Links != null && task.Links.Count != )
-            { throw new BO.BlForbiddenInThisStage("Updating this parameters is prohibited after the project schedule is created"); }
-
+                              || task.FinishDate != tempTask.FinishDate || (task.Links != null
+                              && taskLinks.SequenceEqual(tempTaskLinks)))   //checking if the links are the same
+            { throw new BO.BlForbiddenInThisStage("Updating these parameters is prohibited after the project schedule is created"); }
+        }
         //If we are here, it means that all the tests passed successfully:)
 
         try
         {
+
             //updete the links
             foreach (var item in (_dal.Link.ReadAll(link => link.NextTask == task.Id)))
             {
@@ -252,9 +268,9 @@ internal class TaskImplementation : ITask
                 }
 
 
-            int? tempID;
+            int tempID;
             if (task.Engineer == null)
-                tempID = null;
+                tempID = 0;
             else
                 tempID = task.Engineer.Id;
 
@@ -268,14 +284,6 @@ internal class TaskImplementation : ITask
         {
             throw new BO.BlDoesNotExistException($"Task with ID={task.Id} does Not exist", messege);
         }
-        
-
-        
-            
-
-
-
-
     }
 
     public void UpdateDate(int id, DateTime date)

@@ -22,7 +22,7 @@ sealed internal class DalXml : IDal
         //checking if the date is already set
         if (date != null) return false;
         root.Element(elemName)?.SetValue(elemValue);
-        //root.Add(new XElement(elemName, elemValue));
+
         XMLTools.SaveListToXMLElement(root, data_config_xml);
         return true;
     }
