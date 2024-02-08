@@ -1,7 +1,6 @@
 ﻿using BlApi;
 using BO;
 using DalApi;
-
 namespace BlTest
 {
     internal class Program
