@@ -23,6 +23,15 @@
             <Label Content="Label" HorizontalAlignment="Left" Margin="74,0,0,0" VerticalAlignment="Center" Height="26" Width="54" Grid.Column="0"/>
             <ComboBox HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1"/>
         </Grid>
-
+        <!-- list of engineers  -->
+        <ListView Grid.Row="1">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <!-- botton for adding engineer -->
+        <Button Content="Add" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100" Click="Button_Click"/>
     </Grid>
 </Window>

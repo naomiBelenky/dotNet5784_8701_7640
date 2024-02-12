@@ -7,9 +7,14 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button x:Name="button" Content="admin" HorizontalAlignment="Left" Margin="81,326,0,0" VerticalAlignment="Top" Height="60" Width="142" Click="button_Click"/>
-        <Button x:Name="button1" Content="engineer" HorizontalAlignment="Left" Margin="226,326,0,0" VerticalAlignment="Top" Height="60" Width="152"/>
-        <Button x:Name="button2" Content="initDB" HorizontalAlignment="Left" Margin="597,326,0,0" VerticalAlignment="Top" Height="60" Width="123"/>
+        <!-- enter of the admin -->
+        <Button Content="admin" HorizontalAlignment="Left" Margin="81,326,0,0" VerticalAlignment="Top" Height="60" Width="142" Click="button_Click"/>
+        <!-- enter of the engineers -->
+        <Button Content="engineer" HorizontalAlignment="Left" Margin="226,326,0,0" VerticalAlignment="Top" Height="60" Width="152" Click="Button_Click_2"/>
+        <!-- botton for inital data -->
+        <Button Content="initDB" HorizontalAlignment="Left" Margin="597,326,0,0" VerticalAlignment="Top" Height="60" Width="123" Click="Button_Click_3"/>
+        
+        <Button Content="Handle Engineers" HorizontalAlignment="Left" Margin="469,326,0,0" VerticalAlignment="Top" Height="60" Width="123" Click="btnEngineers_Click"/>
 
     </Grid>
 </Window>

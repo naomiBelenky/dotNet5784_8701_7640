@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using PL.Engineer;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -20,8 +21,24 @@ namespace PL
         {
             InitializeComponent();
         }
+     
+        private void btnEngineers_Click(object sender, RoutedEventArgs e)
+        {
+            new EngineerListWindow().Show();
+
+        }
 
         private void button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
         {
 
         }
