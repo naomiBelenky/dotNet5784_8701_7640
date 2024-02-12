@@ -21,24 +21,26 @@ namespace PL
         {
             InitializeComponent();
         }
-     
+
         private void btnEngineers_Click(object sender, RoutedEventArgs e)
         {
             new EngineerListWindow().Show();
 
         }
 
-        private void button_Click(object sender, RoutedEventArgs e)
+        private void btnInit_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to initialize data?", "Yes", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+                DalTest.Initialization.Do();
+        }
+
+        private void btnEngineer_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Button_Click_3(object sender, RoutedEventArgs e)
+        private void btnAdmin_Click(object sender, RoutedEventArgs e)
         {
 
         }
