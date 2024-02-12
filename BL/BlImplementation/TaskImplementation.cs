@@ -301,7 +301,7 @@ internal class TaskImplementation : ITask
         foreach (BO.TaskInList dependOnTask in links)
         {
             DO.Task fullTask = _dal.Task.Read(dependOnTask.Id) ?? throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist");
-            if (fullTask.PlanToStart == null) throw new BO.BlForbiddenInThisStage($"Task with ID={dependOnTask} hasn't been schedualed yet");
+            if (fullTask.PlanToStart == null) throw new BO.BlForbiddenInThisStage($"Task with ID={dependOnTask.Id} hasn't been schedualed yet");
             if (date < getPlanToFinish(fullTask)) throw new BO.BlForbiddenInThisStage($"Task with ID={dependOnTask.Id} isn't planned to be finished in time");
         }
 
