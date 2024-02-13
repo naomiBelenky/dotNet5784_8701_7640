@@ -17,6 +17,6 @@ public class TaskInEngineer
 
     public override string ToString()
     {
-        return ($" Id: {Id}\n Name: {Name}\n");
+        return ($" Id: {Id}, Name: {Name}\n");
     }
 }

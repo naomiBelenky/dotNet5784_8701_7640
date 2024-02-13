@@ -87,7 +87,7 @@ internal class TaskImplementation : ITask
             task.Engineer = new BO.EngineerInTask    //filling the info about the engineer working on the task
             {
                 Id = (int)doTask.EngineerID,
-                Name = (_dal.Engineer.Read(id) ??
+                Name = (_dal.Engineer.Read((int)doTask.EngineerID) ??
                     throw new BO.BlDoesNotExistException($"Engineer with ID={id} does Not exist")).FullName
                 //if the Read returns an engineer, assigning his name to the EngineerInTask
             };
