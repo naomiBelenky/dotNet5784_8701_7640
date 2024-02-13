@@ -153,8 +153,8 @@ namespace BlTest
                         Id = id,
                         Name = name,
                         Description = descreption,
-                        Creation = DateTime.Now,
-                        Status = BO.Status.Unscheduled,
+                        //Creation = DateTime.Now,  //isn't supposed to be now
+                        //Status = BO.Status.Unscheduled,
                         Links = prevTasks,
 
                         Duration = duration,

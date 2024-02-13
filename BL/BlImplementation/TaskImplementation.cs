@@ -226,29 +226,34 @@ internal class TaskImplementation : ITask
         if (task.Name == "") throw new BO.BlInformationIsntValid("name is not valid");
 
         DO.Task? tempTask = _dal.Task.Read(task.Id);
-        if (tempTask == null) throw new BO.BlAlreadyExistsException($"Task with ID={task.Id} already exists");
+        if (tempTask == null) throw new BO.BlDoesNotExistException($"Task with ID={task.Id} does not exists");
 
         //If the schedule has already been set, check that only the fields allowed for update have been updated
         if (Factory.Get().getStage() == BO.Stage.Execution)
         {
-            List<DO.Link> tempTaskLinks = _dal.Link.ReadAll(link => link.NextTask == task.Id).ToList(); //a list of all the tasks that 'task' depends on
+            List<DO.Link> dalTaskLinks = _dal.Link.ReadAll(link => link.NextTask == task.Id).ToList(); //a list of all the tasks that 'task' depends on
             List<DO.Link> taskLinks = new List<DO.Link>();  //the list of tasks that the user wants 'task' to depend on
             if (task.Links != null)
             {
                 foreach (var taskIn in task.Links)
                 {
-                    DO.Link? link = _dal.Link.Read(link => link.PrevTask == taskIn.Id);
-                    if (link != null)
-                        taskLinks.Add(link);
+                    DO.Link link = new DO.Link(0, taskIn.Id, task.Id);
+                    taskLinks.Add(link);
                 }
             }
 
-            if (task.Id != tempTask.TaskID || (int)task.Difficulty != (int)tempTask.Difficulty ||/*task.Milestone!=tempTask.Milestone||*/
-                              task.Creation != tempTask.Creation || task.PlanToStart != tempTask.PlanToStart
-                              || task.StartWork != tempTask.StartWork || task.Deadline != tempTask.Deadline
-                              || task.FinishDate != tempTask.FinishDate || (task.Links != null
-                              && taskLinks.SequenceEqual(tempTaskLinks)))   //checking if the links are the same
-            { throw new BO.BlForbiddenInThisStage("Updating these parameters is prohibited after the project schedule is created"); }
+            //if (task.Id != tempTask.TaskID || (int)task.Difficulty != (int)tempTask.Difficulty ||/*task.Milestone!=tempTask.Milestone||*/
+            //                  task.Creation != tempTask.Creation || task.PlanToStart != tempTask.PlanToStart
+            //                  || task.StartWork != tempTask.StartWork || task.Deadline != tempTask.Deadline
+            //                  || task.FinishDate != tempTask.FinishDate || (task.Links != null
+            //                  && taskLinks.SequenceEqual(dalTaskLinks)))   //checking if the links are the same
+            //{ throw new BO.BlForbiddenInThisStage("Updating these parameters is prohibited after the project schedule is created"); }
+           
+            if (task.Creation != tempTask.Creation || task.PlanToStart != tempTask.PlanToStart
+                             || task.StartWork != tempTask.StartWork || task.Deadline != tempTask.Deadline
+                              || task.FinishDate != tempTask.FinishDate) throw new BO.BlForbiddenInThisStage("Updating dates is prohibited after the project schedule is created");
+            if (task.Links != null && !taskLinks.SequenceEqual(dalTaskLinks))   //checking if the links are the same
+            { throw new BO.BlForbiddenInThisStage("Updating dependencies is prohibited after the project schedule is created"); }
         }
         //If we are here, it means that all the tests passed successfully:)
 
@@ -375,7 +380,7 @@ internal class TaskImplementation : ITask
 
         IEnumerable<DateTime?> dates = links.Select
             (link => getPlanToFinish(_dal.Task.Read(link.PrevTask)  //making a collection of the PlanToFinish dates of the tasks
-            ?? throw new BO.BlDoesNotExistException($"Task with ID={id} does not exist")));  //if one of the tasks doesn't have a startDate yet
+            ?? throw new BO.BlDoesNotExistException($"Task with ID={id} does not have a start date yet")));  //if one of the tasks doesn't have a startDate yet
 
         if (dates.Any(date => date == null)) return null;   //if one of the tasks doesn't have a startDate yet
         DateTime? suggestedDate = dates.Max();

@@ -28,7 +28,6 @@ internal class Bl : IBl
     {
         BO.Task fullTask = Task.Read(id) ?? throw new BO.BlDoesNotExistException($"Task with ID={id} does not exist");
         if (fullTask.PlanToStart != null) return;   //if the starting date is already set
-        fullTask.PlanToStart = DalApi.Factory.Get.getStartOrFinshDatesFromXml("startDate"); //setting the satrt date temporarily to be the start of project
 
         List<TaskInList>? prevTasks = fullTask.Links?.ToList() ?? new List<TaskInList>();   //if there are no links, creating an empty list
         foreach (var task in prevTasks)

@@ -24,8 +24,8 @@
             <Label Content="Label" HorizontalAlignment="Left" Margin="74,0,0,0" VerticalAlignment="Center" Height="26" Width="54" Grid.Column="0"/>
             <ComboBox HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1"/>
         </Grid>
-        <!-- list of engineers  -->
-        <ListView Margin="5" Grid.Row="1" ItemsSource="{Binding Path=CourseList}">
+        <!-- list of engineers -->
+        <ListView Margin="5" Grid.Row="1" ItemsSource="{Binding Path=EngineerList}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>

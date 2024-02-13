@@ -14,4 +14,9 @@ public class EngineerInTask
     /// Name of the engineer working on the task
     /// </summary>
     public string Name { get; init; }
+
+    public override string ToString()
+    {
+        return ($" Id: {Id}\n Name: {Name}\n");
+    }
 }
