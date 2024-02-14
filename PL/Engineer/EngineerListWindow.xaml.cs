@@ -19,6 +19,8 @@ namespace PL.Engineer
     /// </summary>
     public partial class EngineerListWindow : Window
     {
+        public BO.Level level { get; set; } = BO.Level.All;
+
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
 
         public IEnumerable<BO.Engineer> EngineerList
@@ -39,6 +41,13 @@ namespace PL.Engineer
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            EngineerList = (level == BO.Level.All) ?
+                s_bl?.Engineer.ReadAll()! : s_bl?.Engineer.ReadAll(item => item.InSemester == Semester)!;
 
         }
     }

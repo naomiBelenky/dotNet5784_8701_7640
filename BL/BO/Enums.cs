@@ -6,7 +6,9 @@ public enum Level
     AdvancedBeginner,
     Intermediate,
     Advanced,
-    Expert
+    Expert,
+    All
+
 }
 
 public enum Status
