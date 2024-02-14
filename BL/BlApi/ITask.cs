@@ -7,7 +7,7 @@ public interface ITask
     /// </summary>
     /// <param name="filter"> optional filtering of the tasks to read </param>
     /// <returns></returns>
-    public IEnumerable<BO.TaskInList> ReadAll(Func<bool>? filter = null); //Funk needs to get paramater?
+    public IEnumerable<BO.TaskInList> ReadAll(Func<BO.Task, bool>? filter = null); //Funk needs to get paramater?
     /// <summary>
     /// gets id and returns its task (throws exeption if doesnt find)
     /// </summary>
