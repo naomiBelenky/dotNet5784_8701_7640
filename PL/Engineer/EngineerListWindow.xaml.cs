@@ -47,7 +47,7 @@ namespace PL.Engineer
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             EngineerList = (level == BO.Level.All) ?
-                s_bl?.Engineer.ReadAll()! : s_bl?.Engineer.ReadAll(item => item.InSemester == Semester)!;
+                s_bl?.Engineer.ReadAll()! : s_bl?.Engineer.ReadAll(item => item.Level == level)!;
 
         }
     }

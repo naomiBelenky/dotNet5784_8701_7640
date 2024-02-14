@@ -7,6 +7,8 @@ public interface IBl
     public ITask Task { get; }
     public IMilestone MileStone { get; }
 
+    public void InitializeDB();
+
     /// <summary>
     /// return the stage of the progect (Planning or Execution)
     /// </summary>
