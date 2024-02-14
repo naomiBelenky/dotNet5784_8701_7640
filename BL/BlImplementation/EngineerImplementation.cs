@@ -114,7 +114,7 @@ internal class EngineerImplementation : IEngineer
                                                  Email = doEngineer.Email,
                                                  Level = (BO.Level)doEngineer.Level,
                                                  Cost = doEngineer.CostPerHour,
-                                             });
+                                             }).ToList();
             
             foreach (BO.Engineer engineer in temp)
             {
@@ -162,7 +162,7 @@ internal class EngineerImplementation : IEngineer
 
     private BO.Engineer doToBo(DO.Engineer doEng)
     {
-        BO.Engineer boEng =  new BO.Engineer()
+        return new BO.Engineer()
         {
             Id = doEng.EngineerID,
             Name = doEng.FullName,
@@ -170,14 +170,5 @@ internal class EngineerImplementation : IEngineer
             Level = (BO.Level)doEng.Level,
             Cost = doEng.CostPerHour
         };
-        //check if there is a task on track of the engineer
-        var task = _dal.Task.Read(item => item.EngineerID == doEng.EngineerID);
-
-        if (task!=null) //if found 
-        {
-            BO.TaskInEngineer temp = new BO.TaskInEngineer() { Id= task.TaskID, Name= task.Name };
-            boEng.Task = temp;
-        }
-        return boEng;
     }
 }
