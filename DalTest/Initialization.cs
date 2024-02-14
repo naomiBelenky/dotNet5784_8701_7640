@@ -4,6 +4,7 @@ using DalApi;
 using DO;
 using System.Xml.Linq;
 using Dal;
+using System.Data.Common;
 
 public static class Initialization
 {
@@ -128,6 +129,8 @@ public static class Initialization
 
     public static void Reset()
     {
+        
+
         //resetting the serial numbers to 1
         XElement config = XMLTools.LoadListFromXMLElement("data-config");
         config.Element("NextTaskId")!.Value = "1";
@@ -135,6 +138,8 @@ public static class Initialization
         config.Element("startDate")?.SetValue("");
         config.Element("finishDate")?.SetValue("");
         XMLTools.SaveListToXMLElement(config, "data-config");
+
+      
 
 
         DalApi.Factory.Get.Task.DeleteAll();
