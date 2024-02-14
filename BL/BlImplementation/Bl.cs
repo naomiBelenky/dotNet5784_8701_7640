@@ -14,6 +14,8 @@ internal class Bl : IBl
 
     public BO.Stage StageOfProject { get => StageOfProject; set => StageOfProject = value; }
 
+    public void InitializeDB() => DalTest.Initialization.Do();
+
     public Stage getStage()
     {
         XElement root = XMLTools.LoadListFromXMLElement("data-config");
