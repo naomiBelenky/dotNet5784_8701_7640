@@ -94,15 +94,11 @@ internal class EngineerImplementation : IEngineer
         };
     }
 
-    public void DeleteAll()  //delete all the antity objects in case of new initialization
+    public void DeleteAll()  //delete all the antity objects
     {
 
         XElement engineerList = XMLTools.LoadListFromXMLElement(s_engineers_xml);
         engineerList.RemoveAll();
-
-
-        //foreach (var item in s_engineers_xml)
-        //    Delete(item);
 
         XMLTools.SaveListToXMLElement(engineerList, s_engineers_xml);
     }

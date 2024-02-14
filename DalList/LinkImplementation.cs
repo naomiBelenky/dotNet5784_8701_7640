@@ -74,5 +74,6 @@ internal class LinkImplementation : ILink
 
     public void DeleteAll() //for stage 3
     {
+        DataSource.Links.Clear();
     }
 }

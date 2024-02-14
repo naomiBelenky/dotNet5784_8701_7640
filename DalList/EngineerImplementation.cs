@@ -76,6 +76,6 @@ internal class EngineerImplementation : IEngineer
 
     public void DeleteAll() //for stage 3
     {
-        
+        DataSource.Engineers.Clear();
     }
 }

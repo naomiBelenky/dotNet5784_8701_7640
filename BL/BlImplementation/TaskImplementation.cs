@@ -49,7 +49,7 @@ internal class TaskImplementation : ITask
         {
             DO.Task? tempTask = _dal.Task.Read(id);
             if (tempTask==null) throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist");
-            else if (tempTask.PlanToStart != null) throw new BO.BlForbiddenInThisStage("Deleting is prohibited after the project schedule is created");
+            //else if (tempTask.PlanToStart != null) throw new BO.BlForbiddenInThisStage("Deleting is prohibited after the project schedule is created");
 
             _dal.Task.Delete(id);
         }

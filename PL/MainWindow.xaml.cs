@@ -1,4 +1,5 @@
-﻿using PL.Engineer;
+﻿using BlApi;
+using PL.Engineer;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -32,7 +33,7 @@ namespace PL
         {
             MessageBoxResult result = MessageBox.Show("Are you sure you want to initialize data?", "Yes", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes)
-                DalTest.Initialization.Do();
+                Factory.Get().InitializeDB();
         }
 
         private void btnEngineer_Click(object sender, RoutedEventArgs e)
@@ -43,6 +44,11 @@ namespace PL
         private void btnAdmin_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void resetDB_Click(object sender, RoutedEventArgs e)
+        {
+            Factory.Get().ResetDB();
         }
     }
 }

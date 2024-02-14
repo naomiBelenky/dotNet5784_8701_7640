@@ -9,6 +9,9 @@ public interface IBl
 
     public void InitializeDB();
 
+    public void ResetDB();
+
+
     /// <summary>
     /// return the stage of the progect (Planning or Execution)
     /// </summary>

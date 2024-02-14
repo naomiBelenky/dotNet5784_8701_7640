@@ -116,22 +116,31 @@ public static class Initialization
         //s_dal = dal ?? throw new NullReferenceException("DAL object can not be null!"); //stage 2
         s_dal = DalApi.Factory.Get; //stage 4
 
+        //resetting the serial numbers to 1 and delete all the antity objects
+        Reset(); 
+        
+        createTasks();       
+        createLinks();       
+        createEngineers();
+
+        //s_dal.
+    }
+
+    public static void Reset()
+    {
         //resetting the serial numbers to 1
         XElement config = XMLTools.LoadListFromXMLElement("data-config");
-        config.Element("NextTaskId")!.Value= "1";
+        config.Element("NextTaskId")!.Value = "1";
         config.Element("NextLinkId")!.Value = "1";
         config.Element("startDate")?.SetValue("");
         config.Element("finishDate")?.SetValue("");
         XMLTools.SaveListToXMLElement(config, "data-config");
 
-        DalApi.Factory.Get.Task.DeleteAll();
-        //(The check for existing initial data is performed within the function "DeleteAll")
-        createTasks();
-        DalApi.Factory.Get.Link.DeleteAll();
-        createLinks();
-        DalApi.Factory.Get.Engineer.DeleteAll();
-        createEngineers();
 
-        //s_dal.
+        DalApi.Factory.Get.Task.DeleteAll();
+        Factory.Get.Engineer.DeleteAll();
+        DalApi.Factory.Get.Link.DeleteAll();
+        //(The check for existing initial data is performed within the function "DeleteAll")
+
     }
 }

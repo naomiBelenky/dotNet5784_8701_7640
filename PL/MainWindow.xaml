@@ -11,10 +11,12 @@
         <Button Content="admin" HorizontalAlignment="Left" Margin="81,326,0,0" VerticalAlignment="Top" Height="60" Width="142" Click="btnAdmin_Click"/>
         <!-- enter of the engineers -->
         <Button Content="engineer" HorizontalAlignment="Left" Margin="226,326,0,0" VerticalAlignment="Top" Height="60" Width="152" Click="btnEngineer_Click"/>
-        <!-- botton for inital data -->
+        <!-- botton for inital data base -->
         <Button Content="initDB" HorizontalAlignment="Left" Margin="597,326,0,0" VerticalAlignment="Top" Height="60" Width="123" Click="btnInit_Click"/>
-        
+        <!-- botton for view of engineers -->
         <Button Content="Handle Engineers" HorizontalAlignment="Left" Margin="469,326,0,0" VerticalAlignment="Top" Height="60" Width="123" Click="btnEngineers_Click"/>
+        <!-- botton for reset data base -->
+        <Button Content="resetDB" HorizontalAlignment="Left" Margin="597,265,0,0" VerticalAlignment="Top" Height="56" Width="123" Click="resetDB_Click"/>
 
     </Grid>
 </Window>

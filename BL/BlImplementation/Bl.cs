@@ -15,6 +15,7 @@ internal class Bl : IBl
     public BO.Stage StageOfProject { get => StageOfProject; set => StageOfProject = value; }
 
     public void InitializeDB() => DalTest.Initialization.Do();
+    public void ResetDB() => DalTest.Initialization.Reset();
 
     public Stage getStage()
     {

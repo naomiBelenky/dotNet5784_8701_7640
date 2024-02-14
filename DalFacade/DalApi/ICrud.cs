@@ -13,4 +13,5 @@ public interface ICrud<T> where T : class
     void Update(T item); //Updates entity object
     void Delete(int id); //Deletes an object by its Id
     void DeleteAll(); //delete all the antity objects in case of new initialization
+
 }
