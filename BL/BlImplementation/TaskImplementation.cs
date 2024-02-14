@@ -99,7 +99,7 @@ internal class TaskImplementation : ITask
         return task;
     }
 
-    public IEnumerable<BO.TaskInList> ReadAll(Func<bool>? filter = null)
+    public IEnumerable<BO.TaskInList> ReadAll(Func<BO.Task, bool>? filter = null)
     {
         if (filter == null)
         {
@@ -118,7 +118,7 @@ internal class TaskImplementation : ITask
         {
             // IEnumerable<BO.TaskInList> tasks1=(_dal.Task.ReadAll()).Where(filter()).select new 
             IEnumerable<BO.TaskInList> tasks = (from DO.Task item in _dal.Task.ReadAll()
-                                                where filter()
+                                                where filter(doToBo(item))
                                                 select new BO.TaskInList()
                                                 {
                                                     Id = item.TaskID!,
@@ -368,6 +368,24 @@ internal class TaskImplementation : ITask
             tasks.Add(newTask); //adding each task to the list of TaskInList
         }
         return tasks;
+    }
+    private BO.Task doToBo(DO.Task doTask)
+    {
+        return new BO.Task()
+        {
+            Id = doTask.TaskID,
+            Name = doTask.Name,
+            Description = doTask.Description,
+            Difficulty = (BO.Level)doTask.Difficulty,
+            Creation = (DateTime)doTask.Creation!,
+            PlanToStart = doTask.PlanToStart,
+            StartWork = doTask.StartWork,
+            Deadline = doTask.Deadline,
+            FinishDate = doTask.FinishDate,
+            Duration = doTask.TimeForTask,
+            Product = doTask.Product,
+            Notes = doTask.Notes,
+        };
     }
     #endregion
 

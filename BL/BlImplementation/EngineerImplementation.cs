@@ -79,7 +79,7 @@ internal class EngineerImplementation : IEngineer
         return eng;
     }
 
-    public IEnumerable<BO.Engineer> ReadAll(Func<bool>? filter = null)
+    public IEnumerable<BO.Engineer> ReadAll(Func<BO.Engineer, bool>? filter = null)
     {
         if (filter == null)
         {           
@@ -106,7 +106,7 @@ internal class EngineerImplementation : IEngineer
         else
         {
             IEnumerable<BO.Engineer> temp = (from DO.Engineer doEngineer in _dal.Engineer.ReadAll()
-                                             where filter()
+                                             where filter(doToBo(doEngineer))
                                              select new BO.Engineer()
                                              {
                                                  Id = doEngineer.EngineerID,
@@ -115,6 +115,7 @@ internal class EngineerImplementation : IEngineer
                                                  Level = (BO.Level)doEngineer.Level,
                                                  Cost = doEngineer.CostPerHour,
                                              });
+            
             foreach (BO.Engineer engineer in temp)
             {
                 DO.Task? task = _dal.Task.Read(item => item.EngineerID == engineer.Id);   //searching for the task that the engineer is responsible for
@@ -157,5 +158,26 @@ internal class EngineerImplementation : IEngineer
         {
             throw new BO.BlDoesNotExistException($"Engineer with ID={engineer.Id} does Not exist", message);
         }
+    }
+
+    private BO.Engineer doToBo(DO.Engineer doEng)
+    {
+        BO.Engineer boEng =  new BO.Engineer()
+        {
+            Id = doEng.EngineerID,
+            Name = doEng.FullName,
+            Email = doEng.Email,
+            Level = (BO.Level)doEng.Level,
+            Cost = doEng.CostPerHour
+        };
+        //check if there is a task on track of the engineer
+        var task = _dal.Task.Read(item => item.EngineerID == doEng.EngineerID);
+
+        if (task!=null) //if found 
+        {
+            BO.TaskInEngineer temp = new BO.TaskInEngineer() { Id= task.TaskID, Name= task.Name };
+            boEng.Task = temp;
+        }
+        return boEng;
     }
 }

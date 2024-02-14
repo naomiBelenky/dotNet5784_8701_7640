@@ -9,7 +9,7 @@ public interface IEngineer
     /// </summary>
     /// <param name="filter"></param>
     /// <returns></returns>
-    public IEnumerable<BO.Engineer> ReadAll(Func<bool>? filter = null); //Funk needs to get paramater?
+    public IEnumerable<BO.Engineer> ReadAll(Func<BO.Engineer, bool>? filter = null); //Funk needs to get paramater?
     /// <summary>
     /// gets id and returns its engineer (throws exeption if doesnt find)
     /// </summary>
