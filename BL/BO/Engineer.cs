@@ -30,4 +30,9 @@ public class Engineer
     /// The task the engineer is working on
     /// </summary>
     public BO.TaskInEngineer? Task {  get; set; }
+
+    public override string ToString()
+    {
+        return ($" Id: {Id}\n Name: {Name}\n Email: {Email}\n Level: {Level}\n Cost: {Cost}\n Task: {Task}\n");
+    }
 }

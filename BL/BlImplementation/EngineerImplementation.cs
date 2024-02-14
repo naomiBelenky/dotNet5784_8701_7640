@@ -82,7 +82,7 @@ internal class EngineerImplementation : IEngineer
     public IEnumerable<BO.Engineer> ReadAll(Func<bool>? filter = null)
     {
         if (filter == null)
-        {
+        {           
             IEnumerable<BO.Engineer> temp = (from DO.Engineer doEngineer in _dal.Engineer.ReadAll()
                                              select new BO.Engineer()
                                              {
@@ -91,12 +91,15 @@ internal class EngineerImplementation : IEngineer
                                                  Email = doEngineer.Email,
                                                  Level = (BO.Level)doEngineer.Level,
                                                  Cost = doEngineer.CostPerHour,
-                                             });
+                                             }).ToList();
             foreach (BO.Engineer engineer in temp)
             {
                 DO.Task? task = _dal.Task.Read(item => item.EngineerID == engineer.Id);   //searching for the task that the engineer is responsible for
                 if (task != null)
-                    engineer.Task = new BO.TaskInEngineer { Id = task.TaskID, Name = task.Name };
+                {
+                    BO.TaskInEngineer taskIn = new BO.TaskInEngineer() { Id= task.TaskID, Name= task.Name };
+                    engineer.Task = taskIn;
+                }
             }
             return temp;
         }
@@ -116,7 +119,10 @@ internal class EngineerImplementation : IEngineer
             {
                 DO.Task? task = _dal.Task.Read(item => item.EngineerID == engineer.Id);   //searching for the task that the engineer is responsible for
                 if (task != null)
-                    engineer.Task = new BO.TaskInEngineer { Id = task.TaskID, Name = task.Name };
+                {
+                    BO.TaskInEngineer taskIn = new BO.TaskInEngineer() { Id= task.TaskID, Name= task.Name };
+                    engineer.Task = taskIn;
+                }
             }
             return temp;
         }
@@ -137,7 +143,7 @@ internal class EngineerImplementation : IEngineer
             if (engineer.Task is not null)
             {
                 if (Factory.Get().getStage() == (BO.Stage.Planning)) throw new BO.BlForbiddenInThisStage("Can not assign a task to an engineer in the planning stage");
-                
+
                 var task = _dal.Task.Read(task => task.TaskID == engineer.Task!.Id) //reading the task that the engineer is responsible for
                     ?? throw new BO.BlDoesNotExistException($"task with id={engineer.Task.Id} does not exist");
                 if ((int)task.Difficulty > (int)engineer.Level) throw new BO.BlForbiddenInThisStage($"task with ID={task.TaskID} doesn't fit the engineer level");
