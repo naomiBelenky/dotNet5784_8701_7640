@@ -37,7 +37,7 @@
     <Creation>2023-09-18T00:00:00</Creation>
     <PlanToStart xsi:nil="true" />
     <StartWork xsi:nil="true" />
-    <TimeForTask>P1D</TimeForTask>
+    <TimeForTask>P2D</TimeForTask>
     <Deadline xsi:nil="true" />
     <FinishDate xsi:nil="true" />
     <EngineerID>0</EngineerID>
@@ -144,7 +144,7 @@
     <TaskID>11</TaskID>
     <Name>Security Engineering</Name>
     <Description>Protect systems, data</Description>
-    <Difficulty>AdvancedBeginner</Difficulty>
+    <Difficulty>Beginner</Difficulty>
     <Milestone>false</Milestone>
     <Creation>2023-10-25T00:00:00</Creation>
     <PlanToStart xsi:nil="true" />
@@ -214,7 +214,7 @@
     <TaskID>16</TaskID>
     <Name>Machine Learning Integration</Name>
     <Description>Integrate machine learning</Description>
-    <Difficulty>Expert</Difficulty>
+    <Difficulty>AdvancedBeginner</Difficulty>
     <Milestone>false</Milestone>
     <Creation>2023-10-10T00:00:00</Creation>
     <PlanToStart xsi:nil="true" />
@@ -261,7 +261,7 @@
     <Creation>2023-07-25T00:00:00</Creation>
     <PlanToStart xsi:nil="true" />
     <StartWork xsi:nil="true" />
-    <TimeForTask>P2D</TimeForTask>
+    <TimeForTask>P4D</TimeForTask>
     <Deadline xsi:nil="true" />
     <FinishDate xsi:nil="true" />
     <EngineerID>0</EngineerID>
