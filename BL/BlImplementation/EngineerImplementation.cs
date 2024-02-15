@@ -140,7 +140,7 @@ internal class EngineerImplementation : IEngineer
             if (double.IsNegative(engineer.Cost)) throw new BO.BlInformationIsntValid("cost is not valid");
 
 
-            if (engineer.Level<do)
+            //if (engineer.Level<do)
 
             _dal.Engineer.Update(doEng);    //if the information is valid, update the engineer in the data layer
 

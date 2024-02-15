@@ -65,17 +65,30 @@ namespace PL.Engineer
 
         private void btnAddUpdate_Click(object sender, RoutedEventArgs e)
         {
-            if(isAddMode) //if there is no engineer with this id, add a new engineer
+            try
             {
-                s_bl.Engineer.Add(Engineer);
-                MessageBox.Show("Engineer added successfully");
+                if (isAddMode) //if there is no engineer with this id, add a new engineer
+                {
+                    s_bl.Engineer.Add(Engineer);
+                    MessageBox.Show("Engineer added successfully");
+                }
+                else
+                {
+                    s_bl.Engineer.Update(Engineer);
+                    MessageBox.Show("Engineer updated successfully");
+                }
+                this.Close();
             }
-            else
+
+            catch (Exception ex)
             {
-                s_bl.Engineer.Update(Engineer);
-                MessageBox.Show("Engineer updated successfully");
+                string message = ex.Message + " " + ex.GetType()+ " ";
+                if (ex.InnerException != null)
+                    message += "Dal Exepttion";
+                
+                MessageBox.Show(message);
             }
-            this.Close();
+
         }
 
         
