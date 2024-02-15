@@ -27,7 +27,7 @@ namespace PL.Engineer
             set { SetValue(EngineerProperty, value); }
         }
 
-        public static readonly DependencyProperty EngineerProperty =
+        public static readonly DependencyProperty EngineerProperty  =
             DependencyProperty.Register("Engineer", typeof(BO.Engineer), typeof(EngineerWindow), new PropertyMetadata(null));
 
         public EngineerWindow()
