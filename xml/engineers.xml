@@ -77,4 +77,11 @@
     <Level>AdvancedBeginner</Level>
     <CostPerHour>2</CostPerHour>
   </Engineer>
+  <Engineer>
+    <EngineerID>232323232</EngineerID>
+    <FullName>hi</FullName>
+    <Email>hi@gmail.com</Email>
+    <Level>Beginner</Level>
+    <CostPerHour>9</CostPerHour>
+  </Engineer>
 </ArrayOfEngineer>

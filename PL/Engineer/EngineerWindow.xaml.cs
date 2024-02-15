@@ -30,16 +30,22 @@ namespace PL.Engineer
         public static readonly DependencyProperty EngineerProperty =
             DependencyProperty.Register("Engineer", typeof(BO.Engineer), typeof(EngineerWindow), new PropertyMetadata(null));
 
+        public bool isAddMode { get; }
+
         public EngineerWindow(int id = 0)
         {
             InitializeComponent();
             if (id == 0)
+            {
                 SetValue(EngineerProperty, new BO.Engineer());
+                isAddMode = true;
+            }
             else
                 try
                 {
-                    BO.Engineer engineer = s_bl.Engineer.Read(id) ?? throw new BO.BlDoesNotExistException($"Engineer with id {id} does not exist");
+                    BO.Engineer engineer = s_bl.Engineer.Read(id);
                     SetValue(EngineerProperty, engineer);
+                    isAddMode = false;
                 }
                 catch (BO.BlDoesNotExistException ex)
                 {
@@ -59,7 +65,7 @@ namespace PL.Engineer
 
         private void btnAddUpdate_Click(object sender, RoutedEventArgs e)
         {
-            if(s_bl.Engineer.Read(Engineer.Id) == null) //if there is no engineer with this id, add a new engineer
+            if(isAddMode) //if there is no engineer with this id, add a new engineer
             {
                 s_bl.Engineer.Add(Engineer);
                 MessageBox.Show("Engineer added successfully");
