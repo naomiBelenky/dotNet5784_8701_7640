@@ -74,6 +74,11 @@ namespace PL.Engineer
 
         }
 
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
 
 
         //private void AddButton_Click(object sender, RoutedEventArgs e)
