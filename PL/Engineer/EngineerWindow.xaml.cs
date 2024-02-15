@@ -21,18 +21,30 @@ namespace PL.Engineer
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
 
-        public BO.Engineer Enginner
+        public BO.Engineer Engineer
         {
             get { return (BO.Engineer)GetValue(EngineerProperty); }
             set { SetValue(EngineerProperty, value); }
         }
 
-        public static readonly DependencyProperty EngineerProperty  =
+        public static readonly DependencyProperty EngineerProperty =
             DependencyProperty.Register("Engineer", typeof(BO.Engineer), typeof(EngineerWindow), new PropertyMetadata(null));
 
-        public EngineerWindow()
+        public EngineerWindow(int id = 0)
         {
             InitializeComponent();
+            if (id == 0)
+                SetValue(EngineerProperty, new BO.Engineer());
+            else
+                try
+                {
+                    BO.Engineer engineer = s_bl.Engineer.Read(id) ?? throw new BO.BlDoesNotExistException($"Engineer with id {id} does not exist");
+                    SetValue(EngineerProperty, engineer);
+                }
+                catch (BO.BlDoesNotExistException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -43,6 +55,21 @@ namespace PL.Engineer
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void btnAddUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            if(s_bl.Engineer.Read(Engineer.Id) == null) //if there is no engineer with this id, add a new engineer
+            {
+                s_bl.Engineer.Add(Engineer);
+                MessageBox.Show("Engineer added successfully");
+            }
+            else
+            {
+                s_bl.Engineer.Update(Engineer);
+                MessageBox.Show("Engineer updated successfully");
+            }
+            this.Close();
         }
     }
 }

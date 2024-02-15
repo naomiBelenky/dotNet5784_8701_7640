@@ -53,9 +53,9 @@ internal class EngineerImplementation : IEngineer
 
     public BO.Engineer? Read(int id)
     {
-        DO.Engineer? doEng = _dal.Engineer.Read(id); 
+        DO.Engineer? doEng = _dal.Engineer.Read(id);
         if (doEng == null)
-            throw new BO.BlDoesNotExistException($"Engineer with ID={id} does Not exist");
+            return null;
 
         BO.Engineer eng = new BO.Engineer()
         {

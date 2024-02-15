@@ -39,15 +39,15 @@ namespace PL.Engineer
             EngineerList = s_bl?.Engineer.ReadAll()!;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             EngineerList = (level == BO.Level.All) ?
                 s_bl?.Engineer.ReadAll()! : s_bl?.Engineer.ReadAll(eng => eng.Level == level)!;
+        }
+
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            new EngineerWindow().ShowDialog();
         }
     }
 }
