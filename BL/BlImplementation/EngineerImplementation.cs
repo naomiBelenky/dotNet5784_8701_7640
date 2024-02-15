@@ -138,9 +138,7 @@ internal class EngineerImplementation : IEngineer
             if (string.IsNullOrEmpty(engineer.Name)) throw new BO.BlInformationIsntValid("name is not valid");
             if (!new EmailAddressAttribute().IsValid(engineer.Email)) throw new BO.BlInformationIsntValid("email adress is not valid");
             if (double.IsNegative(engineer.Cost)) throw new BO.BlInformationIsntValid("cost is not valid");
-
-
-            if (engineer.Level<do)
+            //if (engineer.Level)
 
             _dal.Engineer.Update(doEng);    //if the information is valid, update the engineer in the data layer
 

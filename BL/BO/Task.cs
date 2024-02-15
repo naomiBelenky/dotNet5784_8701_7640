@@ -79,6 +79,6 @@ public class Task
 
     public override string ToString()
     {
-        return $" Id: {Id}\n Name: {Name}\n Description: {Description}\n Creation: {Creation}\n Status: {Status}\n PlanToStart: {PlanToStart}\n StartWork: {StartWork}\n PlanToFinish: {PlanToFinish}\n Deadline: {Deadline}\n FinishDate: {FinishDate}\n Duration: {Duration}\n Product: {Product}\n Notes: {Notes}\n Engineer: {Engineer}\n Difficulty: {Difficulty}\n";
+        return $" Id: {Id}\n Name: {Name}\n Description: {Description}\n Creation: {Creation}\n Status: {Status}\n PlanToStart: {PlanToStart}\n StartWork: {StartWork}\n PlanToFinish: {PlanToFinish}\n Deadline: {Deadline}\n FinishDate: {FinishDate}\n Duration: {Duration}\n Product: {Product}\n Notes: {Notes}\n Engineer: {Engineer}\n Difficulty: {Difficulty}\n Dependencies: {Links}";
     }   //i didn't print Links
 }
