@@ -41,7 +41,7 @@ namespace PL.Engineer
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            EngineerList = ((level == BO.Level.All) ?
+             EngineerList = ((level == BO.Level.All) ?
                 s_bl?.Engineer.ReadAll()! : s_bl?.Engineer.ReadAll(eng => eng.Level == level)!)
                 .OrderBy(e => e.Id); // sort by ID so it will be easier to find the engineer in the list as a human
         }
