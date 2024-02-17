@@ -48,7 +48,7 @@ namespace PL
 
         private void resetDB_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Are you sure you want to initialize data?", "Yes", MessageBoxButton.YesNo);
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to reset data?", "Yes", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes)
                 Factory.Get().ResetDB();
         }
