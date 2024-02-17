@@ -8,14 +8,23 @@
         
         Title="EngineerWindow" Height="280" Width="220"
         DataContext="{Binding Engineer, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
-   
-
-
 
     <Window.Resources>
         <Style x:Key="LabelStyle" TargetType="Label">
             <!-- Set any common properties for your labels here -->
             <Setter Property="Margin" Value="5"/>
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="FontFamily" Value="Comic Sans MS" />
+            <Setter Property="FontSize" Value="12" />
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="FontFamily" Value="Comic Sans MS" />
+            <Setter Property="FontSize" Value="12" />
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="FontFamily" Value="Comic Sans MS" />
+            <Setter Property="FontSize" Value="12" />
         </Style>
     </Window.Resources>
 
