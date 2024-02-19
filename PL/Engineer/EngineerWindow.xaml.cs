@@ -53,16 +53,6 @@ namespace PL.Engineer
                 }
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
         private void btnAddUpdate_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -75,6 +65,7 @@ namespace PL.Engineer
                 else
                 {
                     s_bl.Engineer.Update(Engineer);
+                    
                     MessageBox.Show("Engineer updated successfully");
                 }
                 this.Close();
@@ -90,7 +81,5 @@ namespace PL.Engineer
             }
 
         }
-
-        
     }
 }

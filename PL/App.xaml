@@ -6,5 +6,6 @@
     <Application.Resources>
         <local:LevelsCollection x:Key="LevelsCollectionKey" />
         <local:ConvertIdToContent x:Key="ConverIdToContentKey"/>
+        <local:ConvertIdToBool x:Key="ConverIdToBoolKey"/>
     </Application.Resources>
 </Application>

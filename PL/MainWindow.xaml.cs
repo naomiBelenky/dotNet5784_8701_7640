@@ -23,12 +23,6 @@ namespace PL
             InitializeComponent();
         }
 
-        private void btnEngineers_Click(object sender, RoutedEventArgs e)
-        {
-            new EngineerListWindow().Show();
-
-        }
-
         private void btnInit_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult result = MessageBox.Show("Are you sure you want to initialize data?", "Yes", MessageBoxButton.YesNo);
@@ -43,7 +37,7 @@ namespace PL
 
         private void btnAdmin_Click(object sender, RoutedEventArgs e)
         {
-
+            new EngineerListWindow().Show();
         }
 
         private void resetDB_Click(object sender, RoutedEventArgs e)
