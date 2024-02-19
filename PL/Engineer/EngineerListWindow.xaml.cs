@@ -54,15 +54,6 @@ namespace PL.Engineer
                 .OrderBy(e => e.Id); // sort by ID so it will be easier to find the engineer in the list as a human
         }
 
-
-
-
-        private void AddButton_Click(object sender, RoutedEventArgs e)
-        {
-            new EngineerWindow().ShowDialog();
-            UpdateEngineerList();
-        }
-
         private void listView_DoubleClick(object sender, MouseButtonEventArgs e)
         {
             BO.Engineer? engineer = (sender as ListView)?.SelectedItem as BO.Engineer;
@@ -79,13 +70,10 @@ namespace PL.Engineer
 
         }
 
-
-
-        //private void AddButton_Click(object sender, RoutedEventArgs e)
-        //{
-
-        //}
-
-
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            new EngineerWindow().ShowDialog();
+            UpdateEngineerList();
+        }
     }
 }

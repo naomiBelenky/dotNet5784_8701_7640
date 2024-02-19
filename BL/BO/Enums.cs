@@ -17,7 +17,8 @@ public enum Status
     Scheduled,
     OnTrack,
     //InJeopardy, (if we are doing milestone)
-    Done
+    Done,
+    All
 }
 
 public enum Stage

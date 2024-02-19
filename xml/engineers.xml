@@ -1,13 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfEngineer>
   <Engineer>
-    <EngineerID>253228187</EngineerID>
-    <FullName>Avi Buchbut</FullName>
-    <Email>aviBuchbut@gmail.com</Email>
-    <Level>Advanced</Level>
-    <CostPerHour>167.42</CostPerHour>
-  </Engineer>
-  <Engineer>
     <EngineerID>317344069</EngineerID>
     <FullName>Eytan Benisty</FullName>
     <Email>eytanbenisty@gmail.com</Email>
@@ -41,5 +34,12 @@
     <Email>danmaz@gmail.com</Email>
     <Level>5</Level>
     <CostPerHour>485.4</CostPerHour>
+  </Engineer>
+  <Engineer>
+    <EngineerID>253228187</EngineerID>
+    <FullName>Avi Buchbut</FullName>
+    <Email>aviBuchbut@gmail.com</Email>
+    <Level>Expert</Level>
+    <CostPerHour>167.42</CostPerHour>
   </Engineer>
 </ArrayOfEngineer>

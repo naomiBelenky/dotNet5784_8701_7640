@@ -37,7 +37,7 @@ namespace PL
 
         private void btnAdmin_Click(object sender, RoutedEventArgs e)
         {
-            new EngineerListWindow().Show();
+            new AdminWindow().Show();
         }
 
         private void resetDB_Click(object sender, RoutedEventArgs e)
