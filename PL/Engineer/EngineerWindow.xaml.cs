@@ -57,7 +57,7 @@ namespace PL.Engineer
         {
             try
             {
-                if (isAddMode) //if there is no engineer with this id, add a new engineer
+                if (isAddMode)
                 {
                     s_bl.Engineer.Add(Engineer);
                     MessageBox.Show("Engineer added successfully");
@@ -81,5 +81,7 @@ namespace PL.Engineer
             }
 
         }
+
+        
     }
 }

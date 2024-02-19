@@ -128,9 +128,7 @@ public static class Initialization
     }
 
     public static void Reset()
-    {
-        
-
+    {       
         //resetting the serial numbers to 1
         XElement config = XMLTools.LoadListFromXMLElement("data-config");
         config.Element("NextTaskId")!.Value = "1";

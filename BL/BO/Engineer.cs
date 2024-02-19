@@ -31,8 +31,10 @@ public class Engineer
     /// </summary>
     public BO.TaskInEngineer? Task {  get; set; }
 
-    public override string ToString()
-    {
-        return ($" Id: {Id}\n Name: {Name}\n Email: {Email}\n Level: {Level}\n Cost: {Cost}\n Task: {Task}\n");
-    }
+    public override string ToString() => Tools.ToStringProperty(this);
+    //public override string ToString()
+    //{
+
+    //    return ($" Id: {Id}\n Name: {Name}\n Email: {Email}\n Level: {Level}\n Cost: {Cost}\n Task: {Task}\n");
+    //}
 }
