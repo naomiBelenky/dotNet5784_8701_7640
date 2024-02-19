@@ -19,7 +19,7 @@ namespace PL.Task
     /// </summary>
     public partial class TaskWindow : Window
     {
-        public TaskWindow()
+        public TaskWindow(int id = 0)
         {
             InitializeComponent();
         }

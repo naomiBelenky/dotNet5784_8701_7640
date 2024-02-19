@@ -39,6 +39,7 @@ namespace PL.Engineer
             EngineerList = s_bl?.Engineer.ReadAll()!;
         }
 
+        //the user can filter the engineers on the screens according to their level
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
              EngineerList = ((level == BO.Level.All) ?
