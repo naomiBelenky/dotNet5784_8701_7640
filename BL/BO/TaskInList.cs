@@ -23,8 +23,9 @@ public class TaskInList
     /// </summary>
     public BO.Status? Status { get; set; }
 
-    public override string ToString()
-    {
-        return ($" Id: {Id}\n Name: {Name}\n Description: {Description}\n Status: {Status}\n");
-    }
+    public override string ToString() => Tools.ToStringProperty(this);
+    //public override string ToString()
+    //{
+    //    return ($" Id: {Id}\n Name: {Name}\n Description: {Description}\n Status: {Status}\n");
+    //}
 }

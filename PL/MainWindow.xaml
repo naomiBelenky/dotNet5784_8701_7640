@@ -10,18 +10,14 @@
         <!-- Default font style for text-based controls -->
         <Style TargetType="Button">
             <Setter Property="FontFamily" Value="Comic Sans MS" />
-            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontSize" Value="16" />
         </Style>
     </Window.Resources>
     <Grid>
         <!-- enter of the admin -->
-        <Button Content="admin" HorizontalAlignment="Left" Margin="81,326,0,0" VerticalAlignment="Top" Height="60" Width="142" Click="btnAdmin_Click"/>
+        <Button Content="admin" HorizontalAlignment="Left" Margin="228,300,0,0" VerticalAlignment="Top" Height="60" Width="140" Click="btnAdmin_Click"/>
         <!-- enter of the engineers -->
-        <Button Content="engineer" HorizontalAlignment="Left" Margin="226,326,0,0" VerticalAlignment="Top" Height="60" Width="152" Click="btnEngineer_Click"/>
-        <!-- botton for inital data base -->
-        <Button Content="initDB" HorizontalAlignment="Left" Margin="597,326,0,0" VerticalAlignment="Top" Height="60" Width="123" Click="btnInit_Click"/>
-        <!-- botton for reset data base -->
-        <Button Content="resetDB" HorizontalAlignment="Left" Margin="597,265,0,0" VerticalAlignment="Top" Height="56" Width="123" Click="resetDB_Click"/>
+        <Button Content="engineer" HorizontalAlignment="Left" Margin="433,300,0,0" VerticalAlignment="Top" Height="60" Width="140" Click="btnEngineer_Click"/>
 
     </Grid>
 </Window>

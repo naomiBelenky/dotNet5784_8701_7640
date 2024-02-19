@@ -11,10 +11,9 @@ static internal class Tools
         string str = "";
         PropertyInfo[] T_properties = t.GetType().GetProperties();
 
-        foreach(var item in T_properties)
-        
-            str +=( item.Name, item.GetValue(t, null));
-        
+        foreach (var item in T_properties)
+            str += item.Name + ": " + item.GetValue(t, null) + '\n';
+
         return str;
     }
 }
