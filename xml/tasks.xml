@@ -1,40 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfTask xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Task>
-    <TaskID>6</TaskID>
-    <Name>Network Infrastructure</Name>
-    <Description>Manage data communication networks</Description>
-    <Difficulty>Beginner</Difficulty>
-    <Milestone>false</Milestone>
-    <Creation>2023-09-12T00:00:00</Creation>
-    <PlanToStart xsi:nil="true" />
-    <StartWork xsi:nil="true" />
-    <TimeForTask>P1D</TimeForTask>
-    <Deadline xsi:nil="true" />
-    <FinishDate xsi:nil="true" />
-    <EngineerID>0</EngineerID>
-  </Task>
-  <Task>
-    <TaskID>9</TaskID>
-    <Name>Robotics</Name>
-    <Description>Program robotic systems</Description>
+    <TaskID>1</TaskID>
+    <Name>Optimization</Name>
+    <Description>Improve, reduce costs</Description>
     <Difficulty>Advanced</Difficulty>
     <Milestone>false</Milestone>
-    <Creation>2023-09-10T00:00:00</Creation>
-    <PlanToStart xsi:nil="true" />
-    <StartWork xsi:nil="true" />
-    <TimeForTask>P6D</TimeForTask>
-    <Deadline xsi:nil="true" />
-    <FinishDate xsi:nil="true" />
-    <EngineerID>0</EngineerID>
-  </Task>
-  <Task>
-    <TaskID>10</TaskID>
-    <Name>Quality Assurance</Name>
-    <Description>Ensure product reliability</Description>
-    <Difficulty>Expert</Difficulty>
-    <Milestone>false</Milestone>
-    <Creation>2023-08-18T00:00:00</Creation>
+    <Creation>2023-10-28T00:00:00</Creation>
     <PlanToStart xsi:nil="true" />
     <StartWork xsi:nil="true" />
     <TimeForTask>P2D</TimeForTask>
@@ -43,169 +15,15 @@
     <EngineerID>0</EngineerID>
   </Task>
   <Task>
-    <TaskID>11</TaskID>
-    <Name>Security Engineering</Name>
-    <Description>Protect systems, data</Description>
-    <Difficulty>Intermediate</Difficulty>
+    <TaskID>2</TaskID>
+    <Name>Automation</Name>
+    <Description>Design automated solutions</Description>
+    <Difficulty>Beginner</Difficulty>
     <Milestone>false</Milestone>
-    <Creation>2023-09-29T00:00:00</Creation>
-    <PlanToStart xsi:nil="true" />
-    <StartWork xsi:nil="true" />
-    <TimeForTask>P5D</TimeForTask>
-    <Deadline xsi:nil="true" />
-    <FinishDate xsi:nil="true" />
-    <EngineerID>0</EngineerID>
-  </Task>
-  <Task>
-    <TaskID>12</TaskID>
-    <Name>Energy Management</Name>
-    <Description>Design efficient energy solutions</Description>
-    <Difficulty>AdvancedBeginner</Difficulty>
-    <Milestone>false</Milestone>
-    <Creation>2023-09-09T00:00:00</Creation>
-    <PlanToStart xsi:nil="true" />
-    <StartWork xsi:nil="true" />
-    <TimeForTask>P3D</TimeForTask>
-    <Deadline xsi:nil="true" />
-    <FinishDate xsi:nil="true" />
-    <EngineerID>0</EngineerID>
-  </Task>
-  <Task>
-    <TaskID>14</TaskID>
-    <Name>AR Development</Name>
-    <Description>Create AR applications</Description>
-    <Difficulty>Expert</Difficulty>
-    <Milestone>false</Milestone>
-    <Creation>2023-12-04T00:00:00</Creation>
+    <Creation>2023-09-18T00:00:00</Creation>
     <PlanToStart xsi:nil="true" />
     <StartWork xsi:nil="true" />
     <TimeForTask>P6D</TimeForTask>
-    <Deadline xsi:nil="true" />
-    <FinishDate xsi:nil="true" />
-    <EngineerID>0</EngineerID>
-  </Task>
-  <Task>
-    <TaskID>15</TaskID>
-    <Name>UI Design</Name>
-    <Description>Design visual elements</Description>
-    <Difficulty>Advanced</Difficulty>
-    <Milestone>false</Milestone>
-    <Creation>2023-08-06T00:00:00</Creation>
-    <PlanToStart xsi:nil="true" />
-    <StartWork xsi:nil="true" />
-    <TimeForTask>P6D</TimeForTask>
-    <Deadline xsi:nil="true" />
-    <FinishDate xsi:nil="true" />
-    <EngineerID>0</EngineerID>
-  </Task>
-  <Task>
-    <TaskID>16</TaskID>
-    <Name>Machine Learning Integration</Name>
-    <Description>Integrate machine learning</Description>
-    <Difficulty>Advanced</Difficulty>
-    <Milestone>false</Milestone>
-    <Creation>2023-10-28T00:00:00</Creation>
-    <PlanToStart xsi:nil="true" />
-    <StartWork xsi:nil="true" />
-    <TimeForTask>P1D</TimeForTask>
-    <Deadline xsi:nil="true" />
-    <FinishDate xsi:nil="true" />
-    <EngineerID>0</EngineerID>
-  </Task>
-  <Task>
-    <TaskID>17</TaskID>
-    <Name>Structural Analysis</Name>
-    <Description>Analyze structural integrity</Description>
-    <Difficulty>AdvancedBeginner</Difficulty>
-    <Milestone>false</Milestone>
-    <Creation>2023-10-20T00:00:00</Creation>
-    <PlanToStart xsi:nil="true" />
-    <StartWork xsi:nil="true" />
-    <TimeForTask>P3D</TimeForTask>
-    <Deadline xsi:nil="true" />
-    <FinishDate xsi:nil="true" />
-    <EngineerID>0</EngineerID>
-  </Task>
-  <Task>
-    <TaskID>18</TaskID>
-    <Name>Control Systems Engineering</Name>
-    <Description>Design dynamic control</Description>
-    <Difficulty>Beginner</Difficulty>
-    <Milestone>false</Milestone>
-    <Creation>2023-10-10T00:00:00</Creation>
-    <PlanToStart xsi:nil="true" />
-    <StartWork xsi:nil="true" />
-    <TimeForTask>P6D</TimeForTask>
-    <Deadline xsi:nil="true" />
-    <FinishDate xsi:nil="true" />
-    <EngineerID>0</EngineerID>
-  </Task>
-  <Task>
-    <TaskID>19</TaskID>
-    <Name>CAD Modeling</Name>
-    <Description>Create 3D models</Description>
-    <Difficulty>Beginner</Difficulty>
-    <Milestone>false</Milestone>
-    <Creation>2023-07-25T00:00:00</Creation>
-    <PlanToStart xsi:nil="true" />
-    <StartWork xsi:nil="true" />
-    <TimeForTask>P1D</TimeForTask>
-    <Deadline xsi:nil="true" />
-    <FinishDate xsi:nil="true" />
-    <EngineerID>0</EngineerID>
-  </Task>
-  <Task>
-    <TaskID>20</TaskID>
-    <Name>Sustainable Design</Name>
-    <Description>Eco-friendly project design</Description>
-    <Difficulty>AdvancedBeginner</Difficulty>
-    <Milestone>false</Milestone>
-    <Creation>2023-12-18T00:00:00</Creation>
-    <PlanToStart xsi:nil="true" />
-    <StartWork xsi:nil="true" />
-    <TimeForTask>P5D</TimeForTask>
-    <Deadline xsi:nil="true" />
-    <FinishDate xsi:nil="true" />
-    <EngineerID>0</EngineerID>
-  </Task>
-  <Task>
-    <TaskID>4</TaskID>
-    <Name>Algorithm Development</Name>
-    <Description>Craft complex algorithms</Description>
-    <Difficulty>Expert</Difficulty>
-    <Milestone>false</Milestone>
-    <Creation>2023-09-28T00:00:00</Creation>
-    <PlanToStart xsi:nil="true" />
-    <StartWork xsi:nil="true" />
-    <TimeForTask>P3D</TimeForTask>
-    <Deadline xsi:nil="true" />
-    <FinishDate xsi:nil="true" />
-    <EngineerID>0</EngineerID>
-  </Task>
-  <Task>
-    <TaskID>8</TaskID>
-    <Name>System Integration</Name>
-    <Description>Integrate for improved functionality</Description>
-    <Difficulty>Beginner</Difficulty>
-    <Milestone>false</Milestone>
-    <Creation>2023-09-15T00:00:00</Creation>
-    <PlanToStart xsi:nil="true" />
-    <StartWork xsi:nil="true" />
-    <TimeForTask>P1D</TimeForTask>
-    <Deadline xsi:nil="true" />
-    <FinishDate xsi:nil="true" />
-    <EngineerID>0</EngineerID>
-  </Task>
-  <Task>
-    <TaskID>13</TaskID>
-    <Name>Embedded Systems</Name>
-    <Description>Develop dedicated systems</Description>
-    <Difficulty>Advanced</Difficulty>
-    <Milestone>false</Milestone>
-    <Creation>2023-09-27T00:00:00</Creation>
-    <PlanToStart xsi:nil="true" />
-    <StartWork xsi:nil="true" />
-    <TimeForTask>P3D</TimeForTask>
     <Deadline xsi:nil="true" />
     <FinishDate xsi:nil="true" />
     <EngineerID>0</EngineerID>
@@ -214,9 +32,9 @@
     <TaskID>3</TaskID>
     <Name>Simulation</Name>
     <Description>Virtual models for testing</Description>
-    <Difficulty>Advanced</Difficulty>
+    <Difficulty>Intermediate</Difficulty>
     <Milestone>false</Milestone>
-    <Creation>2023-10-22T00:00:00</Creation>
+    <Creation>2023-08-13T00:00:00</Creation>
     <PlanToStart xsi:nil="true" />
     <StartWork xsi:nil="true" />
     <TimeForTask>P1D</TimeForTask>
@@ -225,43 +43,15 @@
     <EngineerID>0</EngineerID>
   </Task>
   <Task>
-    <TaskID>21</TaskID>
-    <Name>hello</Name>
-    <Description />
-    <Difficulty>AdvancedBeginner</Difficulty>
+    <TaskID>4</TaskID>
+    <Name>Algorithm Development</Name>
+    <Description>Craft complex algorithms</Description>
+    <Difficulty>Beginner</Difficulty>
     <Milestone>false</Milestone>
-    <Creation>2024-02-20T20:33:40.8277055+02:00</Creation>
+    <Creation>2023-10-03T00:00:00</Creation>
     <PlanToStart xsi:nil="true" />
     <StartWork xsi:nil="true" />
-    <TimeForTask xsi:nil="true" />
-    <Deadline xsi:nil="true" />
-    <FinishDate xsi:nil="true" />
-    <EngineerID>0</EngineerID>
-  </Task>
-  <Task>
-    <TaskID>22</TaskID>
-    <Name />
-    <Description>hi</Description>
-    <Difficulty>Advanced</Difficulty>
-    <Milestone>false</Milestone>
-    <Creation>2024-02-20T20:42:46.6869282+02:00</Creation>
-    <PlanToStart xsi:nil="true" />
-    <StartWork xsi:nil="true" />
-    <TimeForTask xsi:nil="true" />
-    <Deadline xsi:nil="true" />
-    <FinishDate xsi:nil="true" />
-    <EngineerID>0</EngineerID>
-  </Task>
-  <Task>
-    <TaskID>23</TaskID>
-    <Name>idk</Name>
-    <Description>something</Description>
-    <Difficulty>Expert</Difficulty>
-    <Milestone>false</Milestone>
-    <Creation>2024-02-20T20:44:35.6681812+02:00</Creation>
-    <PlanToStart xsi:nil="true" />
-    <StartWork xsi:nil="true" />
-    <TimeForTask xsi:nil="true" />
+    <TimeForTask>P2D</TimeForTask>
     <Deadline xsi:nil="true" />
     <FinishDate xsi:nil="true" />
     <EngineerID>0</EngineerID>
@@ -275,18 +65,18 @@
     <Creation>2023-07-01T00:00:00</Creation>
     <PlanToStart xsi:nil="true" />
     <StartWork xsi:nil="true" />
-    <TimeForTask>P3D</TimeForTask>
+    <TimeForTask>P5D</TimeForTask>
     <Deadline xsi:nil="true" />
     <FinishDate xsi:nil="true" />
-    <EngineerID>275361643</EngineerID>
+    <EngineerID>0</EngineerID>
   </Task>
   <Task>
-    <TaskID>2</TaskID>
-    <Name>Automation</Name>
-    <Description>Design automated solutions</Description>
-    <Difficulty>Beginner</Difficulty>
+    <TaskID>6</TaskID>
+    <Name>Network Infrastructure</Name>
+    <Description>Manage data communication networks</Description>
+    <Difficulty>Advanced</Difficulty>
     <Milestone>false</Milestone>
-    <Creation>2023-08-26T00:00:00</Creation>
+    <Creation>2023-09-24T00:00:00</Creation>
     <PlanToStart xsi:nil="true" />
     <StartWork xsi:nil="true" />
     <TimeForTask>P5D</TimeForTask>
@@ -295,12 +85,12 @@
     <EngineerID>0</EngineerID>
   </Task>
   <Task>
-    <TaskID>1</TaskID>
-    <Name>Optimization</Name>
-    <Description>Improve, reduce costs</Description>
-    <Difficulty>Advanced</Difficulty>
+    <TaskID>7</TaskID>
+    <Name>Data Analysis</Name>
+    <Description>Extract insights from datasets</Description>
+    <Difficulty>Beginner</Difficulty>
     <Milestone>false</Milestone>
-    <Creation>2023-09-08T00:00:00</Creation>
+    <Creation>2023-08-12T00:00:00</Creation>
     <PlanToStart xsi:nil="true" />
     <StartWork xsi:nil="true" />
     <TimeForTask>P6D</TimeForTask>
@@ -309,15 +99,183 @@
     <EngineerID>0</EngineerID>
   </Task>
   <Task>
-    <TaskID>7</TaskID>
-    <Name>Data Analysis</Name>
-    <Description>Extract insights from datasets</Description>
-    <Difficulty>Advanced</Difficulty>
+    <TaskID>8</TaskID>
+    <Name>System Integration</Name>
+    <Description>Integrate for improved functionality</Description>
+    <Difficulty>Intermediate</Difficulty>
     <Milestone>false</Milestone>
-    <Creation>2023-09-17T00:00:00</Creation>
+    <Creation>2023-09-18T00:00:00</Creation>
     <PlanToStart xsi:nil="true" />
     <StartWork xsi:nil="true" />
-    <TimeForTask>P4D</TimeForTask>
+    <TimeForTask>P5D</TimeForTask>
+    <Deadline xsi:nil="true" />
+    <FinishDate xsi:nil="true" />
+    <EngineerID>0</EngineerID>
+  </Task>
+  <Task>
+    <TaskID>9</TaskID>
+    <Name>Robotics</Name>
+    <Description>Program robotic systems</Description>
+    <Difficulty>Expert</Difficulty>
+    <Milestone>false</Milestone>
+    <Creation>2023-08-11T00:00:00</Creation>
+    <PlanToStart xsi:nil="true" />
+    <StartWork xsi:nil="true" />
+    <TimeForTask>P3D</TimeForTask>
+    <Deadline xsi:nil="true" />
+    <FinishDate xsi:nil="true" />
+    <EngineerID>0</EngineerID>
+  </Task>
+  <Task>
+    <TaskID>10</TaskID>
+    <Name>Quality Assurance</Name>
+    <Description>Ensure product reliability</Description>
+    <Difficulty>Advanced</Difficulty>
+    <Milestone>false</Milestone>
+    <Creation>2023-10-13T00:00:00</Creation>
+    <PlanToStart xsi:nil="true" />
+    <StartWork xsi:nil="true" />
+    <TimeForTask>P1D</TimeForTask>
+    <Deadline xsi:nil="true" />
+    <FinishDate xsi:nil="true" />
+    <EngineerID>0</EngineerID>
+  </Task>
+  <Task>
+    <TaskID>11</TaskID>
+    <Name>Security Engineering</Name>
+    <Description>Protect systems, data</Description>
+    <Difficulty>Expert</Difficulty>
+    <Milestone>false</Milestone>
+    <Creation>2023-08-03T00:00:00</Creation>
+    <PlanToStart xsi:nil="true" />
+    <StartWork xsi:nil="true" />
+    <TimeForTask>P1D</TimeForTask>
+    <Deadline xsi:nil="true" />
+    <FinishDate xsi:nil="true" />
+    <EngineerID>0</EngineerID>
+  </Task>
+  <Task>
+    <TaskID>12</TaskID>
+    <Name>Energy Management</Name>
+    <Description>Design efficient energy solutions</Description>
+    <Difficulty>AdvancedBeginner</Difficulty>
+    <Milestone>false</Milestone>
+    <Creation>2023-08-09T00:00:00</Creation>
+    <PlanToStart xsi:nil="true" />
+    <StartWork xsi:nil="true" />
+    <TimeForTask>P6D</TimeForTask>
+    <Deadline xsi:nil="true" />
+    <FinishDate xsi:nil="true" />
+    <EngineerID>0</EngineerID>
+  </Task>
+  <Task>
+    <TaskID>13</TaskID>
+    <Name>Embedded Systems</Name>
+    <Description>Develop dedicated systems</Description>
+    <Difficulty>AdvancedBeginner</Difficulty>
+    <Milestone>false</Milestone>
+    <Creation>2023-08-24T00:00:00</Creation>
+    <PlanToStart xsi:nil="true" />
+    <StartWork xsi:nil="true" />
+    <TimeForTask>P3D</TimeForTask>
+    <Deadline xsi:nil="true" />
+    <FinishDate xsi:nil="true" />
+    <EngineerID>0</EngineerID>
+  </Task>
+  <Task>
+    <TaskID>14</TaskID>
+    <Name>AR Development</Name>
+    <Description>Create AR applications</Description>
+    <Difficulty>Advanced</Difficulty>
+    <Milestone>false</Milestone>
+    <Creation>2023-12-04T00:00:00</Creation>
+    <PlanToStart xsi:nil="true" />
+    <StartWork xsi:nil="true" />
+    <TimeForTask>P3D</TimeForTask>
+    <Deadline xsi:nil="true" />
+    <FinishDate xsi:nil="true" />
+    <EngineerID>0</EngineerID>
+  </Task>
+  <Task>
+    <TaskID>15</TaskID>
+    <Name>UI Design</Name>
+    <Description>Design visual elements</Description>
+    <Difficulty>Intermediate</Difficulty>
+    <Milestone>false</Milestone>
+    <Creation>2023-08-25T00:00:00</Creation>
+    <PlanToStart xsi:nil="true" />
+    <StartWork xsi:nil="true" />
+    <TimeForTask>P1D</TimeForTask>
+    <Deadline xsi:nil="true" />
+    <FinishDate xsi:nil="true" />
+    <EngineerID>0</EngineerID>
+  </Task>
+  <Task>
+    <TaskID>16</TaskID>
+    <Name>Machine Learning Integration</Name>
+    <Description>Integrate machine learning</Description>
+    <Difficulty>Intermediate</Difficulty>
+    <Milestone>false</Milestone>
+    <Creation>2023-08-18T00:00:00</Creation>
+    <PlanToStart xsi:nil="true" />
+    <StartWork xsi:nil="true" />
+    <TimeForTask>P5D</TimeForTask>
+    <Deadline xsi:nil="true" />
+    <FinishDate xsi:nil="true" />
+    <EngineerID>0</EngineerID>
+  </Task>
+  <Task>
+    <TaskID>17</TaskID>
+    <Name>Structural Analysis</Name>
+    <Description>Analyze structural integrity</Description>
+    <Difficulty>Advanced</Difficulty>
+    <Milestone>false</Milestone>
+    <Creation>2023-08-23T00:00:00</Creation>
+    <PlanToStart xsi:nil="true" />
+    <StartWork xsi:nil="true" />
+    <TimeForTask>P6D</TimeForTask>
+    <Deadline xsi:nil="true" />
+    <FinishDate xsi:nil="true" />
+    <EngineerID>0</EngineerID>
+  </Task>
+  <Task>
+    <TaskID>18</TaskID>
+    <Name>Control Systems Engineering</Name>
+    <Description>Design dynamic control</Description>
+    <Difficulty>Intermediate</Difficulty>
+    <Milestone>false</Milestone>
+    <Creation>2023-10-24T00:00:00</Creation>
+    <PlanToStart xsi:nil="true" />
+    <StartWork xsi:nil="true" />
+    <TimeForTask>P3D</TimeForTask>
+    <Deadline xsi:nil="true" />
+    <FinishDate xsi:nil="true" />
+    <EngineerID>0</EngineerID>
+  </Task>
+  <Task>
+    <TaskID>19</TaskID>
+    <Name>CAD Modeling</Name>
+    <Description>Create 3D models</Description>
+    <Difficulty>Intermediate</Difficulty>
+    <Milestone>false</Milestone>
+    <Creation>2023-07-25T00:00:00</Creation>
+    <PlanToStart xsi:nil="true" />
+    <StartWork xsi:nil="true" />
+    <TimeForTask>P1D</TimeForTask>
+    <Deadline xsi:nil="true" />
+    <FinishDate xsi:nil="true" />
+    <EngineerID>0</EngineerID>
+  </Task>
+  <Task>
+    <TaskID>20</TaskID>
+    <Name>Sustainable Design</Name>
+    <Description>Eco-friendly project design</Description>
+    <Difficulty>Advanced</Difficulty>
+    <Milestone>false</Milestone>
+    <Creation>2023-12-18T00:00:00</Creation>
+    <PlanToStart xsi:nil="true" />
+    <StartWork xsi:nil="true" />
+    <TimeForTask>P2D</TimeForTask>
     <Deadline xsi:nil="true" />
     <FinishDate xsi:nil="true" />
     <EngineerID>0</EngineerID>
