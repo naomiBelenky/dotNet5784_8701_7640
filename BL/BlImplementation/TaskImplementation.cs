@@ -251,12 +251,11 @@ internal class TaskImplementation : ITask
                 }
             }
            
-            if (task.Creation != doTask.Creation || task.PlanToStart != doTask.PlanToStart
-                             || task.StartWork != doTask.StartWork || task.Deadline != doTask.Deadline
-                              || task.FinishDate != doTask.FinishDate) throw new BO.BlForbiddenInThisStage("Updating these dates is prohibited after the project schedule is created");
+            if (task.PlanToStart != doTask.PlanToStart) throw new BO.BlForbiddenInThisStage("Updating these dates is prohibited after the project schedule is created");
             if (task.Links != null && !taskLinks.SequenceEqual(dalTaskLinks))   //checking if the links are the same
             { throw new BO.BlForbiddenInThisStage("Updating dependencies is prohibited after the project schedule is created"); }
         }
+
         //If we are here, it means that all the tests passed successfully:)
 
         try

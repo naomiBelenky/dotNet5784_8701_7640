@@ -92,7 +92,7 @@
         <Label Content="Plan To Start:"  Grid.Row="4" Grid.Column="0" />
         <DatePicker Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center"  VerticalAlignment="Center"
                     SelectedDate ="{Binding PlanToStart, Mode=TwoWay, NotifyOnValidationError=true, 
-                        ValidatesOnExceptions=true}"/>
+                        ValidatesOnExceptions=true}" CalendarClosed="planToStartClosed"/>
 
         <Label Content="Plan To Finish:" Grid.Row="5" Grid.Column="0" />
         <DatePicker Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center"  VerticalAlignment="Center"
