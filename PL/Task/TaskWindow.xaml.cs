@@ -23,7 +23,7 @@ namespace PL.Task
         private bool isAddMode { get; set; }
 
         //private BO.Stage stage { get; set; } = BO.Stage.Planning;  //צריך לעשות שכשקובעים לו"ז זה ישתנה לשלב הביצוע
-        public TaskWindow(int id = 0)
+        public TaskWindow(int id = 0, bool isAddLinkMode = false)
         {
             InitializeComponent();
             if (id == 0)
@@ -77,5 +77,7 @@ namespace PL.Task
         {
 
         }
+
+       
     }
 }
