@@ -11,11 +11,11 @@ internal class TaskImplementation : ITask
 
         if (Factory.Get().getStage() != (BO.Stage.Planning)) throw new BO.BlForbiddenInThisStage("Can not add tasks after scheduling the project");
 
-        DO.Task doTask = new DO.Task(task.Id, task.Name, task.Description, (DO.Level)task.Difficulty) with { TimeForTask = task.Duration };
+        DO.Task doTask = new DO.Task(task.Id, task.Name, task.Description, (DO.Level)task.Difficulty) with { TimeForTask = task.Duration, Creation= DateTime.Now };
         try
         {
             if (task.Id < 0) throw new BO.BlInformationIsntValid("id is not valid");
-            if (task.Name == "") throw new BO.BlInformationIsntValid("name is not valid");
+            if (task.Name == null) throw new BO.BlInformationIsntValid("name is not valid");
 
 
             int id = _dal.Task.Create(doTask);  //if the data is valid, creating the task in the data layer
@@ -49,7 +49,7 @@ internal class TaskImplementation : ITask
         {
             DO.Task? tempTask = _dal.Task.Read(id);
             if (tempTask==null) throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist");
-            //else if (tempTask.PlanToStart != null) throw new BO.BlForbiddenInThisStage("Deleting is prohibited after the project schedule is created");
+            //else if (updatedTask.PlanToStart != null) throw new BO.BlForbiddenInThisStage("Deleting is prohibited after the project schedule is created");
 
             _dal.Task.Delete(id);
         }
@@ -60,7 +60,7 @@ internal class TaskImplementation : ITask
     }
 
 
-    public BO.Task? Read(int id)
+    public BO.Task Read(int id)
     {
         DO.Task? doTask = _dal.Task.Read(id) ?? throw new BO.BlDoesNotExistException($"Task with ID={id} does Not exist");
         BO.Task task = new BO.Task()
@@ -144,15 +144,15 @@ internal class TaskImplementation : ITask
 
     //        
     //        //Check which stage of the project are we in
-    //        DO.Task? tempTask = _dal.Task.Read(task.Id);
-    //        if (tempTask != null)
+    //        DO.Task? updatedTask = _dal.Task.Read(task.Id);
+    //        if (updatedTask != null)
     //            if (Factory.Get().getStage() == BO.Stage.Execution) 
     //            {
     //                //If the schedule has already been set, check that only the fields allowed for update have been updated
-    //                if (task.Id != tempTask.TaskID || (int)task.Difficulty != (int)tempTask.Difficulty ||/*task.Milestone!=tempTask.Milestone||*/
-    //                    task.Creation != tempTask.Creation || task.PlanToStart != tempTask.PlanToStart
-    //                    || task.StartWork != tempTask.StartWork || task.Deadline != tempTask.Deadline
-    //                    || task.FinishDate != tempTask.FinishDate || task.Links != null && task.Links.Count != counterDoLinks)
+    //                if (task.Id != updatedTask.TaskID || (int)task.Difficulty != (int)updatedTask.Difficulty ||/*task.Milestone!=updatedTask.Milestone||*/
+    //                    task.Creation != updatedTask.Creation || task.PlanToStart != updatedTask.PlanToStart
+    //                    || task.StartWork != updatedTask.StartWork || task.Deadline != updatedTask.Deadline
+    //                    || task.FinishDate != updatedTask.FinishDate || task.Links != null && task.Links.Count != counterDoLinks)
     //                { throw new BO.BlForbiddenInThisStage("Updating this parameters is prohibited after the project schedule is created"); }
     //            }
 
@@ -208,10 +208,10 @@ internal class TaskImplementation : ITask
     //        else
     //            tempID = task.Engineer.Id;
 
-    //        DO.Task doTask = new DO.Task(task.Id, task.Name, task.Description, (DO.Level)task.Difficulty,
+    //        DO.Task updatedTask = new DO.Task(task.Id, task.Name, task.Description, (DO.Level)task.Difficulty,
     //            false, task.Creation, task.PlanToStart, task.StartWork, task.Duration, task.Deadline,
     //            task.FinishDate, task.Product, task.Notes, tempID);
-    //        _dal.Task.Update(doTask);
+    //        _dal.Task.Update(updatedTask);
     //    }
 
     //    catch (DO.DalDoesNotExistException messege)
@@ -225,8 +225,17 @@ internal class TaskImplementation : ITask
         if (task.Id <= 0) throw new BO.BlInformationIsntValid("id is not valid");
         if (task.Name == "") throw new BO.BlInformationIsntValid("name is not valid");
 
-        DO.Task? tempTask = _dal.Task.Read(task.Id);
-        if (tempTask == null) throw new BO.BlDoesNotExistException($"Task with ID={task.Id} does not exists");
+        DO.Task? doTask = _dal.Task.Read(task.Id);
+        if (doTask == null) throw new BO.BlDoesNotExistException($"Task with ID={task.Id} does not exists");
+
+        //If the schedule has not been set yet, check that only the fields allowed for update have been updated
+        if (Factory.Get().getStage() == BO.Stage.Planning)
+        {
+            if (task.Creation != doTask.Creation || task.PlanToStart != doTask.PlanToStart
+                             || task.StartWork != doTask.StartWork || task.Deadline != doTask.Deadline
+                              || task.FinishDate != doTask.FinishDate)
+                throw new BO.BlForbiddenInThisStage("Updating dates is prohibited before the project schedule is created");
+        }
 
         //If the schedule has already been set, check that only the fields allowed for update have been updated
         if (Factory.Get().getStage() == BO.Stage.Execution)
@@ -241,17 +250,10 @@ internal class TaskImplementation : ITask
                     taskLinks.Add(link);
                 }
             }
-
-            //if (task.Id != tempTask.TaskID || (int)task.Difficulty != (int)tempTask.Difficulty ||/*task.Milestone!=tempTask.Milestone||*/
-            //                  task.Creation != tempTask.Creation || task.PlanToStart != tempTask.PlanToStart
-            //                  || task.StartWork != tempTask.StartWork || task.Deadline != tempTask.Deadline
-            //                  || task.FinishDate != tempTask.FinishDate || (task.Links != null
-            //                  && taskLinks.SequenceEqual(dalTaskLinks)))   //checking if the links are the same
-            //{ throw new BO.BlForbiddenInThisStage("Updating these parameters is prohibited after the project schedule is created"); }
            
-            if (task.Creation != tempTask.Creation || task.PlanToStart != tempTask.PlanToStart
-                             || task.StartWork != tempTask.StartWork || task.Deadline != tempTask.Deadline
-                              || task.FinishDate != tempTask.FinishDate) throw new BO.BlForbiddenInThisStage("Updating dates is prohibited after the project schedule is created");
+            if (task.Creation != doTask.Creation || task.PlanToStart != doTask.PlanToStart
+                             || task.StartWork != doTask.StartWork || task.Deadline != doTask.Deadline
+                              || task.FinishDate != doTask.FinishDate) throw new BO.BlForbiddenInThisStage("Updating these dates is prohibited after the project schedule is created");
             if (task.Links != null && !taskLinks.SequenceEqual(dalTaskLinks))   //checking if the links are the same
             { throw new BO.BlForbiddenInThisStage("Updating dependencies is prohibited after the project schedule is created"); }
         }
@@ -279,11 +281,11 @@ internal class TaskImplementation : ITask
             else
                 tempID = task.Engineer.Id;
 
-            DO.Task doTask = new DO.Task(task.Id, task.Name, task.Description, (DO.Level)task.Difficulty,
+            DO.Task updatedTask = new DO.Task(task.Id, task.Name, task.Description, (DO.Level)task.Difficulty,
                 false, task.Creation, task.PlanToStart, task.StartWork, task.Duration, task.Deadline,
                 task.FinishDate, task.Product, task.Notes, tempID);
 
-            _dal.Task.Update(doTask);
+            _dal.Task.Update(updatedTask);
         }
         catch (DO.DalDoesNotExistException messege)
         {

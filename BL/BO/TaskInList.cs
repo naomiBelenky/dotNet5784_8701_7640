@@ -11,13 +11,13 @@ public class TaskInList
     /// </summary>
     public int Id { get; init; }
     /// <summary>
-    /// Description of the task
-    /// </summary>
-    public required string Description { get; set; }
-    /// <summary>
     /// Name of the task
     /// </summary>
     public required string Name { get; init; }
+    /// <summary>
+    /// Description of the task
+    /// </summary>
+    public required string Description { get; set; }
     /// <summary>
     /// The status of the task (unscheduled, done...)
     /// </summary>
