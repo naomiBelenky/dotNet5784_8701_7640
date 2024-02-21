@@ -15,8 +15,9 @@ public class TaskInEngineer
     /// </summary>
     public string Name { get; init; }
 
-    public override string ToString()
-    {
-        return ($" Id: {Id}, Name: {Name}\n");
-    }
+    public override string ToString() => Tools.ToStringProperty(this);
+    //public override string ToString()
+    //{
+    //    return ($" Id: {Id}, Name: {Name}\n");
+    //}
 }

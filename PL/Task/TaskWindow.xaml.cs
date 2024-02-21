@@ -1,17 +1,6 @@
-﻿using PL.Engineer;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+
 
 namespace PL.Task
 {
@@ -20,7 +9,6 @@ namespace PL.Task
     /// </summary>
     public partial class TaskWindow : Window
     {
-
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
 
         public BO.Task Task
@@ -32,8 +20,11 @@ namespace PL.Task
         public static readonly DependencyProperty CurrentTaskProperty =
             DependencyProperty.Register("Task", typeof(BO.Task), typeof(TaskWindow), new PropertyMetadata(null));
 
-        public bool isAddMode { get; }
+        private bool isAddMode { get; set; }
 
+        //private BO.Stage stage { get; set; } = s_bl.getStage();   //לא יודעת אם לשים את זה כאן או  ברשימת משימות... נראלי כאן יותר מתאים
+
+        //private BO.Stage stage { get; set; } = BO.Stage.Planning;  //צריך לעשות שכשקובעים לו"ז זה ישתנה לשלב הביצוע
         public TaskWindow(int id = 0)
         {
             InitializeComponent();
@@ -53,6 +44,7 @@ namespace PL.Task
                 {
                     MessageBox.Show(ex.Message);
                 }
+  
         }
 
         private void AddOrUpdateButton_Click(object sender, RoutedEventArgs e)
@@ -77,16 +69,15 @@ namespace PL.Task
             {
                 string message = ex.Message + " " + ex.GetType() + " ";
                 if (ex.InnerException != null)
-                    message += "Dal Exepttion";
+                    message += "Dal Exception";
 
                 MessageBox.Show(message);
             }
 
         }
+        private void addDependencyBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
-
-
-
-
 }
-

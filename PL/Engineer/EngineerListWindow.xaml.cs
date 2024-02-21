@@ -66,10 +66,15 @@ namespace PL.Engineer
 
         }
 
-        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
+        //private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    BO.Engineer? engineer = (sender as ListView)?.SelectedItem as BO.Engineer;
 
-        }
+        //    if (engineer == null) { /*exeption*/ }
+
+        //    new EngineerWindow(engineer!.Id).ShowDialog();
+        //    UpdateEngineerList();
+        //}
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {

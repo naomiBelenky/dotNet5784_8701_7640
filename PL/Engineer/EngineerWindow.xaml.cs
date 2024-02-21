@@ -53,7 +53,7 @@ namespace PL.Engineer
                 }
         }
 
-        private void btnAddUpdate_Click(object sender, RoutedEventArgs e)
+        private void BtnAddUpdate_Click(object sender, RoutedEventArgs e)
         {
             try
             {

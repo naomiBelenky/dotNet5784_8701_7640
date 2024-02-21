@@ -13,7 +13,7 @@ public interface ITask
     /// </summary>
     /// <param name="id"> Id ot the task to read </param>
     /// <returns></returns>
-    public BO.Task? Read(int id);
+    public BO.Task Read(int id);
     /// <summary>
     /// gets a task and adds it to the data.
     /// </summary>

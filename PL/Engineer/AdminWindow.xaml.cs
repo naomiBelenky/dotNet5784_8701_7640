@@ -1,4 +1,6 @@
-﻿using PL.Task;
+﻿using BlApi;
+using PL.Engineer;
+using PL.Task;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +35,20 @@ namespace PL.Engineer
         private void TaskBtn_Click(object sender, RoutedEventArgs e)
         {
             new TaskForList().Show();
+        }
+
+        private void btnInit_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to initialize data?", "Yes", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+                Factory.Get().InitializeDB();
+        }
+
+        private void resetDB_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to reset data?", "Yes", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+                Factory.Get().ResetDB();
         }
     }
 }

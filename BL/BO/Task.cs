@@ -77,8 +77,9 @@ public class Task
     /// </summary>
     public BO.Level Difficulty { get; set; }
 
-    public override string ToString()
-    {
-        return $" Id: {Id}\n Name: {Name}\n Description: {Description}\n Creation: {Creation}\n Status: {Status}\n PlanToStart: {PlanToStart}\n StartWork: {StartWork}\n PlanToFinish: {PlanToFinish}\n Deadline: {Deadline}\n FinishDate: {FinishDate}\n Duration: {Duration}\n Product: {Product}\n Notes: {Notes}\n Engineer: {Engineer}\n Difficulty: {Difficulty}\n Dependencies: {Links}";
-    }   //i didn't print Links
+    public override string ToString() => Tools.ToStringProperty(this);
+    //public override string ToString()
+    //{
+    //    return $" Id: {Id}\n Name: {Name}\n Description: {Description}\n Creation: {Creation}\n Status: {Status}\n PlanToStart: {PlanToStart}\n StartWork: {StartWork}\n PlanToFinish: {PlanToFinish}\n Deadline: {Deadline}\n FinishDate: {FinishDate}\n Duration: {Duration}\n Product: {Product}\n Notes: {Notes}\n Engineer: {Engineer}\n Difficulty: {Difficulty}\n Dependencies: {Links}";
+    //}   //i didn't print Links
 }

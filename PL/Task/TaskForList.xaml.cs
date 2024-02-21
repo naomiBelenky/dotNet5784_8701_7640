@@ -46,32 +46,32 @@ namespace PL.Task
                 .OrderBy(t => t.Id);
         }
 
-        //void UpdateTaskList()
-        //{
-        //    TaskList = ((status == BO.Status.All) ?
-        //        s_bl?.Task.ReadAll()! : s_bl?.Task.ReadAll(task => task.Status == status)!)
-        //        .OrderBy(t => t.Id);
-        //}
+        void UpdateTaskList()
+        {
+            TaskList = ((status == BO.Status.All) ?
+                s_bl?.Task.ReadAll()! : s_bl?.Task.ReadAll(task => task.Status == status)!)
+                .OrderBy(t => t.Id);
+        }
 
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //BO.TaskInList? task
-            //    = (sender as ListView)?.SelectedItem as BO.TaskInList;
 
-            //if (task == null) { /*exeption*/ }
-
-            //new TaskWindow(task!.Id).ShowDialog();
-            //UpdateTaskList();
         }
 
         private void listView_DoubleClick(object sender, EventArgs e)
         {
+            BO.TaskInList? task = (sender as ListView)?.SelectedItem as BO.TaskInList;
 
+            if (task == null) { /*exeption*/ }
+
+            new TaskWindow(task!.Id).ShowDialog();
+            UpdateTaskList();
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-
+            new TaskWindow().ShowDialog();
+            UpdateTaskList();
         }
     }
 }

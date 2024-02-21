@@ -22,14 +22,6 @@ namespace PL
         {
             InitializeComponent();
         }
-
-        private void btnInit_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBoxResult result = MessageBox.Show("Are you sure you want to initialize data?", "Yes", MessageBoxButton.YesNo);
-            if (result == MessageBoxResult.Yes)
-                Factory.Get().InitializeDB();
-        }
-
         private void btnEngineer_Click(object sender, RoutedEventArgs e)
         {
 
@@ -38,13 +30,6 @@ namespace PL
         private void btnAdmin_Click(object sender, RoutedEventArgs e)
         {
             new AdminWindow().Show();
-        }
-
-        private void resetDB_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBoxResult result = MessageBox.Show("Are you sure you want to reset data?", "Yes", MessageBoxButton.YesNo);
-            if (result == MessageBoxResult.Yes)
-                Factory.Get().ResetDB();
         }
     }
 }
