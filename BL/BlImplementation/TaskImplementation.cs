@@ -163,7 +163,7 @@ internal class TaskImplementation : ITask
                     taskLinks.Add(link);
                 }
             }
-           
+
             if (task.PlanToStart != doTask.PlanToStart) throw new BO.BlForbiddenInThisStage("Updating these dates is prohibited after the project schedule is created");
             if (task.Links != null && !taskLinks.SequenceEqual(dalTaskLinks))   //checking if the links are the same
             { throw new BO.BlForbiddenInThisStage("Updating dependencies is prohibited after the project schedule is created"); }
@@ -323,9 +323,9 @@ internal class TaskImplementation : ITask
     }
 
     public bool checkLink(int idPrevTask, int idNextTask)
-        //אני בודקת האם השניה יכולה להיות תלויה בראשונה ולכן אני בודקת אם הראשונה תלויה בשניה
-        //לכן אני מחפשת את כל מי שתלוי בראשונה
-        //check if the second task can be depended in the first task without curcle dependencies
+    //אני בודקת האם השניה יכולה להיות תלויה בראשונה ולכן אני בודקת אם הראשונה תלויה בשניה
+    //לכן אני מחפשת את כל מי שתלוי בראשונה
+    //check if the second task can be depended in the first task without curcle dependencies
     {
         //בודקת עבור כל מי שתלוי בי
         List<DO.Link> dependedsOnSecond = (_dal.Link.ReadAll(link => link.NextTask == idPrevTask)).ToList();
@@ -335,13 +335,13 @@ internal class TaskImplementation : ITask
         foreach (var item in dependedsOnSecond)
         {
             //האם אני תלויה בו
-            if (item.PrevTask == idNextTask) 
+            if (item.PrevTask == idNextTask)
                 return false;
 
             if(!checkLink(item.PrevTask, idNextTask))
                 return false;
         }
-        
+
         return true;
     }
 }
