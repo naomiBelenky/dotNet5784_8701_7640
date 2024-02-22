@@ -47,7 +47,7 @@ namespace PL.Task
             if (callingWindow is AdminWindow)
                 TaskList = s_bl?.Task.ReadAll().OrderBy(t => t.Id)!;
             else if (callingWindow is PlanningTaskWindow)
-                TaskList = s_bl?.Task.ReadAll(/*להוסיף את הפונקציה שמסננת את המשימות שמותר*/).OrderBy(t => t.Id)!;
+                TaskList = s_bl?.Task.ReadAll().OrderBy(t => t.Id)!;
             //להוסיף עוד אחד שאם זה מהחלון של המהנדס אז לסנן לפי הרמה שלו ומטה
         }
         
