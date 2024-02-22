@@ -68,7 +68,7 @@ namespace PL.Task
             BO.TaskInList? task = (sender as ListView)?.SelectedItem as BO.TaskInList;
             if (task == null) { /*exeption*/ }
 
-            if (newNextTask != 0)  
+            if (newNextTask != 0)
             {
                 //s_bl.Task.Read(task!.Id);
                 //ליצור משימה חדשה עם תלות חדשה
@@ -81,16 +81,17 @@ namespace PL.Task
             }
             else
             {
-                
 
-                
 
-            if (stage == BO.Stage.Execution)
-                new TaskWindow(task!.Id).ShowDialog();
-            else
-                new PlanningTaskWindow(task!.Id).ShowDialog();
 
-            UpdateTaskList();
+
+                if (stage == BO.Stage.Execution)
+                    new TaskWindow(task!.Id).ShowDialog();
+                else
+                    new PlanningTaskWindow(task!.Id).ShowDialog();
+
+                UpdateTaskList();
+            }
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
