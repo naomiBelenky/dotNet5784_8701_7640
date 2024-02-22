@@ -337,12 +337,11 @@ internal class TaskImplementation : ITask
             //האם אני תלויה בו
             if (item.PrevTask == idNextTask) 
                 return false;
-            checkLink(item.PrevTask, idNextTask);
+
+            if(!checkLink(item.PrevTask, idNextTask))
+                return false;
         }
         
         return true;
-        
-
-
     }
 }
