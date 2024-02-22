@@ -67,11 +67,19 @@ namespace PL.Task
 
             if (newNextTask != 0)  
             {
+                
+                BO.Task task1= s_bl.Task.Read(task!.Id)!; //זו המשימה שצריך להוסיף אותה אל כל הדברים
+                BO.TaskInList newTaskInList= new BO.TaskInList() { Id = task1.Id, Name = task1.Name, Description = task1.Description, Status = task1.Status };
+                List < BO.TaskInList> myList = task1.Links;
+
+                myList += newTaskInList;
+                BO.Task task2 = task1 with { }
+
                 //s_bl.Task.Read(task!.Id);
                 //ליצור משימה חדשה עם תלות חדשה
                 //ולשלוח אותה לעדכון
                 //?
-                s_bl.Task.Update()
+                s_bl.Task.Update(task1);
                 //פה צריך להוסיף את המשימה שלחצו עליה לתלויות של המשימה ששלחה
 
 
