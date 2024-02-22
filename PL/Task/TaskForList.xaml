@@ -57,6 +57,7 @@
         </ListView>
         
         <!-- botton for adding engineer -->
-        <Button Content="Add" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100" Click="AddButton_Click"/>
+        <Button Content="Add" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100" Click="AddButton_Click"
+                IsEnabled="{Binding Source={StaticResource ConvertStageToBoolKey}, Mode=OneWay}"/>
     </Grid>
 </Window>

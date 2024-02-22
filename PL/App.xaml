@@ -8,5 +8,6 @@
         <local:StatusCollection x:Key="StatusCollectionKey" />
         <local:ConvertIdToContent x:Key="ConverIdToContentKey"/>
         <local:ConvertIdToBool x:Key="ConverIdToBoolKey"/>
+        <local:ConvertStageToBool x:Key="ConvertStageToBoolKey"/>
     </Application.Resources>
 </Application>

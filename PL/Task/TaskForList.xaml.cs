@@ -24,6 +24,7 @@ namespace PL.Task
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
         public BO.Status status { get; set; } = BO.Status.All;
         private BO.Stage stage { get; set; } = s_bl.getStage();
+        private Window callingWindow;
 
 
         public IEnumerable<BO.TaskInList> TaskList
@@ -36,11 +37,14 @@ namespace PL.Task
             DependencyProperty.Register("TaskList", typeof(IEnumerable<BO.TaskInList>), typeof(TaskForList), new PropertyMetadata(null));
 
         private int newNextTask { get; set; } //for case that we here for add link to another task 
-        public TaskForList(int ThereIsNewNextTask = 0)
+        public TaskForList(Window callingWindow)
         {
-            InitializeComponent();            
-            newNextTask = ThereIsNewNextTask; //for case that we here for add link to another task         
+            this.callingWindow = callingWindow;
+
+            InitializeComponent();
+            //newNextTask = ThereIsNewNextTask; //for case that we here for add link to another task         
             TaskList = s_bl?.Task.ReadAll()!;
+            TaskList.OrderBy(t => t.Id);
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -68,38 +72,52 @@ namespace PL.Task
             BO.TaskInList? task = (sender as ListView)?.SelectedItem as BO.TaskInList;
             if (task == null) { /*exeption*/ }
 
-            if (newNextTask != 0)  
-            {      
-                //BO.Task fullTask= s_bl.Task.Read(task!.Id)!; //זו המשימה שצריך להוסיף אותה אל התלויות
-                //BO.TaskInList newTaskInList= new BO.TaskInList() { Id = task!.Id, Name = task.Name, Description = task.Description, Status = task.Status };
-                //List<BO.TaskInList> myList = fullTask.Links!;
+            //if (newNextTask != 0)
+            //{
 
-                //myList += newTaskInList;
-                //BO.Task task2 = fullTask with { }
+            //BO.Task task1= s_bl.Task.Read(task!.Id)!; //זו המשימה שצריך להוסיף אותה אל כל הדברים
+            //BO.TaskInList newTaskInList= new BO.TaskInList() { Id = task1.Id, Name = task1.Name, Description = task1.Description, Status = task1.Status };
+            //List < BO.TaskInList> myList = task1.Links;
 
-                //s_bl.Task.Read(task!.Id);
-                //ליצור משימה חדשה עם תלות חדשה
-                //ולשלוח אותה לעדכון
-                //?
-                //s_bl.Task.Update(fullTask);
-                //פה צריך להוסיף את המשימה שלחצו עליה לתלויות של המשימה ששלחה
+            //myList += newTaskInList;
+            //BO.Task task2 = task1 with { }
 
-
-            }
-            else
+            //s_bl.Task.Read(task!.Id);
+            //ליצור משימה חדשה עם תלות חדשה
+            //ולשלוח אותה לעדכון
+            //?
+            //s_bl.Task.Update(task1);
+            //פה צריך להוסיף את המשימה שלחצו עליה לתלויות של המשימה ששלחה
+            if (callingWindow is AdminWindow adminWindow)
             {
-               
-            if (stage == BO.Stage.Execution)
-                new TaskWindow(task!.Id).ShowDialog();
-            else
-                new PlanningTaskWindow(task!.Id).ShowDialog();
+                if (stage == BO.Stage.Execution)
+                    new TaskWindow(task!.Id).ShowDialog();
+                else
+                    new PlanningTaskWindow(task!.Id).ShowDialog();
 
-            UpdateTaskList();
+                adminWindow.HandleReturnedTask(task);
+            }
+            else if (callingWindow is PlanningTaskWindow PlanningTaskWindow)
+            {
+                PlanningTaskWindow.HandleReturnedTask(task!);
+                Close();
+            }
+
+            //}
+            //else
+            //{
+            //    if (stage == BO.Stage.Execution)
+            //        new TaskWindow(task!.Id).ShowDialog();
+            //    else
+            //        new PlanningTaskWindow(task!.Id).ShowDialog();
+
+            //    UpdateTaskList();
+            //}
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            new TaskWindow().ShowDialog();
+            new PlanningTaskWindow().ShowDialog();
             UpdateTaskList();
         }
     }

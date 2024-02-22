@@ -57,7 +57,7 @@
 
         <Label Content="Dependent tasks:" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center"/>
         <!-- list of dependent tasks -->
-        <ListBox ItemsSource="{Binding Links}" Grid.Row="1" Grid.Column="2" Height="317" Grid.RowSpan="9" VerticalAlignment="Top" Margin="5,5,7,0" Background="{x:Null}">
+        <ListBox ItemsSource="{Binding Links}" Grid.Row="1" Grid.Column="2" Height="233" Grid.RowSpan="5" VerticalAlignment="Top" Margin="5,5,7,0" Background="{x:Null}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Margin="0,0,0,10">
