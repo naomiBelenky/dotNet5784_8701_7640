@@ -1,20 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfTask xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Task>
-    <TaskID>2</TaskID>
-    <Name>Automation</Name>
-    <Description>Design automated solutions</Description>
-    <Difficulty>Expert</Difficulty>
-    <Milestone>false</Milestone>
-    <Creation>2023-09-13T00:00:00</Creation>
-    <PlanToStart xsi:nil="true" />
-    <StartWork xsi:nil="true" />
-    <TimeForTask>P5D</TimeForTask>
-    <Deadline xsi:nil="true" />
-    <FinishDate xsi:nil="true" />
-    <EngineerID>0</EngineerID>
-  </Task>
-  <Task>
     <TaskID>6</TaskID>
     <Name>Network Infrastructure</Name>
     <Description>Manage data communication networks</Description>
@@ -273,6 +259,20 @@
     <Difficulty>Expert</Difficulty>
     <Milestone>false</Milestone>
     <Creation>2023-07-01T00:00:00</Creation>
+    <PlanToStart xsi:nil="true" />
+    <StartWork xsi:nil="true" />
+    <TimeForTask>P5D</TimeForTask>
+    <Deadline xsi:nil="true" />
+    <FinishDate xsi:nil="true" />
+    <EngineerID>0</EngineerID>
+  </Task>
+  <Task>
+    <TaskID>2</TaskID>
+    <Name>Automation</Name>
+    <Description>Design automated solutions</Description>
+    <Difficulty>Expert</Difficulty>
+    <Milestone>false</Milestone>
+    <Creation>2023-09-13T00:00:00</Creation>
     <PlanToStart xsi:nil="true" />
     <StartWork xsi:nil="true" />
     <TimeForTask>P5D</TimeForTask>

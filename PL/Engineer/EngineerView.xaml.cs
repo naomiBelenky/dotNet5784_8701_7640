@@ -17,8 +17,20 @@ namespace PL.Engineer
     /// <summary>
     /// Interaction logic for EngineerView.xaml
     /// </summary>
+    /// 
+
     public partial class EngineerView : Window
     {
+        static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+        public BO.Engineer Engineer
+        {
+            get { return (BO.Engineer)GetValue(EngineerProperty); }
+            set { SetValue(EngineerProperty, value); }
+        }
+
+        public static readonly DependencyProperty EngineerProperty =
+            DependencyProperty.Register("Engineer", typeof(BO.Engineer), typeof(EngineerView), new PropertyMetadata(null));
+
         public EngineerView()
         {
             InitializeComponent();
