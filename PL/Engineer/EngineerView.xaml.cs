@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 namespace PL.Engineer
 {
     /// <summary>
-    /// Interaction logic for Engineer.xaml
+    /// Interaction logic for EngineerView.xaml
     /// </summary>
     /// 
 
