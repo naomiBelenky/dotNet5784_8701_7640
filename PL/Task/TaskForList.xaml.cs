@@ -40,13 +40,17 @@ namespace PL.Task
         public TaskForList(Window callingWindow)
         {
             this.callingWindow = callingWindow;
-
+            
             InitializeComponent();
-            //newNextTask = ThereIsNewNextTask; //for case that we here for add link to another task         
-            TaskList = s_bl?.Task.ReadAll()!;
-            TaskList.OrderBy(t => t.Id);
+            //צריך לעשות מיון לפי פונקציה שמוסיפים איזה תלויות יכולות להופיע
+            //אם מגיעים מחלון מהנדס צריך מיון לפי הרמה שלו ומטה
+            if (callingWindow is AdminWindow)
+                TaskList = s_bl?.Task.ReadAll().OrderBy(t => t.Id)!;
+            else if (callingWindow is PlanningTaskWindow)
+                TaskList = s_bl?.Task.ReadAll(/*להוסיף את הפונקציה שמסננת את המשימות שמותר*/).OrderBy(t => t.Id)!;
+            //להוסיף עוד אחד שאם זה מהחלון של המהנדס אז לסנן לפי הרמה שלו ומטה
         }
-
+        
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             TaskList = ((status == BO.Status.All) ?
