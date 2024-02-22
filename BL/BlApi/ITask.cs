@@ -36,5 +36,7 @@ public interface ITask
     /// <param name="date"> new Date to update </param>
     public void UpdateDate(int id, DateTime date);
 
+    public bool checkLink(int idPrevTask, int idNextTask);
+
     public DateTime? SuggestStartDate(int id);
 }
