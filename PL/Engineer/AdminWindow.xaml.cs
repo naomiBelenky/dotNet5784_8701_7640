@@ -34,7 +34,8 @@ namespace PL.Engineer
 
         private void TaskBtn_Click(object sender, RoutedEventArgs e)
         {
-            new TaskForList().Show();
+            TaskForList taskForListWindow = new TaskForList(this);
+            taskForListWindow.Show();
         }
 
         private void btnInit_Click(object sender, RoutedEventArgs e)
@@ -49,6 +50,10 @@ namespace PL.Engineer
             MessageBoxResult result = MessageBox.Show("Are you sure you want to reset data?", "Yes", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes)
                 Factory.Get().ResetDB();
+        }
+        public void HandleReturnedTask(BO.TaskInList task)
+        {
+
         }
     }
 }

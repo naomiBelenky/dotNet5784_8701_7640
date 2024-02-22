@@ -73,11 +73,6 @@ namespace PL.Task
             }
 
         }
-        private void addDependencyBtn_Click(object sender, RoutedEventArgs e)
-        {
 
-        }
-
-       
     }
 }
