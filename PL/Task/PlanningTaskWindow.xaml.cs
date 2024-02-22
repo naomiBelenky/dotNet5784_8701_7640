@@ -5,9 +5,9 @@ using System.Windows;
 namespace PL.Task
 {
     /// <summary>
-    /// Interaction logic for TaskWindow.xaml
+    /// Interaction logic for PlanningTaskWindow.xaml
     /// </summary>
-    public partial class TaskWindow : Window
+    public partial class PlanningTaskWindow : Window
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
 
@@ -18,12 +18,12 @@ namespace PL.Task
         }
 
         public static readonly DependencyProperty CurrentTaskProperty =
-            DependencyProperty.Register("Task", typeof(BO.Task), typeof(TaskWindow), new PropertyMetadata(null));
+            DependencyProperty.Register("Task", typeof(BO.Task), typeof(PlanningTaskWindow), new PropertyMetadata(null));
 
         private bool isAddMode { get; set; }
 
         //private BO.Stage stage { get; set; } = BO.Stage.Planning;  //צריך לעשות שכשקובעים לו"ז זה ישתנה לשלב הביצוע
-        public TaskWindow(int id = 0, bool isAddLinkMode = false)
+        public PlanningTaskWindow(int id = 0)
         {
             InitializeComponent();
             if (id == 0)
@@ -42,14 +42,14 @@ namespace PL.Task
                 {
                     MessageBox.Show(ex.Message);
                 }
-  
+
         }
 
         private void AddOrUpdateButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                if (isAddMode) 
+                if (isAddMode)
                 {
                     s_bl.Task.Add(Task);
                     MessageBox.Show("Task added successfully:)");
@@ -77,7 +77,5 @@ namespace PL.Task
         {
 
         }
-
-       
     }
 }

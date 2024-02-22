@@ -23,6 +23,8 @@ namespace PL.Task
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
         public BO.Status status { get; set; } = BO.Status.All;
+        private BO.Stage stage { get; set; } = s_bl.getStage();
+
 
         public IEnumerable<BO.TaskInList> TaskList
         {
@@ -53,6 +55,7 @@ namespace PL.Task
             TaskList = ((status == BO.Status.All) ?
                 s_bl?.Task.ReadAll()! : s_bl?.Task.ReadAll(task => task.Status == status)!)
                 .OrderBy(t => t.Id);
+
         }
 
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -90,9 +93,12 @@ namespace PL.Task
 
                 
 
+            if (stage == BO.Stage.Execution)
                 new TaskWindow(task!.Id).ShowDialog();
-                UpdateTaskList();
-            }          
+            else
+                new PlanningTaskWindow(task!.Id).ShowDialog();
+
+            UpdateTaskList();
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
