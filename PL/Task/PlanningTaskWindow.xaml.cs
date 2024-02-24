@@ -75,13 +75,14 @@ namespace PL.Task
         }
         private void addDependencyBtn_Click(object sender, RoutedEventArgs e)
         {
-            TaskForList taskForListWindow = new TaskForList(this);
+            TaskForList taskForListWindow = new TaskForList(this, Task.Id);
             taskForListWindow.ShowDialog();
         }
         public void HandleReturnedTask(BO.TaskInList task)
         {
             if (Task.Links==null) Task.Links = new List<BO.TaskInList>();
-            Task.Links.Add(task);
+            if (!Task.Links.Exists(item=>item.Id == task.Id))
+                Task.Links.Add(task);
         }
 
     }

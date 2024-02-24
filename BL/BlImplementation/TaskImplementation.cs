@@ -330,6 +330,8 @@ internal class TaskImplementation : ITask
         //בודקת עבור כל מי שתלוי בי
         List<DO.Link> dependedsOnSecond = (_dal.Link.ReadAll(link => link.NextTask == idPrevTask)).ToList();
 
+        if (idPrevTask == idNextTask) return false; //a task can't depend on itself
+
         if (dependedsOnSecond.Count() == 0) return true;
 
         foreach (var item in dependedsOnSecond)

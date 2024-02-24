@@ -35,5 +35,17 @@ namespace PL.Engineer
         {
             InitializeComponent();
         }
+
+        private void Cancle_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void OK_Click(object sender, RoutedEventArgs e)
+        {
+            //לפתוח חלון שמראה את המשימה הנוכחית ולשלוח לו את הת"ז של המהנדס
+            //אולי לעשות עוד פעם חלונות נפרדים לשלב תכנון ולשלב ביצוע?
+            Close();
+        }
     }
 }

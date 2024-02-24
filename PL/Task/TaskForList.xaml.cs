@@ -37,7 +37,7 @@ namespace PL.Task
             DependencyProperty.Register("TaskList", typeof(IEnumerable<BO.TaskInList>), typeof(TaskForList), new PropertyMetadata(null));
 
         private int newNextTask { get; set; } //for case that we here for add link to another task 
-        public TaskForList(Window callingWindow)
+        public TaskForList(Window callingWindow, int id = 0)
         {
             this.callingWindow = callingWindow;
             
@@ -47,7 +47,7 @@ namespace PL.Task
             if (callingWindow is AdminWindow)
                 TaskList = s_bl?.Task.ReadAll().OrderBy(t => t.Id)!;
             else if (callingWindow is PlanningTaskWindow)
-                TaskList = s_bl?.Task.ReadAll(item=>s_bl.Task.checkLink(item.Id,/*???????????/*/)).OrderBy(t => t.Id)!;
+                TaskList = s_bl?.Task.ReadAll(item=>s_bl.Task.checkLink(item.Id, id)).OrderBy(t => t.Id)!;
             //להוסיף עוד אחד שאם זה מהחלון של המהנדס אז לסנן לפי הרמה שלו ומטה
         }
         
@@ -89,7 +89,8 @@ namespace PL.Task
             {
                 PlanningTaskWindow.HandleReturnedTask(task!);
                 Close();
-           
+
+            }
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)

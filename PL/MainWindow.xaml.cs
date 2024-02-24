@@ -24,7 +24,7 @@ namespace PL
         }
         private void btnEngineer_Click(object sender, RoutedEventArgs e)
         {
-
+            new EngineerView().ShowDialog();
         }
 
         private void btnAdmin_Click(object sender, RoutedEventArgs e)

@@ -5,11 +5,38 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Engineer"
         mc:Ignorable="d"
-        Title="EngineerView" Height="450" Width="800">
+        Title="EngineerView" Height="180" Width="270"
+                DataContext="{Binding Engineer, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
+
+    <Window.Resources>
+        <Style TargetType="Label">
+            <Setter Property="FontFamily" Value="Comic Sans MS" />
+            <Setter Property="FontSize" Value="14" />
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="FontFamily" Value="Comic Sans MS" />
+            <Setter Property="FontSize" Value="12" />
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="FontFamily" Value="Comic Sans MS" />
+            <Setter Property="FontSize" Value="12" />
+        </Style>
+        <Style TargetType="ListBox">
+            <Setter Property="FontFamily" Value="Comic Sans MS" />
+            <Setter Property="FontSize" Value="10" />
+        </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="FontFamily" Value="Comic Sans MS" />
+            <Setter Property="FontSize" Value="12" />
+        </Style>
+    </Window.Resources>
+
     <Grid>
         <Label Content="Enter engineer's ID:" Margin="0,16,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Width="148"/>
-        <TextBox HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="166" Height="29" Margin="0,60,0,0"
+        <TextBox HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Width="166" Height="29"
                  Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
-        
+        <Button Content="Cancle" HorizontalAlignment="Left" Margin="34,104,0,0" VerticalAlignment="Top" Width="70" Click="Cancle_Click"/>
+        <Button Content="OK" HorizontalAlignment="Left" Margin="154,104,0,0" VerticalAlignment="Top" Width="70" Click="OK_Click"/>
+
     </Grid>
 </Window>
