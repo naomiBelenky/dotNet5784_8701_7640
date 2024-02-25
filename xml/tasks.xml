@@ -225,20 +225,6 @@
     <EngineerID>0</EngineerID>
   </Task>
   <Task>
-    <TaskID>17</TaskID>
-    <Name>Structural Analysis</Name>
-    <Description>Analyze structural integrity</Description>
-    <Difficulty>Beginner</Difficulty>
-    <Milestone>false</Milestone>
-    <Creation>2023-10-21T00:00:00</Creation>
-    <PlanToStart xsi:nil="true" />
-    <StartWork xsi:nil="true" />
-    <TimeForTask>P5D</TimeForTask>
-    <Deadline xsi:nil="true" />
-    <FinishDate xsi:nil="true" />
-    <EngineerID>0</EngineerID>
-  </Task>
-  <Task>
     <TaskID>18</TaskID>
     <Name>Control Systems Engineering</Name>
     <Description>Design dynamic control</Description>
@@ -276,6 +262,20 @@
     <PlanToStart xsi:nil="true" />
     <StartWork xsi:nil="true" />
     <TimeForTask>P3D</TimeForTask>
+    <Deadline xsi:nil="true" />
+    <FinishDate xsi:nil="true" />
+    <EngineerID>0</EngineerID>
+  </Task>
+  <Task>
+    <TaskID>17</TaskID>
+    <Name>Structural Analysis</Name>
+    <Description>Analyze structural integrity</Description>
+    <Difficulty>Beginner</Difficulty>
+    <Milestone>false</Milestone>
+    <Creation>2023-10-21T00:00:00</Creation>
+    <PlanToStart xsi:nil="true" />
+    <StartWork xsi:nil="true" />
+    <TimeForTask>P5D</TimeForTask>
     <Deadline xsi:nil="true" />
     <FinishDate xsi:nil="true" />
     <EngineerID>0</EngineerID>

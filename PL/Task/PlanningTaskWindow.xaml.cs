@@ -80,7 +80,7 @@ namespace PL.Task
         }
         public void HandleReturnedTask(BO.TaskInList task)
         {
-            if (Task.Links==null) Task.Links = new List<BO.TaskInList>();
+            if (Task.Links == null) Task.Links = new List<BO.TaskInList>();
             if (!Task.Links.Exists(item=>item.Id == task.Id))
                 Task.Links.Add(task);
         }
