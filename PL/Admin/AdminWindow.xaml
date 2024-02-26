@@ -16,9 +16,10 @@
         <Button Content="Engineer List" HorizontalAlignment="Left" Margin="120,280,0,0" VerticalAlignment="Top" Height="82" Width="157" Click="EngBtn_Click"/>
         <Button Content="Task List" HorizontalAlignment="Left" Margin="300,280,0,0" VerticalAlignment="Top" Height="82" Width="156" Click="TaskBtn_Click"/>
         <!-- botton for inital data base -->
-        <Button Content="initialize" HorizontalAlignment="Left" Margin="597,300,0,0" VerticalAlignment="Top" Height="60" Width="123" Click="btnInit_Click"/>
+        <Button Content="initialize" HorizontalAlignment="Left" Margin="600,300,0,0" VerticalAlignment="Top" Height="60" Width="123" Click="btnInit_Click"/>
         <!-- botton for reset data base -->
-        <Button Content="reset" HorizontalAlignment="Left" Margin="597,231,0,0" VerticalAlignment="Top" Height="56" Width="123" Click="resetDB_Click"/>
+        <Button Content="reset" HorizontalAlignment="Left" Margin="600,230,0,0" VerticalAlignment="Top" Height="56" Width="123" Click="resetDB_Click"/>
+        <Button Content="automatic schedule" HorizontalAlignment="Left" Margin="120,130,0,0" VerticalAlignment="Top" Height="70" Width="155" Click="Schedule_Click"/>
 
     </Grid>
 </Window>
