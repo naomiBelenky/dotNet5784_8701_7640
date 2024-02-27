@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 
 namespace PL.Engineer
 {
+    
     /// <summary>
     /// Interaction logic for LittleTaskOfEngineer.xaml
     /// </summary>
@@ -38,48 +39,50 @@ namespace PL.Engineer
 
         public LittleTaskOfEngineer(BO.Engineer currEng)
         {
-            InitializeComponent();
             try
             {
+                InitializeComponent();
                 CurrentEngineer = currEng;
-
-                if (CurrentEngineer.Task == null)
-                {
-
-                }
-
-
-
             }
-            catch
-            { 
-
+            catch(Exception ex) 
+            {
+                MessageBox.Show(ex.Message);
             }
-
-            
-            //    new LittleTaskOfEngineer().Show();
-            ////MessageBox.Show("You are still not responsible for any tasks");
-            //else
-            //    idOfTaskOfCurrentEngineer = taskOfCurrentEngineer.Id;
         }
 
         private void TaskDetails_Click(object sender, RoutedEventArgs e)
         {
-            new TaskWindow(CurrentEngineer.Task!.Id).Show();
+            try
+            {
+                new TaskWindow(CurrentEngineer.Task!.Id).Show();
+            }
+            catch (Exception ex)
+            { MessageBox.Show(ex.Message); }
         }
 
         private void AddTask_Click(object sender, RoutedEventArgs e)
         {
-            new TaskForList(this, 0, CurrentEngineer.Id).Show();
+            try
+            {
+                new TaskForList(this, 0, CurrentEngineer.Id).Show();
+            }
+            catch (Exception ex)
+            { MessageBox.Show(ex.Message); }
         }
 
         public void HandleReturnedTask(BO.TaskInList task)
         {
-            BO.TaskInEngineer newTask = new BO.TaskInEngineer() { Id = task.Id, Name = task.Name };
-            CurrentEngineer.Task = newTask;
-            s_bl.Engineer.Update(CurrentEngineer);
-            MessageBox.Show("You have a new task, Have pleasure and good luck!");
-            Close();
+            try
+            {
+                BO.TaskInEngineer newTask = new BO.TaskInEngineer() { Id = task.Id, Name = task.Name };
+                CurrentEngineer.Task = newTask;
+                s_bl.Engineer.Update(CurrentEngineer);
+                MessageBox.Show("You have a new task, Have pleasure and good luck!");
+                Close();
+            }
+            catch (Exception ex)
+            { MessageBox.Show(ex.Message); }
+          
         }
     }
 }
