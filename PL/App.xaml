@@ -9,6 +9,7 @@
         <local:ConvertIdToContent x:Key="ConverIdToContentKey"/>
         <local:ConvertIdToBool x:Key="ConverIdToBoolKey"/>
         <local:ConvertStageToBool x:Key="ConvertStageToBoolKey"/>
-        <local:ConvertTaskInEngineerToContent x:Key="ConvertTaskInEngineerToContentKey"/>
+        <local:ConvertWindowToVisibility x:Key="ConvertWindowToVisibilityKey"/>
+
     </Application.Resources>
 </Application>

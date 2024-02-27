@@ -22,6 +22,8 @@ namespace PL.Engineer
     /// </summary>
     public partial class AdminWindow : Window
     {
+        static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+
         public AdminWindow()
         {
             InitializeComponent();
@@ -54,6 +56,18 @@ namespace PL.Engineer
         public void HandleReturnedTask(BO.TaskInList task)
         {
 
+        }
+
+        private void Schedule_Click(object sender, RoutedEventArgs e)
+        {
+            try {
+                s_bl.automaticSchedule();
+                MessageBox.Show("scheduled all tasks succesfully");
+            }
+            catch (BO.BlDoesNotExistException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

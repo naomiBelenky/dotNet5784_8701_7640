@@ -23,8 +23,8 @@ namespace PL.Task
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
         public BO.Status status { get; set; } = BO.Status.All;
-        private BO.Stage stage { get; set; } = s_bl.getStage();
-        private Window callingWindow;
+        public BO.Stage stage { get { return s_bl.getStage(); } }
+        public Window callingWindow { get; }
 
 
         public IEnumerable<BO.TaskInList> TaskList
