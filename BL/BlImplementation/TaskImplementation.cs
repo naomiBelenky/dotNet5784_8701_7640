@@ -323,11 +323,10 @@ internal class TaskImplementation : ITask
     }
 
     public bool checkLink(int idPrevTask, int idNextTask)
-    //אני בודקת האם השניה יכולה להיות תלויה בראשונה ולכן אני בודקת אם הראשונה תלויה בשניה
-    //לכן אני מחפשת את כל מי שתלוי בראשונה
     //check if the second task can be depended in the first task without curcle dependencies
+    //so actually check if the first 
     {
-        //בודקת עבור כל מי שתלוי בי
+        //look for all the task that depended in the first task
         List<DO.Link> dependedsOnSecond = (_dal.Link.ReadAll(link => link.NextTask == idPrevTask)).ToList();
 
         if (idPrevTask == idNextTask) return false; //a task can't depend on itself
@@ -336,7 +335,7 @@ internal class TaskImplementation : ITask
 
         foreach (var item in dependedsOnSecond)
         {
-            //האם אני תלויה בו
+            //check if I depended him
             if (item.PrevTask == idNextTask)
                 return false;
 
@@ -346,4 +345,22 @@ internal class TaskImplementation : ITask
 
         return true;
     }
+
+    public bool didntFinishLink(BO.Task task)
+    {
+        List<BO.TaskInList> tasks = getLinks(task);
+
+        if(tasks.Count == 0) return true;
+
+        foreach (var item in tasks)
+        {
+            DO.Task? fullTask = _dal.Task.Read(item.Id);
+            if (fullTask == null) { }///???????
+                
+            if (fullTask.FinishDate >= DateTime.Now)
+                    return false;
+        }
+        return true;
+    }
+    
 }

@@ -9,5 +9,6 @@
         <local:ConvertIdToContent x:Key="ConverIdToContentKey"/>
         <local:ConvertIdToBool x:Key="ConverIdToBoolKey"/>
         <local:ConvertStageToBool x:Key="ConvertStageToBoolKey"/>
+        <local:ConvertTaskInEngineerToContent x:Key="ConvertTaskInEngineerToContentKey"/>
     </Application.Resources>
 </Application>
