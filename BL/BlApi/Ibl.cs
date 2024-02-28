@@ -18,5 +18,11 @@ public interface IBl
     /// 
 
     public BO.Stage getStage();
+
+    /// <summary>
+    /// create a schedule automaticly
+    /// </summary>
     public void automaticSchedule();
+
+   
 }

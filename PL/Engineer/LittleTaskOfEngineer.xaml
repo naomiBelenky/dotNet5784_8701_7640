@@ -1,0 +1,18 @@
+﻿<Window x:Class="PL.Engineer.LittleTaskOfEngineer"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL.Engineer"
+        mc:Ignorable="d"
+        Title="LittleTaskOfEngineer" Height="200" Width="180"
+        DataContext="{Binding CurrentEngineer, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
+
+    <Grid>
+        <Label Content="Your Task:" HorizontalAlignment="Left" Margin="56,16,0,0" VerticalAlignment="Top" Width="64"/>
+        <Label Content="{Binding Task, Mode=TwoWay, Converter={StaticResource ConvertTaskInEngineerToContentKey}}" Margin="26,45,26,0" VerticalAlignment="Top" Height="46" Width="127"/>
+        <Button Content="Task details" HorizontalAlignment="Center" Margin="0,105,0,0" VerticalAlignment="Top" Width="80"  Height="20" Click="TaskDetails_Click"/>
+        <Button Content="Add new Task" HorizontalAlignment="Center" Margin="0,133,0,0" VerticalAlignment="Top" Width="80" Click="AddTask_Click"/>
+
+    </Grid>
+</Window>

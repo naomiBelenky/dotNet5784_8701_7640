@@ -65,11 +65,7 @@ namespace PL.Task
 
             catch (Exception ex)
             {
-                string message = ex.Message + " " + ex.GetType() + " ";
-                if (ex.InnerException != null)
-                    message += "Dal Exception";
-
-                MessageBox.Show(message);
+                MessageBox.Show(ex.Message);
             }
 
         }

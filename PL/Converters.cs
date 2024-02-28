@@ -62,3 +62,16 @@ class ConvertWindowToVisibility : IValueConverter
         throw new NotImplementedException();
     }
 }
+
+class ConvertTaskInEngineerToContent : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        return (BO.TaskInEngineer)value == null ? "You dont have a task yet" : value.ToString()!;
+    }
+
+    object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}

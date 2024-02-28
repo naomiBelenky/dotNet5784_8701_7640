@@ -37,18 +37,22 @@ namespace PL.Task
             DependencyProperty.Register("TaskList", typeof(IEnumerable<BO.TaskInList>), typeof(TaskForList), new PropertyMetadata(null));
 
         private int newNextTask { get; set; } //for case that we here for add link to another task 
-        public TaskForList(Window callingWindow, int id = 0)
+        public TaskForList(Window callingWindow, int id = 0, int engID = 0)
         {
             this.callingWindow = callingWindow;
             
             InitializeComponent();
-            //צריך לעשות מיון לפי פונקציה שמוסיפים איזה תלויות יכולות להופיע
-            //אם מגיעים מחלון מהנדס צריך מיון לפי הרמה שלו ומטה
             if (callingWindow is AdminWindow)
                 TaskList = s_bl?.Task.ReadAll().OrderBy(t => t.Id)!;
             else if (callingWindow is PlanningTaskWindow)
-                TaskList = s_bl?.Task.ReadAll(item=>s_bl.Task.checkLink(item.Id, id)).OrderBy(t => t.Id)!;
-            //להוסיף עוד אחד שאם זה מהחלון של המהנדס אז לסנן לפי הרמה שלו ומטה
+                TaskList = s_bl?.Task.ReadAll(item => s_bl.Task.checkLink(item.Id, id)).OrderBy(t => t.Id)!;
+            else if (callingWindow is LittleTaskOfEngineer) 
+            {
+                BO.Engineer tempEng = s_bl.Engineer.Read(engID);
+                TaskList = s_bl?.Task.ReadAll(item => item.Difficulty <= tempEng.Level && item.Engineer == null && s_bl.Task.didntFinishLink(item));
+                //מה עושים אם זה נאל? כאילו אם אין משימות שמתאימות לרמה שלו?
+
+            }
         }
         
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -89,7 +93,11 @@ namespace PL.Task
             {
                 PlanningTaskWindow.HandleReturnedTask(task!);
                 Close();
-
+            }
+            else if(callingWindow is LittleTaskOfEngineer littleTaskOfEngineer)
+            {
+                littleTaskOfEngineer.HandleReturnedTask(task!);
+                Close();
             }
         }
 
