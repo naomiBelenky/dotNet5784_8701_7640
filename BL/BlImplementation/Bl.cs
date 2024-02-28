@@ -17,6 +17,11 @@ internal class Bl : IBl
     public void InitializeDB() => DalTest.Initialization.Do();
     public void ResetDB() => DalTest.Initialization.Reset();
 
+    public void saveStartDate(DateTime date)
+    {
+        DalApi.Factory.Get.saveStartandFinishDatestoFile("data-config", "startDate", date);
+    }
+
     public Stage getStage()
     {
         XElement root = XMLTools.LoadListFromXMLElement("data-config");
