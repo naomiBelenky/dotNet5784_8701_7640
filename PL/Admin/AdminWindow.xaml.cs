@@ -1,4 +1,5 @@
 ﻿using BlApi;
+using PL.Admin;
 using PL.Engineer;
 using PL.Task;
 using System;
@@ -60,14 +61,15 @@ namespace PL.Engineer
 
         private void Schedule_Click(object sender, RoutedEventArgs e)
         {
-            try {
-                s_bl.automaticSchedule();
-                MessageBox.Show("scheduled all tasks succesfully");
-            }
-            catch (BO.BlDoesNotExistException ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            //try {
+                new ProjectStartDate().Show();
+            //    s_bl.automaticSchedule();
+            //    MessageBox.Show("scheduled all tasks succesfully");
+            //}
+            //catch (BO.BlDoesNotExistException ex)
+            //{
+            //    MessageBox.Show(ex.Message);
+            //}
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Controls;
 
 
 namespace PL.Task
@@ -81,9 +82,16 @@ namespace PL.Task
         public void HandleReturnedTask(BO.TaskInList task)
         {
             if (Task.Links == null) Task.Links = new List<BO.TaskInList>();
-            if (!Task.Links.Exists(item=>item.Id == task.Id))
+            if (!Task.Links.Exists(item => item.Id == task.Id))
                 Task.Links.Add(task);
         }
 
+        private void listBox_DoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            BO.TaskInList? task = (sender as ListBox)?.SelectedItem as BO.TaskInList;
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to delete this dependency?", "Yes", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+                Task.Links!.Remove(task!);
+        }
     }
 }
