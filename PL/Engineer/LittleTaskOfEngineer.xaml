@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Engineer"
         mc:Ignorable="d"
-        Title="LittleTaskOfEngineer" Height="200" Width="250"
+        Title="LittleTaskOfEngineer" Height="170" Width="250"
         DataContext="{Binding CurrentEngineer, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
     <Window.Resources>
         <Style TargetType="Label">
@@ -19,11 +19,10 @@
     </Window.Resources>
 
     <Grid>
-        <Label Content="Your Task:" HorizontalAlignment="Center" Margin="0,17,0,0" VerticalAlignment="Top" Width="83"/>
-        <Label Content="{Binding Task, Mode=TwoWay, Converter={StaticResource ConvertTaskInEngineerToContentKey}}" Margin="21,45,22,0" VerticalAlignment="Top" Height="46"/>
-        <Button Content="Task details" HorizontalAlignment="Center" Margin="0,105,0,0" VerticalAlignment="Top" Width="91"  Height="20" Click="TaskDetails_Click"
-                IsEnabled="{Binding Task, Mode=TwoWay, Converter={StaticResource ConvertTaskInEngineerToBoolKey}}"/>
-        <Button Content="Add new Task" HorizontalAlignment="Center" Margin="0,133,0,0" VerticalAlignment="Top" Width="92" Click="AddTask_Click"/>
+        <Label Content="Your Task:" HorizontalAlignment="Left" Margin="10,7,0,0" VerticalAlignment="Top" Width="64"/>
+        <Label Content="{Binding Task, Mode=TwoWay, Converter={StaticResource ConvertTaskInEngineerToContentKey}}" Margin="0,36,0,0" VerticalAlignment="Top" Height="46"/>
+        <Button Content="Task details" HorizontalAlignment="Left" Margin="10,82,0,0" VerticalAlignment="Top" Width="80"  Height="20" Click="TaskDetails_Click" IsEnabled="{Binding Task, Mode=TwoWay, Converter={StaticResource ConvertTaskInEngineerToBoolForTaskDetilesBottonKey}}"/>
+        <Button Content="Add new Task" HorizontalAlignment="Left" Margin="104,82,0,0" VerticalAlignment="Top" Width="80" Click="AddTask_Click" IsEnabled="{Binding Task, Mode=TwoWay, Converter={StaticResource ConvertTaskInEngineerToBoolForAddBottonKey}}"/>
 
     </Grid>
 </Window>

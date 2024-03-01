@@ -39,34 +39,49 @@ namespace PL.Task
         private int newNextTask { get; set; } //for case that we here for add link to another task 
         public TaskForList(Window callingWindow, int id = 0, int engID = 0)
         {
-            this.callingWindow = callingWindow;
-            
-            InitializeComponent();
-            if (callingWindow is AdminWindow)
-                TaskList = s_bl?.Task.ReadAll().OrderBy(t => t.Id)!;
-            else if (callingWindow is PlanningTaskWindow)
-                TaskList = s_bl?.Task.ReadAll(item => s_bl.Task.checkLink(item.Id, id)).OrderBy(t => t.Id)!;
-            else if (callingWindow is LittleTaskOfEngineer) 
+            try
             {
-                BO.Engineer tempEng = s_bl.Engineer.Read(engID);
-                TaskList = s_bl?.Task.ReadAll(item => item.Difficulty <= tempEng.Level && item.Engineer == null && s_bl.Task.didntFinishLink(item));
-                //מה עושים אם זה נאל? כאילו אם אין משימות שמתאימות לרמה שלו?
+                this.callingWindow = callingWindow;
 
+                InitializeComponent();
+                if (callingWindow is AdminWindow)
+                    TaskList = s_bl?.Task.ReadAll().OrderBy(t => t.Id)!;
+                else if (callingWindow is PlanningTaskWindow)
+                    TaskList = s_bl?.Task.ReadAll(item => s_bl.Task.checkLink(item.Id, id)).OrderBy(t => t.Id)!;
+                else if (callingWindow is LittleTaskOfEngineer)
+                {
+                    BO.Engineer tempEng = s_bl.Engineer.Read(engID);
+                    TaskList = s_bl?.Task.ReadAll(item => (((int)item.Difficulty <= (int)tempEng.Level) && item.Engineer == null && s_bl.Task.didntFinishLink(item)));
+                    //מה עושים אם זה נאל? כאילו אם אין משימות שמתאימות לרמה שלו?
+
+                }
             }
+            catch(Exception ex) { MessageBox.Show(ex.Message); }
+
         }
         
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            TaskList = ((status == BO.Status.All) ?
-                s_bl?.Task.ReadAll()! : s_bl?.Task.ReadAll(task => task.Status == status)!)
-                .OrderBy(t => t.Id);
+            try
+            {
+                TaskList = ((status == BO.Status.All) ?
+                 s_bl?.Task.ReadAll()! : s_bl?.Task.ReadAll(task => task.Status == status)!)
+                 .OrderBy(t => t.Id);
+            }
+            catch(Exception ex) { MessageBox.Show(ex.Message); }
+
         }
 
         void UpdateTaskList()
         {
-            TaskList = ((status == BO.Status.All) ?
+            try
+            {
+                TaskList = ((status == BO.Status.All) ?
                 s_bl?.Task.ReadAll()! : s_bl?.Task.ReadAll(task => task.Status == status)!)
                 .OrderBy(t => t.Id);
+            }
+            catch(Exception ex) { MessageBox.Show(ex.Message); }
+         
 
         }
 

@@ -11,6 +11,8 @@
         <local:ConvertStageToBool x:Key="ConvertStageToBoolKey"/>
         <local:ConvertWindowToVisibility x:Key="ConvertWindowToVisibilityKey"/>
         <local:ConvertTaskInEngineerToContent x:Key="ConvertTaskInEngineerToContentKey"/>
+        <local:ConvertTaskInEngineerToBoolForAddBotton x:Key="ConvertTaskInEngineerToBoolForAddBottonKey"/>
+        <local:ConvertTaskInEngineerToBoolForTaskDetilesBotton x:Key="ConvertTaskInEngineerToBoolForTaskDetilesBottonKey"/>
 
     </Application.Resources>
 </Application>
