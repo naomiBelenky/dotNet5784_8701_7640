@@ -13,6 +13,7 @@ using System.Windows.Shapes;
 
 namespace PL
 {
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -20,16 +21,30 @@ namespace PL
     {
         public MainWindow()
         {
-            InitializeComponent();
+            try
+            {
+                InitializeComponent();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
         private void btnEngineer_Click(object sender, RoutedEventArgs e)
         {
-            new EngineerView().ShowDialog();
+            try
+            {
+                new EngineerView().ShowDialog();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
         private void btnAdmin_Click(object sender, RoutedEventArgs e)
         {
-            new AdminWindow().Show();
+            try
+            {
+                new AdminWindow().Show();
+
+            }
+            catch(Exception ex) { MessageBox.Show(ex.Message); }
         }
     }
+
 }

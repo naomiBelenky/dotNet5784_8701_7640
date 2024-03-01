@@ -25,24 +25,25 @@ namespace PL.Task
         //private BO.Stage stage { get; set; } = BO.Stage.Planning;  //צריך לעשות שכשקובעים לו"ז זה ישתנה לשלב הביצוע
         public TaskWindow(int id = 0, bool isAddLinkMode = false)
         {
-            InitializeComponent();
-            if (id == 0)
+            try
             {
-                SetValue(CurrentTaskProperty, new BO.Task());
-                isAddMode = true;
-            }
-            else
-                try
+                InitializeComponent();
+                if (id == 0)
+                {
+                    SetValue(CurrentTaskProperty, new BO.Task());
+                    isAddMode = true;
+                }
+                else
                 {
                     BO.Task task = s_bl.Task.Read(id);
                     SetValue(CurrentTaskProperty, task);
                     isAddMode = false;
                 }
-                catch (BO.BlDoesNotExistException ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-  
+            }
+            catch (BO.BlDoesNotExistException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void AddOrUpdateButton_Click(object sender, RoutedEventArgs e)

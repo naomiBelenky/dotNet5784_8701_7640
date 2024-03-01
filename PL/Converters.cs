@@ -67,7 +67,34 @@ class ConvertTaskInEngineerToContent : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        return (BO.TaskInEngineer)value == null ? "You dont have a task yet" : value.ToString()!;
+        return (BO.TaskInEngineer)value == null ? "You are not responsible for a task yet" + "\n" +
+            "(Would you like to be in charge of a new task?)" : value.ToString()!;
+    }
+
+    object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+class ConvertTaskInEngineerToBoolForAddBotton : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        return (BO.TaskInEngineer)value == null ? true : false;
+    }
+
+    object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+class ConvertTaskInEngineerToBoolForTaskDetilesBotton : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        return (BO.TaskInEngineer)value == null ? false : true;
     }
 
     object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
