@@ -165,7 +165,7 @@ internal class TaskImplementation : ITask
             }
 
             if (task.PlanToStart != doTask.PlanToStart) throw new BO.BlForbiddenInThisStage("Updating these dates is prohibited after the project schedule is created");
-            if (task.Links != null && !taskLinks.SequenceEqual(dalTaskLinks))   //checking if the links are the same
+            if (task.Links != null && !taskLinks.Zip(dalTaskLinks, (x, y) => x.PrevTask == y.PrevTask).All(result => result))   //checking if the links are the same
             { throw new BO.BlForbiddenInThisStage("Updating dependencies is prohibited after the project schedule is created"); }
         }
 
@@ -243,7 +243,7 @@ internal class TaskImplementation : ITask
         if (task.PlanToStart == null) status = BO.Status.Unscheduled;
         else if (task.StartWork == null) status = BO.Status.Scheduled;
         else if (task.FinishDate == null) status = BO.Status.OnTrack;
-        else if (task.FinishDate <= DateTime.Now) status = BO.Status.Done;
+        else if (task.FinishDate != null) status = BO.Status.Done;
         return status;
     }
     /// <summary>

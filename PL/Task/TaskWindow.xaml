@@ -94,7 +94,7 @@
                         ValidatesOnExceptions=true}"/>
 
         <Label Content="Plan To Start:"  Grid.Row="4" Grid.Column="0" />
-        <DatePicker Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center"  VerticalAlignment="Center"
+        <DatePicker Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center"  VerticalAlignment="Center" IsEnabled="False"
                     SelectedDate ="{Binding PlanToStart, Mode=TwoWay, NotifyOnValidationError=true, 
                         ValidatesOnExceptions=true}" />
 
