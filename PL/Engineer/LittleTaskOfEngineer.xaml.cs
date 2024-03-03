@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 
 namespace PL.Engineer
 {
-    
+
     /// <summary>
     /// Interaction logic for LittleTaskOfEngineer.xaml
     /// </summary>
@@ -44,7 +44,7 @@ namespace PL.Engineer
                 InitializeComponent();
                 CurrentEngineer = currEng;
             }
-            catch(Exception ex) 
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -64,7 +64,16 @@ namespace PL.Engineer
         {
             try
             {
-                new TaskForList(this, 0, CurrentEngineer.Id).Show();
+                new TaskForList(() =>
+                {
+                    BO.Engineer tempEng = s_bl.Engineer.Read(CurrentEngineer.Id);
+                    return s_bl?.Task.ReadAll(item => ((int)item.Difficulty <= (int)tempEng.Level) && item.Engineer == null && s_bl.Task.didntFinishLink(item));
+                    //מה עושים אם זה נאל? כאילו אם אין משימות שמתאימות לרמה שלו?
+                }, (BO.TaskInList task, TaskForList.Closer close, BO.Stage stage) =>
+                {
+                    HandleReturnedTask(task);
+                    close();
+                }).Show();
             }
             catch (Exception ex)
             { MessageBox.Show(ex.Message); }
@@ -83,7 +92,7 @@ namespace PL.Engineer
             }
             catch (Exception ex)
             { MessageBox.Show(ex.Message); }
-          
+
         }
     }
 }

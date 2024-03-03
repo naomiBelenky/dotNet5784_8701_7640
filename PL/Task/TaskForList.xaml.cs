@@ -24,8 +24,6 @@ namespace PL.Task
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
         public BO.Status status { get; set; } = BO.Status.All;
         public BO.Stage stage { get { return s_bl.getStage(); } }
-        public Window callingWindow { get; }
-
 
         public IEnumerable<BO.TaskInList> TaskList
         {
@@ -37,24 +35,22 @@ namespace PL.Task
             DependencyProperty.Register("TaskList", typeof(IEnumerable<BO.TaskInList>), typeof(TaskForList), new PropertyMetadata(null));
 
         private int newNextTask { get; set; } //for case that we here for add link to another task 
-        public TaskForList(Window callingWindow, int id = 0, int engID = 0)
+
+        public delegate IEnumerable<BO.TaskInList>? TaskListGetter();
+
+        public delegate void Closer();
+
+        public delegate void HandleReturnedTask(BO.TaskInList task, Closer closer, BO.Stage stage);
+
+        HandleReturnedTask handleReturnedTask;
+
+        public TaskForList(TaskListGetter? taskListGetter, HandleReturnedTask handleReturnedTask)
         {
+            this.handleReturnedTask = handleReturnedTask;
             try
             {
-                this.callingWindow = callingWindow;
-
                 InitializeComponent();
-                if (callingWindow is AdminWindow)
-                    TaskList = s_bl?.Task.ReadAll().OrderBy(t => t.Id)!;
-                else if (callingWindow is PlanningTaskWindow)
-                    TaskList = s_bl?.Task.ReadAll(item => s_bl.Task.checkLink(item.Id, id)).OrderBy(t => t.Id)!;
-                else if (callingWindow is LittleTaskOfEngineer)
-                {
-                    BO.Engineer tempEng = s_bl.Engineer.Read(engID);
-                    TaskList = s_bl?.Task.ReadAll(item => (((int)item.Difficulty <= (int)tempEng.Level) && item.Engineer == null && s_bl.Task.didntFinishLink(item)));
-                    //מה עושים אם זה נאל? כאילו אם אין משימות שמתאימות לרמה שלו?
-
-                }
+                TaskList = taskListGetter().OrderBy(t => t.Id);
             }
             catch(Exception ex) { MessageBox.Show(ex.Message); }
 
@@ -95,25 +91,7 @@ namespace PL.Task
             BO.TaskInList? task = (sender as ListView)?.SelectedItem as BO.TaskInList;
             if (task == null) { /*exeption*/ }
 
-            if (callingWindow is AdminWindow adminWindow)
-            {
-                if (stage == BO.Stage.Execution)
-                    new TaskWindow(task!.Id).ShowDialog();
-                else
-                    new PlanningTaskWindow(task!.Id).ShowDialog();
-
-                adminWindow.HandleReturnedTask(task);
-            }
-            else if (callingWindow is PlanningTaskWindow PlanningTaskWindow)
-            {
-                PlanningTaskWindow.HandleReturnedTask(task!);
-                Close();
-            }
-            else if(callingWindow is LittleTaskOfEngineer littleTaskOfEngineer)
-            {
-                littleTaskOfEngineer.HandleReturnedTask(task!);
-                Close();
-            }
+            handleReturnedTask(task, Close, stage);
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
