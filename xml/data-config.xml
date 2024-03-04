@@ -2,6 +2,6 @@
 <config>
   <NextTaskId>21</NextTaskId>
   <NextLinkId>42</NextLinkId>
-  <startDate>2024-03-01T00:00:00</startDate>
+  <startDate></startDate>
   <finishDate></finishDate>
 </config>

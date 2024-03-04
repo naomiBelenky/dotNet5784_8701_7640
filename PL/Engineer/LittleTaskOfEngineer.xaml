@@ -7,6 +7,16 @@
         mc:Ignorable="d"
         Title="LittleTaskOfEngineer" Height="170" Width="250"
         DataContext="{Binding CurrentEngineer, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
+    <Window.Resources>
+        <Style TargetType="Label">
+            <Setter Property="FontFamily" Value="Comic Sans MS" />
+            <Setter Property="FontSize" Value="12" />
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="FontFamily" Value="Comic Sans MS" />
+            <Setter Property="FontSize" Value="12" />
+        </Style>
+    </Window.Resources>
 
     <Grid>
         <Label Content="Your Task:" HorizontalAlignment="Left" Margin="10,7,0,0" VerticalAlignment="Top" Width="64"/>

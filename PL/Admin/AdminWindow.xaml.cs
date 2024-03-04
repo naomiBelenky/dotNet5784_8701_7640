@@ -37,7 +37,16 @@ namespace PL.Engineer
 
         private void TaskBtn_Click(object sender, RoutedEventArgs e)
         {
-            TaskForList taskForListWindow = new TaskForList(this);
+            TaskForList taskForListWindow = new TaskForList(() => { return s_bl.Task.ReadAll(); },
+                (BO.TaskInList task, TaskForList.Closer close, BO.Stage stage) =>
+                {
+                    if (stage == BO.Stage.Execution)
+                        new TaskWindow(task!.Id).ShowDialog();
+                    else
+                        new PlanningTaskWindow(task!.Id).ShowDialog();
+
+                    HandleReturnedTask(task);
+                });
             taskForListWindow.Show();
         }
 
@@ -62,7 +71,7 @@ namespace PL.Engineer
         private void Schedule_Click(object sender, RoutedEventArgs e)
         {
             //try {
-                new ProjectStartDate().Show();
+            new ProjectStartDate().Show();
             //    s_bl.automaticSchedule();
             //    MessageBox.Show("scheduled all tasks succesfully");
             //}

@@ -16,7 +16,7 @@ internal class EngineerImplementation : IEngineer
         {
             if (item.Id <= 0) throw new BO.BlInformationIsntValid("id is not valid");
             if (string.IsNullOrEmpty(item.Name)) throw new BO.BlInformationIsntValid("name is not valid");
-            if (!new EmailAddressAttribute().IsValid(item.Email)) throw new BO.BlInformationIsntValid("email adress is not valid");
+            if (item.Email == null || !new EmailAddressAttribute().IsValid(item.Email)) throw new BO.BlInformationIsntValid("email adress is not valid");
             if (double.IsNegative(item.Cost)) throw new BO.BlInformationIsntValid("cost is not valid");
             if((int)item.Level<0||(int)item.Level>4) throw new BO.BlInformationIsntValid("Level is not valid");
 
@@ -151,8 +151,9 @@ internal class EngineerImplementation : IEngineer
                     ?? throw new BO.BlDoesNotExistException($"task with id={engineer.Task.Id} does not exist");
                 if ((int)task.Difficulty > (int)engineer.Level) throw new BO.BlForbiddenInThisStage($"task with ID={task.TaskID} doesn't fit the engineer level");
                 if (task.EngineerID != 0) throw new BO.BlForbiddenInThisStage($"Task with ID={task.TaskID} is already assigned to an engineer");
+                if (_dal.Task.ReadAll(task => task.EngineerID==engineer.Id && task.FinishDate==null).ToList().Count>0) throw new BO.BlForbiddenInThisStage($"{engineer.Name} is already assigned to another task on track");
 
-                _dal.Task.Update(task with { EngineerID = engineer.Id });   //if there is a task, update the task that this engineer is working on it
+                _dal.Task.Update(task with { EngineerID = engineer.Id, StartWork = DateTime.Now });   //if there is a task, update the task that this engineer is working on it
             }
 
         }
