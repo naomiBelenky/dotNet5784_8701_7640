@@ -73,7 +73,7 @@ namespace PL.Engineer
                 {
                     HandleReturnedTask(task);
                     close();
-                }).Show();
+                }, false).Show();
             }
             catch (Exception ex)
             { MessageBox.Show(ex.Message); }

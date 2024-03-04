@@ -35,4 +35,11 @@
     <Level>Intermediate</Level>
     <CostPerHour>197.15</CostPerHour>
   </Engineer>
+  <Engineer>
+    <EngineerID>21</EngineerID>
+    <FullName>svd</FullName>
+    <Email>sas@jkb.com</Email>
+    <Level>Advanced</Level>
+    <CostPerHour>0</CostPerHour>
+  </Engineer>
 </ArrayOfEngineer>

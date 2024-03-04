@@ -34,7 +34,9 @@ namespace PL.Task
         public static readonly DependencyProperty TaskListProperty =
             DependencyProperty.Register("TaskList", typeof(IEnumerable<BO.TaskInList>), typeof(TaskForList), new PropertyMetadata(null));
 
-        private int newNextTask { get; set; } //for case that we here for add link to another task 
+        private int newNextTask { get; set; } //for case that we here for add link to another task
+
+        public bool showAddButton { get; set; }
 
         public delegate IEnumerable<BO.TaskInList>? TaskListGetter();
 
@@ -44,8 +46,9 @@ namespace PL.Task
 
         HandleReturnedTask handleReturnedTask;
 
-        public TaskForList(TaskListGetter? taskListGetter, HandleReturnedTask handleReturnedTask)
+        public TaskForList(TaskListGetter? taskListGetter, HandleReturnedTask handleReturnedTask, bool showAddButton)
         {
+            this.showAddButton = showAddButton;
             this.handleReturnedTask = handleReturnedTask;
             try
             {

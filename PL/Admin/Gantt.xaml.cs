@@ -15,7 +15,6 @@ using System.Windows.Shapes;
 
 namespace PL.Admin
 {
-    DateTime startOfProject = BlApi.Factory.Get().
     /// <summary>
     /// Interaction logic for Gantt.xaml
     /// </summary>

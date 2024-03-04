@@ -51,11 +51,11 @@ class ConvertStageToBool : IValueConverter
     }
 }
 
-class ConvertWindowToVisibility : IValueConverter
+class ConvertBoolToVisibility : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        return value is AdminWindow ? "Visible" : "Hidden";
+        return value is true ? Visibility.Visible : Visibility.Hidden;
     }
 
     object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -109,7 +109,7 @@ class ConvertTimeSpanToInt : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        return value.Days;
+        return ((TimeSpan)value).Days;
     }
 
     object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -118,11 +118,24 @@ class ConvertTimeSpanToInt : IValueConverter
     }
 }
 
-class ConvertDateTimeToInt : IValueConverter
+//class ConvertDateTimeToInt : IValueConverter
+//{
+//    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+//    {
+//        return (value-startOfProject).Days;
+//    }
+
+//    object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+//    {
+//        throw new NotImplementedException();
+//    }
+//}
+
+class ConverStageToVisibility : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        return (value-startOfProject).Days;
+        return (BO.Stage)value == BO.Stage.Execution ? "Visible" : "Hidden";
     }
 
     object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -130,7 +143,4 @@ class ConvertDateTimeToInt : IValueConverter
         throw new NotImplementedException();
     }
 }
-
-
-
 

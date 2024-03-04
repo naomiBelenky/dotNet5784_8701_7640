@@ -49,7 +49,7 @@ namespace PL.Engineer
                         new PlanningTaskWindow(task!.Id).ShowDialog();
 
                     HandleReturnedTask(task);
-                });
+                }, true);
             taskForListWindow.Show();
         }
 
