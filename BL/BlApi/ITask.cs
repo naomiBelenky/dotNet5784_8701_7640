@@ -52,5 +52,5 @@ public interface ITask
     /// <param name="task"></param>
     /// <returns></returns>
 
-    public bool didntFinishLink(BO.Task task);
+    public bool NodidntFinishLink(BO.Task task);
 }

@@ -48,15 +48,14 @@ namespace PL.Task
 
         public TaskForList(TaskListGetter? taskListGetter, HandleReturnedTask handleReturnedTask, bool showAddButton)
         {
-            this.showAddButton = showAddButton;
-            this.handleReturnedTask = handleReturnedTask;
-            try
-            {
+            try 
+            { 
+                this.handleReturnedTask = handleReturnedTask;
+            
                 InitializeComponent();
                 TaskList = taskListGetter().OrderBy(t => t.Id);
-            }
+            }            
             catch(Exception ex) { MessageBox.Show(ex.Message); }
-
         }
         
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

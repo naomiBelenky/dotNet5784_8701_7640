@@ -52,5 +52,8 @@ namespace PL.Admin
             ListOfTasks = (from item in listT
                            select s_bl.Task.Read(item.Id)).ToList();
         }
+
+
+     
     }
 }

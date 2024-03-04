@@ -46,7 +46,7 @@ namespace PL.Engineer
                     if (stage == BO.Stage.Execution)
                         new TaskWindow(task!.Id).ShowDialog();
                     else
-                        new PlanningTaskWindow(task!.Id).ShowDialog();
+                        new PlanningTaskWindow(task.Id).ShowDialog();
 
                     HandleReturnedTask(task);
                 }, true);

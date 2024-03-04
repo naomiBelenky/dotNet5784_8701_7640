@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Admin"
         mc:Ignorable="d"
-        Title="Gantt" Height="450" Width="800"
+        Title="Gantt" Height="600" Width="1000"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
     <Grid>
         <ItemsControl ItemsSource="{Binding ListOfTasks}" Margin="65,51,83,44">
@@ -14,15 +14,15 @@
                     <Border BorderThickness="2" BorderBrush="Aqua">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                             <TextBlock HorizontalAlignment="Left" Text="{Binding Id}" FontWeight="Bold" Background="Aquamarine"/>
-                            <Rectangle HorizontalAlignment="Left" Height="20" Width="{Binding PlanToStart}"  Fill="White"/>
-                            <TextBlock HorizontalAlignment="Left" Text="{Binding TaskName}" Width="10" FontWeight="Bold" Background="Aquamarine">
+                            <Rectangle HorizontalAlignment="Left" Height="20" Width="{Binding PlanToStart,Mode=TwoWay,Converter={StaticResource ConvertDateTimeToIntKey}}"  Fill="White"/>
+                            <TextBlock HorizontalAlignment="Left" Text="{Binding TaskName}" Width="{Binding Duration, Mode=TwoWay, Converter={StaticResource ConvertTimeSpanToIntKey}}" FontWeight="Bold" Background="{Binding Status,Mode=TwoWay,Converter={StaticResource ConvertStatusToColorKey}}">
                                 <TextBlock.ToolTip>
                                     <ToolTip>
                                         <StackPanel>
                                             <TextBlock FontWeight="Bold" Text="{Binding Name}"/>
                                             <TextBlock Text="{Binding Description}"/>
                                             <TextBlock Text="{Binding Engineer}"/>
-               
+
                                             <!-- הוספת פרטים נוספים כפי שתרצה -->
                                         </StackPanel>
                                     </ToolTip>
@@ -33,6 +33,11 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
+        <Label Content="Scheduled" HorizontalAlignment="Left" Margin="756,548,0,0" VerticalAlignment="Top" Background="Gray" Width="68"/>
+        <Label Content="OnTrack" HorizontalAlignment="Left" Margin="843,548,0,0" VerticalAlignment="Top" Background="Orange"/>
+        <Label Content="Done" HorizontalAlignment="Left" Margin="916,548,0,0" VerticalAlignment="Top" Background="Green"/>
+
+
     </Grid>
 </Window>
 

@@ -13,6 +13,12 @@
         <local:ConvertTaskInEngineerToContent x:Key="ConvertTaskInEngineerToContentKey"/>
         <local:ConvertTaskInEngineerToBoolForAddBotton x:Key="ConvertTaskInEngineerToBoolForAddBottonKey"/>
         <local:ConvertTaskInEngineerToBoolForTaskDetilesBotton x:Key="ConvertTaskInEngineerToBoolForTaskDetilesBottonKey"/>
+        <local:ConvertTimeSpanToInt x:Key="ConvertTimeSpanToIntKey"/>
+        <local:ConvertDateTimeToInt x:Key="ConvertDateTimeToIntKey"/>
+        <local:ConvertStatusToColor x:Key="ConvertStatusToColorKey"/>
+
+
+
         <local:ConverStageToVisibility x:Key="ConverStageToVisibilityKey"/>
 
                
