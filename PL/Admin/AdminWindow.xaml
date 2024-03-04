@@ -20,6 +20,7 @@
         <!-- botton for reset data base -->
         <Button Content="reset" HorizontalAlignment="Left" Margin="600,230,0,0" VerticalAlignment="Top" Height="56" Width="123" Click="resetDB_Click"/>
         <Button Content="automatic schedule" HorizontalAlignment="Left" Margin="120,130,0,0" VerticalAlignment="Top" Height="70" Width="155" Click="Schedule_Click"/>
+        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="434,141,0,0" VerticalAlignment="Top" Height="45" Width="114" Click="button_Click"/>
 
     </Grid>
 </Window>

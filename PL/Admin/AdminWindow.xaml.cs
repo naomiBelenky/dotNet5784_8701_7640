@@ -80,5 +80,10 @@ namespace PL.Engineer
             //    MessageBox.Show(ex.Message);
             //}
         }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            new Gantt().Show();
+        }
     }
 }
