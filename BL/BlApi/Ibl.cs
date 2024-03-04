@@ -13,6 +13,9 @@ public interface IBl
 
     public void saveStartDate(DateTime date);
 
+    public void getStartDate(DateTime date)
+
+
 
     /// <summary>
     /// return the stage of the progect (Planning or Execution)

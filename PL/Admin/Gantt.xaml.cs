@@ -34,14 +34,12 @@ namespace PL.Admin
         //    DependencyProperty.Register("observeListTask", typeof(ObservableCollection<BO.Task>), typeof(MainWindow), new PropertyMetadata(null));
 
 
-
         public List<BO.Task> ListOfTasks
         {
             get { return (List<BO.Task>)GetValue(ListOfTasksProperty); }
             set { SetValue(ListOfTasksProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for ListOfTasks.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ListOfTasksProperty =
             DependencyProperty.Register("ListOfTasks", typeof(List<BO.Task>), typeof(Gantt), new PropertyMetadata(null));
 
@@ -50,11 +48,21 @@ namespace PL.Admin
         {
             InitializeComponent();
             ListOfTasks = new List<BO.Task>();
-            //  ListOfTasks.Add(new BO.Task) { }
+
             List<BO.TaskInList> listT = s_bl.Task.ReadAll().ToList();
             ListOfTasks = (from item in listT
                            select s_bl.Task.Read(item.Id)).ToList();
         }
 
+
+        int getDaysFromStartProject()
+        {
+            DateTime workStartDate = ;
+
+            TimeSpan timeSpan = workStartDate - projectStartDate;
+            int daysPassed = (int)timeSpan.TotalDays;
+
+            return daysPassed;
+        }
     }
 }
