@@ -38,18 +38,19 @@ namespace PL.Task
 
         public bool showAddButton { get; set; }
 
-        public delegate IEnumerable<BO.TaskInList>? TaskListGetter();
+        public delegate IEnumerable<BO.TaskInList> TaskListGetter();
 
         public delegate void Closer();
 
         public delegate void HandleReturnedTask(BO.TaskInList task, Closer closer, BO.Stage stage);
 
-        HandleReturnedTask handleReturnedTask;
+        HandleReturnedTask? handleReturnedTask;
 
-        public TaskForList(TaskListGetter? taskListGetter, HandleReturnedTask handleReturnedTask, bool showAddButton)
+        public TaskForList(TaskListGetter taskListGetter, HandleReturnedTask handleReturnedTask, bool showAddButton)
         {
             try 
             { 
+                this.showAddButton = showAddButton;
                 this.handleReturnedTask = handleReturnedTask;
             
                 InitializeComponent();
@@ -89,17 +90,31 @@ namespace PL.Task
         }
 
         private void listView_DoubleClick(object sender, EventArgs e)
-        { 
-            BO.TaskInList? task = (sender as ListView)?.SelectedItem as BO.TaskInList;
-            if (task == null) { MessageBox.Show("No task was selected"); Close(); return; }
+        {
+            try
+            {
+                BO.TaskInList? task = (sender as ListView)?.SelectedItem as BO.TaskInList;
+                if (task == null) { MessageBox.Show("No task was selected"); Close(); return; }
 
-            handleReturnedTask(task, Close, stage);
+                handleReturnedTask!(task, Close, stage);
+            }
+            catch (BO.BlDoesNotExistException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            new PlanningTaskWindow().ShowDialog();
-            UpdateTaskList();
+            try
+            {
+                new PlanningTaskWindow().ShowDialog();
+                UpdateTaskList();
+            }
+            catch (BO.BlDoesNotExistException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

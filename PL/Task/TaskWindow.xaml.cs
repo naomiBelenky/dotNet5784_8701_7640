@@ -21,12 +21,14 @@ namespace PL.Task
             DependencyProperty.Register("Task", typeof(BO.Task), typeof(TaskWindow), new PropertyMetadata(null));
 
         private bool isAddMode { get; set; }
+        public bool withPermissions { get; set; }
 
         //private BO.Stage stage { get; set; } = BO.Stage.Planning;  //צריך לעשות שכשקובעים לו"ז זה ישתנה לשלב הביצוע
-        public TaskWindow(int id = 0, bool isAddLinkMode = false)
+        public TaskWindow(bool withPermissions, int id = 0, bool isAddLinkMode = false)
         {
             try
             {
+                this.withPermissions = withPermissions;
                 InitializeComponent();
                 if (id == 0)
                 {

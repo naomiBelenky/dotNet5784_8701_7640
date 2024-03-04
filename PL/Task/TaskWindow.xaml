@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL.Task"
         mc:Ignorable="d"
         Title="TaskWindow" Height="457" Width="500"
-        DataContext="{Binding Task, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
+        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
 
     <Window.Resources>
         <Style x:Key="LabelStyle" TargetType="Label">
@@ -60,7 +60,8 @@
 
         <Label Content="Dependent tasks:" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center"/>
         <!-- list of dependent tasks -->
-        <ListBox ItemsSource="{Binding Links}" Grid.Row="1" Grid.Column="2" Height="317" Grid.RowSpan="9" VerticalAlignment="Top" Margin="5,5,7,0" Background="{x:Null}">
+        <ListBox BorderBrush="Black" BorderThickness="1"
+            ItemsSource="{Binding Task.Links}" Grid.Row="1" Grid.Column="2" Height="310" Grid.RowSpan="9" VerticalAlignment="Top" Margin="5,5,7,0" Background="{x:Null}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Margin="0,0,0,10">
@@ -76,55 +77,56 @@
 
         <Label  Content="ID:"  Grid.Row="0" Grid.Column="0" />
         <TextBox Grid.Row="0" Grid.Column="1"  TextWrapping="Wrap" HorizontalAlignment="Center" Width="120"
-        Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" IsEnabled="False"/>
+        Text="{Binding Task.Id, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" IsEnabled="False"/>
 
         <Label  Content="Name:" Grid.Row="1" Grid.Column="0" />
         <TextBox Grid.Row="1" Grid.Column="1" TextWrapping="Wrap" HorizontalAlignment="Center" Width="120"
-                 Text="{Binding Name, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"/>
+                 Text="{Binding Task.Name, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"/>
 
         <Label  Content="Description:" Grid.Row="2" Grid.Column="0" />
         <TextBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" TextWrapping="Wrap" Width="120"
-                 Text="{Binding Description, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"/>
+                 Text="{Binding Task.Description, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"/>
 
         <Label Content="Difficulty:" Grid.Row="3" Grid.Column="0" />
         <ComboBox Grid.Row="3" Grid.Column="1"
                   ItemsSource="{Binding Source={StaticResource LevelsCollectionKey}}" 
-                  SelectedValue="{Binding Difficulty, Mode=TwoWay, NotifyOnValidationError=true, 
-                        ValidatesOnExceptions=true}"/>
+                  SelectedValue="{Binding Task.Difficulty, Mode=TwoWay, NotifyOnValidationError=true, 
+                        ValidatesOnExceptions=true}"
+                  IsEnabled="{Binding withPermissions}"/>
 
         <Label Content="Plan To Start:"  Grid.Row="4" Grid.Column="0" />
         <DatePicker Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center"  VerticalAlignment="Center" IsEnabled="False"
-                    SelectedDate ="{Binding PlanToStart, Mode=TwoWay, NotifyOnValidationError=true, 
+                    SelectedDate ="{Binding Task.PlanToStart, Mode=TwoWay, NotifyOnValidationError=true, 
                         ValidatesOnExceptions=true}" />
 
         <Label Content="Plan To Finish:" Grid.Row="5" Grid.Column="0" />
         <DatePicker Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center"  VerticalAlignment="Center"
-                    SelectedDate ="{Binding PlanToFinish, Mode=TwoWay, NotifyOnValidationError=true, 
+                    SelectedDate ="{Binding Task.PlanToFinish, Mode=TwoWay, NotifyOnValidationError=true, 
                         ValidatesOnExceptions=true}" IsEnabled="False"/>
 
         <Label Content="Start Work:"  Grid.Row="6" Grid.Column="0" />
         <DatePicker Grid.Row="6" Grid.Column="1" HorizontalAlignment="Center"  VerticalAlignment="Center"
-                    SelectedDate ="{Binding StartWork, Mode=TwoWay, NotifyOnValidationError=true, 
+                    SelectedDate ="{Binding Task.StartWork, Mode=TwoWay, NotifyOnValidationError=true, 
                         ValidatesOnExceptions=true}" IsEnabled="False"/>
 
         <Label Content="Finish Work:" Grid.Row="7" Grid.Column="0" />
         <DatePicker Grid.Row="7" Grid.Column="1" HorizontalAlignment="Center"  VerticalAlignment="Center"
-                    SelectedDate ="{Binding FinishDate, Mode=TwoWay, NotifyOnValidationError=true, 
+                    SelectedDate ="{Binding Task.FinishDate, Mode=TwoWay, NotifyOnValidationError=true, 
                         ValidatesOnExceptions=true}"/>
 
         <Label Content="Duration:" Grid.Row="8" Grid.Column="0" />
         <TextBox Grid.Row="8" Grid.Column="1" TextWrapping="Wrap" HorizontalAlignment="Center" Width="120" IsEnabled="False"
-                 Text="{Binding Duration, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                 Text="{Binding Task.Duration, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
 
         <Label Content="Product:" Grid.Row="9" Grid.Column="0" />
         <TextBox Grid.Row="9" Grid.Column="1"  TextWrapping="Wrap" HorizontalAlignment="Center" Width="120"
-                 Text="{Binding Product, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                 Text="{Binding Task.Product, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
 
         <Label Content="Notes:" Grid.Row="10" Grid.Column="0" />
         <TextBox Grid.Row="10" Grid.Column="1" TextWrapping="Wrap" HorizontalAlignment="Center" Width="120"
-                 Text="{Binding Notes, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"/>
+                 Text="{Binding Task.Notes, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"/>
 
-        <Button Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}"
+        <Button Content="{Binding Task.Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}"
                 HorizontalAlignment="Left" Margin="35,9,0,0" Grid.Row="11" VerticalAlignment="Top" Width="180" Click="AddOrUpdateButton_Click" Height="23" Grid.Column="1" Grid.ColumnSpan="2"/>
     </Grid>
 </Window>

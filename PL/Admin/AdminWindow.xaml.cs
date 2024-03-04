@@ -44,7 +44,7 @@ namespace PL.Engineer
                 (BO.TaskInList task, TaskForList.Closer close, BO.Stage stage) =>
                 {
                     if (stage == BO.Stage.Execution)
-                        new TaskWindow(task!.Id).ShowDialog();
+                        new TaskWindow(true, task!.Id).ShowDialog();
                     else
                         new PlanningTaskWindow(task.Id).ShowDialog();
 
@@ -58,6 +58,7 @@ namespace PL.Engineer
             MessageBoxResult result = MessageBox.Show("Are you sure you want to initialize data?", "Yes", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes)
                 Factory.Get().InitializeDB();
+            Close();
         }
 
         private void resetDB_Click(object sender, RoutedEventArgs e)
@@ -65,6 +66,7 @@ namespace PL.Engineer
             MessageBoxResult result = MessageBox.Show("Are you sure you want to reset data?", "Yes", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes)
                 Factory.Get().ResetDB();
+            Close();
         }
         public void HandleReturnedTask(BO.TaskInList task)
         {
@@ -75,6 +77,7 @@ namespace PL.Engineer
         {
             //try {
             new ProjectStartDate().Show();
+            Close();
             //    s_bl.automaticSchedule();
             //    MessageBox.Show("scheduled all tasks succesfully");
             //}
