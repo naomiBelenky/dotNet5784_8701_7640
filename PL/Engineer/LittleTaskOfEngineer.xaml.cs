@@ -67,7 +67,7 @@ namespace PL.Engineer
                 new TaskForList(() =>
                 {
                     BO.Engineer tempEng = s_bl.Engineer.Read(CurrentEngineer.Id);
-                    return s_bl?.Task.ReadAll(item => ((int)item.Difficulty <= (int)tempEng.Level) && item.Engineer == null && s_bl.Task.didntFinishLink(item));
+                    return s_bl?.Task.ReadAll(item => ((int)item.Difficulty <= (int)tempEng.Level) && item.Engineer == null && s_bl.Task.NodidntFinishLink(item));
                     //מה עושים אם זה נאל? כאילו אם אין משימות שמתאימות לרמה שלו?
                 }, (BO.TaskInList task, TaskForList.Closer close, BO.Stage stage) =>
                 {

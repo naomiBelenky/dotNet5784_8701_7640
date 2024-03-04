@@ -141,6 +141,12 @@ internal class TaskImplementation : ITask
         DO.Task? doTask = _dal.Task.Read(task.Id);
         if (doTask == null) throw new BO.BlDoesNotExistException($"Task with ID={task.Id} does not exists");
 
+        if(!NodidntFinishLink(task))
+        {
+            if (task.StartWork != doTask.StartWork || task.FinishDate != doTask.FinishDate)
+                throw new BO.BlForbiddenInThisStage("Updating these dates is prohibited before all the previous tasks are done");
+        }
+
         //If the schedule has not been set yet, check that only the fields allowed for update have been updated
         if (Factory.Get().getStage() == BO.Stage.Planning)
         {
@@ -345,8 +351,13 @@ internal class TaskImplementation : ITask
 
         return true;
     }
-
-    public bool didntFinishLink(BO.Task task)
+    /// <summary>
+    /// return true if there are no prev tasks that didnt finish
+    /// </summary>
+    /// <param name="task"></param>
+    /// <returns></returns>
+    /// <exception cref="BO.BlDoesNotExistException"></exception>
+    public bool NodidntFinishLink(BO.Task task)
     {
         List<BO.TaskInList> tasks = getLinks(task);
 
@@ -355,9 +366,9 @@ internal class TaskImplementation : ITask
         foreach (var item in tasks)
         {
             DO.Task? fullTask = _dal.Task.Read(item.Id);
-            if (fullTask == null) { }///???????
-                
-            if (fullTask.FinishDate >= DateTime.Now)
+            if (fullTask == null) { throw new BO.BlDoesNotExistException($"Task with ID={item.Id}Doesnt exist"); }
+
+            if (fullTask!.FinishDate == null) 
                     return false;
         }
         return true;

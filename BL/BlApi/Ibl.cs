@@ -13,7 +13,7 @@ public interface IBl
 
     public void saveStartDate(DateTime date);
 
-    public void getStartDate(DateTime date)
+    public DateTime? getStartDate();
 
 
 

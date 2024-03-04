@@ -109,7 +109,7 @@ class ConvertTimeSpanToInt : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        return value.Days;
+        return 40*((TimeSpan)value).Days;
     }
 
     object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -120,9 +120,29 @@ class ConvertTimeSpanToInt : IValueConverter
 
 class ConvertDateTimeToInt : IValueConverter
 {
+    static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        return (value-startOfProject).Days;
+        return 40*((TimeSpan)((DateTime)value - s_bl.getStartDate())!).Days;
+
+    }
+
+    object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+class ConvertStatusToColor : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if ((BO.Status)value == BO.Status.Scheduled) return "Gray";
+        if ((BO.Status)value == BO.Status.OnTrack) return "Orange";
+        if ((BO.Status)value == BO.Status.Done) return "Green";
+
+        return "true";
     }
 
     object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

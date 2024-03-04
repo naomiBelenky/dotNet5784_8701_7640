@@ -21,9 +21,9 @@ internal class Bl : IBl
     {
         DalApi.Factory.Get.saveStartandFinishDatestoFile("data-config", "startDate", date);
     }
-    public void getStartDate(DateTime date)
+    public DateTime? getStartDate()
     {
-        DalApi.Factory.Get.getStartOrFinshDatesFromXml("startDate");
+        return (DalApi.Factory.Get.getStartOrFinshDatesFromXml("startDate"));
     }
 
     public Stage getStage()

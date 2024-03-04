@@ -15,7 +15,6 @@ using System.Windows.Shapes;
 
 namespace PL.Admin
 {
-    DateTime startOfProject = BlApi.Factory.Get().
     /// <summary>
     /// Interaction logic for Gantt.xaml
     /// </summary>
@@ -55,14 +54,6 @@ namespace PL.Admin
         }
 
 
-        int getDaysFromStartProject()
-        {
-            DateTime workStartDate = ;
-
-            TimeSpan timeSpan = workStartDate - projectStartDate;
-            int daysPassed = (int)timeSpan.TotalDays;
-
-            return daysPassed;
-        }
+     
     }
 }
