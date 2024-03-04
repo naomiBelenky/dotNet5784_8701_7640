@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Engineer"
         mc:Ignorable="d"
-        Title="LittleTaskOfEngineer" Height="170" Width="250"
+        Title="LittleTaskOfEngineer" Height="170" Width="270"
         DataContext="{Binding CurrentEngineer, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
     <Window.Resources>
         <Style TargetType="Label">
@@ -19,10 +19,12 @@
     </Window.Resources>
 
     <Grid>
-        <Label Content="Your Task:" HorizontalAlignment="Left" Margin="10,7,0,0" VerticalAlignment="Top" Width="64"/>
+        <Label Content="Your Task:" HorizontalAlignment="Left" Margin="10,7,0,0" VerticalAlignment="Top" Width="73"/>
         <Label Content="{Binding Task, Mode=TwoWay, Converter={StaticResource ConvertTaskInEngineerToContentKey}}" Margin="0,36,0,0" VerticalAlignment="Top" Height="46"/>
-        <Button Content="Task details" HorizontalAlignment="Left" Margin="10,82,0,0" VerticalAlignment="Top" Width="80"  Height="20" Click="TaskDetails_Click" IsEnabled="{Binding Task, Mode=TwoWay, Converter={StaticResource ConvertTaskInEngineerToBoolForTaskDetilesBottonKey}}"/>
-        <Button Content="Add new Task" HorizontalAlignment="Left" Margin="104,82,0,0" VerticalAlignment="Top" Width="80" Click="AddTask_Click" IsEnabled="{Binding Task, Mode=TwoWay, Converter={StaticResource ConvertTaskInEngineerToBoolForAddBottonKey}}"/>
+        <Button Content="Task details" HorizontalAlignment="Left" Margin="10,82,0,0" VerticalAlignment="Top" Width="90"  Height="20" Click="TaskDetails_Click"
+                IsEnabled="{Binding Task, Mode=TwoWay, Converter={StaticResource ConvertTaskInEngineerToBoolForTaskDetilesBottonKey}}"/>
+        <Button Content="Add new Task" HorizontalAlignment="Left" Margin="126,82,0,0" VerticalAlignment="Top" Width="98" Click="AddTask_Click"
+                IsEnabled="{Binding Task, Mode=TwoWay, Converter={StaticResource ConvertTaskInEngineerToBoolForAddBottonKey}}"/>
 
     </Grid>
 </Window>

@@ -67,8 +67,7 @@ internal class EngineerImplementation : IEngineer
         };
 
         //check if there is a task on track of the engineer
-        var task = _dal.Task.Read(item => item.EngineerID == id /*&&
-           item.StartWork < DateTime.Now && DateTime.Now < item.Deadline*/); 
+        var task = _dal.Task.Read(item => (item.EngineerID == id && item.FinishDate == null)); 
 
         if (task!=null) //if found 
         {
@@ -94,7 +93,7 @@ internal class EngineerImplementation : IEngineer
                                              }).ToList();
             foreach (BO.Engineer engineer in temp)
             {
-                DO.Task? task = _dal.Task.Read(item => item.EngineerID == engineer.Id);   //searching for the task that the engineer is responsible for
+                DO.Task? task = _dal.Task.Read(item => (item.EngineerID == engineer.Id && item.FinishDate == null));   //searching for the task that the engineer is responsible for
                 if (task != null)
                 {
                     BO.TaskInEngineer taskIn = new BO.TaskInEngineer() { Id= task.TaskID, Name= task.Name };

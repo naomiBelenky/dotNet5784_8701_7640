@@ -179,7 +179,6 @@ internal class TaskImplementation : ITask
 
         try
         {
-
             //updete the links
             foreach (var item in (_dal.Link.ReadAll(link => link.NextTask == task.Id)))
             {

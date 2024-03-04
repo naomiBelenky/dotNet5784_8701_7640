@@ -91,7 +91,7 @@ namespace PL.Task
         private void listView_DoubleClick(object sender, EventArgs e)
         { 
             BO.TaskInList? task = (sender as ListView)?.SelectedItem as BO.TaskInList;
-            if (task == null) { /*exeption*/ }
+            if (task == null) { MessageBox.Show("No task was selected"); Close(); return; }
 
             handleReturnedTask(task, Close, stage);
         }

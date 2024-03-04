@@ -55,7 +55,7 @@ class ConvertBoolToVisibility : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        return value is true ? Visibility.Visible : Visibility.Hidden;
+        return value is true ? Visibility.Visible : Visibility.Collapsed;
     }
 
     object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -118,20 +118,20 @@ class ConvertTimeSpanToInt : IValueConverter
     }
 }
 
-//class ConvertDateTimeToInt : IValueConverter
-//{
-//    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-//    {
-//        return (value-startOfProject).Days;
-//    }
-
-//    object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-//    {
-//        throw new NotImplementedException();
-//    }
-//}
-
 class ConverStageToVisibility : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        return BlApi.Factory.Get().getStage() == Stage.Execution ? Visibility.Visible : Visibility.Collapsed;
+    }
+
+    object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+class ConvertDateTimeToInt : IValueConverter
 {
     static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
 
