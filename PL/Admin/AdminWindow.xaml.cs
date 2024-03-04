@@ -1,4 +1,5 @@
 ﻿using BlApi;
+using BO;
 using PL.Admin;
 using PL.Engineer;
 using PL.Task;
@@ -25,6 +26,8 @@ namespace PL.Engineer
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
 
+        public BO.Stage stage { get; set; } = s_bl.getStage();
+
         public AdminWindow()
         {
             InitializeComponent();
@@ -46,7 +49,7 @@ namespace PL.Engineer
                         new PlanningTaskWindow(task.Id).ShowDialog();
 
                     HandleReturnedTask(task);
-                });
+                }, true);
             taskForListWindow.Show();
         }
 
@@ -81,7 +84,7 @@ namespace PL.Engineer
             //}
         }
 
-        private void button_Click(object sender, RoutedEventArgs e)
+        private void GantButton_Click(object sender, RoutedEventArgs e)
         {
             new Gantt().Show();
         }

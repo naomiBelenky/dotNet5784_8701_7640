@@ -9,7 +9,7 @@
         <local:ConvertIdToContent x:Key="ConverIdToContentKey"/>
         <local:ConvertIdToBool x:Key="ConverIdToBoolKey"/>
         <local:ConvertStageToBool x:Key="ConvertStageToBoolKey"/>
-        <local:ConvertWindowToVisibility x:Key="ConvertWindowToVisibilityKey"/>
+        <local:ConvertBoolToVisibility x:Key="ConvertBoolToVisibilityKey"/>
         <local:ConvertTaskInEngineerToContent x:Key="ConvertTaskInEngineerToContentKey"/>
         <local:ConvertTaskInEngineerToBoolForAddBotton x:Key="ConvertTaskInEngineerToBoolForAddBottonKey"/>
         <local:ConvertTaskInEngineerToBoolForTaskDetilesBotton x:Key="ConvertTaskInEngineerToBoolForTaskDetilesBottonKey"/>
@@ -19,5 +19,8 @@
 
 
 
+        <local:ConverStageToVisibility x:Key="ConverStageToVisibilityKey"/>
+
+               
     </Application.Resources>
 </Application>

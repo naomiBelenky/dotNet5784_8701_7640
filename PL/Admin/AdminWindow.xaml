@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Engineer"
         mc:Ignorable="d"
+        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
         Title="AdminWindow" Height="450" Width="800">
+    
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="FontFamily" Value="Comic Sans MS" />
@@ -14,13 +16,13 @@
     </Window.Resources>
     <Grid>
         <Button Content="Engineer List" HorizontalAlignment="Left" Margin="120,280,0,0" VerticalAlignment="Top" Height="82" Width="157" Click="EngBtn_Click"/>
-        <Button Content="Task List" HorizontalAlignment="Left" Margin="300,280,0,0" VerticalAlignment="Top" Height="82" Width="156" Click="TaskBtn_Click"/>
-        <!-- botton for inital data base -->
-        <Button Content="initialize" HorizontalAlignment="Left" Margin="600,300,0,0" VerticalAlignment="Top" Height="60" Width="123" Click="btnInit_Click"/>
-        <!-- botton for reset data base -->
-        <Button Content="reset" HorizontalAlignment="Left" Margin="600,230,0,0" VerticalAlignment="Top" Height="56" Width="123" Click="resetDB_Click"/>
-        <Button Content="automatic schedule" HorizontalAlignment="Left" Margin="120,130,0,0" VerticalAlignment="Top" Height="70" Width="155" Click="Schedule_Click"/>
-        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="434,141,0,0" VerticalAlignment="Top" Height="45" Width="114" Click="button_Click"/>
+    <Button Content="Task List" HorizontalAlignment="Left" Margin="300,280,0,0" VerticalAlignment="Top" Height="82" Width="156" Click="TaskBtn_Click"/>
+    <!-- botton for inital data base -->
+    <Button Content="initialize" HorizontalAlignment="Left" Margin="600,300,0,0" VerticalAlignment="Top" Height="60" Width="123" Click="btnInit_Click"/>
+    <!-- botton for reset data base -->
+    <Button Content="reset" HorizontalAlignment="Left" Margin="600,230,0,0" VerticalAlignment="Top" Height="56" Width="123" Click="resetDB_Click"/>
+    <Button Content="automatic schedule" HorizontalAlignment="Left" Margin="120,130,0,0" VerticalAlignment="Top" Height="70" Width="155" Click="Schedule_Click"/>
+    <Button Content="Gantt chart" HorizontalAlignment="Left" Margin="300,130,0,0" VerticalAlignment="Top" Height="70" Width="155" Click="GantButton_Click" Visibility="{Binding stage, Converter={StaticResource ConverStageToVisibilityKey}}"/>
 
     </Grid>
 </Window>

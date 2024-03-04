@@ -37,7 +37,7 @@
     <Creation>2023-10-23T00:00:00</Creation>
     <PlanToStart>2024-03-13T00:00:00</PlanToStart>
     <StartWork xsi:nil="true" />
-    <TimeForTask>P5D</TimeForTask>
+    <TimeForTask>P4D</TimeForTask>
     <Deadline xsi:nil="true" />
     <FinishDate xsi:nil="true" />
     <EngineerID>0</EngineerID>
@@ -65,7 +65,7 @@
     <Creation>2023-10-25T00:00:00</Creation>
     <PlanToStart>2024-03-13T00:00:00</PlanToStart>
     <StartWork xsi:nil="true" />
-    <TimeForTask>P5D</TimeForTask>
+    <TimeForTask>P1D</TimeForTask>
     <Deadline xsi:nil="true" />
     <FinishDate xsi:nil="true" />
     <EngineerID>0</EngineerID>
@@ -135,7 +135,7 @@
     <Creation>2023-10-01T00:00:00</Creation>
     <PlanToStart>2024-03-13T00:00:00</PlanToStart>
     <StartWork xsi:nil="true" />
-    <TimeForTask>P6D</TimeForTask>
+    <TimeForTask>P4D</TimeForTask>
     <Deadline xsi:nil="true" />
     <FinishDate xsi:nil="true" />
     <EngineerID>0</EngineerID>
@@ -278,6 +278,6 @@
     <TimeForTask>P4D</TimeForTask>
     <Deadline xsi:nil="true" />
     <FinishDate xsi:nil="true" />
-    <EngineerID>0</EngineerID>
+    <EngineerID>21</EngineerID>
   </Task>
 </ArrayOfTask>

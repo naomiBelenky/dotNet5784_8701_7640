@@ -59,6 +59,6 @@
         <!-- botton for adding engineer -->
         <Button Content="Add" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100" Click="AddButton_Click"
                 IsEnabled="{Binding stage, Converter={StaticResource ConvertStageToBoolKey}, Mode=OneWay}"
-                Visibility="{Binding callingWindow, Mode=OneWay, Converter={StaticResource ConvertWindowToVisibilityKey}}"/>
+                Visibility="{Binding showAddButton, Mode=OneWay, Converter={StaticResource ConvertBoolToVisibilityKey}}"/>
     </Grid>
 </Window>

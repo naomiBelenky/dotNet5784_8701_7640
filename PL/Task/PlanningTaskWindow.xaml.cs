@@ -83,7 +83,7 @@ namespace PL.Task
             {
                 HandleReturnedTask(task);
                 close();
-            });
+            }, false);
             taskForListWindow.ShowDialog();
         }
         public void HandleReturnedTask(BO.TaskInList task)

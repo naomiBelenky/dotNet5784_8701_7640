@@ -105,7 +105,7 @@
         <Label Content="Start Work:"  Grid.Row="6" Grid.Column="0" />
         <DatePicker Grid.Row="6" Grid.Column="1" HorizontalAlignment="Center"  VerticalAlignment="Center"
                     SelectedDate ="{Binding StartWork, Mode=TwoWay, NotifyOnValidationError=true, 
-                        ValidatesOnExceptions=true}"/>
+                        ValidatesOnExceptions=true}" IsEnabled="False"/>
 
         <Label Content="Finish Work:" Grid.Row="7" Grid.Column="0" />
         <DatePicker Grid.Row="7" Grid.Column="1" HorizontalAlignment="Center"  VerticalAlignment="Center"
