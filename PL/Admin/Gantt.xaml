@@ -7,27 +7,32 @@
         mc:Ignorable="d"
         Title="Gantt" Height="450" Width="800"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
-    <!--<Grid>-->
-    <!--<DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="dataGrid_SelectionChanged"/>-->
-    <Grid >
+    <Grid>
         <ItemsControl ItemsSource="{Binding ListOfTasks}" Margin="65,51,83,44">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Border BorderThickness="2" BorderBrush="Aqua">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                             <TextBlock HorizontalAlignment="Left" Text="{Binding Id}" FontWeight="Bold" Background="Aquamarine"/>
-                            <Rectangle HorizontalAlignment="Left" Height="20" Width="30"  Fill="White"/>
-
-                            <!--Width="{Binding DaysFromStart}"-->
-                            <!--Width="{Binding DaysFromStart}"-->
-                            <TextBlock HorizontalAlignment="Left" Text="{Binding TaskName}" Width="{Binding Duration}" FontWeight="Bold" Background="Aquamarine"/>
-
-        
+                            <Rectangle HorizontalAlignment="Left" Height="20" Width="{Binding PlanToStart}"  Fill="White"/>
+                            <TextBlock HorizontalAlignment="Left" Text="{Binding TaskName}" Width="10" FontWeight="Bold" Background="Aquamarine">
+                                <TextBlock.ToolTip>
+                                    <ToolTip>
+                                        <StackPanel>
+                                            <TextBlock FontWeight="Bold" Text="{Binding Name}"/>
+                                            <TextBlock Text="{Binding Description}"/>
+                                            <TextBlock Text="{Binding Engineer}"/>
+               
+                                            <!-- הוספת פרטים נוספים כפי שתרצה -->
+                                        </StackPanel>
+                                    </ToolTip>
+                                </TextBlock.ToolTip>
+                            </TextBlock>
                         </StackPanel>
                     </Border>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
     </Grid>
-    <!--</Grid>-->
 </Window>
+
