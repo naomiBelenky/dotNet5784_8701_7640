@@ -12,7 +12,9 @@
         <local:ConvertWindowToVisibility x:Key="ConvertWindowToVisibilityKey"/>
         <local:ConvertTaskInEngineerToContent x:Key="ConvertTaskInEngineerToContentKey"/>
         <local:ConvertTaskInEngineerToBoolForAddBotton x:Key="ConvertTaskInEngineerToBoolForAddBottonKey"/>
-        <local:ConvertTaskInEngineerToBoolForTaskDetilesBotton x:Key="ConvertTaskInEngineerToBoolForTaskDetilesBottonKey"/>
+        <local:ConverStageToVisibility x:Key="ConverStageToVisibilityKey"/>
 
+        
+        
     </Application.Resources>
 </Application>

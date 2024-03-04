@@ -89,3 +89,16 @@ class ConvertTaskInEngineerToBoolForAddBotton : IValueConverter
         throw new NotImplementedException();
     }
 }
+
+class ConverStageToVisibility : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        return (BO.Stage)value == BO.Stage.Execution ? "Visible" : "Hidden";
+    }
+
+    object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}

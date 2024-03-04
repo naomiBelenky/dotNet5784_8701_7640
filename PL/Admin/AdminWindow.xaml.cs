@@ -1,4 +1,5 @@
 ﻿using BlApi;
+using BO;
 using PL.Admin;
 using PL.Engineer;
 using PL.Task;
@@ -24,6 +25,8 @@ namespace PL.Engineer
     public partial class AdminWindow : Window
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+
+        public BO.Stage stage { get; set; } = s_bl.getStage();
 
         public AdminWindow()
         {
@@ -81,7 +84,7 @@ namespace PL.Engineer
             //}
         }
 
-        private void button_Click(object sender, RoutedEventArgs e)
+        private void GantButton_Click(object sender, RoutedEventArgs e)
         {
             new Gantt().Show();
         }

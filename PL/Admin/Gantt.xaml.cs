@@ -52,16 +52,5 @@ namespace PL.Admin
             ListOfTasks = (from item in listT
                            select s_bl.Task.Read(item.Id)).ToList();
         }
-
-
-        int getDaysFromStartProject()
-        {
-            DateTime workStartDate = ;
-
-            TimeSpan timeSpan = workStartDate - projectStartDate;
-            int daysPassed = (int)timeSpan.TotalDays;
-
-            return daysPassed;
-        }
     }
 }
