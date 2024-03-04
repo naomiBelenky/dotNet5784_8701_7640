@@ -22,7 +22,7 @@
                             <!--Width="{Binding DaysFromStart}"-->
                             <TextBlock HorizontalAlignment="Left" Text="{Binding TaskName}" Width="{Binding Duration}" FontWeight="Bold" Background="Aquamarine"/>
 
-
+        
                         </StackPanel>
                     </Border>
                 </DataTemplate>
