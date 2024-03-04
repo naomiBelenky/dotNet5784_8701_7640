@@ -168,7 +168,7 @@ internal class TaskImplementation : ITask
             if (task.Links != null && !taskLinks.Zip(dalTaskLinks, (x, y) => x.PrevTask == y.PrevTask).All(result => result))   //checking if the links are the same
             { throw new BO.BlForbiddenInThisStage("Updating dependencies is prohibited after the project schedule is created"); }
         }
-
+        if (task.StartWork == null && task.FinishDate!=null) throw new BO.BlForbiddenInThisStage("Cannot update finish date before start date");
         //If we are here, it means that all the tests passed successfully:)
 
         try

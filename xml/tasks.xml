@@ -43,20 +43,6 @@
     <EngineerID>0</EngineerID>
   </Task>
   <Task>
-    <TaskID>2</TaskID>
-    <Name>Automation</Name>
-    <Description>Design automated solutions</Description>
-    <Difficulty>Beginner</Difficulty>
-    <Milestone>false</Milestone>
-    <Creation>2023-10-01T00:00:00</Creation>
-    <PlanToStart>2024-03-16T00:00:00</PlanToStart>
-    <StartWork xsi:nil="true" />
-    <TimeForTask>P5D</TimeForTask>
-    <Deadline xsi:nil="true" />
-    <FinishDate xsi:nil="true" />
-    <EngineerID>0</EngineerID>
-  </Task>
-  <Task>
     <TaskID>3</TaskID>
     <Name>Simulation</Name>
     <Description>Virtual models for testing</Description>
@@ -279,5 +265,19 @@
     <Deadline xsi:nil="true" />
     <FinishDate xsi:nil="true" />
     <EngineerID>21</EngineerID>
+  </Task>
+  <Task>
+    <TaskID>2</TaskID>
+    <Name>Automation</Name>
+    <Description>Design automated solutions</Description>
+    <Difficulty>Beginner</Difficulty>
+    <Milestone>false</Milestone>
+    <Creation>2023-10-01T00:00:00</Creation>
+    <PlanToStart>2024-03-16T00:00:00</PlanToStart>
+    <StartWork>2024-03-04T22:05:03.9650189+02:00</StartWork>
+    <TimeForTask>P5D</TimeForTask>
+    <Deadline xsi:nil="true" />
+    <FinishDate xsi:nil="true" />
+    <EngineerID>4</EngineerID>
   </Task>
 </ArrayOfTask>
