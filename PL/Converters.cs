@@ -89,16 +89,3 @@ class ConvertTaskInEngineerToBoolForAddBotton : IValueConverter
         throw new NotImplementedException();
     }
 }
-
-class ConvertTaskInEngineerToBoolForTaskDetilesBotton : IValueConverter
-{
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        return (BO.TaskInEngineer)value == null ? false : true;
-    }
-
-    object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        throw new NotImplementedException();
-    }
-}
