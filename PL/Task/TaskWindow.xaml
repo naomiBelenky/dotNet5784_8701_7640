@@ -126,7 +126,7 @@
         <TextBox Grid.Row="10" Grid.Column="1" TextWrapping="Wrap" HorizontalAlignment="Center" Width="120"
                  Text="{Binding Task.Notes, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"/>
 
-        <Button Content="{Binding Task.Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}"
+        <Button Content="{Binding Task.Id, Mode=OneWay, Converter={StaticResource ConverIdToContentKey}}"
                 HorizontalAlignment="Left" Margin="35,9,0,0" Grid.Row="11" VerticalAlignment="Top" Width="180" Click="AddOrUpdateButton_Click" Height="23" Grid.Column="1" Grid.ColumnSpan="2"/>
     </Grid>
 </Window>

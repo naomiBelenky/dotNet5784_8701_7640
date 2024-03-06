@@ -84,23 +84,21 @@ namespace PL.Task
 
         }
 
-        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
         private void listView_DoubleClick(object sender, EventArgs e)
         {
             try
             {
                 BO.TaskInList? task = (sender as ListView)?.SelectedItem as BO.TaskInList;
-                if (task == null) { MessageBox.Show("No task was selected"); Close(); return; }
+                if (task == null)
+                {
+                    MessageBox.Show("No task was selected"); Close(); return;
+                }
 
                 handleReturnedTask!(task, Close, stage);
             }
-            catch (BO.BlDoesNotExistException ex)
+            catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, ex.GetType().Name, MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -111,9 +109,9 @@ namespace PL.Task
                 new PlanningTaskWindow().ShowDialog();
                 UpdateTaskList();
             }
-            catch (BO.BlDoesNotExistException ex)
+            catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message , ex.GetType().Name, MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

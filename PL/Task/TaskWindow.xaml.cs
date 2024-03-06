@@ -42,7 +42,7 @@ namespace PL.Task
                     isAddMode = false;
                 }
             }
-            catch (BO.BlDoesNotExistException ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }

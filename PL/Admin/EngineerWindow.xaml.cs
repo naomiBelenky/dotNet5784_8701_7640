@@ -34,23 +34,27 @@ namespace PL.Engineer
 
         public EngineerWindow(int id = 0)
         {
-            InitializeComponent();
-            if (id == 0)
+            try
             {
-                SetValue(EngineerProperty, new BO.Engineer());
-                isAddMode = true;
+                InitializeComponent();
+                if (id == 0)
+                {
+                    SetValue(EngineerProperty, new BO.Engineer());
+                    isAddMode = true;
+                }
+                else
+                    try
+                    {
+                        BO.Engineer engineer = s_bl.Engineer.Read(id);
+                        SetValue(EngineerProperty, engineer);
+                        isAddMode = false;
+                    }
+                    catch (BO.BlDoesNotExistException ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
             }
-            else
-                try
-                {
-                    BO.Engineer engineer = s_bl.Engineer.Read(id);
-                    SetValue(EngineerProperty, engineer);
-                    isAddMode = false;
-                }
-                catch (BO.BlDoesNotExistException ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
         private void BtnAddUpdate_Click(object sender, RoutedEventArgs e)
@@ -80,8 +84,6 @@ namespace PL.Engineer
                 MessageBox.Show(message);
             }
 
-        }
-
-        
+        }        
     }
 }

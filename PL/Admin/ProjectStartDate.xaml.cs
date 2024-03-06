@@ -37,13 +37,14 @@ namespace PL.Admin
 
         private void OK_Click(object sender, RoutedEventArgs e)
         {
-            s_bl.saveStartDate(Date);
             try
             {
+                s_bl.saveStartDate(Date);
+
                 s_bl.automaticSchedule();
                 MessageBox.Show("scheduled all tasks succesfully");
             }
-            catch (BO.BlDoesNotExistException ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }

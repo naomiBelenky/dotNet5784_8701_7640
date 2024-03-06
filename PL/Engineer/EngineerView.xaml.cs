@@ -35,8 +35,12 @@ namespace PL.Engineer
  
         public EngineerView()
         {
-            InitializeComponent();
-            SetValue(CurrentEngineerProperty, new BO.Engineer());
+            try
+            {
+                InitializeComponent();
+                SetValue(CurrentEngineerProperty, new BO.Engineer());
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
         private void Cancle_Click(object sender, RoutedEventArgs e)
@@ -49,26 +53,14 @@ namespace PL.Engineer
         {
             try
             {
-                //CurrentEngineer=new BO.Engineer();
-
                 CurrentEngineer = s_bl.Engineer.Read(CurrentEngineer.Id);
                 new LittleTaskOfEngineer(CurrentEngineer).Show();
-                //BO.TaskInEngineer? taskOfCurrentEngineer = s_bl.Engineer.Read(Engineer.Id).Task;
-
-                //if (taskOfCurrentEngineer == null)
-                //    new LittleTaskOfEngineer().Show();
-                ////MessageBox.Show("You are still not responsible for any tasks");
-                //else
-                //    idOfTaskOfCurrentEngineer = taskOfCurrentEngineer.Id;
             }
 
             catch (Exception ex) 
             {
                 MessageBox.Show(ex.Message);
             }
-                       
-            //לפתוח חלון שמראה את המשימה הנוכחית ולשלוח לו את הת"ז של המהנדס
-            //אולי לעשות עוד פעם חלונות נפרדים לשלב תכנון ולשלב ביצוע?
             Close();
         }
     }
