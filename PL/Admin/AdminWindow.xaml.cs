@@ -35,36 +35,51 @@ namespace PL.Engineer
 
         private void EngBtn_Click(object sender, RoutedEventArgs e)
         {
-            new EngineerListWindow().Show();
+            try { new EngineerListWindow().Show(); }
+            catch(Exception ex) { MessageBox.Show(ex.Message); }
         }
 
         private void TaskBtn_Click(object sender, RoutedEventArgs e)
         {
-            TaskForList taskForListWindow = new TaskForList(() => { return s_bl.Task.ReadAll(); },
-                (BO.TaskInList task, TaskForList.Closer close, BO.Stage stage) =>
-                {
-                    if (stage == BO.Stage.Execution)
-                        new TaskWindow(task!.Id).ShowDialog();
-                    else
-                        new PlanningTaskWindow(task.Id).ShowDialog();
+            try
+            {
+                TaskForList taskForListWindow = new TaskForList(() => { return s_bl.Task.ReadAll(); },
+                    (BO.TaskInList task, TaskForList.Closer close, BO.Stage stage) =>
+                    {
+                        if (stage == BO.Stage.Execution)
+                            new TaskWindow(true, task!.Id).ShowDialog();
+                        else
+                            new PlanningTaskWindow(task.Id).ShowDialog();
 
-                    HandleReturnedTask(task);
-                }, true);
-            taskForListWindow.Show();
+                        HandleReturnedTask(task);
+                    }, true);
+                taskForListWindow.Show();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
         private void btnInit_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Are you sure you want to initialize data?", "Yes", MessageBoxButton.YesNo);
-            if (result == MessageBoxResult.Yes)
-                Factory.Get().InitializeDB();
+            try
+            {
+                MessageBoxResult result = MessageBox.Show("Are you sure you want to initialize data?", "Yes", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.Yes)
+                    Factory.Get().InitializeDB();
+                Close();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
         private void resetDB_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Are you sure you want to reset data?", "Yes", MessageBoxButton.YesNo);
-            if (result == MessageBoxResult.Yes)
-                Factory.Get().ResetDB();
+            try
+            {
+                MessageBoxResult result = MessageBox.Show("Are you sure you want to reset data?", "Yes", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.Yes)
+                    Factory.Get().ResetDB();
+                Close();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
         public void HandleReturnedTask(BO.TaskInList task)
         {
@@ -73,20 +88,24 @@ namespace PL.Engineer
 
         private void Schedule_Click(object sender, RoutedEventArgs e)
         {
-            //try {
-            new ProjectStartDate().Show();
-            //    s_bl.automaticSchedule();
-            //    MessageBox.Show("scheduled all tasks succesfully");
-            //}
-            //catch (BO.BlDoesNotExistException ex)
-            //{
-            //    MessageBox.Show(ex.Message);
-            //}
+            try
+            {
+                new ProjectStartDate().Show();
+                Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void GantButton_Click(object sender, RoutedEventArgs e)
         {
-            new Gantt().Show();
+            try
+            {
+                new Gantt().Show();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
     }
 }

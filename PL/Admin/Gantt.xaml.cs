@@ -45,15 +45,16 @@ namespace PL.Admin
 
         public Gantt()
         {
-            InitializeComponent();
-            ListOfTasks = new List<BO.Task>();
+            try
+            {
+                InitializeComponent();
+                ListOfTasks = new List<BO.Task>();
 
-            List<BO.TaskInList> listT = s_bl.Task.ReadAll().ToList();
-            ListOfTasks = (from item in listT
-                           select s_bl.Task.Read(item.Id)).ToList();
-        }
-
-
-     
+                List<BO.TaskInList> listT = s_bl.Task.ReadAll().ToList();
+                ListOfTasks = (from item in listT
+                               select s_bl.Task.Read(item.Id)).ToList();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }    
     }
 }

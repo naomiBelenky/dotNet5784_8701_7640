@@ -35,51 +35,62 @@ namespace PL.Engineer
 
         public EngineerListWindow()
         {
-            InitializeComponent();
-            EngineerList = s_bl?.Engineer.ReadAll()!;
+            try
+            {
+                InitializeComponent();
+                EngineerList = s_bl?.Engineer.ReadAll()!;
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
         //the user can filter the engineers on the screens according to their level
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-             EngineerList = ((level == BO.Level.All) ?
-                s_bl?.Engineer.ReadAll()! : s_bl?.Engineer.ReadAll(eng => eng.Level == level)!)
-                .OrderBy(e => e.Id); // sort by ID so it will be easier to find the engineer in the list as a human
+            try
+            {
+                EngineerList = ((level == BO.Level.All) ?
+                   s_bl?.Engineer.ReadAll()! : s_bl?.Engineer.ReadAll(eng => eng.Level == level)!)
+                   .OrderBy(e => e.Id); // sort by ID so it will be easier to find the engineer in the list as a human
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
         void UpdateEngineerList()
         {
-
-            EngineerList = ((level == BO.Level.All) ?
-                s_bl?.Engineer.ReadAll()! : s_bl?.Engineer.ReadAll(eng => eng.Level == level)!)
-                .OrderBy(e => e.Id); // sort by ID so it will be easier to find the engineer in the list as a human
+            try
+            {
+                EngineerList = ((level == BO.Level.All) ?
+                    s_bl?.Engineer.ReadAll()! : s_bl?.Engineer.ReadAll(eng => eng.Level == level)!)
+                    .OrderBy(e => e.Id); // sort by ID so it will be easier to find the engineer in the list as a human
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
         private void listView_DoubleClick(object sender, MouseButtonEventArgs e)
         {
-            BO.Engineer? engineer = (sender as ListView)?.SelectedItem as BO.Engineer;
+            try
+            {
+                BO.Engineer? engineer = (sender as ListView)?.SelectedItem as BO.Engineer;
 
-            if (engineer == null) { /*exeption*/ }
-            
-            new EngineerWindow(engineer!.Id).ShowDialog();
-            UpdateEngineerList();
+                if (engineer == null)
+                {
+                    MessageBox.Show("No engineer was selected"); Close(); return;
+                }
 
+                new EngineerWindow(engineer!.Id).ShowDialog();
+                UpdateEngineerList();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
-
-        //private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    BO.Engineer? engineer = (sender as ListView)?.SelectedItem as BO.Engineer;
-
-        //    if (engineer == null) { /*exeption*/ }
-
-        //    new EngineerWindow(engineer!.Id).ShowDialog();
-        //    UpdateEngineerList();
-        //}
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            new EngineerWindow().ShowDialog();
-            UpdateEngineerList();
+            try
+            {
+                new EngineerWindow().ShowDialog();
+                UpdateEngineerList();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
     }
 }

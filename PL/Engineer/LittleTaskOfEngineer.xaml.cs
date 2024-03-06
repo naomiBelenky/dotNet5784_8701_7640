@@ -54,7 +54,8 @@ namespace PL.Engineer
         {
             try
             {
-                new TaskWindow(CurrentEngineer.Task!.Id).Show();
+                new TaskWindow(false, CurrentEngineer.Task!.Id).Show();
+                Close();
             }
             catch (Exception ex)
             { MessageBox.Show(ex.Message); }
@@ -67,8 +68,9 @@ namespace PL.Engineer
                 new TaskForList(() =>
                 {
                     BO.Engineer tempEng = s_bl.Engineer.Read(CurrentEngineer.Id);
-                    return s_bl?.Task.ReadAll(item => ((int)item.Difficulty <= (int)tempEng.Level) && item.Engineer == null && s_bl.Task.NodidntFinishLink(item));
+                    return s_bl?.Task.ReadAll(item => ((int)item.Difficulty <= (int)tempEng.Level) && item.Engineer == null && s_bl.Task.NodidntFinishLink(item)) ?? new List<BO.TaskInList>();
                     //מה עושים אם זה נאל? כאילו אם אין משימות שמתאימות לרמה שלו?
+                    //עשיתי שזה מחזיר רשימה ריקה
                 }, (BO.TaskInList task, TaskForList.Closer close, BO.Stage stage) =>
                 {
                     HandleReturnedTask(task);

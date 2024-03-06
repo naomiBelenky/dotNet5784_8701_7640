@@ -22,27 +22,27 @@ namespace PL.Task
             DependencyProperty.Register("Task", typeof(BO.Task), typeof(PlanningTaskWindow), new PropertyMetadata(null));
 
         private bool isAddMode { get; set; }
-
-        //private BO.Stage stage { get; set; } = BO.Stage.Planning;  //צריך לעשות שכשקובעים לו"ז זה ישתנה לשלב הביצוע
         public PlanningTaskWindow(int id = 0)
         {
-            InitializeComponent();
-            if (id == 0)
+            try
             {
-                SetValue(CurrentTaskProperty, new BO.Task());
-                isAddMode = true;
-            }
-            else
-                try
+                InitializeComponent();
+                if (id == 0)
+                {
+                    SetValue(CurrentTaskProperty, new BO.Task());
+                    isAddMode = true;
+                }
+                else
                 {
                     BO.Task task = s_bl.Task.Read(id);
                     SetValue(CurrentTaskProperty, task);
                     isAddMode = false;
                 }
-                catch (BO.BlDoesNotExistException ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
         }
 
@@ -76,29 +76,41 @@ namespace PL.Task
         }
         private void addDependencyBtn_Click(object sender, RoutedEventArgs e)
         {
-            TaskForList taskForListWindow = new TaskForList(() =>
+            try
             {
-                return s_bl?.Task.ReadAll(item => s_bl.Task.checkLink(item.Id, Task.Id));
-            }, (BO.TaskInList task, TaskForList.Closer close, BO.Stage stage) =>
-            {
-                HandleReturnedTask(task);
-                close();
-            }, false);
-            taskForListWindow.ShowDialog();
+                TaskForList taskForListWindow = new TaskForList(() =>
+                {
+                    return s_bl.Task.ReadAll(item => s_bl.Task.checkLink(item.Id, Task.Id));
+                }, (BO.TaskInList task, TaskForList.Closer close, BO.Stage stage) =>
+                {
+                    HandleReturnedTask(task);
+                    close();
+                }, false);
+                taskForListWindow.ShowDialog();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
         public void HandleReturnedTask(BO.TaskInList task)
         {
-            if (Task.Links == null) Task.Links = new List<BO.TaskInList>();
-            if (!Task.Links.Exists(item => item.Id == task.Id))
-                Task.Links.Add(task);
+            try
+            {
+                if (Task.Links == null) Task.Links = new List<BO.TaskInList>();
+                if (!Task.Links.Exists(item => item.Id == task.Id))
+                    Task.Links.Add(task);
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
         private void listBox_DoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            BO.TaskInList? task = (sender as ListBox)?.SelectedItem as BO.TaskInList;
-            MessageBoxResult result = MessageBox.Show("Are you sure you want to delete this dependency?", "Yes", MessageBoxButton.YesNo);
-            if (result == MessageBoxResult.Yes)
-                Task.Links!.Remove(task!);
+            try
+            {
+                BO.TaskInList? task = (sender as ListBox)?.SelectedItem as BO.TaskInList;
+                MessageBoxResult result = MessageBox.Show("Are you sure you want to delete this dependency?", "Yes", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.Yes)
+                    Task.Links!.Remove(task!);
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
     }
 }
