@@ -52,7 +52,7 @@ namespace PL.Admin
 
                 List<BO.TaskInList> listT = s_bl.Task.ReadAll().ToList();
                 ListOfTasks = (from item in listT
-                               select s_bl.Task.Read(item.Id)).ToList();
+                               select s_bl.Task.Read(item.Id)).OrderBy(t => t.PlanToStart).ToList();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }    
