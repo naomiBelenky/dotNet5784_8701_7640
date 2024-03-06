@@ -5,7 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800"
+        DataContext="{Binding Time, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
+
+
+
+
     <Window.Resources>
         <!-- Default font style for text-based controls -->
         <Style TargetType="Button">
@@ -18,6 +23,15 @@
         <Button Content="admin" HorizontalAlignment="Left" Margin="228,300,0,0" VerticalAlignment="Top" Height="60" Width="140" Click="btnAdmin_Click"/>
         <!-- enter of the engineers -->
         <Button Content="engineer" HorizontalAlignment="Left" Margin="433,300,0,0" VerticalAlignment="Top" Height="60" Width="140" Click="btnEngineer_Click"/>
+        <Label Content="{Binding Converter={StaticResource ConvertTimeToContentKey}}" HorizontalAlignment="Left" Margin="49,50,0,0" VerticalAlignment="Top" Height="28" Width="249"/>
+        <Button Content="next year" HorizontalAlignment="Left" Margin="60,70,0,0" VerticalAlignment="Top" Height="60" Width="120" Click="btnAddYear_Click"/>
+        <Button Content="next day" HorizontalAlignment="Left" Margin="200,70,0,0" VerticalAlignment="Top" Height="60" Width="120" Click="btnAddDay_Click"/>
+        <Button Content="next hour" HorizontalAlignment="Left" Margin="350,70,0,0" VerticalAlignment="Top" Height="60" Width="120" Click="btnAddHour_Click"/>
+        <Button Content="initialize time" HorizontalAlignment="Left" Margin="500,70,0,0" VerticalAlignment="Top" Height="60" Width="120" Click="btnInitTime_Click"/>
+
+
+
+
 
     </Grid>
 </Window>

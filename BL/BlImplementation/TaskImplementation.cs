@@ -7,12 +7,16 @@ internal class TaskImplementation : ITask
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
 
+
+    private readonly IBl _bl;
+    internal TaskImplementation(IBl bl) => _bl = bl;
+
     public int Add(BO.Task task)
     {
 
         if (Factory.Get().getStage() != (BO.Stage.Planning)) throw new BO.BlForbiddenInThisStage("Can not add tasks after scheduling the project");
 
-        DO.Task doTask = new DO.Task(task.Id, task.Name, task.Description, (DO.Level)task.Difficulty) with { TimeForTask = task.Duration, Creation= DateTime.Now };
+        DO.Task doTask = new DO.Task(task.Id, task.Name, task.Description, (DO.Level)task.Difficulty) with { TimeForTask = task.Duration, Creation= _bl.Clock };
         try
         {
             if (task.Id < 0) throw new BO.BlInformationIsntValid("id is not valid");

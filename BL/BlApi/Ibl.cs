@@ -7,6 +7,32 @@ public interface IBl
     public ITask Task { get; }
     public IMilestone MileStone { get; }
 
+    public DateTime Clock { get; }
+
+    /// <summary>
+    /// initialize the time
+    /// </summary>
+
+    public DateTime InitTime();
+
+    /// <summary>
+    /// promote the hours of the time
+    /// </summary>
+    public void PromoteHour();
+
+    /// <summary>
+    /// promote the minutes of the time
+    /// </summary>
+    public void PromoteDay();
+
+    /// <summary>
+    /// promote the seconds of the time
+    /// </summary>
+    public void PromoteYear();
+
+    
+
+
     public void InitializeDB();
 
     public void ResetDB();
@@ -28,6 +54,8 @@ public interface IBl
     /// create a schedule automaticly
     /// </summary>
     public void automaticSchedule();
+
+
 
    
 }

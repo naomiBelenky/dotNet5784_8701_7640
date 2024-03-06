@@ -16,6 +16,7 @@
         <local:ConvertTimeSpanToInt x:Key="ConvertTimeSpanToIntKey"/>
         <local:ConvertDateTimeToInt x:Key="ConvertDateTimeToIntKey"/>
         <local:ConvertStatusToColor x:Key="ConvertStatusToColorKey"/>
+        <local:ConvertTimeToContent x:Key="ConvertTimeToContentKey"/>
 
 
 

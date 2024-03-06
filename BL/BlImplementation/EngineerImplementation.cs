@@ -6,7 +6,10 @@ namespace BlImplementation;
 internal class EngineerImplementation : IEngineer
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
-    
+
+    private readonly IBl _bl;
+    internal EngineerImplementation(IBl bl) => _bl = bl;
+
     public int Add(BO.Engineer item)
     {
         
@@ -34,7 +37,7 @@ internal class EngineerImplementation : IEngineer
 
         //check if there is a task that the engineer already started working on
         var task = _dal.Task.Read(item => item.EngineerID == id &&
-           item.StartWork < DateTime.Now);
+           item.StartWork < _bl.Clock);
         if (task != null) //if found 
         {
             throw new BO.BlForbiddenInThisStage("Deletion is impossible because the engineer is/was working on a task");
@@ -152,11 +155,11 @@ internal class EngineerImplementation : IEngineer
                 if (task.EngineerID != 0) throw new BO.BlForbiddenInThisStage($"Task with ID={task.TaskID} is already assigned to an engineer");
                 if (_dal.Task.ReadAll(task => task.EngineerID==engineer.Id && task.FinishDate==null).ToList().Count>0) throw new BO.BlForbiddenInThisStage($"{engineer.Name} is already assigned to another task on track");
 
-                _dal.Task.Update(task with { EngineerID = engineer.Id, StartWork = DateTime.Now });   //if there is a task, update the task that this engineer is working on it
+                _dal.Task.Update(task with { EngineerID = engineer.Id, StartWork = _bl.Clock });   //if there is a task, update the task that this engineer is working on it
             }
 
         }
-        catch (DO.DalDoesNotExistException message)
+        catch (DO.DalDoesNotExistException message) 
         {
             throw new BO.BlDoesNotExistException($"Engineer with ID={engineer.Id} does Not exist", message);
         }

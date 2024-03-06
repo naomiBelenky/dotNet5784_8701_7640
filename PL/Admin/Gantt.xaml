@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Admin"
         mc:Ignorable="d"
-        Title="Gantt" Height="600" Width="1000"
+        Title="Gantt" Height="800" Width="1000"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
     <Grid>
         <ItemsControl ItemsSource="{Binding ListOfTasks}" Margin="65,51,83,44">
@@ -23,7 +23,6 @@
                                             <TextBlock Text="{Binding Description}"/>
                                             <TextBlock Text="{Binding Engineer}"/>
 
-                                            <!-- הוספת פרטים נוספים כפי שתרצה -->
                                         </StackPanel>
                                     </ToolTip>
                                 </TextBlock.ToolTip>

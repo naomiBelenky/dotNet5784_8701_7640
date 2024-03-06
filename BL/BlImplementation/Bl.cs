@@ -6,11 +6,35 @@ using System.Xml.Linq;
 
 internal class Bl : IBl
 {
-    public IEngineer Engineer => new EngineerImplementation();
+    public IEngineer Engineer => new EngineerImplementation(this);
 
-    public ITask Task => new TaskImplementation();
+    public ITask Task => new TaskImplementation(this);
 
     public IMilestone MileStone => throw new NotImplementedException();
+
+    private static DateTime s_Clock = DateTime.Now.Date;
+    public DateTime Clock { get { return s_Clock; } private set { s_Clock = value; } }
+
+    public DateTime InitTime()
+    {
+        Clock = DateTime.Now;
+        return Clock;
+    }
+
+    public void PromoteHour()
+    {
+        Clock = Clock.AddHours(1);
+    }
+
+    public void PromoteDay()
+    {
+        Clock = Clock.AddDays(1);
+    }
+
+    public void PromoteYear()
+    {
+        Clock = Clock.AddYears(1);
+    }
 
     public BO.Stage StageOfProject { get => StageOfProject; set => StageOfProject = value; }
 
@@ -61,4 +85,6 @@ internal class Bl : IBl
             recursiveSchedule(task.Id);
         }
     }
+
+
 }
