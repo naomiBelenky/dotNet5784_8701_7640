@@ -38,7 +38,7 @@ namespace PL.Engineer
             try
             {
                 InitializeComponent();
-                EngineerList = s_bl?.Engineer.ReadAll()!;
+                EngineerList = s_bl?.Engineer.ReadAll().OrderBy(e => e.Id)!;
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }

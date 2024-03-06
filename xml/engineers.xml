@@ -25,15 +25,15 @@
     <EngineerID>368640159</EngineerID>
     <FullName>Tal Oriel</FullName>
     <Email>taloriel@gmail.com</Email>
-    <Level>Beginner</Level>
-    <CostPerHour>456.65</CostPerHour>
+    <Level>Advanced</Level>
+    <CostPerHour>244.34</CostPerHour>
   </Engineer>
   <Engineer>
     <EngineerID>284891393</EngineerID>
     <FullName>Dan Maztal</FullName>
     <Email>danmaz@gmail.com</Email>
-    <Level>Intermediate</Level>
-    <CostPerHour>391.74</CostPerHour>
+    <Level>Expert</Level>
+    <CostPerHour>105.09</CostPerHour>
   </Engineer>
   <Engineer>
     <EngineerID>342430234</EngineerID>

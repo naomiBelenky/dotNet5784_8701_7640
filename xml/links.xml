@@ -81,6 +81,11 @@
     <NextTask>18</NextTask>
   </Link>
   <Link>
+    <LinkID>18</LinkID>
+    <PrevTask>5</PrevTask>
+    <NextTask>19</NextTask>
+  </Link>
+  <Link>
     <LinkID>19</LinkID>
     <PrevTask>5</PrevTask>
     <NextTask>20</NextTask>
