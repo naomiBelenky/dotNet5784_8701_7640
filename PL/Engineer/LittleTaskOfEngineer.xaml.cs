@@ -44,10 +44,8 @@ namespace PL.Engineer
                 InitializeComponent();
                 CurrentEngineer = currEng;
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            catch (Exception ex) { MessageBox.Show(ex.Message, ex.GetType().ToString(), MessageBoxButton.OK, MessageBoxImage.Error); }
+
         }
 
         private void TaskDetails_Click(object sender, RoutedEventArgs e)
@@ -57,8 +55,8 @@ namespace PL.Engineer
                 new TaskWindow(false, CurrentEngineer.Task!.Id).Show();
                 Close();
             }
-            catch (Exception ex)
-            { MessageBox.Show(ex.Message); }
+            catch (Exception ex) { MessageBox.Show(ex.Message, ex.GetType().ToString(), MessageBoxButton.OK, MessageBoxImage.Error); }
+
         }
 
         private void AddTask_Click(object sender, RoutedEventArgs e)
@@ -68,7 +66,7 @@ namespace PL.Engineer
                 new TaskForList(() =>
                 {
                     BO.Engineer tempEng = s_bl.Engineer.Read(CurrentEngineer.Id);
-                    return s_bl?.Task.ReadAll(item => ((int)item.Difficulty <= (int)tempEng.Level) && item.Engineer == null && s_bl.Task.NodidntFinishLink(item)) ?? new List<BO.TaskInList>();
+                    return s_bl?.Task.ReadAll(item => ((int)item.Difficulty <= (int)tempEng.Level) && item.Status == BO.Status.Scheduled && s_bl.Task.NodidntFinishLink(item))?? new List<BO.TaskInList>();
                     //מה עושים אם זה נאל? כאילו אם אין משימות שמתאימות לרמה שלו?
                     //עשיתי שזה מחזיר רשימה ריקה
                 }, (BO.TaskInList task, TaskForList.Closer close, BO.Stage stage) =>
@@ -77,8 +75,8 @@ namespace PL.Engineer
                     close();
                 }, false).Show();
             }
-            catch (Exception ex)
-            { MessageBox.Show(ex.Message); }
+            catch (Exception ex) { MessageBox.Show(ex.Message, ex.GetType().ToString(), MessageBoxButton.OK, MessageBoxImage.Error); }
+
         }
 
         public void HandleReturnedTask(BO.TaskInList task)
@@ -92,8 +90,7 @@ namespace PL.Engineer
                 MessageBox.Show("You have a new task, Have pleasure and good luck!");
                 Close();
             }
-            catch (Exception ex)
-            { MessageBox.Show(ex.Message); }
+            catch (Exception ex) { MessageBox.Show(ex.Message, ex.GetType().ToString(), MessageBoxButton.OK, MessageBoxImage.Error); }
 
         }
     }

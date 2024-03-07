@@ -150,10 +150,10 @@ class ConvertStatusToColor : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        if ((BO.Status)value == BO.Status.Scheduled) return "Gray";
-        if ((BO.Status)value == BO.Status.OnTrack) return "Orange";
-        if ((BO.Status)value == BO.Status.Done) return "Green";
-
+        if ((((BO.Task)value).PlanToFinish < BlApi.Factory.Get().Clock) && ((BO.Task)value).Status != BO.Status.Done) return "Red";
+        if (((BO.Task)value).Status == BO.Status.Scheduled) return "Gray";
+        if (((BO.Task)value).Status == BO.Status.OnTrack) return "Orange";
+        if (((BO.Task)value).Status == BO.Status.Done) return "Green";
         return "true";
     }
 

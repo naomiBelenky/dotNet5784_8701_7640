@@ -42,10 +42,8 @@ namespace PL.Task
                     isAddMode = false;
                 }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            catch (Exception ex) { MessageBox.Show(ex.Message, ex.GetType().ToString(), MessageBoxButton.OK, MessageBoxImage.Error); }
+
         }
 
         private void AddOrUpdateButton_Click(object sender, RoutedEventArgs e)
@@ -65,13 +63,7 @@ namespace PL.Task
                 }
                 this.Close();
             }
-
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
+            catch (Exception ex) { MessageBox.Show(ex.Message, ex.GetType().ToString(), MessageBoxButton.OK, MessageBoxImage.Error); }
         }
-
     }
 }

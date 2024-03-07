@@ -40,7 +40,7 @@ namespace PL.Engineer
                 InitializeComponent();
                 EngineerList = s_bl?.Engineer.ReadAll().OrderBy(e => e.Id)!;
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            catch (Exception ex) { MessageBox.Show(ex.Message, ex.GetType().ToString(), MessageBoxButton.OK, MessageBoxImage.Error); }
         }
 
         //the user can filter the engineers on the screens according to their level
@@ -52,7 +52,7 @@ namespace PL.Engineer
                    s_bl?.Engineer.ReadAll()! : s_bl?.Engineer.ReadAll(eng => eng.Level == level)!)
                    .OrderBy(e => e.Id); // sort by ID so it will be easier to find the engineer in the list as a human
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            catch (Exception ex) { MessageBox.Show(ex.Message, ex.GetType().ToString(), MessageBoxButton.OK, MessageBoxImage.Error); }
         }
 
         void UpdateEngineerList()
@@ -63,7 +63,7 @@ namespace PL.Engineer
                     s_bl?.Engineer.ReadAll()! : s_bl?.Engineer.ReadAll(eng => eng.Level == level)!)
                     .OrderBy(e => e.Id); // sort by ID so it will be easier to find the engineer in the list as a human
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            catch (Exception ex) { MessageBox.Show(ex.Message, ex.GetType().ToString(), MessageBoxButton.OK, MessageBoxImage.Error); }
         }
 
         private void listView_DoubleClick(object sender, MouseButtonEventArgs e)
@@ -80,7 +80,7 @@ namespace PL.Engineer
                 new EngineerWindow(engineer!.Id).ShowDialog();
                 UpdateEngineerList();
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            catch (Exception ex) { MessageBox.Show(ex.Message, ex.GetType().ToString(), MessageBoxButton.OK, MessageBoxImage.Error); }
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
@@ -90,7 +90,7 @@ namespace PL.Engineer
                 new EngineerWindow().ShowDialog();
                 UpdateEngineerList();
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            catch (Exception ex) { MessageBox.Show(ex.Message, ex.GetType().ToString(), MessageBoxButton.OK, MessageBoxImage.Error); }
         }
     }
 }

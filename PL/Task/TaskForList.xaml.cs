@@ -96,10 +96,8 @@ namespace PL.Task
 
                 handleReturnedTask!(task, Close, stage);
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, ex.GetType().Name, MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            catch (Exception ex) { MessageBox.Show(ex.Message, ex.GetType().ToString(), MessageBoxButton.OK, MessageBoxImage.Error); }
+
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
@@ -109,10 +107,8 @@ namespace PL.Task
                 new PlanningTaskWindow().ShowDialog();
                 UpdateTaskList();
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message , ex.GetType().Name, MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            catch (Exception ex) { MessageBox.Show(ex.Message, ex.GetType().ToString(), MessageBoxButton.OK, MessageBoxImage.Error); }
+
         }
     }
 }

@@ -23,11 +23,11 @@
         <Button Content="admin" HorizontalAlignment="Left" Margin="228,300,0,0" VerticalAlignment="Top" Height="60" Width="140" Click="btnAdmin_Click"/>
         <!-- enter of the engineers -->
         <Button Content="engineer" HorizontalAlignment="Left" Margin="433,300,0,0" VerticalAlignment="Top" Height="60" Width="140" Click="btnEngineer_Click"/>
-        <Label Content="{Binding Converter={StaticResource ConvertTimeToContentKey}}" HorizontalAlignment="Left" Margin="49,50,0,0" VerticalAlignment="Top" Height="28" Width="249"/>
-        <Button Content="next year" HorizontalAlignment="Left" Margin="60,70,0,0" VerticalAlignment="Top" Height="60" Width="120" Click="btnAddYear_Click"/>
-        <Button Content="next day" HorizontalAlignment="Left" Margin="200,70,0,0" VerticalAlignment="Top" Height="60" Width="120" Click="btnAddDay_Click"/>
-        <Button Content="next hour" HorizontalAlignment="Left" Margin="350,70,0,0" VerticalAlignment="Top" Height="60" Width="120" Click="btnAddHour_Click"/>
-        <Button Content="initialize time" HorizontalAlignment="Left" Margin="500,70,0,0" VerticalAlignment="Top" Height="60" Width="120" Click="btnInitTime_Click"/>
+        <Label Content="{Binding Converter={StaticResource ConvertTimeToContentKey}}" HorizontalAlignment="Left" Margin="49,50,0,0" VerticalAlignment="Top" Height="60" Width="249" FontSize="20"/>
+        <Button Content="next year" HorizontalAlignment="Left" Margin="60,130,0,0" VerticalAlignment="Top" Height="30" Width="100" Click="btnAddYear_Click"/>
+        <Button Content="next day" HorizontalAlignment="Left" Margin="180,130,0,0" VerticalAlignment="Top" Height="30" Width="100" Click="btnAddDay_Click"/>
+        <Button Content="next hour" HorizontalAlignment="Left" Margin="300,130,0,0" VerticalAlignment="Top" Height="30" Width="100" Click="btnAddHour_Click"/>
+        <Button Content="initialize time" HorizontalAlignment="Left" Margin="166,176,0,0" VerticalAlignment="Top" Height="30" Width="130" Click="btnInitTime_Click"/>
 
 
 

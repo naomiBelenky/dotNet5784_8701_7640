@@ -88,7 +88,7 @@ namespace PL.Task
                 }, false);
                 taskForListWindow.ShowDialog();
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            catch (Exception ex) { MessageBox.Show(ex.Message, ex.GetType().ToString(), MessageBoxButton.OK, MessageBoxImage.Error); }
         }
         public void HandleReturnedTask(BO.TaskInList task)
         {
@@ -98,7 +98,7 @@ namespace PL.Task
                 if (!Task.Links.Exists(item => item.Id == task.Id))
                     Task.Links.Add(task);
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            catch (Exception ex) { MessageBox.Show(ex.Message, ex.GetType().ToString(), MessageBoxButton.OK, MessageBoxImage.Error); }
         }
 
         private void listBox_DoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -110,7 +110,7 @@ namespace PL.Task
                 if (result == MessageBoxResult.Yes)
                     Task.Links!.Remove(task!);
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            catch (Exception ex) { MessageBox.Show(ex.Message, ex.GetType().ToString(), MessageBoxButton.OK, MessageBoxImage.Error); }
         }
     }
 }

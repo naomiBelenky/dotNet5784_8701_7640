@@ -20,7 +20,7 @@ internal class EngineerImplementation : IEngineer
             if (item.Id <= 0) throw new BO.BlInformationIsntValid("id is not valid");
             if (string.IsNullOrEmpty(item.Name)) throw new BO.BlInformationIsntValid("name is not valid");
             if (item.Email == null || !new EmailAddressAttribute().IsValid(item.Email)) throw new BO.BlInformationIsntValid("email adress is not valid");
-            if (double.IsNegative(item.Cost)) throw new BO.BlInformationIsntValid("cost is not valid");
+            if (double.IsNegative(item.Cost) || item.Cost == 0) throw new BO.BlInformationIsntValid("cost is not valid");
             if((int)item.Level<0||(int)item.Level>4) throw new BO.BlInformationIsntValid("Level is not valid");
 
             int newID = _dal.Engineer.Create(doEng);
@@ -139,7 +139,7 @@ internal class EngineerImplementation : IEngineer
             if (int.IsNegative(engineer.Id)) throw new BO.BlInformationIsntValid("id is not valid");
             if (string.IsNullOrEmpty(engineer.Name)) throw new BO.BlInformationIsntValid("name is not valid");
             if (!new EmailAddressAttribute().IsValid(engineer.Email)) throw new BO.BlInformationIsntValid("email adress is not valid");
-            if (double.IsNegative(engineer.Cost)) throw new BO.BlInformationIsntValid("cost is not valid");
+            if (double.IsNegative(engineer.Cost) || engineer.Cost == 0) throw new BO.BlInformationIsntValid("cost is not valid");
             DO.Engineer notUpdatetEng = _dal.Engineer.Read(engineer.Id) ?? throw new BO.BlDoesNotExistException($"Engineer with ID={engineer.Id} does not exist");
             if (engineer.Level < (BO.Level)notUpdatetEng.Level) throw new BO.BlInformationIsntValid("Level of an engineer can only go up but not down");
 
