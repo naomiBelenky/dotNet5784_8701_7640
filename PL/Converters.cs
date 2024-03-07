@@ -64,6 +64,19 @@ class ConvertBoolToVisibility : IValueConverter
     }
 }
 
+class ConvertAdminModeToVisibility : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        return value is true ? Visibility.Collapsed : Visibility.Visible;
+    }
+
+    object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
 class ConvertTaskInEngineerToContent : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -136,7 +149,9 @@ class ConvertDateTimeToInt : IValueConverter
 
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        return 40*((TimeSpan)((DateTime)value - s_bl.getStartDate())!).Days;
+        if (((BO.Task)value).StartWork == null)
+            return 40*((TimeSpan)(((BO.Task)value).PlanToStart - s_bl.getStartDate())!).Days;
+        return 40*((TimeSpan)(((BO.Task)value).StartWork - s_bl.getStartDate())!).Days;
 
     }
 

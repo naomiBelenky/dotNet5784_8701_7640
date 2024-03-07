@@ -43,24 +43,24 @@
     <CostPerHour>9000</CostPerHour>
   </Engineer>
   <Engineer>
-    <EngineerID>15287144</EngineerID>
-    <FullName>Deb</FullName>
-    <Email>ooooo@ooooo</Email>
-    <Level>Beginner</Level>
-    <CostPerHour>0</CostPerHour>
-  </Engineer>
-  <Engineer>
-    <EngineerID>99</EngineerID>
-    <FullName>Dvo</FullName>
-    <Email>,.mn#@!8m,./</Email>
-    <Level>Beginner</Level>
-    <CostPerHour>0</CostPerHour>
-  </Engineer>
-  <Engineer>
     <EngineerID>456</EngineerID>
     <FullName>eng</FullName>
     <Email>eng@e</Email>
     <Level>Advanced</Level>
-    <CostPerHour>0</CostPerHour>
+    <CostPerHour>23</CostPerHour>
+  </Engineer>
+  <Engineer>
+    <EngineerID>15287144</EngineerID>
+    <FullName>Deb</FullName>
+    <Email>ooooo@ooooo</Email>
+    <Level>Beginner</Level>
+    <CostPerHour>235</CostPerHour>
+  </Engineer>
+  <Engineer>
+    <EngineerID>99</EngineerID>
+    <FullName>Dvo4</FullName>
+    <Email>,.mn#@!8m,./</Email>
+    <Level>AdvancedBeginner</Level>
+    <CostPerHour>4</CostPerHour>
   </Engineer>
 </ArrayOfEngineer>

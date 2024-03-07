@@ -153,7 +153,7 @@ internal class EngineerImplementation : IEngineer
                     ?? throw new BO.BlDoesNotExistException($"task with id={engineer.Task.Id} does not exist");
                 if ((int)task.Difficulty > (int)engineer.Level) throw new BO.BlForbiddenInThisStage($"task with ID={task.TaskID} doesn't fit the engineer level");
                 if (task.EngineerID != 0) throw new BO.BlForbiddenInThisStage($"Task with ID={task.TaskID} is already assigned to an engineer");
-                if (_dal.Task.ReadAll(task => task.EngineerID==engineer.Id && task.FinishDate==null).ToList().Count>0) throw new BO.BlForbiddenInThisStage($"{engineer.Name} is already assigned to another task on track");
+                if (_dal.Task.ReadAll(task => task.EngineerID == engineer.Id && task.FinishDate == null).ToList().Count > 0) throw new BO.BlForbiddenInThisStage($"{engineer.Name} is already assigned to another task on track");
 
                 _dal.Task.Update(task with { EngineerID = engineer.Id, StartWork = _bl.Clock });   //if there is a task, update the task that this engineer is working on it
             }

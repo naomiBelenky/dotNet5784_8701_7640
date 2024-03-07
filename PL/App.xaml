@@ -10,6 +10,7 @@
         <local:ConvertIdToBool x:Key="ConverIdToBoolKey"/>
         <local:ConvertStageToBool x:Key="ConvertStageToBoolKey"/>
         <local:ConvertBoolToVisibility x:Key="ConvertBoolToVisibilityKey"/>
+        <local:ConvertAdminModeToVisibility x:Key="ConvertAdminModeToVisibilityKey"/>
         <local:ConvertTaskInEngineerToContent x:Key="ConvertTaskInEngineerToContentKey"/>
         <local:ConvertTaskInEngineerToBoolForAddBotton x:Key="ConvertTaskInEngineerToBoolForAddBottonKey"/>
         <local:ConvertTaskInEngineerToBoolForTaskDetilesBotton x:Key="ConvertTaskInEngineerToBoolForTaskDetilesBottonKey"/>
@@ -17,9 +18,6 @@
         <local:ConvertDateTimeToInt x:Key="ConvertDateTimeToIntKey"/>
         <local:ConvertStatusToColor x:Key="ConvertStatusToColorKey"/>
         <local:ConvertTimeToContent x:Key="ConvertTimeToContentKey"/>
-
-
-
         <local:ConverStageToVisibility x:Key="ConverStageToVisibilityKey"/>
 
                

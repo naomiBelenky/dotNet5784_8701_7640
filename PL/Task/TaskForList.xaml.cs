@@ -55,10 +55,10 @@ namespace PL.Task
             
                 InitializeComponent();
                 TaskList = taskListGetter().OrderBy(t => t.Id);
-            }            
-            catch(Exception ex) { MessageBox.Show(ex.Message); }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message, ex.GetType().ToString(), MessageBoxButton.OK, MessageBoxImage.Error); }
         }
-        
+
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
@@ -67,7 +67,7 @@ namespace PL.Task
                  s_bl?.Task.ReadAll()! : s_bl?.Task.ReadAll(task => task.Status == status)!)
                  .OrderBy(t => t.Id);
             }
-            catch(Exception ex) { MessageBox.Show(ex.Message); }
+            catch (Exception ex) { MessageBox.Show(ex.Message, ex.GetType().ToString(), MessageBoxButton.OK, MessageBoxImage.Error); }
 
         }
 
@@ -79,8 +79,8 @@ namespace PL.Task
                 s_bl?.Task.ReadAll()! : s_bl?.Task.ReadAll(task => task.Status == status)!)
                 .OrderBy(t => t.Id);
             }
-            catch(Exception ex) { MessageBox.Show(ex.Message); }
-         
+            catch (Exception ex) { MessageBox.Show(ex.Message, ex.GetType().ToString(), MessageBoxButton.OK, MessageBoxImage.Error); }
+
 
         }
 

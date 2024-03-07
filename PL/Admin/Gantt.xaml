@@ -14,7 +14,7 @@
                     <Border BorderThickness="2" BorderBrush="Aqua">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                             <TextBlock HorizontalAlignment="Left" Text="{Binding Id}" FontWeight="Bold" Background="Aquamarine"/>
-                            <Rectangle HorizontalAlignment="Left" Height="20" Width="{Binding PlanToStart,Mode=TwoWay,Converter={StaticResource ConvertDateTimeToIntKey}}"  Fill="White"/>
+                            <Rectangle HorizontalAlignment="Left" Height="20" Width="{Binding Converter={StaticResource ConvertDateTimeToIntKey}}" Fill="White"/>
                             <TextBlock HorizontalAlignment="Left" Text="{Binding TaskName}" Width="{Binding Duration, Mode=TwoWay, Converter={StaticResource ConvertTimeSpanToIntKey}}" FontWeight="Bold"
                                        Background="{Binding Mode=OneWay,Converter={StaticResource ConvertStatusToColorKey}}">
                                 <TextBlock.ToolTip>
@@ -34,9 +34,10 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
-        <Label Content="Scheduled" HorizontalAlignment="Left" Margin="756,548,0,0" VerticalAlignment="Top" Background="Gray" Width="68"/>
-        <Label Content="OnTrack" HorizontalAlignment="Left" Margin="843,548,0,0" VerticalAlignment="Top" Background="Orange"/>
-        <Label Content="Done" HorizontalAlignment="Left" Margin="916,548,0,0" VerticalAlignment="Top" Background="Green"/>
+        <Label Content="Scheduled" HorizontalAlignment="Left" Margin="90,605,0,0" VerticalAlignment="Top" Background="Gray" Width="68"/>
+        <Label Content="OnTrack" HorizontalAlignment="Left" Margin="175,605,0,0" VerticalAlignment="Top" Background="Orange"/>
+        <Label Content="Done" HorizontalAlignment="Left" Margin="245,605,0,0" VerticalAlignment="Top" Background="Green"/>
+        <Label Content="Late" HorizontalAlignment="Left" Margin="300,605,0,0" VerticalAlignment="Top" Background="Red"/>
 
 
     </Grid>

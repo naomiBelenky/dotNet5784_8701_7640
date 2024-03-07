@@ -21,14 +21,14 @@ namespace PL.Task
             DependencyProperty.Register("Task", typeof(BO.Task), typeof(TaskWindow), new PropertyMetadata(null));
 
         private bool isAddMode { get; set; }
-        public bool withPermissions { get; set; }
+        public bool adminNotEngineer { get; set; }
 
         //private BO.Stage stage { get; set; } = BO.Stage.Planning;  //צריך לעשות שכשקובעים לו"ז זה ישתנה לשלב הביצוע
-        public TaskWindow(bool withPermissions, int id = 0, bool isAddLinkMode = false)
+        public TaskWindow(bool adminNotEngineer = true, int id = 0, bool isAddLinkMode = false)
         {
             try
             {
-                this.withPermissions = withPermissions;
+                this.adminNotEngineer = adminNotEngineer;
                 InitializeComponent();
                 if (id == 0)
                 {
@@ -62,6 +62,15 @@ namespace PL.Task
                     MessageBox.Show("Task updated successfully:)");
                 }
                 this.Close();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message, ex.GetType().ToString(), MessageBoxButton.OK, MessageBoxImage.Error); }
+        }
+
+        private void finishBttn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Task.FinishDate = s_bl.Clock;
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, ex.GetType().ToString(), MessageBoxButton.OK, MessageBoxImage.Error); }
         }
