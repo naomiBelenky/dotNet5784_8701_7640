@@ -15,7 +15,7 @@
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                             <TextBlock HorizontalAlignment="Left" Text="{Binding Id}" FontWeight="Bold" Background="Aquamarine"/>
                             <Rectangle HorizontalAlignment="Left" Height="20" Width="{Binding Converter={StaticResource ConvertDateTimeToIntKey}}" Fill="White"/>
-                            <TextBlock HorizontalAlignment="Left" Text="{Binding TaskName}" Width="{Binding Duration, Mode=TwoWay, Converter={StaticResource ConvertTimeSpanToIntKey}}" FontWeight="Bold"
+                            <TextBlock HorizontalAlignment="Left" Text="{Binding TaskName}" Width="{Binding Converter={StaticResource ConvertTimeSpanToIntKey}}" FontWeight="Bold"
                                        Background="{Binding Mode=OneWay,Converter={StaticResource ConvertStatusToColorKey}}">
                                 <TextBlock.ToolTip>
                                     <ToolTip>
@@ -23,8 +23,8 @@
                                             <TextBlock FontWeight="Bold" Text="{Binding Name}"/>
                                             <TextBlock Text="{Binding Description}"/>
                                             <TextBlock Text="{Binding Engineer}"/>
-                                            <!--<TextBlock Text="{Binding StartWork}"/>-->
-                                            <!--<TextBlock Text="{Binding FinishDate}"/>-->
+                                            <TextBlock Text="{Binding StartWork}"/>
+                                            <TextBlock Text="{Binding FinishDate}"/>
                                         </StackPanel>
                                     </ToolTip>
                                 </TextBlock.ToolTip>

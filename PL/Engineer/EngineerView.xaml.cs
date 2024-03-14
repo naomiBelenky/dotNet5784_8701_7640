@@ -38,7 +38,8 @@ namespace PL.Engineer
             try
             {
                 InitializeComponent();
-                SetValue(CurrentEngineerProperty, new BO.Engineer());
+                CurrentEngineer = new BO.Engineer();
+                //SetValue(CurrentEngineerProperty, new BO.Engineer());
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, ex.GetType().ToString(), MessageBoxButton.OK, MessageBoxImage.Error); }
         }

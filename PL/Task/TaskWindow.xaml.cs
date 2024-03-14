@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Controls;
 
 
 namespace PL.Task
@@ -71,6 +72,8 @@ namespace PL.Task
             try
             {
                 Task.FinishDate = s_bl.Clock;
+                Button button = (Button)sender;
+                button.IsEnabled = false;
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, ex.GetType().ToString(), MessageBoxButton.OK, MessageBoxImage.Error); }
         }
