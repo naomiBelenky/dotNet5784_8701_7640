@@ -43,19 +43,22 @@ internal class Bl : IBl
 
     public void saveStartDate(DateTime date)
     {
-        DalApi.Factory.Get.saveStartandFinishDatestoFile("data-config", "startDate", date);
+        //DalApi.Factory.Get.saveStartandFinishDatestoFile("data-config", "startDate", date);
+        DalApi.Factory.Get.StartDate = date;
     }
     public DateTime? getStartDate()
     {
-        return (DalApi.Factory.Get.getStartOrFinshDatesFromXml("startDate"));
+        //return (DalApi.Factory.Get.getStartOrFinshDatesFromXml("startDate"));
+        return DalApi.Factory.Get.StartDate;
     }
 
     public Stage getStage()
     {
-        XElement root = XMLTools.LoadListFromXMLElement("data-config");
-        DateTime? date = root.ToDateTimeNullable("startDate");
+        //XElement root = XMLTools.LoadListFromXMLElement("data-config");
+        //DateTime? date = root.ToDateTimeNullable("startDate");
+        DateTime? date = DalApi.Factory.Get.StartDate;
 
-        if (date == null)
+        if (date == null || date.ToString() == "")
             return Stage.Planning;
         else return Stage.Execution;
     }

@@ -180,12 +180,14 @@ internal class TaskImplementation : ITask
         }
         if (task.StartWork == null && task.FinishDate!=null) throw new BO.BlForbiddenInThisStage("Cannot update finish date before start date");
         if (task.FinishDate < task.StartWork) throw new BO.BlForbiddenInThisStage("Finish date can't be before start date");
+        //if (task.StartWork < _dal.StartDate) throw new BO.BlForbiddenInThisStage("The project has not started yet");
         //If we are here, it means that all the tests passed successfully:)
 
         try
         {
             //updete the links
-            foreach (var item in (_dal.Link.ReadAll(link => link.NextTask == task.Id)))
+            var links = _dal.Link.ReadAll(link => link.NextTask == task.Id).ToList();
+            foreach (var item in links)
             {
                 _dal.Link.Delete(item.LinkID);
             }
@@ -320,7 +322,7 @@ internal class TaskImplementation : ITask
         if (Factory.Get().getStage() == BO.Stage.Planning) throw new BO.BlDoesNotExistException("Start date of the project is not set yet");
         DO.Task task = _dal.Task.Read(id) ?? throw new BO.BlDoesNotExistException($"Task with ID={id} does not exist");
         IEnumerable<DO.Link> links = _dal.Link.ReadAll(link => link.NextTask == id);    //getting all the tasks that our task depends on
-        if (links.Count() == 0) return _dal.getStartOrFinshDatesFromXml("startDate");    //if the task does not depend on any task, it can start when the project starts
+        if (links.Count() == 0) return _dal.StartDate;    //if the task does not depend on any task, it can start when the project starts
 
         IEnumerable<DateTime?> dates = links.Select
             (link => getPlanToFinish(_dal.Task.Read(link.PrevTask)  //making a collection of the PlanToFinish dates of the tasks

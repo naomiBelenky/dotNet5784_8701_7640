@@ -36,7 +36,7 @@ namespace PL.Task
 
         private int newNextTask { get; set; } //for case that we here for add link to another task
 
-        public bool showAddButton { get; set; }
+        public bool showButtonAndFiltering { get; set; }
 
         public delegate IEnumerable<BO.TaskInList> TaskListGetter();
 
@@ -46,11 +46,11 @@ namespace PL.Task
 
         HandleReturnedTask? handleReturnedTask;
 
-        public TaskForList(TaskListGetter taskListGetter, HandleReturnedTask handleReturnedTask, bool showAddButton)
+        public TaskForList(TaskListGetter taskListGetter, HandleReturnedTask handleReturnedTask, bool showButtonAndFiltering)
         {
             try 
             { 
-                this.showAddButton = showAddButton;
+                this.showButtonAndFiltering = showButtonAndFiltering;
                 this.handleReturnedTask = handleReturnedTask;
             
                 InitializeComponent();

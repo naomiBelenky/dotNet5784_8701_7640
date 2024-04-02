@@ -34,19 +34,22 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <!--internal, upper grid-->
-                <!--Internal, Upper Grid-->
+        <!--Internal, Upper Grid-->
         <Grid HorizontalAlignment="Stretch" Height="auto" Grid.Row="0" VerticalAlignment="Stretch" Width="auto">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <!--for choosing the filter of the engineer list vew-->
-            <Label Content="Select:" HorizontalAlignment="Left" Margin="12,0,0,0" VerticalAlignment="Center" Height="26" Width="103" Grid.Column="0"/>
+            <Label Content="Select:" HorizontalAlignment="Left" Margin="12,0,0,0" VerticalAlignment="Center" Height="26" Width="103" Grid.Column="0"
+                Visibility="{Binding showButtonAndFiltering, Mode=OneWay, Converter={StaticResource ConvertBoolToVisibilityKey}}"/>
             <ComboBox ItemsSource="{Binding Source={StaticResource StatusCollectionKey}}"
                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1"
-                SelectedValue="{Binding Path=status, Mode=TwoWay}" SelectionChanged="ComboBox_SelectionChanged" />
+                SelectedValue="{Binding Path=status, Mode=TwoWay}" SelectionChanged="ComboBox_SelectionChanged"
+                Visibility="{Binding showButtonAndFiltering, Mode=OneWay, Converter={StaticResource ConvertBoolToVisibilityKey}}"/>
+
         </Grid>
-        
+
         <!-- list of engineers -->
         <ListView Margin="5" Grid.Row="1" ItemsSource="{Binding Path=TaskList}" MouseDoubleClick="listView_DoubleClick">
             <ListView.View>
@@ -55,10 +58,10 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        
+
         <!-- botton for adding engineer -->
         <Button Content="Add" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100" Click="AddButton_Click"
                 IsEnabled="{Binding stage, Converter={StaticResource ConvertStageToBoolKey}, Mode=OneWay}"
-                Visibility="{Binding showAddButton, Mode=OneWay, Converter={StaticResource ConvertBoolToVisibilityKey}}"/>
+                Visibility="{Binding showButtonAndFiltering, Mode=OneWay, Converter={StaticResource ConvertBoolToVisibilityKey}}"/>
     </Grid>
 </Window>
