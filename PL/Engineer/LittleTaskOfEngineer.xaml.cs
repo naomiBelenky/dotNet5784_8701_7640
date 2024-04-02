@@ -83,7 +83,7 @@ namespace PL.Engineer
         {
             try
             {
-                if (task == null) { throw new Exception("There is a problem in this task"); }
+                if (task == null) { throw new Exception("No task was selected"); }
                 BO.TaskInEngineer newTask = new BO.TaskInEngineer() { Id = task.Id, Name = task.Name };
                 CurrentEngineer.Task = newTask;
                 s_bl.Engineer.Update(CurrentEngineer);

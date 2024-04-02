@@ -256,8 +256,6 @@ namespace BlTest
             Console.WriteLine(s);
             return Console.ReadLine();
         }
-
-
     }
 }
 

@@ -6,11 +6,6 @@
     <NextTask>1</NextTask>
   </Link>
   <Link>
-    <LinkID>2</LinkID>
-    <PrevTask>5</PrevTask>
-    <NextTask>2</NextTask>
-  </Link>
-  <Link>
     <LinkID>3</LinkID>
     <PrevTask>5</PrevTask>
     <NextTask>3</NextTask>
@@ -99,11 +94,6 @@
     <LinkID>20</LinkID>
     <PrevTask>19</PrevTask>
     <NextTask>1</NextTask>
-  </Link>
-  <Link>
-    <LinkID>21</LinkID>
-    <PrevTask>19</PrevTask>
-    <NextTask>2</NextTask>
   </Link>
   <Link>
     <LinkID>22</LinkID>

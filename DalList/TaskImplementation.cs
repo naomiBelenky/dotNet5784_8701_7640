@@ -69,6 +69,6 @@ internal class TaskImplementation : ITask
     public void DeleteAll() //for stage 3
     {
         DataSource.Tasks.Clear();
-        DataSource.Config.ResetIDs();
+        DataSource.Config.ResetTaskID();
     }
 }

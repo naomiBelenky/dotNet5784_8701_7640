@@ -179,7 +179,7 @@ internal class TaskImplementation : ITask
             { throw new BO.BlForbiddenInThisStage("Updating dependencies is prohibited after the project schedule is created"); }
         }
         if (task.StartWork == null && task.FinishDate!=null) throw new BO.BlForbiddenInThisStage("Cannot update finish date before start date");
-        if (task.FinishDate<task.StartWork) throw new BO.BlForbiddenInThisStage("Finish date can't be before start date");
+        if (task.FinishDate < task.StartWork) throw new BO.BlForbiddenInThisStage("Finish date can't be before start date");
         //If we are here, it means that all the tests passed successfully:)
 
         try

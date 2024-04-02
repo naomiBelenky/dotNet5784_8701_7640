@@ -17,10 +17,13 @@ internal static class DataSource
         private static int nextLinkID = LinkId;
         internal static int NextLinkID { get => nextLinkID++; }
 
-        internal static void ResetIDs()
+        internal static void ResetTaskID()
         {
             nextTaskID = TaskId;
+        }
+        internal static void ResetLinkID()
+        {
             nextLinkID = LinkId;
         }
-    }
+    }           
 }
