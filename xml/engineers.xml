@@ -1,45 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfEngineer>
   <Engineer>
-    <EngineerID>251083752</EngineerID>
-    <FullName>Eytan Benisty</FullName>
-    <Email>eytanbenisty@gmail.com</Email>
-    <Level>Expert</Level>
-    <CostPerHour>363.48</CostPerHour>
-  </Engineer>
-  <Engineer>
-    <EngineerID>21</EngineerID>
-    <FullName>eng</FullName>
-    <Email>eng@.</Email>
-    <Level>Advanced</Level>
-    <CostPerHour>0</CostPerHour>
-  </Engineer>
-  <Engineer>
-    <EngineerID>265364474</EngineerID>
-    <FullName>Shira Market</FullName>
-    <Email>shiramarket@gmail.com</Email>
-    <Level>Advanced</Level>
-    <CostPerHour>297.67</CostPerHour>
-  </Engineer>
-  <Engineer>
-    <EngineerID>368640159</EngineerID>
-    <FullName>Tal Oriel</FullName>
-    <Email>taloriel@gmail.com</Email>
-    <Level>Advanced</Level>
-    <CostPerHour>244.34</CostPerHour>
-  </Engineer>
-  <Engineer>
-    <EngineerID>284891393</EngineerID>
-    <FullName>Dan Maztal</FullName>
-    <Email>danmaz@gmail.com</Email>
-    <Level>Expert</Level>
-    <CostPerHour>105.09</CostPerHour>
-  </Engineer>
-  <Engineer>
-    <EngineerID>342430234</EngineerID>
+    <EngineerID>254226608</EngineerID>
     <FullName>Avi Buchbut</FullName>
     <Email>aviBuchbut@gmail.com</Email>
+    <Level>Beginner</Level>
+    <CostPerHour>479.68</CostPerHour>
+  </Engineer>
+  <Engineer>
+    <EngineerID>295538253</EngineerID>
+    <FullName>Shira Market</FullName>
+    <Email>shiramarket@gmail.com</Email>
     <Level>Expert</Level>
-    <CostPerHour>236.77</CostPerHour>
+    <CostPerHour>214.79</CostPerHour>
+  </Engineer>
+  <Engineer>
+    <EngineerID>306454481</EngineerID>
+    <FullName>Tal Oriel</FullName>
+    <Email>taloriel@gmail.com</Email>
+    <Level>Intermediate</Level>
+    <CostPerHour>360.15</CostPerHour>
+  </Engineer>
+  <Engineer>
+    <EngineerID>399873486</EngineerID>
+    <FullName>Eytan Benisty</FullName>
+    <Email>eytanbenisty@gmail.com</Email>
+    <Level>AdvancedBeginner</Level>
+    <CostPerHour>38.85</CostPerHour>
+  </Engineer>
+  <Engineer>
+    <EngineerID>370619724</EngineerID>
+    <FullName>Dan Maztal</FullName>
+    <Email>danmaz@gmail.com</Email>
+    <Level>Advanced</Level>
+    <CostPerHour>389.62</CostPerHour>
   </Engineer>
 </ArrayOfEngineer>
