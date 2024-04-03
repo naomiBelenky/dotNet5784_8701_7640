@@ -54,7 +54,7 @@ namespace PL.Admin
                 ListOfTasks = (from item in listT
                                select s_bl.Task.Read(item.Id)).OrderBy(t => t.PlanToStart).ToList();
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
-        }    
+            catch (Exception ex) { MessageBox.Show(ex.Message, ex.GetType().ToString(), MessageBoxButton.OK, MessageBoxImage.Error); }
+        }
     }
 }

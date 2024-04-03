@@ -92,7 +92,7 @@
                   ItemsSource="{Binding Source={StaticResource LevelsCollectionKey}}" 
                   SelectedValue="{Binding Task.Difficulty, Mode=TwoWay, NotifyOnValidationError=true, 
                         ValidatesOnExceptions=true}"
-                  IsEnabled="{Binding withPermissions}"/>
+                  IsEnabled="{Binding adminNotEngineer}"/>
 
         <Label Content="Plan To Start:"  Grid.Row="4" Grid.Column="0" />
         <DatePicker Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center"  VerticalAlignment="Center" IsEnabled="False"
@@ -110,9 +110,12 @@
                         ValidatesOnExceptions=true}" IsEnabled="False"/>
 
         <Label Content="Finish Work:" Grid.Row="7" Grid.Column="0" />
-        <DatePicker Grid.Row="7" Grid.Column="1" HorizontalAlignment="Center"  VerticalAlignment="Center"
+        <DatePicker Grid.Row="7" Grid.Column="1" HorizontalAlignment="Center"  VerticalAlignment="Center" IsEnabled="False"
                     SelectedDate ="{Binding Task.FinishDate, Mode=TwoWay, NotifyOnValidationError=true, 
-                        ValidatesOnExceptions=true}"/>
+                        ValidatesOnExceptions=true}"
+                    Visibility="{Binding adminNotEngineer, Mode=OneWay, Converter={StaticResource ConvertBoolToVisibilityKey}}"/>
+        <Button Content="press if finished" Height="auto" Width="auto" Grid.Row="7" Grid.Column="1" HorizontalAlignment="Center"  VerticalAlignment="Center"
+                  Visibility="{Binding adminNotEngineer, Mode=OneWay, Converter={StaticResource ConvertAdminModeToVisibilityKey}}" Click="finishBttn_Click"/>
 
         <Label Content="Duration:" Grid.Row="8" Grid.Column="0" />
         <TextBox Grid.Row="8" Grid.Column="1" TextWrapping="Wrap" HorizontalAlignment="Center" Width="120" IsEnabled="False"

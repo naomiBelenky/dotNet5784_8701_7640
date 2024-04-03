@@ -55,7 +55,7 @@ namespace PL.Engineer
                     }, true);
                 taskForListWindow.Show();
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            catch (Exception ex) { MessageBox.Show(ex.Message, ex.GetType().ToString(), MessageBoxButton.OK, MessageBoxImage.Error); }
         }
 
         private void btnInit_Click(object sender, RoutedEventArgs e)
@@ -67,7 +67,7 @@ namespace PL.Engineer
                     Factory.Get().InitializeDB();
                 Close();
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            catch (Exception ex) { MessageBox.Show(ex.Message, ex.GetType().ToString(), MessageBoxButton.OK, MessageBoxImage.Error); }
         }
 
         private void resetDB_Click(object sender, RoutedEventArgs e)
@@ -79,7 +79,7 @@ namespace PL.Engineer
                     Factory.Get().ResetDB();
                 Close();
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            catch (Exception ex) { MessageBox.Show(ex.Message, ex.GetType().ToString(), MessageBoxButton.OK, MessageBoxImage.Error); }
         }
         public void HandleReturnedTask(BO.TaskInList task)
         {
@@ -93,10 +93,8 @@ namespace PL.Engineer
                 new ProjectStartDate().Show();
                 Close();
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            catch (Exception ex) { MessageBox.Show(ex.Message, ex.GetType().ToString(), MessageBoxButton.OK, MessageBoxImage.Error); }
+
         }
 
         private void GantButton_Click(object sender, RoutedEventArgs e)
@@ -105,7 +103,7 @@ namespace PL.Engineer
             {
                 new Gantt().Show();
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            catch (Exception ex) { MessageBox.Show(ex.Message, ex.GetType().ToString(), MessageBoxButton.OK, MessageBoxImage.Error); }
         }
     }
 }

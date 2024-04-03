@@ -44,10 +44,8 @@ namespace PL.Admin
                 s_bl.automaticSchedule();
                 MessageBox.Show("scheduled all tasks succesfully");
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            catch (Exception ex) { MessageBox.Show(ex.Message, ex.GetType().ToString(), MessageBoxButton.OK, MessageBoxImage.Error); }
+
             Close();
         }
     }

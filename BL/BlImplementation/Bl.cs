@@ -70,7 +70,7 @@ internal class Bl : IBl
         {
             recursiveSchedule(task.Id);
         }
-        DateTime planToStart = (DateTime)Task.SuggestStartDate(id);
+        DateTime planToStart = (DateTime)Task.SuggestStartDate(id)!;
         Task.UpdateDate(id, planToStart);
     }
 

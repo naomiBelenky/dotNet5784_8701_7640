@@ -20,7 +20,7 @@ internal class EngineerImplementation : IEngineer
             if (item.Id <= 0) throw new BO.BlInformationIsntValid("id is not valid");
             if (string.IsNullOrEmpty(item.Name)) throw new BO.BlInformationIsntValid("name is not valid");
             if (item.Email == null || !new EmailAddressAttribute().IsValid(item.Email)) throw new BO.BlInformationIsntValid("email adress is not valid");
-            if (double.IsNegative(item.Cost)) throw new BO.BlInformationIsntValid("cost is not valid");
+            if (double.IsNegative(item.Cost) || item.Cost == 0) throw new BO.BlInformationIsntValid("cost is not valid");
             if((int)item.Level<0||(int)item.Level>4) throw new BO.BlInformationIsntValid("Level is not valid");
 
             int newID = _dal.Engineer.Create(doEng);
@@ -139,7 +139,7 @@ internal class EngineerImplementation : IEngineer
             if (int.IsNegative(engineer.Id)) throw new BO.BlInformationIsntValid("id is not valid");
             if (string.IsNullOrEmpty(engineer.Name)) throw new BO.BlInformationIsntValid("name is not valid");
             if (!new EmailAddressAttribute().IsValid(engineer.Email)) throw new BO.BlInformationIsntValid("email adress is not valid");
-            if (double.IsNegative(engineer.Cost)) throw new BO.BlInformationIsntValid("cost is not valid");
+            if (double.IsNegative(engineer.Cost) || engineer.Cost == 0) throw new BO.BlInformationIsntValid("cost is not valid");
             DO.Engineer notUpdatetEng = _dal.Engineer.Read(engineer.Id) ?? throw new BO.BlDoesNotExistException($"Engineer with ID={engineer.Id} does not exist");
             if (engineer.Level < (BO.Level)notUpdatetEng.Level) throw new BO.BlInformationIsntValid("Level of an engineer can only go up but not down");
 
@@ -153,7 +153,8 @@ internal class EngineerImplementation : IEngineer
                     ?? throw new BO.BlDoesNotExistException($"task with id={engineer.Task.Id} does not exist");
                 if ((int)task.Difficulty > (int)engineer.Level) throw new BO.BlForbiddenInThisStage($"task with ID={task.TaskID} doesn't fit the engineer level");
                 if (task.EngineerID != 0) throw new BO.BlForbiddenInThisStage($"Task with ID={task.TaskID} is already assigned to an engineer");
-                if (_dal.Task.ReadAll(task => task.EngineerID==engineer.Id && task.FinishDate==null).ToList().Count>0) throw new BO.BlForbiddenInThisStage($"{engineer.Name} is already assigned to another task on track");
+                if (_dal.Task.ReadAll(task => task.EngineerID == engineer.Id && task.FinishDate == null).ToList().Count > 0) throw new BO.BlForbiddenInThisStage($"{engineer.Name} is already assigned to another task on track");
+                if (_bl.Clock < _dal.getStartOrFinshDatesFromXml("startDate")) throw new BO.BlForbiddenInThisStage("The project hasn't started, cannot start a task yet");
 
                 _dal.Task.Update(task with { EngineerID = engineer.Id, StartWork = _bl.Clock });   //if there is a task, update the task that this engineer is working on it
             }

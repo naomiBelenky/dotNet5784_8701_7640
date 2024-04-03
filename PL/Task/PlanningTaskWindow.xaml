@@ -58,7 +58,7 @@
         <Label Content="Dependent tasks:" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" Margin="0,0,0,20"/>
         <!-- list of dependent tasks -->
         <ListBox BorderBrush="Black" BorderThickness="1"
-            ItemsSource="{Binding Links}" Grid.Column="2" Height="227" Grid.RowSpan="6" VerticalAlignment="Top" Margin="5,46,7,0" Background="{x:Null}" MouseDoubleClick="listBox_DoubleClick">
+            ItemsSource="{Binding Links}" Grid.Column="2" Height="234" Grid.RowSpan="6" VerticalAlignment="Top" Margin="5,46,7,0" Background="{x:Null}" MouseDoubleClick="listBox_DoubleClick">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Margin="0,0,0,10">
@@ -104,7 +104,7 @@
 
         <Button Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}"
                 HorizontalAlignment="Left" Margin="35,15,0,0" Grid.Row="7" VerticalAlignment="Top" Width="180" Click="AddOrUpdateButton_Click" Height="23" Grid.Column="1" Grid.ColumnSpan="2"/>
-        <Button Grid.Column="2" Content="Add dependent task" HorizontalAlignment="Left" Margin="43,0,0,0" Grid.Row="6" VerticalAlignment="Center" Width="159" Click="addDependencyBtn_Click"/>
+        <Button Grid.Column="2" Content="Add dependent task" HorizontalAlignment="Left" Margin="43,10,0,0" Grid.Row="6" VerticalAlignment="Center" Width="159" Click="addDependencyBtn_Click"/>
         <Label Grid.Column="2" Content="To delete a dependency, double click it" HorizontalAlignment="Center" Margin="0,21,0,0" VerticalAlignment="Top" Width="200" FontSize="10"/>
     </Grid>
 </Window>

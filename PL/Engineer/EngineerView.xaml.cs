@@ -38,9 +38,10 @@ namespace PL.Engineer
             try
             {
                 InitializeComponent();
-                SetValue(CurrentEngineerProperty, new BO.Engineer());
+                CurrentEngineer = new BO.Engineer();
+                //SetValue(CurrentEngineerProperty, new BO.Engineer());
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            catch (Exception ex) { MessageBox.Show(ex.Message, ex.GetType().ToString(), MessageBoxButton.OK, MessageBoxImage.Error); }
         }
 
         private void Cancle_Click(object sender, RoutedEventArgs e)
@@ -56,11 +57,8 @@ namespace PL.Engineer
                 CurrentEngineer = s_bl.Engineer.Read(CurrentEngineer.Id);
                 new LittleTaskOfEngineer(CurrentEngineer).Show();
             }
+            catch (Exception ex) { MessageBox.Show(ex.Message, ex.GetType().ToString(), MessageBoxButton.OK, MessageBoxImage.Error); }
 
-            catch (Exception ex) 
-            {
-                MessageBox.Show(ex.Message);
-            }
             Close();
         }
     }

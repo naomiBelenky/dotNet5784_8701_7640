@@ -64,6 +64,19 @@ class ConvertBoolToVisibility : IValueConverter
     }
 }
 
+class ConvertAdminModeToVisibility : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        return value is true ? Visibility.Collapsed : Visibility.Visible;
+    }
+
+    object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
 class ConvertTaskInEngineerToContent : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -108,7 +121,10 @@ class ConvertTimeSpanToInt : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        return 40*((TimeSpan)value).Days;
+        if (((BO.Task)value).FinishDate != null)
+            return 40 * ((TimeSpan)(((BO.Task)value).FinishDate - ((BO.Task)value).StartWork)!).Days;
+        //שתי השורות הראשונות אני לא יודעת אם צריך, זה קצת מבלבל את התרשים... אולי לשאול את אסתי
+        return 40 * ((TimeSpan)((BO.Task)value).Duration!).Days;
     }
 
     object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -136,7 +152,9 @@ class ConvertDateTimeToInt : IValueConverter
 
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        return 40*((TimeSpan)((DateTime)value - s_bl.getStartDate())!).Days;
+        if (((BO.Task)value).StartWork == null)
+            return 40*((TimeSpan)(((BO.Task)value).PlanToStart - s_bl.getStartDate())!).Days;
+        return 40*((TimeSpan)(((BO.Task)value).StartWork - s_bl.getStartDate())!).Days;
 
     }
 
@@ -150,10 +168,10 @@ class ConvertStatusToColor : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        if ((BO.Status)value == BO.Status.Scheduled) return "Gray";
-        if ((BO.Status)value == BO.Status.OnTrack) return "Orange";
-        if ((BO.Status)value == BO.Status.Done) return "Green";
-
+        if ((((BO.Task)value).PlanToFinish < BlApi.Factory.Get().Clock) && ((BO.Task)value).Status != BO.Status.Done) return "Red";
+        if (((BO.Task)value).Status == BO.Status.Scheduled) return "Gray";
+        if (((BO.Task)value).Status == BO.Status.OnTrack) return "Orange";
+        if (((BO.Task)value).Status == BO.Status.Done) return "Green";
         return "true";
     }
 
@@ -167,7 +185,7 @@ class ConvertTimeToContent : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        return value.ToString();
+        return value.ToString() ?? "";
     }
 
     object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

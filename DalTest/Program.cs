@@ -4,7 +4,7 @@ using Dal;
 using DalApi;
 using DO;
 using System.Data.SqlTypes;
-
+using System.Threading.Channels;
 
 internal class Program
 {
@@ -84,9 +84,9 @@ internal class Program
             int id;
 
             Console.WriteLine("write task name");
-            name = Console.ReadLine();
+            name = Console.ReadLine() ?? "";
             Console.WriteLine("write description");
-            description = Console.ReadLine();
+            description = Console.ReadLine() ?? "";
             Console.WriteLine("enter plan to start");
             planToStart = Convert.ToDateTime(Console.ReadLine());
             Console.WriteLine("enter deadline");
@@ -96,10 +96,10 @@ internal class Program
             Console.WriteLine("write notes");
             notes = Console.ReadLine();
             Console.WriteLine("enter engineer ID");
-            id = int.Parse(Console.ReadLine());
+            id = int.TryParse(Console.ReadLine(), out int _id) ? _id : 0;
             Console.WriteLine("enter time for task");
-            timeForTask = TimeSpan.Parse(Console.ReadLine());
-            Level difficulty = (Level)int.Parse(Console.ReadLine());
+            timeForTask = TimeSpan.TryParse(Console.ReadLine(), out TimeSpan _timeForTask) ? _timeForTask : null;
+            Level difficulty = (Level)(int.TryParse(Console.ReadLine(), out int _difficulty) ? _difficulty : 0);
 
             DO.Task task = new DO.Task(0, name, description, difficulty, false, DateTime.Now,
                 planToStart, null, timeForTask, deadLine, null, product, notes, id);
@@ -110,15 +110,15 @@ internal class Program
         if (choice == "engineer")
         {
             Console.WriteLine("enter ID");
-            int id = int.Parse(Console.ReadLine());
+            int id = int.TryParse(Console.ReadLine(), out int _id) ? _id : 0;
             Console.WriteLine("enter full name");
-            string name = Console.ReadLine();
+            string name = Console.ReadLine() ?? "";
             Console.WriteLine("enter email");
-            string email = Console.ReadLine();
+            string email = Console.ReadLine() ?? "";
             Console.WriteLine("enter engineer level");
-            Level level = (Level)int.Parse(Console.ReadLine());
+            Level level = (Level)(int.TryParse(Console.ReadLine(), out int _difficulty) ? _difficulty : 0);
             Console.WriteLine("please enter cost per hour");
-            double costPerHour = double.Parse(Console.ReadLine());
+            double costPerHour = double.TryParse(Console.ReadLine(), out double _costPerHour) ? _costPerHour : 0;
 
             DO.Engineer newEngineer = new DO.Engineer(id, name, email, level, costPerHour);
 
@@ -128,10 +128,10 @@ internal class Program
         if (choice == "link")
         {
             Console.WriteLine("enter previous task ID");
-            int prevTask = int.Parse(Console.ReadLine());
+            int prevTask = int.TryParse(Console.ReadLine(), out int _prevTask) ? _prevTask : 0;
 
             Console.WriteLine("enter the depended task ID");
-            int newTask = int.Parse(Console.ReadLine());
+            int newTask = int.TryParse(Console.ReadLine(), out int _nxtTask) ? _nxtTask : 0;
 
             DO.Link newLink = new DO.Link(0, prevTask, newTask);
 
@@ -142,7 +142,7 @@ internal class Program
     private static void read(string? choice)    //printing an object by its id
     {
         Console.WriteLine("enter ID");
-        int id = int.Parse(Console.ReadLine());
+        int id = int.TryParse(Console.ReadLine(), out int _id) ? _id : 0;
 
         switch (choice)
         {
@@ -176,16 +176,16 @@ internal class Program
     private static void update(string? choice)  //updating one object by its id
     {
         Console.WriteLine($"enter {choice} ID");
-        int id = int.Parse(Console.ReadLine());
+        int id = int.TryParse(Console.ReadLine(), out int _id) ? _id : 0;
         Console.WriteLine("enter fields to update");
 
         switch (choice)
         {
             case "task":
                 Console.WriteLine("write task name");
-                string? name = Console.ReadLine();
+                string? name = Console.ReadLine() ?? "";
                 Console.WriteLine("describe the task");
-                string? description = Console.ReadLine();
+                string? description = Console.ReadLine() ?? "";
                 DateTime? creation = DateTime.Today;
                 Console.WriteLine("on what date do you plan to start?");
                 DateTime? planToStart = Convert.ToDateTime(Console.ReadLine());
@@ -197,9 +197,9 @@ internal class Program
                 Console.WriteLine("if you have any notes about the task, write them here");
                 string? notes = Console.ReadLine();
                 Console.WriteLine("enter the engineer id");
-                int engineerId = int.Parse(Console.ReadLine());
+                int engineerId = int.TryParse(Console.ReadLine(), out int _engineerId) ? (int)_engineerId : 0;
                 Console.WriteLine("enter task difficulty");
-                Level difficulty = (Level)int.Parse(Console.ReadLine());
+                Level difficulty = (Level)(int.TryParse(Console.ReadLine(), out int _difficulty) ? _difficulty : 0);
 
                 DO.Task newTask = new DO.Task(id, name, description, difficulty, false, DateTime.Now,
                     planToStart, null, timeForTask, deadLine, null, product, notes, id);
@@ -208,22 +208,22 @@ internal class Program
                 break;
             case "engineer":
                 Console.WriteLine("enter full name");
-                string? engName = Console.ReadLine();
+                string? engName = Console.ReadLine() ?? "";
                 Console.WriteLine("enter email");
-                string? email = Console.ReadLine();
+                string? email = Console.ReadLine() ?? "";
                 Console.WriteLine("enter engineer level");
-                Level level = (Level)int.Parse(Console.ReadLine());
+                Level level = (Level)(int.TryParse(Console.ReadLine(), out int _level) ? _level : 0);
                 Console.WriteLine("enter engineer cost per hour");
-                double costPerHour = double.Parse(Console.ReadLine());
+                double costPerHour = double.TryParse(Console.ReadLine(), out double _costPerHour) ? _costPerHour : 0;
                 DO.Engineer newEngineer = new Engineer(id, engName, email, level, costPerHour);
                 s_dal.Engineer.Update(newEngineer);
                 break;
             case "link":
                 Console.WriteLine("enter previous task ID");
-                int prevTask = int.Parse(Console.ReadLine());
+                int prevTask = int.TryParse(Console.ReadLine(), out int _prevTask) ? _prevTask : 0;
 
                 Console.WriteLine("enter the depended task ID");
-                int dependedTask = int.Parse(Console.ReadLine());
+                int dependedTask = int.TryParse(Console.ReadLine(), out int _dependedTask) ? _dependedTask : 0;
 
                 DO.Link newLink = new DO.Link(id, prevTask, dependedTask);
                 s_dal.Link.Update(newLink);
@@ -234,7 +234,7 @@ internal class Program
     private static void delete(string? choice)  //deleting one obgect by its id
     {
         Console.WriteLine("enter id");
-        int id = int.Parse(Console.ReadLine());
+        int id = int.TryParse(Console.ReadLine(), out int _id) ? _id : 0;
         switch (choice)
         {
             case "task": s_dal.Task.Delete(id); break;

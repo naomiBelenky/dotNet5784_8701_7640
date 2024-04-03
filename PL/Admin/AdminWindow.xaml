@@ -21,8 +21,10 @@
     <Button Content="initialize" HorizontalAlignment="Left" Margin="600,300,0,0" VerticalAlignment="Top" Height="60" Width="123" Click="btnInit_Click"/>
     <!-- botton for reset data base -->
     <Button Content="reset" HorizontalAlignment="Left" Margin="600,230,0,0" VerticalAlignment="Top" Height="56" Width="123" Click="resetDB_Click"/>
-    <Button Content="automatic schedule" HorizontalAlignment="Left" Margin="120,130,0,0" VerticalAlignment="Top" Height="70" Width="155" Click="Schedule_Click"/>
-    <Button Content="Gantt chart" HorizontalAlignment="Left" Margin="300,130,0,0" VerticalAlignment="Top" Height="70" Width="155" Click="GantButton_Click" Visibility="{Binding stage, Converter={StaticResource ConverStageToVisibilityKey}}"/>
+    <Button Content="automatic schedule" HorizontalAlignment="Left" Margin="120,130,0,0" VerticalAlignment="Top" Height="70" Width="155" Click="Schedule_Click"
+            IsEnabled="{Binding stage, Converter={StaticResource ConvertStageToBoolKey}}"/>
+    <Button Content="Gantt chart" HorizontalAlignment="Left" Margin="300,130,0,0" VerticalAlignment="Top" Height="70" Width="155" Click="GantButton_Click"
+            Visibility="{Binding stage, Converter={StaticResource ConverStageToVisibilityKey}}"/>
 
     </Grid>
 </Window>

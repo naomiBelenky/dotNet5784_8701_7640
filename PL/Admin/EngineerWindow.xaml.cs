@@ -54,7 +54,7 @@ namespace PL.Engineer
                         MessageBox.Show(ex.Message);
                     }
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            catch (Exception ex) { MessageBox.Show(ex.Message, ex.GetType().ToString(), MessageBoxButton.OK, MessageBoxImage.Error); }
         }
 
         private void BtnAddUpdate_Click(object sender, RoutedEventArgs e)
@@ -74,16 +74,9 @@ namespace PL.Engineer
                 }
                 this.Close();
             }
+            catch (Exception ex) { MessageBox.Show(ex.Message, ex.GetType().ToString(), MessageBoxButton.OK, MessageBoxImage.Error); }
 
-            catch (Exception ex)
-            {
-                string message = ex.Message + " " + ex.GetType()+ " ";
-                if (ex.InnerException != null)
-                    message += "Dal Exepttion";
-                
-                MessageBox.Show(message);
-            }
 
-        }        
+        }
     }
 }

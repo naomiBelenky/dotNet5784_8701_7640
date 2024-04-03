@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Controls;
 
 
 namespace PL.Task
@@ -21,14 +22,14 @@ namespace PL.Task
             DependencyProperty.Register("Task", typeof(BO.Task), typeof(TaskWindow), new PropertyMetadata(null));
 
         private bool isAddMode { get; set; }
-        public bool withPermissions { get; set; }
+        public bool adminNotEngineer { get; set; }
 
         //private BO.Stage stage { get; set; } = BO.Stage.Planning;  //צריך לעשות שכשקובעים לו"ז זה ישתנה לשלב הביצוע
-        public TaskWindow(bool withPermissions, int id = 0, bool isAddLinkMode = false)
+        public TaskWindow(bool adminNotEngineer = true, int id = 0, bool isAddLinkMode = false)
         {
             try
             {
-                this.withPermissions = withPermissions;
+                this.adminNotEngineer = adminNotEngineer;
                 InitializeComponent();
                 if (id == 0)
                 {
@@ -42,10 +43,8 @@ namespace PL.Task
                     isAddMode = false;
                 }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            catch (Exception ex) { MessageBox.Show(ex.Message, ex.GetType().ToString(), MessageBoxButton.OK, MessageBoxImage.Error); }
+
         }
 
         private void AddOrUpdateButton_Click(object sender, RoutedEventArgs e)
@@ -65,14 +64,18 @@ namespace PL.Task
                 }
                 this.Close();
             }
-
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
+            catch (Exception ex) { MessageBox.Show(ex.Message, ex.GetType().ToString(), MessageBoxButton.OK, MessageBoxImage.Error); }
         }
 
-       
+        private void finishBttn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Task.FinishDate = s_bl.Clock;
+                Button button = (Button)sender;
+                button.IsEnabled = false;
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message, ex.GetType().ToString(), MessageBoxButton.OK, MessageBoxImage.Error); }
+        }
     }
 }
