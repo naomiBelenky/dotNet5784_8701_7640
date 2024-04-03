@@ -43,20 +43,6 @@
     <EngineerID>0</EngineerID>
   </Task>
   <Task>
-    <TaskID>2</TaskID>
-    <Name>Automation</Name>
-    <Description>Design automated solutions</Description>
-    <Difficulty>Intermediate</Difficulty>
-    <Milestone>false</Milestone>
-    <Creation>2023-09-20T00:00:00</Creation>
-    <PlanToStart xsi:nil="true" />
-    <StartWork xsi:nil="true" />
-    <TimeForTask>P4D</TimeForTask>
-    <Deadline xsi:nil="true" />
-    <FinishDate xsi:nil="true" />
-    <EngineerID>0</EngineerID>
-  </Task>
-  <Task>
     <TaskID>3</TaskID>
     <Name>Simulation</Name>
     <Description>Virtual models for testing</Description>
@@ -211,20 +197,6 @@
     <EngineerID>0</EngineerID>
   </Task>
   <Task>
-    <TaskID>14</TaskID>
-    <Name>AR Development</Name>
-    <Description>Create AR applications</Description>
-    <Difficulty>Intermediate</Difficulty>
-    <Milestone>false</Milestone>
-    <Creation>2023-12-04T00:00:00</Creation>
-    <PlanToStart xsi:nil="true" />
-    <StartWork xsi:nil="true" />
-    <TimeForTask>P6D</TimeForTask>
-    <Deadline xsi:nil="true" />
-    <FinishDate xsi:nil="true" />
-    <EngineerID>0</EngineerID>
-  </Task>
-  <Task>
     <TaskID>15</TaskID>
     <Name>UI Design</Name>
     <Description>Design visual elements</Description>
@@ -267,20 +239,6 @@
     <EngineerID>0</EngineerID>
   </Task>
   <Task>
-    <TaskID>20</TaskID>
-    <Name>Sustainable Design</Name>
-    <Description>Eco-friendly project design</Description>
-    <Difficulty>Expert</Difficulty>
-    <Milestone>false</Milestone>
-    <Creation>2023-08-17T00:00:00</Creation>
-    <PlanToStart xsi:nil="true" />
-    <StartWork xsi:nil="true" />
-    <TimeForTask>P3D</TimeForTask>
-    <Deadline xsi:nil="true" />
-    <FinishDate xsi:nil="true" />
-    <EngineerID>0</EngineerID>
-  </Task>
-  <Task>
     <TaskID>2</TaskID>
     <Name>Automation</Name>
     <Description>Design automated solutions</Description>
@@ -293,5 +251,47 @@
     <Deadline xsi:nil="true" />
     <FinishDate>2024-03-22T22:31:40.2964756+02:00</FinishDate>
     <EngineerID>21</EngineerID>
+  </Task>
+  <Task>
+    <TaskID>2</TaskID>
+    <Name>Automation</Name>
+    <Description>Design automated solutions</Description>
+    <Difficulty>Intermediate</Difficulty>
+    <Milestone>false</Milestone>
+    <Creation>2023-09-20T00:00:00</Creation>
+    <PlanToStart>2024-03-27T00:00:00</PlanToStart>
+    <StartWork xsi:nil="true" />
+    <TimeForTask>P4D</TimeForTask>
+    <Deadline xsi:nil="true" />
+    <FinishDate xsi:nil="true" />
+    <EngineerID>0</EngineerID>
+  </Task>
+  <Task>
+    <TaskID>14</TaskID>
+    <Name>AR Development</Name>
+    <Description>Create AR applications</Description>
+    <Difficulty>Intermediate</Difficulty>
+    <Milestone>false</Milestone>
+    <Creation>2023-12-04T00:00:00</Creation>
+    <PlanToStart>2024-03-31T00:00:00</PlanToStart>
+    <StartWork xsi:nil="true" />
+    <TimeForTask>P6D</TimeForTask>
+    <Deadline xsi:nil="true" />
+    <FinishDate xsi:nil="true" />
+    <EngineerID>0</EngineerID>
+  </Task>
+  <Task>
+    <TaskID>20</TaskID>
+    <Name>Sustainable Design</Name>
+    <Description>Eco-friendly project design</Description>
+    <Difficulty>Expert</Difficulty>
+    <Milestone>false</Milestone>
+    <Creation>2023-08-17T00:00:00</Creation>
+    <PlanToStart>2024-03-31T00:00:00</PlanToStart>
+    <StartWork xsi:nil="true" />
+    <TimeForTask>P3D</TimeForTask>
+    <Deadline xsi:nil="true" />
+    <FinishDate xsi:nil="true" />
+    <EngineerID>0</EngineerID>
   </Task>
 </ArrayOfTask>
