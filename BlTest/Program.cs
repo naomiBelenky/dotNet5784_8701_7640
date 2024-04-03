@@ -29,9 +29,8 @@ namespace BlTest
                         case "engineer": engineerMenu(); break;
                         case "automaticSchedule":
                             DateTime startOfProject = DateTime.Parse(getString("enter date of start of the project"));
-                            if (DalApi.Factory.Get.saveStartandFinishDatestoFile("data-config", "startDate", startOfProject))
-                                s_bl.automaticSchedule();
-                            else throw new BO.BlAlreadyExistsException($"The date is already set");
+                            DalApi.Factory.Get.StartDate = startOfProject;
+                            s_bl.automaticSchedule();
                             break;
                         default:
                             Console.WriteLine("not valid input, try again"); break;

@@ -128,21 +128,20 @@ public static class Initialization
     }
 
     public static void Reset()
-    {       
-        //resetting the serial numbers to 1
-        XElement config = XMLTools.LoadListFromXMLElement("data-config");
-        config.Element("NextTaskId")!.Value = "1";
-        config.Element("NextLinkId")!.Value = "1";
-        config.Element("startDate")?.SetValue("");
-        config.Element("finishDate")?.SetValue("");
-        XMLTools.SaveListToXMLElement(config, "data-config");
-        
-
+    {
+        //if (XMLTools.LoadListFromXMLElement("dal-config").Element("dal")!.Value == "xml")
+        //{
+        //    XElement config = XMLTools.LoadListFromXMLElement("data-config");
+        //    config.Element("startDate")?.SetValue("");
+        //    config.Element("finishDate")?.SetValue("");
+        //    XMLTools.SaveListToXMLElement(config, "data-config");
+        //}
+        DalApi.Factory.Get.StartDate = null;
 
         DalApi.Factory.Get.Task.DeleteAll();
         Factory.Get.Engineer.DeleteAll();
         DalApi.Factory.Get.Link.DeleteAll();
         //(The check for existing initial data is performed within the function "DeleteAll")
-
+        DateTime? a = DalApi.Factory.Get.StartDate;
     }
 }

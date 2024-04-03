@@ -4,8 +4,7 @@ using DalApi;
 using DO;
 using System;
 using System.Collections.Generic;
-
-
+using System.Xml.Linq;
 
 internal class TaskImplementation : ITask
 {
@@ -88,5 +87,9 @@ internal class TaskImplementation : ITask
             tasks.Clear();
             XMLTools.SaveListToXMLSerializer(tasks, s_tasks_xml);
         }
+        //resetting the serial numbers to 1
+        XElement config = XMLTools.LoadListFromXMLElement("data-config");
+        config.Element("NextTaskId")!.Value = "1";
+        XMLTools.SaveListToXMLElement(config, "data-config");
     }
 }

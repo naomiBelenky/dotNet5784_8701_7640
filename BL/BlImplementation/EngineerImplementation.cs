@@ -154,7 +154,7 @@ internal class EngineerImplementation : IEngineer
                 if ((int)task.Difficulty > (int)engineer.Level) throw new BO.BlForbiddenInThisStage($"task with ID={task.TaskID} doesn't fit the engineer level");
                 if (task.EngineerID != 0) throw new BO.BlForbiddenInThisStage($"Task with ID={task.TaskID} is already assigned to an engineer");
                 if (_dal.Task.ReadAll(task => task.EngineerID == engineer.Id && task.FinishDate == null).ToList().Count > 0) throw new BO.BlForbiddenInThisStage($"{engineer.Name} is already assigned to another task on track");
-                if (_bl.Clock < _dal.getStartOrFinshDatesFromXml("startDate")) throw new BO.BlForbiddenInThisStage("The project hasn't started, cannot start a task yet");
+                if (_bl.Clock < _dal.StartDate) throw new BO.BlForbiddenInThisStage("The project hasn't started, cannot start a task yet");
 
                 _dal.Task.Update(task with { EngineerID = engineer.Id, StartWork = _bl.Clock });   //if there is a task, update the task that this engineer is working on it
             }

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 internal class LinkImplementation : ILink
 {
@@ -85,7 +86,11 @@ internal class LinkImplementation : ILink
             links.Clear();
             XMLTools.SaveListToXMLSerializer(links, s_links_xml);
         }
-     
+
+        //resetting the serial numbers to 1
+        XElement config = XMLTools.LoadListFromXMLElement("data-config");
+        config.Element("NextLinkId")!.Value = "1";
+        XMLTools.SaveListToXMLElement(config, "data-config");
 
     }
 }

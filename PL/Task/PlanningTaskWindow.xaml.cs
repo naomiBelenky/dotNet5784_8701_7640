@@ -39,10 +39,8 @@ namespace PL.Task
                     isAddMode = false;
                 }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            catch (Exception ex) { MessageBox.Show(ex.Message, ex.GetType().ToString(), MessageBoxButton.OK, MessageBoxImage.Error); }
+
 
         }
 
@@ -64,14 +62,8 @@ namespace PL.Task
                 this.Close();
             }
 
-            catch (Exception ex)
-            {
-                string message = ex.Message + " " + ex.GetType() + " ";
-                if (ex.InnerException != null)
-                    message += "Dal Exception";
+            catch (Exception ex) { MessageBox.Show(ex.Message, ex.GetType().ToString(), MessageBoxButton.OK, MessageBoxImage.Error); }
 
-                MessageBox.Show(message);
-            }
 
         }
         private void addDependencyBtn_Click(object sender, RoutedEventArgs e)
