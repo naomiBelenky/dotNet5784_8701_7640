@@ -180,6 +180,7 @@ internal class TaskImplementation : ITask
         }
         if (task.StartWork == null && task.FinishDate!=null) throw new BO.BlForbiddenInThisStage("Cannot update finish date before start date");
         if (task.FinishDate < task.StartWork) throw new BO.BlForbiddenInThisStage("Finish date can't be before start date");
+        if (task.Difficulty == BO.Level.All) throw new BO.BlInformationIsntValid("'All' isn't a valid difficulty ,choose something else");
         //if (task.StartWork < _dal.StartDate) throw new BO.BlForbiddenInThisStage("The project has not started yet");
         //If we are here, it means that all the tests passed successfully:)
 

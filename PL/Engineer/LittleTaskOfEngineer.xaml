@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL.Engineer"
         mc:Ignorable="d"
         Title="LittleTaskOfEngineer" Height="170" Width="290"
-        DataContext="{Binding CurrentEngineer, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
+        DataContext="{Binding CurrentEngineer, RelativeSource={RelativeSource Self}, Mode=TwoWay}" Icon="/Engineer/eye.png">
     <Window.Resources>
         <Style TargetType="Label">
             <Setter Property="FontFamily" Value="Comic Sans MS" />

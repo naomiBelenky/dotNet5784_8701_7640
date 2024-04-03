@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL.Task"
         mc:Ignorable="d"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
-        Title="TaskForList" Height="450" Width="800">
+        Title="TaskForList" Height="450" Width="800" Icon="/Task/list-check.png">
     <Window.Resources>
         <!-- Default font style for text-based controls -->
         <Style TargetType="ComboBox">
