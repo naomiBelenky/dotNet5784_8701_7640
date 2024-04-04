@@ -13,7 +13,7 @@ sealed internal class DalList : IDal
 
     //public DateTime? StartDate { get => Instance.StartDate; set => Instance.StartDate=value; }
     private DateTime? _startDate = null; // backing field
-
+    
     public DateTime? StartDate
     {
         get => _startDate;
