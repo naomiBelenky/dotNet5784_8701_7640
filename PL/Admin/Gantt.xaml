@@ -39,7 +39,7 @@
         <Label Content="Done" HorizontalAlignment="Left" Margin="245,605,0,0" VerticalAlignment="Top" Background="Green"/>
         <Label Content="Late" HorizontalAlignment="Left" Margin="300,605,0,0" VerticalAlignment="Top" Background="Red"/>
 
-
+        
     </Grid>
 </Window>
 

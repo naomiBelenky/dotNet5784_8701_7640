@@ -12,9 +12,17 @@
         <Style TargetType="Button">
             <Setter Property="FontFamily" Value="Comic Sans MS" />
             <Setter Property="FontSize" Value="16" />
+            <Setter Property="Background" Value="#F6E0FA"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Red"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
     </Window.Resources>
     <Grid>
+        <Polygon Points="50,0 0,100 100,40 0,40 100,100" Fill="Yellow" HorizontalAlignment="Right"/>
+        <Label HorizontalAlignment="Right" Margin="0,38,32,0">בס"ד</Label>
         <Button Content="Engineer List" HorizontalAlignment="Left" Margin="120,280,0,0" VerticalAlignment="Top" Height="82" Width="157" Click="EngBtn_Click"/>
     <Button Content="Task List" HorizontalAlignment="Left" Margin="300,280,0,0" VerticalAlignment="Top" Height="82" Width="156" Click="TaskBtn_Click"/>
     <!-- botton for inital data base -->
