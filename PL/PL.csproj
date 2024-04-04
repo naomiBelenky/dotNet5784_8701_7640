@@ -14,7 +14,33 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Admin\calendar.png" />
+    <None Remove="Admin\chart-histogram.png" />
+    <None Remove="Admin\pencil.png" />
+    <None Remove="Admin\user.png" />
+    <None Remove="Admin\users-alt.png" />
+    <None Remove="Engineer\eye.png" />
+    <None Remove="Engineer\user.png" />
+    <None Remove="home.png" />
+    <None Remove="Task\list-check.png" />
+    <None Remove="Task\pencil.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\BL\BL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Admin\calendar.png" />
+    <Resource Include="Admin\chart-histogram.png" />
+    <Resource Include="Admin\pencil.png" />
+    <Resource Include="Admin\user.png" />
+    <Resource Include="Admin\users-alt.png" />
+    <Resource Include="Engineer\eye.png" />
+    <Resource Include="Engineer\user.png" />
+    <Resource Include="home.png" />
+    <Resource Include="Task\list-check.png" />
+    <Resource Include="Task\pencil.png" />
   </ItemGroup>
 
 </Project>

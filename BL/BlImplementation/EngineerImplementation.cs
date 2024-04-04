@@ -142,6 +142,7 @@ internal class EngineerImplementation : IEngineer
             if (double.IsNegative(engineer.Cost) || engineer.Cost == 0) throw new BO.BlInformationIsntValid("cost is not valid");
             DO.Engineer notUpdatetEng = _dal.Engineer.Read(engineer.Id) ?? throw new BO.BlDoesNotExistException($"Engineer with ID={engineer.Id} does not exist");
             if (engineer.Level < (BO.Level)notUpdatetEng.Level) throw new BO.BlInformationIsntValid("Level of an engineer can only go up but not down");
+            if (engineer.Level == BO.Level.All) throw new BO.BlInformationIsntValid("'All' isn't a valid level,choose something else");
 
             _dal.Engineer.Update(doEng);    //if the information is valid, update the engineer in the data layer
 

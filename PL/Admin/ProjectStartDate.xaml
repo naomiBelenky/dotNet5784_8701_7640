@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Admin"
         mc:Ignorable="d"
-        Title="ProjectStartDate" Height="200" Width="300">
+        Title="ProjectStartDate" Height="200" Width="300" Icon="/Admin/calendar.png">
 
     <Window.Resources>
         <Style TargetType="Label">

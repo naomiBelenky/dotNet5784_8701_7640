@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL.Admin"
         mc:Ignorable="d"
         Title="Gantt" Height="800" Width="1000"
-        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
+        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}" Icon="/Admin/chart-histogram.png">
     <Grid>
         <ItemsControl ItemsSource="{Binding ListOfTasks}" Margin="65,51,83,44">
             <ItemsControl.ItemTemplate>
