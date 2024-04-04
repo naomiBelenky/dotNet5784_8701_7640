@@ -2,14 +2,15 @@
 
 Bonuses:
 1. Icons (1)
-2. Automatic sceduale (2)
-3. To String property (1)
-4. (Trigers) (3)
-5. TryPharce in DalTest (1)
+2. Automatic schedule (2)
+3. To String property (1)?
+4. (Triggers) (3)
+5. TryParse in DalTest (1)
+6. Shapes (1)
 
 
+An engineer ID: 123
 
-An engineer ID: 366022981 (his name is Avi Buchbut).
 
 
 

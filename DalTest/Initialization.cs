@@ -105,6 +105,10 @@ public static class Initialization
             //s_dalEngineer.Create(temp); //stage 1
             s_dal!.Engineer.Create(temp); //stage 2
         }
+
+        Engineer eng = new Engineer(123, "Bibi Netanyahu", "bibi@gmail.com", Level.Expert, 20000);
+        s_dal!.Engineer.Create(eng);
+
     }
 
     //public static void Do(IDal? dal   /*ITask? dalTask, ILink? dalLink, IEngineer? dalEngineer*/) //stage 3
