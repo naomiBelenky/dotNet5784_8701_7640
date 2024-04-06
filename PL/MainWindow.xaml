@@ -12,10 +12,14 @@
         <!-- Default font style for text-based controls -->
 
         <Style TargetType="Button">
-
             <Setter Property="Background" Value="LightSkyBlue"/>
             <Setter Property="FontFamily" Value="Comic Sans MS" />
             <Setter Property="FontSize" Value="16" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="FontSize" Value="20"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
         <Style TargetType="Label">
             <Setter Property="FontFamily" Value="Comic Sans MS" />
