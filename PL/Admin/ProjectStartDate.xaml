@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Admin"
         mc:Ignorable="d"
-        Title="ProjectStartDate" Height="200" Width="300" Icon="/Admin/calendar.png">
+        Title="ProjectStartDate" Height="200" Width="300" Icon="/Admin/calendar.png" Background="#C8E6FF">
 
     <Window.Resources>
         <Style TargetType="Label">
@@ -15,6 +15,8 @@
         <Style TargetType="Button">
             <Setter Property="FontFamily" Value="Comic Sans MS" />
             <Setter Property="FontSize" Value="12" />
+            <Setter Property="Background" Value="LightSkyBlue"/>
+
         </Style>
         <Style TargetType="DatePicker">
             <Setter Property="FontFamily" Value="Comic Sans MS" />

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Task"
         mc:Ignorable="d"
-        Title="TaskWindow" Height="457" Width="500"
+        Title="TaskWindow" Height="457" Width="500" Background="#C8E6FF"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}" Icon="/Task/pencil.png">
 
     <Window.Resources>
@@ -24,6 +24,7 @@
         <Style TargetType="Button">
             <Setter Property="FontFamily" Value="Comic Sans MS" />
             <Setter Property="FontSize" Value="12" />
+            <Setter Property="Background" Value="LightSkyBlue"/>
         </Style>
         <Style TargetType="ListBox">
             <Setter Property="FontFamily" Value="Comic Sans MS" />

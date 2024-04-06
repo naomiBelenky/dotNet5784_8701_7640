@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Engineer"
         mc:Ignorable="d"
-        Title="LittleTaskOfEngineer" Height="170" Width="290"
+        Title="LittleTaskOfEngineer" Height="170" Width="290" Background="#C8E6FF"
         DataContext="{Binding CurrentEngineer, RelativeSource={RelativeSource Self}, Mode=TwoWay}" Icon="/Engineer/eye.png">
     <Window.Resources>
         <Style TargetType="Label">
@@ -15,6 +15,8 @@
         <Style TargetType="Button">
             <Setter Property="FontFamily" Value="Comic Sans MS" />
             <Setter Property="FontSize" Value="12" />
+            <Setter Property="Background" Value="LightSkyBlue"/>
+
         </Style>
     </Window.Resources>
 

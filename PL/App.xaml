@@ -19,7 +19,7 @@
         <local:ConvertStatusToColor x:Key="ConvertStatusToColorKey"/>
         <local:ConvertTimeToContent x:Key="ConvertTimeToContentKey"/>
         <local:ConverStageToVisibility x:Key="ConverStageToVisibilityKey"/>
-
+        
                
     </Application.Resources>
 </Application>

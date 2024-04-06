@@ -21,7 +21,8 @@ internal class TaskImplementation : ITask
         {
             if (task.Id < 0) throw new BO.BlInformationIsntValid("id is not valid");
             if (task.Name == null) throw new BO.BlInformationIsntValid("name is not valid");
-
+            if (task.Duration == null) throw new BO.BlInformationIsntValid("Duration is not valid");
+            if (task.Difficulty == BO.Level.All) throw new BO.BlInformationIsntValid("Difficulty is not valid");
 
             int id = _dal.Task.Create(doTask);  //if the data is valid, creating the task in the data layer
             if (task.Links != null) //if there are dependent tasks, adding them to the list of links

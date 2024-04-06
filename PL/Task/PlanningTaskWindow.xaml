@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Task"
         mc:Ignorable="d"
-        Title="PlanningTaskWindow" Height="400" Width="500"
+        Title="PlanningTaskWindow" Height="400" Width="500" Background="#C8E6FF"
         DataContext="{Binding Task, RelativeSource={RelativeSource Self}, Mode=TwoWay}" Icon="/Task/pencil.png">
 
     <Window.Resources>
@@ -24,6 +24,8 @@
         <Style TargetType="Button">
             <Setter Property="FontFamily" Value="Comic Sans MS" />
             <Setter Property="FontSize" Value="14" />
+            <Setter Property="Background" Value="LightSkyBlue"/>
+
         </Style>
         <Style TargetType="ListBox">
             <Setter Property="FontFamily" Value="Comic Sans MS" />
@@ -58,7 +60,9 @@
         <Label Content="Dependent tasks:" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" Margin="0,0,0,20"/>
         <!-- list of dependent tasks -->
         <ListBox BorderBrush="Black" BorderThickness="1"
-            ItemsSource="{Binding Links}" Grid.Column="2" Height="234" Grid.RowSpan="6" VerticalAlignment="Top" Margin="5,46,7,0" Background="{x:Null}" MouseDoubleClick="listBox_DoubleClick">
+            ItemsSource="{Binding Links, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 Grid.Column="2" Height="234" Grid.RowSpan="6" VerticalAlignment="Top" Margin="5,46,7,0" Background="{x:Null}"
+                 MouseDoubleClick="listBox_DoubleClick">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Margin="0,0,0,10">

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Engineer"
         mc:Ignorable="d"
-        Title="EngineerView" Height="200" Width="270"
+        Title="EngineerView" Height="200" Width="270" Background="#C8E6FF"
         DataContext="{Binding CurrentEngineer, RelativeSource={RelativeSource Self}, Mode=TwoWay}" Icon="/Engineer/user.png">
 
 
@@ -21,6 +21,8 @@
         <Style TargetType="Button">
             <Setter Property="FontFamily" Value="Comic Sans MS" />
             <Setter Property="FontSize" Value="12" />
+            <Setter Property="Background" Value="LightSkyBlue"/>
+
         </Style>
         <Style TargetType="ListBox">
             <Setter Property="FontFamily" Value="Comic Sans MS" />
@@ -35,7 +37,7 @@
     <Grid>
         <Label Content="Enter engineer's ID:" Margin="0,16,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Width="148"/>
         <TextBox HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="166" Height="29"
-                 Text="{Binding Id, Mode=TwoWay}" Margin="0,74,0,0" />
+                 Text="{Binding Id, Mode=TwoWay}" Margin="0,74,0,0" MaxLength="9" PreviewTextInput="TextBox_PreviewTextInput"/>
         <Button Content="Cancel" HorizontalAlignment="Left" Margin="43,128,0,0" VerticalAlignment="Top" Width="70" Click="Cancle_Click"/>
         <Button Content="OK" HorizontalAlignment="Left" Margin="163,128,0,0" VerticalAlignment="Top" Width="70" Click="OK_Click" IsDefault="True"/>
     </Grid>

@@ -5,12 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
-        DataContext="{Binding Time, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
+        Title="MainWindow" Height="450" Width="800" Background="#C8E6FF"
+        DataContext="{Binding Time, RelativeSource={RelativeSource Self}, Mode=TwoWay}" Icon="/home.png">
 
     <Window.Resources>
         <!-- Default font style for text-based controls -->
+
         <Style TargetType="Button">
+
+            <Setter Property="Background" Value="LightSkyBlue"/>
             <Setter Property="FontFamily" Value="Comic Sans MS" />
             <Setter Property="FontSize" Value="16" />
         </Style>
@@ -24,6 +27,9 @@
         <Button Content="admin" HorizontalAlignment="Left" Margin="220,299,0,0" VerticalAlignment="Top" Height="60" Width="140" Click="btnAdmin_Click"/>
         <!-- enter of the engineers -->
         <Button Content="engineer" HorizontalAlignment="Left" Margin="425,299,0,0" VerticalAlignment="Top" Height="60" Width="140" Click="btnEngineer_Click"/>
+
+        <Polygon Points="50,0 68,38 100,40 78,65 90,100 50,80 10,100 22,65 0,40 32,38" Fill="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="342,0,0,138"/>
+
         <Label Content="{Binding Converter={StaticResource ConvertTimeToContentKey}}"
                HorizontalAlignment="Left" Margin="285,55,0,0" VerticalAlignment="Top" Height="35" Width="218" FontSize="20">
             <Label.RenderTransform>
@@ -34,6 +40,7 @@
         <Button Content="next day" HorizontalAlignment="Left" Margin="357,100,0,0" VerticalAlignment="Top" Height="25" Width="70" FontSize="13" Click="btnAddDay_Click"/>
         <Button Content="next hour" HorizontalAlignment="Left" Margin="435,100,0,0" VerticalAlignment="Top" Height="25" Width="70" FontSize="13" Click="btnAddHour_Click"/>
         <Button Content="initialize time" HorizontalAlignment="Left" Margin="346,132,0,0" VerticalAlignment="Top" Height="26" Width="96" FontSize="13" Click="btnInitTime_Click">
+
             <Button.RenderTransform>
                 <MatrixTransform/>
             </Button.RenderTransform>

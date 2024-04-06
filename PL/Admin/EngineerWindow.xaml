@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL.Engineer"
         mc:Ignorable="d"
         
-        Title="EngineerWindow" Height="280" Width="220"
+        Title="EngineerWindow" Height="280" Width="220" Background="#C8E6FF"
         DataContext="{Binding Engineer, RelativeSource={RelativeSource Self}, Mode=TwoWay}" Icon="/Admin/pencil.png">
 
     <Window.Resources>
@@ -25,6 +25,8 @@
         <Style TargetType="Button">
             <Setter Property="FontFamily" Value="Comic Sans MS" />
             <Setter Property="FontSize" Value="12" />
+            <Setter Property="Background" Value="LightSkyBlue"/>
+
         </Style>
     </Window.Resources>
 
@@ -32,7 +34,7 @@
     <Grid>
         <!--<StackPanel Orientation="Horizontal">-->
         <Label Content="ID:" HorizontalAlignment="Left" Margin="17,13,0,0" VerticalAlignment="Top" Height="auto" Width="40" />
-        <TextBox HorizontalAlignment="Left" Margin="67,18,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"
+        <TextBox HorizontalAlignment="Left" Margin="67,18,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" MaxLength ="9"
                  Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
                  IsEnabled="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToBoolKey}}"/>
         
