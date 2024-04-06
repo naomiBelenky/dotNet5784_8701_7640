@@ -205,14 +205,4 @@
     <PrevTask>17</PrevTask>
     <NextTask>20</NextTask>
   </Link>
-  <Link>
-    <LinkID>42</LinkID>
-    <PrevTask>2</PrevTask>
-    <NextTask>21</NextTask>
-  </Link>
-  <Link>
-    <LinkID>43</LinkID>
-    <PrevTask>18</PrevTask>
-    <NextTask>21</NextTask>
-  </Link>
 </ArrayOfLink>

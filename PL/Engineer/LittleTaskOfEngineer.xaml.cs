@@ -67,8 +67,7 @@ namespace PL.Engineer
                 {
                     BO.Engineer tempEng = s_bl.Engineer.Read(CurrentEngineer.Id);
                     return s_bl?.Task.ReadAll(item => ((int)item.Difficulty <= (int)tempEng.Level) && item.Status == BO.Status.Scheduled && s_bl.Task.NodidntFinishLink(item))?? new List<BO.TaskInList>();
-                    //מה עושים אם זה נאל? כאילו אם אין משימות שמתאימות לרמה שלו?
-                    //עשיתי שזה מחזיר רשימה ריקה
+                  
                 }, (BO.TaskInList task, TaskForList.Closer close, BO.Stage stage) =>
                 {
                     HandleReturnedTask(task);
