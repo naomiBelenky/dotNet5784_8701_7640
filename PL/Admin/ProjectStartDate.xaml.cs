@@ -39,11 +39,18 @@ namespace PL.Admin
         {
             try
             {
-              
-                s_bl.saveStartDate(Date);
+                if (Date < s_bl.Clock)
+                {
+                    MessageBox.Show("Invalid date - was already");
+                }
+                else
+                {
+                    s_bl.saveStartDate(Date);
 
-                s_bl.automaticSchedule();
-                MessageBox.Show("scheduled all tasks succesfully");
+                    s_bl.automaticSchedule();
+                    MessageBox.Show("scheduled all tasks succesfully");
+                }
+               
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, ex.GetType().ToString(), MessageBoxButton.OK, MessageBoxImage.Error); }
 

@@ -17,6 +17,7 @@
                             <Rectangle HorizontalAlignment="Left" Height="20" Width="{Binding Converter={StaticResource ConvertDateTimeToIntKey}}" Fill="#C8E6FF"/>
                             <TextBlock HorizontalAlignment="Left" Text="{Binding TaskName}" Width="{Binding Converter={StaticResource ConvertTimeSpanToIntKey}}" FontWeight="Bold"
                                        Background="{Binding Mode=OneWay,Converter={StaticResource ConvertStatusToColorKey}}">
+                                
                                 <TextBlock.ToolTip>
                                     <ToolTip>
                                         <StackPanel>
