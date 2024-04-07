@@ -6,6 +6,7 @@ namespace Dal;
 
 sealed internal class DalXml : IDal
 {
+    private DalXml() { }
     public static IDal Instance { get; } = new DalXml();
     public ITask Task => new TaskImplementation();
 

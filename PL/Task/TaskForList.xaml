@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL.Task"
         mc:Ignorable="d"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
-        Title="TaskForList" Height="450" Width="800" Icon="/Task/list-check.png">
+        Title="TaskForList" Height="450" Width="800" Icon="/Task/list-check.png" Background="#C8E6FF">
     <Window.Resources>
         <!-- Default font style for text-based controls -->
         <Style TargetType="ComboBox">
@@ -16,6 +16,8 @@
         <Style TargetType="Button">
             <Setter Property="FontFamily" Value="Comic Sans MS" />
             <Setter Property="FontSize" Value="14" />
+            <Setter Property="Background" Value="LightSkyBlue"/>
+
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="FontSize" Value="19"/>
@@ -56,7 +58,7 @@
         </Grid>
 
         <!-- list of engineers -->
-        <ListView Margin="5" Grid.Row="1" ItemsSource="{Binding Path=TaskList}" MouseDoubleClick="listView_DoubleClick">
+        <ListView Margin="5" Grid.Row="1" ItemsSource="{Binding Path=TaskList}" MouseDoubleClick="listView_DoubleClick" Background="Azure">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>

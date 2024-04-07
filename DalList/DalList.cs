@@ -4,6 +4,8 @@ using System;
 
 sealed internal class DalList : IDal
 {
+    private DalList() { }
+
     public static IDal Instance { get; } = new DalList();
 
     public ITask Task => new TaskImplementation();
@@ -25,8 +27,6 @@ sealed internal class DalList : IDal
 
     //public DateTime? FinishDate { get => Instance.FinishDate; set => Instance.FinishDate=value; }
     
-    private DalList() { }
-
     public void saveStartandFinishDatestoFile(string data_config_xml, string elemName, DateTime? toSave) {  }
 
     public DateTime? getStartOrFinshDatesFromXml(string elemName) { return null; }

@@ -61,5 +61,11 @@ namespace PL.Engineer
 
             Close();
         }
+        private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            // Allow only numeric input
+            e.Handled = !char.IsDigit(e.Text, e.Text.Length-1);
+        }
+
     }
 }

@@ -5,16 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Admin"
         mc:Ignorable="d"
-        Title="Gantt" Height="800" Width="1000"
+        Title="Gantt" Height="800" Width="1000" Background="#C8E6FF"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}" Icon="/Admin/chart-histogram.png">
     <Grid>
         <ItemsControl ItemsSource="{Binding ListOfTasks}" Margin="65,51,83,44">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Border BorderThickness="2" BorderBrush="Aqua">
+                    <Border BorderThickness="2" BorderBrush="LightSkyBlue">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                            <TextBlock HorizontalAlignment="Left" Text="{Binding Id}" FontWeight="Bold" Background="Aquamarine"/>
-                            <Rectangle HorizontalAlignment="Left" Height="20" Width="{Binding Converter={StaticResource ConvertDateTimeToIntKey}}" Fill="White"/>
+                            <TextBlock HorizontalAlignment="Left" Text="{Binding Id}" FontWeight="Bold" Background="LightSkyBlue" Width="20"/>
+                            <Rectangle HorizontalAlignment="Left" Height="20" Width="{Binding Converter={StaticResource ConvertDateTimeToIntKey}}" Fill="#C8E6FF"/>
                             <TextBlock HorizontalAlignment="Left" Text="{Binding TaskName}" Width="{Binding Converter={StaticResource ConvertTimeSpanToIntKey}}" FontWeight="Bold"
                                        Background="{Binding Mode=OneWay,Converter={StaticResource ConvertStatusToColorKey}}">
                                 <TextBlock.ToolTip>
@@ -36,8 +36,8 @@
         </ItemsControl>
         <Label Content="Scheduled" HorizontalAlignment="Left" Margin="90,605,0,0" VerticalAlignment="Top" Background="Gray" Width="68"/>
         <Label Content="OnTrack" HorizontalAlignment="Left" Margin="175,605,0,0" VerticalAlignment="Top" Background="Orange"/>
-        <Label Content="Done" HorizontalAlignment="Left" Margin="245,605,0,0" VerticalAlignment="Top" Background="Green"/>
-        <Label Content="Late" HorizontalAlignment="Left" Margin="300,605,0,0" VerticalAlignment="Top" Background="Red"/>
+        <Label Content="Done" HorizontalAlignment="Left" Margin="245,605,0,0" VerticalAlignment="Top" Background="LimeGreen"/>
+        <Label Content="Late" HorizontalAlignment="Left" Margin="300,605,0,0" VerticalAlignment="Top" Background="OrangeRed"/>
 
         
     </Grid>
