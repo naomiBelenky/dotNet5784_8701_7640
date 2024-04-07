@@ -39,6 +39,7 @@ namespace PL.Admin
         {
             try
             {
+              
                 s_bl.saveStartDate(Date);
 
                 s_bl.automaticSchedule();

@@ -123,7 +123,6 @@ class ConvertTimeSpanToInt : IValueConverter
     {
         if (((BO.Task)value).FinishDate != null)
             return 40 * ((TimeSpan)(((BO.Task)value).FinishDate - ((BO.Task)value).StartWork)!).Days;
-        //שתי השורות הראשונות אני לא יודעת אם צריך, זה קצת מבלבל את התרשים... אולי לשאול את אסתי
         return 40 * ((TimeSpan)((BO.Task)value).Duration!).Days;
     }
 
