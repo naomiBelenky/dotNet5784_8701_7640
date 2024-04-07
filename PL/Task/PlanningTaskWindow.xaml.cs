@@ -88,7 +88,7 @@ namespace PL.Task
             try
             {
                 if (Task.Links == null) Task.Links = new List<BO.TaskInList>();
-                if (Task.Links.Exists(item => item.Id == task.Id))
+                if (!Task.Links.Exists(item => item.Id == task.Id))
                     Task.Links.Add(task);
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, ex.GetType().ToString(), MessageBoxButton.OK, MessageBoxImage.Error); }
